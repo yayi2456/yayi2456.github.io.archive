@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Be With Me">
-    <title>Archiv: 2017 - Be With Me</title>
+    <title>Archivos: 2017 - Be With Me</title>
     <meta name="author" content="YaYi">
     
         <meta name="keywords" content="hexo,javascript,">
@@ -31,6 +31,8 @@
         
     
     
+        <meta property="og:image" content="http://yoursite.com/assets/images/myhead.jpg"/>
+    
     
     
     
@@ -47,6 +49,10 @@
 
 
     
+        
+            
+        
+    
 
 <header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
@@ -59,6 +65,8 @@
                 href="#about">
         
         
+            <img class="header-picture" src="/assets/images/myhead.jpg" alt="Foto de autor"/>
+        
         </a>
     
 </header>
@@ -66,8 +74,23 @@
             <!-- Define author's picture -->
 
 
+
+        
+    
+
 <nav id="sidebar" data-behavior="1">
     <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/myhead.jpg" alt="Foto de autor"/>
+                </a>
+                <h4 class="sidebar-profile-name">YaYi</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>author.bio</p>
+</h5>
+                
+            </div>
         
         
             <ul class="sidebar-buttons">
@@ -80,7 +103,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-home"></i>
-                        <span class="sidebar-button-desc">Home</span>
+                        <span class="sidebar-button-desc">Inicio</span>
                     </a>
             </li>
             
@@ -92,7 +115,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
-                        <span class="sidebar-button-desc">Kategorien</span>
+                        <span class="sidebar-button-desc">Categorías</span>
                     </a>
             </li>
             
@@ -104,7 +127,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
-                        <span class="sidebar-button-desc">Tags</span>
+                        <span class="sidebar-button-desc">Etiquetas</span>
                     </a>
             </li>
             
@@ -116,7 +139,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
-                        <span class="sidebar-button-desc">Archiv</span>
+                        <span class="sidebar-button-desc">Archivos</span>
                     </a>
             </li>
             
@@ -128,7 +151,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-search"></i>
-                        <span class="sidebar-button-desc">Suche</span>
+                        <span class="sidebar-button-desc">Buscar</span>
                     </a>
             </li>
             
@@ -140,7 +163,7 @@
                         >
                     
                         <i class="sidebar-button-icon fa fa-lg fa-question"></i>
-                        <span class="sidebar-button-desc">Über</span>
+                        <span class="sidebar-button-desc">Acerca de</span>
                     </a>
             </li>
             
@@ -227,7 +250,7 @@
                     
                         <p>
                             <a href="/2017/10/29/first-try/#post-footer" class="postShorten-excerpt_link link">
-                                Kommentieren und teilen
+                                Comentar y compartir
                             </a>
                         </p>
                     
@@ -277,7 +300,7 @@
                     
                         <p>
                             <a href="/2017/10/29/hello-world/#post-footer" class="postShorten-excerpt_link link">
-                                Kommentieren und teilen
+                                Comentar y compartir
                             </a>
                         </p>
                     
@@ -291,7 +314,7 @@
     <ul class="pagination">
         
         
-        <li class="pagination-number">Seite 1 von 1</li>
+        <li class="pagination-number">página 1 de 1</li>
     </ul>
 </div>
 
@@ -311,11 +334,17 @@
         
 
 
+    
+        
+    
+
 <div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
         </div>
+        
+            <img id="about-card-picture" src="/assets/images/myhead.jpg" alt="Foto de autor"/>
         
             <h4 id="about-card-name">YaYi</h4>
         
@@ -356,7 +385,7 @@
             </form>
         </div>
         <div class="modal-body">
-            <div class="no-result text-color-light text-center">keinen Beitrag gefunden</div>
+            <div class="no-result text-color-light text-center">no se encontraron artículos</div>
             <div class="results">
                 
                 <div class="media">
@@ -401,10 +430,10 @@
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium"
-                data-message-zero="keinen Beitrag gefunden"
-                data-message-one="1 Beitrag gefunden"
-                data-message-other="{n} Einträge gefunden">
-                2 Einträge gefunden
+                data-message-zero="no se encontraron artículos"
+                data-message-one="1 artículo encontrado"
+                data-message-other="{n} artículos encontrados">
+                2 artículos encontrados
             </p>
         </div>
     </div>
@@ -416,13 +445,6 @@
 <script src="/assets/js/script-ivwiy10zeb8fifc4swnhkwneuk64y53w2scmdmtp8thi9cqfxh31aowtroaz.min.js"></script>
 <!--SCRIPTS END-->
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
-    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-    <script>
-        var algoliaClient = algoliasearch('Z7A3XW4R2I', '12db1ad54372045549ef465881c17e743');
-        var algoliaIndex = algoliaClient.initIndex('my-hexo-blog');
-    </script>
 
     </body>
 </html>
