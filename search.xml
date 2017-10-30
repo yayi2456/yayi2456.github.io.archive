@@ -34,8 +34,11 @@
     <entry>
       <title><![CDATA[关于]]></title>
       <url>/about/index.html</url>
-      <content type="html"><![CDATA[<p>大家好，我是XXX。欢迎来到我的个人技术博客。</p>
-<p>这里用markdown写下你的简介，就跟平时写md一样就可以了。</p>
+      <content type="html"><![CDATA[<p>╰(￣ω￣ｏ)！</p>
+<p>就不说什么能认识大家很开心之类的废话了！</p>
+<p>我目前还在大学奔波忙碌，真的完全是小白啦！之前学习专业课的时候受到很多大神博主的帮助，中文文档简直是瑰宝！</p>
+<p>所以~希望我的东西或多或少也能帮助到别人！</p>
+<p>鞠躬~(●’◡’●)</p>
 ]]></content>
     </entry>
     
@@ -46,14 +49,14 @@
     </entry>
     
     <entry>
-      <title><![CDATA[读书]]></title>
-      <url>/reading/index.html</url>
+      <title><![CDATA[all-categories]]></title>
+      <url>/all-catagories/index.html</url>
       <content type="html"></content>
     </entry>
     
     <entry>
-      <title><![CDATA[all-categories]]></title>
-      <url>/all-catagories/index.html</url>
+      <title><![CDATA[读书]]></title>
+      <url>/reading/index.html</url>
       <content type="html"></content>
     </entry>
     
