@@ -263,7 +263,7 @@
 <p>下面将严格证明这个命题：</p>
 <p>——————这个过程线省略————</p>
 <p><strong>归并的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  </div><div class="line">  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  </div><div class="line">   <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
 <ol>
 <li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
@@ -276,7 +276,7 @@
 <p><strong>快排时间空间复杂度：</strong></p>
 <p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
 <p><strong>快排的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;<span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;</div><div class="line">  <span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
 <p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
 <p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
@@ -302,16 +302,16 @@
 
                 
 <p class="pink-link-context">
-    <a href="/2017/10/31/linux、vim、git常用命令/" rel="next" title="Linux、Vim、Git常用命令——简明扼要版">
-    上一篇：Linux、Vim、Git常用命令——简明扼要版
+    <a href="/2017/10/31/序列比较/" rel="next" title="序列比较">
+    上一篇：序列比较
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/10/31/序列比较/" rel="next" title="序列比较">
-    下一篇：序列比较
+    <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" rel="next" title="树莓派解析域名失败导致apt-get update不可用">
+    下一篇：树莓派解析域名失败导致apt-get update不可用
   </a>
 </p>
 
@@ -385,7 +385,9 @@
                 
                     <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
                 
-                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                    <a class="social-link" href="http://unsplash.com" target="_blank">unsplash--谢谢你的免费图片！</a>
+                
+                    <a class="social-link" href="www.iconfont.cn" target="_blank">iconfont-阿里巴巴矢量图片库</a>
                 
             </div>
             
