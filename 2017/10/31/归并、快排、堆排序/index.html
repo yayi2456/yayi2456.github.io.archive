@@ -7,7 +7,7 @@
 
     
 
-    <title>最喜欢你啦！</title>
+    <title>归并、快排、堆排序 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="归并、快排、堆排序"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -213,12 +213,12 @@
             <div class="article-title">
                 
     
-        <h1>无题</h1>
+        <h1>归并、快排、堆排序</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-10-31T11:32:03.434Z"><a href="/2017/10/31/归并、快排、堆排序/">2017-10-31</a></time>
+            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/归并、快排、堆排序/">2017-10-31</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -226,6 +226,14 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
+        
+            <a href="/tags/数据结构/" class="chip blue lighten-1">数据结构</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#归并"><span class="section table-of-contents-text">归并</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#快排"><span class="section table-of-contents-text">快排</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#堆排序"><span class="section table-of-contents-text">堆排序</span></a></li></ol>
@@ -255,7 +263,7 @@
 <p>下面将严格证明这个命题：</p>
 <p>——————这个过程线省略————</p>
 <p><strong>归并的代码：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;//start,end,temp</div><div class="line">   if(s==null)s=0;</div><div class="line">   if(e==null)e=this.length-1;</div><div class="line">   if(b==null)b=new Array(this.length);</div><div class="line">   if(s&gt;=e)return;</div><div class="line">   var m=(s+e)&gt;&gt;1;//取中间值</div><div class="line">   this.mergeSort(s,m,b);</div><div class="line">   this.mergeSort(m+1,e,b);</div><div class="line">   for(var i=s,j=s,k=m+1;i&lt;=e;++i)</div><div class="line">      b[i]=this[(k&gt;e||j&lt;=m&amp;&amp;this[j]&lt;this[k])?j++:k++];</div><div class="line">   for(var i=s;i&lt;=e;++i)</div><div class="line">      this[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
 <ol>
 <li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
@@ -268,7 +276,7 @@
 <p><strong>快排时间空间复杂度：</strong></p>
 <p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
 <p><strong>快排的代码：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;//start,end</div><div class="line">   if(s==null)s=0;</div><div class="line">   if(e==null)e=this.length-1;</div><div class="line">   if(s&gt;=e)return;</div><div class="line">   this.swap((s+e)&gt;&gt;1,e);</div><div class="line">   var index=s-1;</div><div class="line">   for(var i=s;i&lt;=e;++i)</div><div class="line">      if(this[i]&lt;=this[e])</div><div class="line">         this.swap(i,++index);</div><div class="line">   this.quickSort(s,index-1);</div><div class="line">   this.quickSort(index+1,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;<span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
 <p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
 <p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
@@ -287,23 +295,23 @@
 <p><strong>堆排序时间空间复杂度</strong></p>
 <p>完全二叉树高度log(n+1)，即对每个节点进行调整的时间复杂度是O(logn)，包括建堆的时间耗费与取值和调整，整个算法时间复杂度是O(nlogn)。额外空间只有temp用来存取出的数，O(1)。</p>
 <p><strong>堆排序的代码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   for(var i=1;i&lt;this.length;++i)&#123;</div><div class="line">      for(var j=i,k=(j-1)&gt;&gt;1;k&gt;=0;j=k,k=(k-1)&gt;&gt;1)&#123;</div><div class="line">         if(this[k]&gt;=this[j])break;</div><div class="line">         this.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   for(var i=this.length-1;i&gt;0;--i)&#123;</div><div class="line">      this.swap(0,i);</div><div class="line">      for(var j=0;k=(j+1)&lt;&lt;1;k&lt;=i;j=k,k=(k+1)&lt;&lt;1)&#123;</div><div class="line">         if(k==i||this[k]&lt;this[k-1])--k;</div><div class="line">         if(this[k]&lt;=this[j])braek;</div><div class="line">         this.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;<span class="keyword">this</span>.length;++i)&#123;</div><div class="line">      <span class="keyword">for</span>(var j=i,k=(j-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;k&gt;=<span class="number">0</span>;j=k,k=(k-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&gt;=<span class="keyword">this</span>[j])<span class="keyword">break</span>;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="keyword">this</span>.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;--i)&#123;</div><div class="line">      <span class="keyword">this</span>.swap(<span class="number">0</span>,i);</div><div class="line">      <span class="keyword">for</span>(var j=<span class="number">0</span>;k=(j+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>;k&lt;=i;j=k,k=(k+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(k==i||<span class="keyword">this</span>[k]&lt;<span class="keyword">this</span>[k-<span class="number">1</span>])--k;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&lt;=<span class="keyword">this</span>[j])braek;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>本篇文章中的代码部分来自于作者twobin于网址<a href="http://www.cnblogs.com/twobin的博文《排序算法性能比较》。" target="_blank" rel="external">http://www.cnblogs.com/twobin的博文《排序算法性能比较》。</a></p>
 </blockquote>
 
                 
 <p class="pink-link-context">
-    <a href="/2017/10/31/背包问题/" rel="next" title="">
-    上一篇：
+    <a href="/2017/10/31/linux、vim、git常用命令/" rel="next" title="Linux、Vim、Git常用命令——简明扼要版">
+    上一篇：Linux、Vim、Git常用命令——简明扼要版
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/10/31/linux、vim、git常用命令/" rel="next" title="">
-    下一篇：
+    <a href="/2017/10/31/序列比较/" rel="next" title="序列比较">
+    下一篇：序列比较
   </a>
 </p>
 
