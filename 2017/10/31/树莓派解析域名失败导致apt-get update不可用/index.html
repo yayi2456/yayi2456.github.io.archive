@@ -7,7 +7,7 @@
 
     
 
-    <title>归档：2017/10 | 最喜欢你啦！</title>
+    <title>最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -193,82 +193,85 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>无题</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
-        
-        
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2017
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2017/10/31/在MFC中创建控制台/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:33:17.010Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:51.738Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/背包问题/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:26.198Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/归并、快排、堆排序/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:03.434Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/linux、vim、git常用命令/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:30:39.683Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/OS-Lab1/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T09:57:47.000Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                OS Lab1
-                            </a>
-                        
-                            <a href="/2017/10/29/first-try/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-29T09:56:10.000Z">2017-10-29</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                first try
-                            </a>
-                        
-                            <a href="/2017/10/29/hello-world/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-29T09:08:32.942Z">2017-10-29</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                Hello World
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+            </div>
+            <time class="pink-link-context" datetime="2017-10-31T11:32:51.738Z"><a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">2017-10-31</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
+<p>除了这个，我还按照网上各路大神的说法，改了好几个地方，这里一一记下来，以便以后查找。</p>
+<ol>
+<li>删除某个目录的内容，只记得是/ect/apt/…/partial什么的</li>
+<li>修改/etc/apt/resolv.conf的内容，数字改成8.8.8.8</li>
+<li>修改源。据说给的源是国外源，速度慢。国内有很多源可用，网址如下：<a href="http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html</a></li>
+</ol>
+<hr>
+<p>除此之外，倒是了解了一些些关于远程与vnc。<br>实现这两者需要安装东西，并不是装了系统就可以连远程的。这个百度一下很多教程。</p>
+<hr>
+<p>另外是在Linux命令行下的vi(vim)与nano编辑器。<br>相较而言当然是nano好用。<br>用nano编辑/etc/apt/s文件命令：sudo nano /etc/apt/s<br>用vi编辑只需将nano改为vi<br>nano内有提示，只需按照提示来就好，而vi就比较复杂。<br><a href="http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html</a><br>该网址内容详尽。注意的是，vi命令模式不是命令行界面，按下esc并不会有界面上的变化，并不是教程错了。</p>
+<hr>
+<p>Linux下的文件相关命令</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2017/10/31/在MFC中创建控制台/" rel="next" title="">
+    上一篇：
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/10/31/背包问题/" rel="next" title="">
+    下一篇：
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

@@ -7,7 +7,7 @@
 
     
 
-    <title>归档：2017/10 | 最喜欢你啦！</title>
+    <title>最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -193,82 +193,78 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>无题</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
-        
-        
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2017
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2017/10/31/在MFC中创建控制台/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:33:17.010Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:51.738Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/背包问题/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:26.198Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/归并、快排、堆排序/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:32:03.434Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/linux、vim、git常用命令/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T11:30:39.683Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                
-                            </a>
-                        
-                            <a href="/2017/10/31/OS-Lab1/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-31T09:57:47.000Z">2017-10-31</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                OS Lab1
-                            </a>
-                        
-                            <a href="/2017/10/29/first-try/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-29T09:56:10.000Z">2017-10-29</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                first try
-                            </a>
-                        
-                            <a href="/2017/10/29/hello-world/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-10-29T09:08:32.942Z">2017-10-29</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                Hello World
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+            </div>
+            <time class="pink-link-context" datetime="2017-10-31T11:33:17.010Z"><a href="/2017/10/31/在MFC中创建控制台/">2017-10-31</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <hr>
+<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
+<hr>
+<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
+<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#ifdef _DEBUG</div><div class="line">   AllocConsole()</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#include&lt;conio.h&gt;</div></pre></td></tr></table></figure>
+<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
+<p>使用步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=&quot;&quot;;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
+<p>这段代码完成了将CString类型的str输出的任务。</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" rel="next" title="">
+    下一篇：
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
