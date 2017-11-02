@@ -7,7 +7,7 @@
 
     
 
-    <title>first try | 最喜欢你啦！</title>
+    <title>最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="first try"/>
+    
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -229,12 +229,12 @@
             <div class="article-title">
                 
     
-        <h1>first try</h1>
+        <h1>无题</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-10-29T09:56:10.000Z"><a href="/2017/10/29/first-try/">2017-10-29</a></time>
+            <time class="pink-link-context" datetime="2017-11-01T05:51:22.664Z"><a href="/2017/11/01/Cloud RAN for Mobile Networks——A Technology Overview/">2017-11-01</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -244,25 +244,29 @@
             
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#yayi’s-new-blog"><span class="section table-of-contents-text">yayi’s new blog</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h1 id="yayi’s-new-blog"><a href="#yayi’s-new-blog" class="headerlink" title="yayi’s new blog"></a>yayi’s new blog</h1><p>what !你为什么这么多事啊！？</p>
+                <hr>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>移动数据的传输容量正在连续增加。根据Cisco的预测，在智能手机与穿戴设备的推动下，从2012到2017年容量将增长13-fold。因此，移动网络运营商需要增加网络的capacity来满足日益增长的用户需求。当LTE（long term evolution）的spectral efficiency标准正逼近Shanon极限，增加网络capacity的最好方法要么是增加基站覆盖区域，创建一个结构复杂的多元小基站网络（HetSNets）要么是使用像多用户多输入多输出（MIMO）或是Massive MIMO这样的多根天线在同一频率时段服务于多个用户的技术。然而，这将导致更大的的小基站区间干扰水平（Growing inter-cell interference levels）以及更多的花费。</p>
+<p>移动网络的TCO（total cost of ownership）包括了CAPEX（CAPital Expenditure）和OPEX（OPerating EXpenditure）。capex主要指关于网络构建的花费，网络构建可能会从网络规划一直到网址需求，RF硬件，baseband硬件（基带），软件许可，leased line连接（专用网络连接），安装，civil cost（民用花费），网站支持，像供电或者是冷却（cooling）。OPEX包括需要去操纵网络的花费，比如，站点出租，专用网络，电力，运营与保持，升级。CAPEX与OPEX在更多base station被部署之后都显著增加了。更具体地说（more specifically），CAPEX增加是因为基站是无线网络infrastructure基础设施中最昂贵的组成成分，而OPEX增加是因为基站覆盖区需要相当多的电力去驱动，比如，中国移动估计有72%的电力花费在基站覆盖区域（cell sites）。移动网络运营商需要支付网络建造，运营，保持和升级的费用；同时人均收入（ARPU）随之时间的增长保持不变甚至有所下降，因为典型的用户对数据的需求越来越多却希望为移动流量付更少的费用。像图1中所示，如果补救措施，移动网络运营商将有可能面对入不敷出的局面。 因此，在移动网络领域，优化了花费和能源消耗的新型建构方式变得必需。</p>
+<p>C-RAN是一种新型的移动网络结构，有着接受上述所有挑战的能力。这个概念最初在论文9中被提出并且在6中被详细描述。在C-RAN中，baseband processing（基带处理）被中心化，被被放在一个虚拟的BBU pool中被诸多site分享。这意味着它可能能够适应nonuniform traffic非均匀流量并更加有效率地利用一些资源，比如，基站。由于这个特性在C-RAN结构中将用到比传统结构更少的BBU，而且C-RAN还有降低网络运营费用的潜能，这是因为电力与能量的消耗相较于传统的RAN结构已经被减少了。新的BBU可以更轻易地被添加被升级，从而改善网络的稳定性并使得网络更容易被维护。虚拟化的BBU pool可以被多个不同的网络运营商所分享，允许他们通过云服务来租RAN。由于多个网站的BBU在同一个pool中co-located（协作），他们彼此之间可以以更小的延迟时间进行通信，这样，被介绍给LTE-Advanced来增加spectral efficiency和throughput吞吐量的机械装置，比如说增强版的ICIC与CoMP都被facilitated，在两个基站覆盖区内实行的负载平衡方法也被facilitated。而且，网络的表现也被改善，例如通过减少BBU pool内部的移交操作的延时。<br>据China MObile Research Institute的猜想，C-RAN结构被移动网络运营商设为了目标，例如IBM、Alcatel-Lucent、华为、ZYTE、诺基亚西门子网络、Intel和Texas instruments。而且，在2020年的水平上来看，C-RAN被视为是典型的在5G中支持soft and green technologies的实现。然而，C-RAN并不是唯一可以对抗上述运营商们面临的挑战的选手，其他解决方式，包括small cells、being part of HetSNets and Massive MIMO。small cells的部署是户外hot spot闹区和室内coverage scenarios平均方案 。</p>
 
                 
 <p class="pink-link-context">
-    <a href="/2017/10/31/OS-Lab1/" rel="next" title="OS Lab1">
-    上一篇：OS Lab1
+    <a href="/2017/11/01/CN1/" rel="next" title="实验室心情全记录">
+    上一篇：实验室心情全记录
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/10/29/hello-world/" rel="next" title="Hello World">
-    下一篇：Hello World
+    <a href="/2017/10/31/linux、vim、git常用命令/" rel="next" title="Linux、Vim、Git常用命令——简明扼要版">
+    下一篇：Linux、Vim、Git常用命令——简明扼要版
   </a>
 </p>
 

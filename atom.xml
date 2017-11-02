@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-31T15:48:45.725Z</updated>
+  <updated>2017-11-02T11:13:16.114Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,95 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>the One使用记录</title>
+    <link href="http://yoursite.com/2017/11/01/the%20One%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%951/"/>
+    <id>http://yoursite.com/2017/11/01/the One使用记录1/</id>
+    <published>2017-11-01T09:10:19.000Z</published>
+    <updated>2017-11-02T11:13:16.114Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;一个小tip：使用linux命令行进入带空格的文件，如果直接cd filename进入的话是不行的，那应该怎么进入呢？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;cd
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="实验室" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+    
+      <category term="实验室" scheme="http://yoursite.com/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="模拟器" scheme="http://yoursite.com/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>实验室心情全记录</title>
+    <link href="http://yoursite.com/2017/11/01/CN1/"/>
+    <id>http://yoursite.com/2017/11/01/CN1/</id>
+    <published>2017-11-01T09:04:55.000Z</published>
+    <updated>2017-11-01T09:05:56.192Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;又一个小时过去了呢。&lt;/p&gt;
+&lt;p&gt;第一个看到的文档是：《移动P2P网络中协同缓存的研究》，这个比较浅显比较傻，不是我需要的，主要讲的是一些显而易见的理想化的缓存策略，并没有涉及到一个复杂网络。主要讲的是缓存的接入控制策略：什么东四能进缓存？缓存替换策略以及缓存的一致性。&lt;
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="实验室" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+    
+      <category term="实验室" scheme="http://yoursite.com/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/11/01/Cloud%20RAN%20for%20Mobile%20Networks%E2%80%94%E2%80%94A%20Technology%20Overview/"/>
+    <id>http://yoursite.com/2017/11/01/Cloud RAN for Mobile Networks——A Technology Overview/</id>
+    <published>2017-11-01T05:51:22.664Z</published>
+    <updated>2017-11-01T06:30:19.665Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;hr&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Linux、Vim、Git常用命令——简明扼要版</title>
@@ -48,7 +137,7 @@
     <link href="http://yoursite.com/2017/10/31/%E5%9C%A8MFC%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
     <id>http://yoursite.com/2017/10/31/在MFC中创建控制台/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:48:25.959Z</updated>
+    <updated>2017-11-02T11:13:18.351Z</updated>
     
     <summary type="html">
     
@@ -130,17 +219,11 @@
     <link href="http://yoursite.com/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/"/>
     <id>http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:47:23.754Z</updated>
+    <updated>2017-11-01T05:51:29.799Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…&lt;br&gt;没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。&lt;br&gt;后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑
-        
-      
+      &lt;p&gt;捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…&lt;br&gt;没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。&lt;br&gt;后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。&lt;/p&gt;
     
     </summary>
     
@@ -156,7 +239,7 @@
     <link href="http://yoursite.com/2017/10/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2017/10/31/背包问题/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:45:02.770Z</updated>
+    <updated>2017-10-31T16:09:51.245Z</updated>
     
     <summary type="html">
     

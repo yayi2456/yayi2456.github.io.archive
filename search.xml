@@ -3,6 +3,85 @@
   
     
     <entry>
+      <title><![CDATA[the One使用记录]]></title>
+      <url>/2017/11/01/the%20One%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%951/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>一个小tip：使用linux命令行进入带空格的文件，如果直接cd filename进入的话是不行的，那应该怎么进入呢？</p>
+<p><strong>cd “filename”就好啦</strong>！</p>
+<p>又一个小tip：不下心关掉了eclipse的项目工程目录怎么办？</p>
+<p><strong>Window-&gt;Show View-&gt;Others-&gt;General-&gt;Project Explorer</strong></p>
+<p>emmm，markdown行内代码形式：``包起来就行</p>
+</blockquote>
+<h1 id="从github下载the-one"><a href="#从github下载the-one" class="headerlink" title="从github下载the-one"></a>从github下载the-one</h1><p>犹记我初学git的时候也是傻傻的，这里就放出来具体操作方法了！</p>
+<p>首先需要一个GitBash。在gitbash里使用cd命令进入想存放the one的文件夹，然后输入命令：<code>git clone https://github.com/akeranen/the-one.wiki.git</code>，前面两个是命令，最后一个是参数，代表的是这个仓库的地址。</p>
+<p>等到完成之后就会发现在这个文件夹下面多了好多东西呀！</p>
+<p>done！</p>
+<h1 id="将项目import进Eclipse"><a href="#将项目import进Eclipse" class="headerlink" title="将项目import进Eclipse"></a>将项目import进Eclipse</h1><p>eclipse，使用java的孩子应该没有不知道的吧。哦对，the one是java代码编写。</p>
+<p>到了这一步就出了一点小问题…一直是使用eclipse的File-&gt;import功能向workspace导入外部的项目的，导入the one的时候竟然告诉我未找到项目文件！<br>我尝试使用File-&gt;Open Project From FileSystem来，这次可以了。the one 成功出现在了project explorer里面！但是！有错误！</p>
+<p>这个应该在说明文档里面说了，1.1以后版本的java要编译theone需要添加一些liabrary到项目的build path，e</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 实验室 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 实验室 </tag>
+            
+            <tag> 计算机网络 </tag>
+            
+            <tag> 模拟器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[实验室心情全记录]]></title>
+      <url>/2017/11/01/CN1/</url>
+      <content type="html"><![CDATA[<p>又一个小时过去了呢。</p>
+<p>第一个看到的文档是：《移动P2P网络中协同缓存的研究》，这个比较浅显比较傻，不是我需要的，主要讲的是一些显而易见的理想化的缓存策略，并没有涉及到一个复杂网络。主要讲的是缓存的接入控制策略：什么东四能进缓存？缓存替换策略以及缓存的一致性。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 实验室 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 实验室 </tag>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/2017/11/01/Cloud%20RAN%20for%20Mobile%20Networks%E2%80%94%E2%80%94A%20Technology%20Overview/</url>
+      <content type="html"><![CDATA[<hr>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>移动数据的传输容量正在连续增加。根据Cisco的预测，在智能手机与穿戴设备的推动下，从2012到2017年容量将增长13-fold。因此，移动网络运营商需要增加网络的capacity来满足日益增长的用户需求。当LTE（long term evolution）的spectral efficiency标准正逼近Shanon极限，增加网络capacity的最好方法要么是增加基站覆盖区域，创建一个结构复杂的多元小基站网络（HetSNets）要么是使用像多用户多输入多输出（MIMO）或是Massive MIMO这样的多根天线在同一频率时段服务于多个用户的技术。然而，这将导致更大的的小基站区间干扰水平（Growing inter-cell interference levels）以及更多的花费。</p>
+<p>移动网络的TCO（total cost of ownership）包括了CAPEX（CAPital Expenditure）和OPEX（OPerating EXpenditure）。capex主要指关于网络构建的花费，网络构建可能会从网络规划一直到网址需求，RF硬件，baseband硬件（基带），软件许可，leased line连接（专用网络连接），安装，civil cost（民用花费），网站支持，像供电或者是冷却（cooling）。OPEX包括需要去操纵网络的花费，比如，站点出租，专用网络，电力，运营与保持，升级。CAPEX与OPEX在更多base station被部署之后都显著增加了。更具体地说（more specifically），CAPEX增加是因为基站是无线网络infrastructure基础设施中最昂贵的组成成分，而OPEX增加是因为基站覆盖区需要相当多的电力去驱动，比如，中国移动估计有72%的电力花费在基站覆盖区域（cell sites）。移动网络运营商需要支付网络建造，运营，保持和升级的费用；同时人均收入（ARPU）随之时间的增长保持不变甚至有所下降，因为典型的用户对数据的需求越来越多却希望为移动流量付更少的费用。像图1中所示，如果补救措施，移动网络运营商将有可能面对入不敷出的局面。 因此，在移动网络领域，优化了花费和能源消耗的新型建构方式变得必需。</p>
+<p>C-RAN是一种新型的移动网络结构，有着接受上述所有挑战的能力。这个概念最初在论文9中被提出并且在6中被详细描述。在C-RAN中，baseband processing（基带处理）被中心化，被被放在一个虚拟的BBU pool中被诸多site分享。这意味着它可能能够适应nonuniform traffic非均匀流量并更加有效率地利用一些资源，比如，基站。由于这个特性在C-RAN结构中将用到比传统结构更少的BBU，而且C-RAN还有降低网络运营费用的潜能，这是因为电力与能量的消耗相较于传统的RAN结构已经被减少了。新的BBU可以更轻易地被添加被升级，从而改善网络的稳定性并使得网络更容易被维护。虚拟化的BBU pool可以被多个不同的网络运营商所分享，允许他们通过云服务来租RAN。由于多个网站的BBU在同一个pool中co-located（协作），他们彼此之间可以以更小的延迟时间进行通信，这样，被介绍给LTE-Advanced来增加spectral efficiency和throughput吞吐量的机械装置，比如说增强版的ICIC与CoMP都被facilitated，在两个基站覆盖区内实行的负载平衡方法也被facilitated。而且，网络的表现也被改善，例如通过减少BBU pool内部的移交操作的延时。<br>据China MObile Research Institute的猜想，C-RAN结构被移动网络运营商设为了目标，例如IBM、Alcatel-Lucent、华为、ZYTE、诺基亚西门子网络、Intel和Texas instruments。而且，在2020年的水平上来看，C-RAN被视为是典型的在5G中支持soft and green technologies的实现。然而，C-RAN并不是唯一可以对抗上述运营商们面临的挑战的选手，其他解决方式，包括small cells、being part of HetSNets and Massive MIMO。small cells的部署是户外hot spot闹区和室内coverage scenarios平均方案 。</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Linux、Vim、Git常用命令——简明扼要版]]></title>
       <url>/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
       <content type="html"><![CDATA[<p>第一次操作系统实验课记录：</p>
@@ -175,6 +254,7 @@
       <title><![CDATA[树莓派解析域名失败导致apt-get update不可用]]></title>
       <url>/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
+<a id="more"></a>
 <p>除了这个，我还按照网上各路大神的说法，改了好几个地方，这里一一记下来，以便以后查找。</p>
 <ol>
 <li>删除某个目录的内容，只记得是/ect/apt/…/partial什么的</li>
