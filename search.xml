@@ -3,6 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[计算机网络运输层之初涉江湖]]></title>
+      <url>/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82%E5%B1%82%E4%B9%8B%E5%88%9D%E6%B6%89%E6%B1%9F%E6%B9%96/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。</p>
+</blockquote>
+<h1 id="概述与运输层服务"><a href="#概述与运输层服务" class="headerlink" title="概述与运输层服务"></a>概述与运输层服务</h1><p>运输层的协议提供的是<strong>逻辑通信</strong>，并不是直接相连的。</p>
+<p>现在我们聊的是<strong>对等层通信</strong>，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。</p>
+<p>实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为<strong>报文段</strong>。报文段交给网络层，网络层再封装成<strong>数据报</strong>再向目的地发送。到了目的地之后做一个相反的动作，送给应用层使用。需要区分清楚的是，制定目的地、决定报文段怎么产生、决定报文段如何合并都是运输层的工作，网络层相当于送信的邮差，只负责传输。但是话又说回来了，网络层更加底层，网络层提供了怎样的服务、有多大的带宽都限制了运输层的服务。</p>
+<p>现在<strong>因特网</strong>的运输层主要有两个协议：UDP、TCP。UDP是不可靠的、多目的地的、无序的传输；TCP是面向连接的可靠的传输。具体特性将在后面讲到。</p>
+<p>因特网的网络层协议是IP协议（网际协议）。IP非常不可靠，他是<strong>尽力而为交付服务</strong>，一不确保报文段的交付，二不保证报文段交付的按序，三不保证报文段交付的完整性，被称为<strong>不可靠服务</strong>。</p>
+<p>TCP与UDP的基本职责是将两个端系统之间的IP交付服务扩展为运行在两个端系统之上的两个进程之间的信息交付服务。将主机之间的交付扩展为进程之间的交付就是<strong>运输层的多路复用与多路分解</strong>。</p>
+<h1 id="运输层的多路复用与多路分解"><a href="#运输层的多路复用与多路分解" class="headerlink" title="运输层的多路复用与多路分解"></a>运输层的多路复用与多路分解</h1><p>多路复用与多路分解服务是所有计算机网络都需要的。</p>
+<p>我们知道，实现运输层的服务需要借助于socket，一个进程可以对应一个或几个socket（？）。在send端，运输层在报文段中加了首部信息之后，把各进程产生的数据无差别的交给网络层；在rev端，运输层从网络层那里拿出数据，解析报文段的首部信息从而定位socket，把<strong>分解后的</strong>报文段信息给对应的socket。</p>
+<p>为了实现这种服务，在首部信息里面一定封装有<strong>端口号</strong>，关于端口号的更多信息，可以访问<a href="http://www.iana.org" target="_blank" rel="external">RFC 3232</a>获得。</p>
+<h2 id="1-无连接的"><a href="#1-无连接的" class="headerlink" title="1. 无连接的"></a>1. 无连接的</h2>]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 大三的课 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 网络课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[the One使用记录]]></title>
       <url>/2017/11/01/the%20One%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%951/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -129,34 +163,6 @@
             <tag> Git </tag>
             
             <tag> Linux </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[在MFC中创建控制台]]></title>
-      <url>/2017/10/31/%E5%9C%A8MFC%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%8E%A7%E5%88%B6%E5%8F%B0/</url>
-      <content type="html"><![CDATA[<hr>
-<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
-<hr>
-<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
-<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _DEBUG</span></div><div class="line">   AllocConsole()</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></div></pre></td></tr></table></figure>
-<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
-<p>使用步骤如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=<span class="string">""</span>;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
-<p>这段代码完成了将CString类型的str输出的任务。</p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> MFC </tag>
-            
-            <tag> 可视化 </tag>
             
         </tags>
         
@@ -293,6 +299,34 @@
         <tags>
             
             <tag> 算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[在MFC中创建控制台]]></title>
+      <url>/2017/10/31/%E5%9C%A8MFC%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%8E%A7%E5%88%B6%E5%8F%B0/</url>
+      <content type="html"><![CDATA[<hr>
+<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
+<hr>
+<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
+<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _DEBUG</span></div><div class="line">   AllocConsole()</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></div></pre></td></tr></table></figure>
+<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
+<p>使用步骤如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=<span class="string">""</span>;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
+<p>这段代码完成了将CString类型的str输出的任务。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> MFC </tag>
+            
+            <tag> 可视化 </tag>
             
         </tags>
         
