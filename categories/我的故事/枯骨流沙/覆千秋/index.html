@@ -7,7 +7,7 @@
 
     
 
-    <title>归并、快排、堆排序 | 最喜欢你啦！</title>
+    <title>覆千秋 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="归并、快排、堆排序"/>
+    
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -241,138 +241,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
-            
 
         
-
+            <a class="breadcrumb" href="/categories/我的故事/枯骨流沙/覆千秋/">覆千秋</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>归并、快排、堆排序</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/归并、快排、堆排序/">2017-10-31</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
-        
-            <a href="/tags/数据结构/" class="chip blue lighten-1">数据结构</a>
+            <a href="/2017/11/03/覆千秋1/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-11-03T13:46:15.000Z">2017-11-03</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                覆千秋1
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#归并"><span class="section table-of-contents-text">归并</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#快排"><span class="section table-of-contents-text">快排</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#堆排序"><span class="section table-of-contents-text">堆排序</span></a></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <hr>
-<p>归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。</p>
-<hr>
-<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><p>归并排序也是一种排序算法。<br>问题：将n个数由从小到大地排序。<br>归并提出的解决是：</p>
-<ol>
-<li>将这列数分成两半</li>
-<li>递归地将每一半排序</li>
-<li>将两个有序列合并成一整列</li>
-</ol>
-<p>归并排序在做串的切分时不考虑大小因素，只从中间切分。于是在合并时便需要对两个有序串做一定处理才能保证结果串的有序性。<br>为此，一个容易想到的方法是创建一个临时的数组存储有序列。如图：</p>
-<p><img src="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>每次都比较1串与2串当前位置元素大小，将较小的那一个输出到TMP数组中当前位置并加一，将输出串的当前位置加一。直到两个串都输出完毕。<br>这种方式所用的额外空间是O(n)，只需要O(n)次比较。</p>
-<p>实际上，归并排序一般是递归进行一直到每个串的长度是1，主要运算过程全部落在合并上面。下面由递归式分析归并排序算法的时间复杂度。</p>
-<p><strong>归并时间空间复杂度分析：</strong></p>
-<p>设T(n)表示该算法在规模为n的输入实例上最坏的运行时间，假设n是2的整数次幂，可以得到递推公式如下：</p>
-<p><img src="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="公式"></p>
-<p>则有递推关系：</p>
-<p><img src="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>将这些时间都加在一起即为nlog2N。即归并的时间复杂度是O(nlogn)级别。</p>
-<p>下面将严格证明这个命题：</p>
-<p>——————这个过程线省略————</p>
-<p><strong>归并的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  </div><div class="line">  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  </div><div class="line">   <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
-<ol>
-<li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
-<li>对两边分别递归地使用快排</li>
-<li>合并</li>
-</ol>
-<p>与归并相似的一点是，二者都采用递归方法解决问题，但是归并的排序工作都留在了合并过程中完成，而快排正与之相反，排序工作都在分割的过程中完成。</p>
-<p><img src="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KP"></p>
-<p>从图中可以明显看出，快排最终得到的串就是一个有序的串。</p>
-<p><strong>快排时间空间复杂度：</strong></p>
-<p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
-<p><strong>快排的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;</div><div class="line">  <span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
-<p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
-<p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
-<hr>
-<p>堆是一种数据结构，可以看做是一棵任一孩子结点都小于（大顶堆）或都大于（小顶堆）父亲结点的完全二叉树。这样根结点总是整个堆中最大或小的结点，每次只需将根取出来即可保证有序。但是，每添加或减少一个结点都需要对堆进行必要的维护。<br>于是，堆排序中最关键的操作就是将一个序列调整成为堆。</p>
-<p>堆排序给出的解决方法：</p>
-<ol>
-<li>将序列建成堆</li>
-<li>迭代地取根进入有序队列并调整堆直到堆为有序序列</li>
-</ol>
-<p>堆的产生过程其实就是一个调整过程，下面给出堆的调整过程（以大根堆为例）：</p>
-<p><img src="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终取出数字的顺序即为最终顺序。</p>
-<p>堆排序适合于结点数较多情况下的要求前几个结点。当记录数较少时，不推荐使用堆排序。</p>
-<p>hash表+堆排序是处理海量数据的绝佳组合。</p>
-<p><strong>堆排序时间空间复杂度</strong></p>
-<p>完全二叉树高度log(n+1)，即对每个节点进行调整的时间复杂度是O(logn)，包括建堆的时间耗费与取值和调整，整个算法时间复杂度是O(nlogn)。额外空间只有temp用来存取出的数，O(1)。</p>
-<p><strong>堆排序的代码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;<span class="keyword">this</span>.length;++i)&#123;</div><div class="line">      <span class="keyword">for</span>(var j=i,k=(j-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;k&gt;=<span class="number">0</span>;j=k,k=(k-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&gt;=<span class="keyword">this</span>[j])<span class="keyword">break</span>;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="keyword">this</span>.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;--i)&#123;</div><div class="line">      <span class="keyword">this</span>.swap(<span class="number">0</span>,i);</div><div class="line">      <span class="keyword">for</span>(var j=<span class="number">0</span>;k=(j+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>;k&lt;=i;j=k,k=(k+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(k==i||<span class="keyword">this</span>[k]&lt;<span class="keyword">this</span>[k-<span class="number">1</span>])--k;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&lt;=<span class="keyword">this</span>[j])braek;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>本篇文章中的代码部分来自于作者twobin于网址<a href="http://www.cnblogs.com/twobin的博文《排序算法性能比较》。" target="_blank" rel="external">http://www.cnblogs.com/twobin的博文《排序算法性能比较》。</a></p>
-</blockquote>
-
-                
-<p class="pink-link-context">
-    <a href="/2017/10/31/在MFC中创建控制台/" rel="next" title="在MFC中创建控制台">
-    上一篇：在MFC中创建控制台
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/10/31/序列比较/" rel="next" title="序列比较">
-    下一篇：序列比较
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>
