@@ -286,7 +286,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#UDP概述"><span class="section table-of-contents-text">UDP概述</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-UDP特点"><span class="section table-of-contents-text">1. UDP特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-UDP报文"><span class="section table-of-contents-text">2. UDP报文</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Persudo-Header"><span class="section table-of-contents-text">Persudo Header</span></a></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#UDP概述"><span class="section table-of-contents-text">UDP概述</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-UDP特点"><span class="section table-of-contents-text">1. UDP特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-UDP报文"><span class="section table-of-contents-text">2. UDP报文</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Persudo-Header"><span class="section table-of-contents-text">Persudo Header</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#可靠数据传输原理"><span class="section table-of-contents-text">可靠数据传输原理</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#构造可靠数据传输协议"><span class="section table-of-contents-text">构造可靠数据传输协议</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#rdt1-0：信道完全可靠"><span class="section table-of-contents-text">rdt1.0：信道完全可靠</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#rdt2-0：信道具有比特差错"><span class="section table-of-contents-text">rdt2.0：信道具有比特差错</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#比特交替协议——rdt3-0：信道可能丢包、产生比特差错"><span class="section table-of-contents-text">比特交替协议——rdt3.0：信道可能丢包、产生比特差错</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#流水线可靠数据传输协议"><span class="section table-of-contents-text">流水线可靠数据传输协议</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#回退N步：GBN"><span class="section table-of-contents-text">回退N步：GBN</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#选择重传"><span class="section table-of-contents-text">选择重传</span></a></li></ol></li></ol>
 </div>
 
 
@@ -338,8 +338,67 @@
 <p>希望使用UDP实现可靠传输的话需要在应用层协议上加上可靠性保证。这种方法既可以保证可靠传输，又可以拒绝拥塞控制的影响。</p>
 </blockquote>
 <p>表1：流行的因特网应用及其下协议</p>
-<p>|应用|应用层协议|下层运输协议|</p>
-<p>电子邮件|SMTP|TCP<br>远程终端访问|Talnet|TCP<br>Web|HTTP|TCP<br>文件传输|FTP|TCP<br>远程文件服务器|NFS|通常UDP<br>流式多媒体|通常专用|UDP或TCP<br>因特网电话|通常专用|UDP或TCP<br>网络管理|SNMP|通常UDP<br>路由选择协议|RIP|通常UDP<br>名字转换|DNS|通常UDP</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>应用层协议</th>
+<th>下层运输协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电子邮件</td>
+<td>SMTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程终端访问</td>
+<td>Talnet</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>HTTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>文件传输</td>
+<td>FTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程文件服务器</td>
+<td>NFS</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>流式多媒体</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>因特网电话</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>网络管理</td>
+<td>SNMP</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>路由选择协议</td>
+<td>RIP</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>名字转换</td>
+<td>DNS</td>
+<td>通常UDP</td>
+</tr>
+</tbody>
+</table>
 <h2 id="2-UDP报文"><a href="#2-UDP报文" class="headerlink" title="2. UDP报文"></a>2. UDP报文</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/9685377.jpg" alt="UDP头信息"></p>
 <p>长度：指明了包括首部信息在内的UDP报文段长度（单位：字节：Byte）；</p>
 <p>下面重点说<strong>检验和</strong>：</p>
@@ -348,6 +407,72 @@
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/92376358.jpg" alt=""></p>
 <p>在发送端，首先会将报文段中的checksum清零，然后把报文段与persudo header的数据当作16bit的很多数据，对他们进行求和运算，将得出的16bit结果求反给checksum字段。</p>
 <p>在接收端，产生新的伪首部，然后只需要将这些数据全部求和，最终如果是16个1，说明<strong>可能</strong>是没错的，但是也可能<strong>发生的错误已经超出了检错能力</strong>，如果不是16个1，那说明一定是错了。</p>
+<p>checksum有什么用呢？对于明确错误的信息，UDP会要么丢弃；要么把数据给应用层，但是给应用层警告说数据是错的。</p>
+<blockquote>
+<p>其实伪首部破坏了分层结构，在运输层产生了网络层的信息。</p>
+<p>UDP校验和覆盖的范围超出了UDP数据报本身，使用伪首部的目的是检验UDP数据报是否真正到达目的地，正确的目的地包括了特定的主机和该主机上特定的端口</p>
+<p>checksum机制在ipv4下是可选的，但是在ipv6下是必须的。</p>
+</blockquote>
+<p>在checksum中看到了<strong>端对端原则</strong>。端对端原则是一个被受赞扬的原则，该原则表述为某种功能必须基于端对端实现：”与在较高级别提供这些功能的代价相比，在较低级别上设置的功能可能是冗余或几乎没有价值的。“<br>在这里，由于不能保证从网络到物理到链路都有有效的检错机制，甚至在某些路由器的内存中也可能引入比特差错，实现端对端的错误检测机制是有必要的。</p>
+<h1 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h1><p>在这一节里，将所有的底层数据传输视为不可靠的，可能会发生数据的丢失、差错、失序等。</p>
+<p>这里讨论的是普遍的计算机网络使用的理论，将以<strong>分组</strong>代替<strong>报文段</strong>被使用。同时，只考虑<strong>单向数据传输</strong>，其实<strong>双向数据传输</strong>并不会更难。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/10707246.jpg" alt=""></p>
+<h2 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h2><h3 id="rdt1-0：信道完全可靠"><a href="#rdt1-0：信道完全可靠" class="headerlink" title="rdt1.0：信道完全可靠"></a>rdt1.0：信道完全可靠</h3><p>假如信道完全可靠，UDP完全可靠。发送方只要接收到rdt_send就做处理并调用udp_send，接收方只要接收到rdt_rcv就处理。有限状态机（FSM）图如下：</p>
+<p>发送端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/67644025.jpg" alt=""></p>
+<p>接收端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/29594625.jpg" alt=""></p>
+<h3 id="rdt2-0：信道具有比特差错"><a href="#rdt2-0：信道具有比特差错" class="headerlink" title="rdt2.0：信道具有比特差错"></a>rdt2.0：信道具有比特差错</h3><p><strong>自动重传请求</strong>（Automatic Repeat reQuest）：在接收方确认接收到正确的报文之后给出<strong>肯定确认</strong>，接受到不正确的报文之后给出<strong>否定确认</strong>。</p>
+<p>实际上，这种机制需要其他的支持：</p>
+<ol>
+<li>差错检测</li>
+<li>接收方反馈：如果正确，返回ACK，不正确返回NAK。</li>
+<li>重传：发送方在接收到NAK时重传。</li>
+</ol>
+<p>FSM：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/62528979.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/18789362.jpg" alt=""></p>
+<p>但是，如果ACK或者NCK的包错误了怎么办呢？<br>一般有三种解决方法：</p>
+<ol>
+<li>发送请求，询问上一个差错包的内容。这样很容易陷入询问的死循环。</li>
+<li>增加足够的检错纠错能力。导致冗余数据过多。</li>
+<li>直接重传。可能会引入冗余分组，使得接收方不知道这个包是新包还是重传包。</li>
+</ol>
+<p>对于第三种方法，可以引入<strong>序列号</strong>的概念来解决问题。对于我们现在讨论的停等协议，只需要两个序号即1bit即可。</p>
+<p>这个版本是<strong>rdt2.1</strong>，新的FSM是这样的：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/35627137.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/21016547.jpg" alt=""></p>
+<p>其实，如果不使用NAK，而是对上次的接收再发送一个ACK，也能起到同样的效果，这样，有了<strong>rdt2.2</strong>版本：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/79622017.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43136886.jpg" alt=""></p>
+<h3 id="比特交替协议——rdt3-0：信道可能丢包、产生比特差错"><a href="#比特交替协议——rdt3-0：信道可能丢包、产生比特差错" class="headerlink" title="比特交替协议——rdt3.0：信道可能丢包、产生比特差错"></a>比特交替协议——rdt3.0：信道可能丢包、产生比特差错</h3><p>如果产生了丢包，接收端是不会知道的，只能在发送端处理这个问题。一个是发送端主动发送的数据丢失，和接收端没有关系，一个是接收端已经收到了包，但是发送的确认信息丢失。</p>
+<p>发送方需要<strong>重传</strong>，应该做到：</p>
+<ol>
+<li>每次发送数据之后启动一个定时器</li>
+<li>响应定时器中断</li>
+<li>停止定时器</li>
+</ol>
+<p>在重传中，延时时间的设置是很重要的。过长的延迟时间将影响应用层的体验，果断的延迟时间将会引入<strong>冗余数据分组</strong>。rdt2.2已经有能力处理冗余数据分组：当在等待1的时候又传来了0，接收端会直接丢弃这些数据。而对于停等协议，不会有在等1的时候正好发送了1的冗余包的情况。</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/29153183.jpg" alt=""></p>
+<h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><p>rdt3.0对于错误处理已经比较完善了，但是他的问题在于他是一个停等协议。停等协议对链路的利用率低到令人发指！</p>
+<blockquote>
+<p>对于一个速度是1Gbps的链路，发送一个大小1000Byte的包：</p>
+<p>进入所需时间：$$t=\frac{L}{R}=\frac{8000bit/pkt}{10^9bit/s}=8us/pkt</p>
+<p>假设传输所需时间是15ms，那么信道的利用率是：</p>
+<p>$$U_sender=\frac{\frac{L}{R}}{RTT+\frac{L}{R}}=\frac{0.008}{30.008}=0.00027$$</p>
+</blockquote>
+<p>为了提高传输效率，停等协议需要被摒弃。现在使用的技术被称为<strong>流水线</strong>。<br>使用流水线技术，1个bit的序号是不够用的，在后面我们将讲到对于n个同时发出的包，需要2*n个序列号。而且，在发送端和接收端都需要有缓存机制来暂时存储：发送端需要存储已经发送但是没有确认接收的数据，接收端需要存储已经正确接收的数据。</p>
+<p>这一节并没有完整的讨论流水线机制下的协议，从下一小节开始，对缓存的处理、序列号的处理进行讨论。</p>
+<h2 id="回退N步：GBN"><a href="#回退N步：GBN" class="headerlink" title="回退N步：GBN"></a>回退N步：GBN</h2><p>允许发送方连续发送N个数据包，接收方按序接收数据包，失序的包会被丢弃。（这时由于没有考虑双向传输，而且接收端的机制，在接收端的结构暂且不提）</p>
+<p>在发送方将会有一个缓冲区，把结构抽象成这样：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/82326531.jpg" alt=""></p>
+<p>在这次传输的过程中只能使用[send_base,sendbase+N-1]之间的序号。扩展FSM如图：</p>
+<p>发送端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/56361901.jpg" alt=""></p>
+<p>接收端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/32672336.jpg" alt=""></p>
+<p>在这个FSM中存在变量，初始化是需要的。<br>在发送端，当上层请求发送数据时，有一个判断：如果还可以继续发送（nextseqnum&lt; base+N），就继续发送，如果在发送这个之前所有的包都已经被确认过了，就需要开一个定时器，<strong>从这里可以看出：计时器以最左边界启动</strong>。如果不能再发送了，拒绝发送数据。这时可能有三种处理方式：将该数据返回给上层，隐含地表示已经不能再传了；缓存这些数据；使用同步机制只允许上层在窗口不满的时候才能调用rdt_send。<br>数据发送出去之后，如果按时接收到了一个ACK，比如说是ACK(i)，那么说明从base到i都已经被确认了。假如这时已经没有未确认包了，计时器停止，否则，重新为新的最左包启动一个定时器。<br>如果ACK损坏了，什么也不做。因为有定时装置，只需等待重传。这与rdt3.0的机制是相同的。<br>好了，timeout了，将现在所有的未确认全部重传，然后重启定时器。</p>
+<p>在接收端，同样初始化。<br>接收端只会等待需要等待的按序的包，如果不是按序的，不予接收，并将上一个确认信息给发送方。类似于rdt2.0的处理方式。发送方收到的这个包并不会对发送方有什么影响，只是由于timer不能被停止或重启，一定时间之后便会触发重传。<br>如果接受端收到了一个按序的、在检错能力之内没有错误的包，才对他进行处理，更新自己的期望包序号，并向发送方发出自己的确认信息。</p>
+<p>这种方式的弊端在于失序数据的丢弃。</p>
+<p>假如发送方一口气发送了N个包，恰巧第一个包坏了，其他都好的，由于接收端拒绝接受第一个坏的包，其他包也被丢弃了，只能重传所有的N个包。<br><del>或者，其实这N个包都好好的到了接收端，接收端返回了N个确认包。</del> emmm其实这里做的比较好，因为反回了N就代表N以及以前的都已经收到了。</p>
+<h2 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h2><p>对上一小节最后提出的回退N步的弊端，在选择重传之中得到了解决。但是应该知道，功能的增强需要结构的复杂作为代价。</p>
+<p>最后，我需要补充一下端口号与进程之间的关系：</p>
 
                 
 
