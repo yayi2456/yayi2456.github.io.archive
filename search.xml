@@ -51,13 +51,30 @@
 <p>然而，由于UDP没有拥塞控制机制，当网络繁忙时，路由器会有大量的分组溢出，几乎没有UDP分组能够成功通过路由器到达目的地。而且，具有拥塞控制机制的TCP发送方会减慢自己的速率。UDP没有拥塞控制机制不仅造成了UDP会话之间的高丢包率，也挤垮了TCP会话。很多研究人员已经提出了新的机制，使所有数据源执行自适应的拥塞控制。</p>
 <p>希望使用UDP实现可靠传输的话需要在应用层协议上加上可靠性保证。这种方法既可以保证可靠传输，又可以拒绝拥塞控制的影响。</p>
 </blockquote>
-<center>表1：流行的因特网应用及其下协议</center>
-
-<center><br><br>|应用|应用层协议|下层运输协议|<br>|:–:|:–:|:–:|<br>电子邮件|SMTP|TCP<br>远程终端访问|Talnet|TCP<br>Web|HTTP|TCP<br>文件传输|FTP|TCP<br>远程文件服务器|NFS|通常UDP<br>流式多媒体|通常专用|UDP或TCP<br>因特网电话|通常专用|UDP或TCP<br>网络管理|SNMP|通常UDP<br>路由选择协议|RIP|通常UDP<br>名字转换|DNS|通常UDP<br><br></center>
-
+<p>表1：流行的因特网应用及其下协议</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">应用</th>
+<th style="text-align:center">应用层协议</th>
+<th style="text-align:center">下层运输协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>电子邮件|SMTP|TCP<br>远程终端访问|Talnet|TCP<br>Web|HTTP|TCP<br>文件传输|FTP|TCP<br>远程文件服务器|NFS|通常UDP<br>流式多媒体|通常专用|UDP或TCP<br>因特网电话|通常专用|UDP或TCP<br>网络管理|SNMP|通常UDP<br>路由选择协议|RIP|通常UDP<br>名字转换|DNS|通常UDP</p>
 <h2 id="2-UDP报文"><a href="#2-UDP报文" class="headerlink" title="2. UDP报文"></a>2. UDP报文</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/9685377.jpg" alt="UDP头信息"></p>
 <p>长度：指明了包括首部信息在内的UDP报文段长度（单位：字节：Byte）；</p>
 <p>下面重点说<strong>检验和</strong>：</p>
+<p>在计组里面就学了几个检错方法，对于一个检错机制：数据=冗余位  实际数据。决定检错能力的是冗余位数与算法。对于UDP，他提供的是一个很简单的检错机制，而且只能检错，不能修改错误。</p>
+<h3 id="Persudo-Header"><a href="#Persudo-Header" class="headerlink" title="Persudo Header"></a>Persudo Header</h3><p>persudo header结构是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/92376358.jpg" alt=""></p>
+<p>在发送端，首先会将报文段中的checksum清零，然后把报文段与persudo header的数据当作16bit的很多数据，对他们进行求和运算，将得出的16bit结果求反给checksum字段。</p>
+<p>在接收端，只需要将这些数据全部求和，最终如果是16个1，说明<strong>可能</strong>是没错的，但是也可能<strong>发生的错误已经超出了检错能力</strong>，</p>
 ]]></content>
       
         <categories>
