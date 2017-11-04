@@ -52,20 +52,7 @@
 <p>希望使用UDP实现可靠传输的话需要在应用层协议上加上可靠性保证。这种方法既可以保证可靠传输，又可以拒绝拥塞控制的影响。</p>
 </blockquote>
 <p>表1：流行的因特网应用及其下协议</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">应用</th>
-<th style="text-align:center">应用层协议</th>
-<th style="text-align:center">下层运输协议</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
+<p>|应用|应用层协议|下层运输协议|</p>
 <p>电子邮件|SMTP|TCP<br>远程终端访问|Talnet|TCP<br>Web|HTTP|TCP<br>文件传输|FTP|TCP<br>远程文件服务器|NFS|通常UDP<br>流式多媒体|通常专用|UDP或TCP<br>因特网电话|通常专用|UDP或TCP<br>网络管理|SNMP|通常UDP<br>路由选择协议|RIP|通常UDP<br>名字转换|DNS|通常UDP</p>
 <h2 id="2-UDP报文"><a href="#2-UDP报文" class="headerlink" title="2. UDP报文"></a>2. UDP报文</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/9685377.jpg" alt="UDP头信息"></p>
 <p>长度：指明了包括首部信息在内的UDP报文段长度（单位：字节：Byte）；</p>
@@ -74,7 +61,7 @@
 <h3 id="Persudo-Header"><a href="#Persudo-Header" class="headerlink" title="Persudo Header"></a>Persudo Header</h3><p>persudo header结构是这样的：</p>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/92376358.jpg" alt=""></p>
 <p>在发送端，首先会将报文段中的checksum清零，然后把报文段与persudo header的数据当作16bit的很多数据，对他们进行求和运算，将得出的16bit结果求反给checksum字段。</p>
-<p>在接收端，只需要将这些数据全部求和，最终如果是16个1，说明<strong>可能</strong>是没错的，但是也可能<strong>发生的错误已经超出了检错能力</strong>，</p>
+<p>在接收端，产生新的伪首部，然后只需要将这些数据全部求和，最终如果是16个1，说明<strong>可能</strong>是没错的，但是也可能<strong>发生的错误已经超出了检错能力</strong>，如果不是16个1，那说明一定是错了。</p>
 ]]></content>
       
         <categories>
