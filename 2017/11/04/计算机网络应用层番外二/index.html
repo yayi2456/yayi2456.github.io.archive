@@ -7,7 +7,7 @@
 
     
 
-    <title>MFC | 最喜欢你啦！</title>
+    <title>计算机网络应用层之番外二 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="计算机网络应用层之番外二"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -241,30 +241,88 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/计算机网络/">计算机网络</a><a class="breadcrumb" href="/categories/计算机网络/大三的课/">大三的课</a>
+
 
         
-            <a class="breadcrumb" href="/tags/MFC/">MFC</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>计算机网络应用层之番外二</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2017-11-04T13:12:40.000Z"><a href="/2017/11/04/计算机网络应用层番外二/">2017-11-04</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/10/31/在MFC中创建控制台/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-10-31T14:57:47.000Z">2017-10-31</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                在MFC中创建控制台
-            </a>
+            <a href="/tags/网络课/" class="chip blue lighten-1">网络课</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
+<p>多用户并发访问与可靠文件传输，不能有下载大小的限制。</p>
+<p>为了用UDP实现多用户并发访问，一定是需要使用多个socket。仿照FTP的协议设计：使用一个UDP的socket在master进行监听，这个socket绑定一个确定的端口号，用户客户机连接服务器发请求使用。</p>
+<p>考虑的请求比较小，可以使用一个包传送完成：</p>
+<p>Server在端口号X进行监听。</p>
+<p>将有一个N。<br>一个client要求连接，发送请求之后立即fork一个子进程，仍然使用这个socket，立即进入准备接收的状态。Server收到了，立即fork一个子线程，master继续监听，确保其他client的请求能被接收到。子线程新建一个UDP的socket，准备进行接收。由于UDP的不可靠，希望在传输数据的时候，Server应该首先，在fork出子线程之后立即对命令请求进行分析，告诉client一共要穿多少个包。（因为在n结束之后，client的子线程就会结束。如果不采用n结束子线程就结束，肯定需要有一个例如，里最后一个包recv之后多久end。这样应该是不太可靠的…对于server，需要有超时重传。emmmm</p>
+<p>其实这样也行：</p>
+<p>client子线程立即等待server传回的数据。同时启动一个定时器，如果超过了一定时间，反正也是同一个socket，就再重传，然后去等。</p>
+<p>server呢，在子线程fork出之后就去分析命令，然后开始传包。每一个包有一个序列号。采用选择重传的机制进行文件信息的传输。当发送端的所有发出的包已经发送完毕并且所有的一发送包都得到回执确认之后，向接收端发送最终的发送完毕包。这个包在发送完之后，client接受到之后必须给ACK。server收到ACK之后才能关闭。</p>
+<p>有状况：<br>如果client没接到信息或者信息错了，按照选择重传，不会有动作，server重传没毛病；如果client给的ACK丢了，server不能确定client已经收到，也会重传，所以client不可能在发送完ACK就关闭，而是影该等待server的回执，让server知道我已经知道我拿到完整的包了。一旦等到，立即关闭。<br>所以client这边对于最后一个包的动作是：recv-&gt;收到错报，不动，等重传/收到对的包，回复ACK同时启动一个超时重传机制，开始接收server的回执，不管接受到了什么，关闭。（因为这个时候server只要收到了client的东西就证明client肯定已经知道包已经传完了）<br>因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
+<p>server的动作是-&gt;发送最后一个结束包-&gt;超时重传/接收到client的信息-&gt;发送一个ACK，关闭。</p>
+<p>server也知道client这时server也已经关闭</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/11/04/计算机网络运输层之循序渐进/" rel="next" title="计算机网络运输层之二">
+    下一篇：计算机网络运输层之二
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

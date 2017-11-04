@@ -3,6 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[计算机网络应用层之番外二]]></title>
+      <url>/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82%E7%95%AA%E5%A4%96%E4%BA%8C/</url>
+      <content type="html"><![CDATA[<p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
+<p>多用户并发访问与可靠文件传输，不能有下载大小的限制。</p>
+<p>为了用UDP实现多用户并发访问，一定是需要使用多个socket。仿照FTP的协议设计：使用一个UDP的socket在master进行监听，这个socket绑定一个确定的端口号，用户客户机连接服务器发请求使用。</p>
+<p>考虑的请求比较小，可以使用一个包传送完成：</p>
+<p>Server在端口号X进行监听。</p>
+<p>将有一个N。<br>一个client要求连接，发送请求之后立即fork一个子进程，仍然使用这个socket，立即进入准备接收的状态。Server收到了，立即fork一个子线程，master继续监听，确保其他client的请求能被接收到。子线程新建一个UDP的socket，准备进行接收。由于UDP的不可靠，希望在传输数据的时候，Server应该首先，在fork出子线程之后立即对命令请求进行分析，告诉client一共要穿多少个包。（因为在n结束之后，client的子线程就会结束。如果不采用n结束子线程就结束，肯定需要有一个例如，里最后一个包recv之后多久end。这样应该是不太可靠的…对于server，需要有超时重传。emmmm</p>
+<p>其实这样也行：</p>
+<p>client子线程立即等待server传回的数据。同时启动一个定时器，如果超过了一定时间，反正也是同一个socket，就再重传，然后去等。</p>
+<p>server呢，在子线程fork出之后就去分析命令，然后开始传包。每一个包有一个序列号。采用选择重传的机制进行文件信息的传输。当发送端的所有发出的包已经发送完毕并且所有的一发送包都得到回执确认之后，向接收端发送最终的发送完毕包。这个包在发送完之后，client接受到之后必须给ACK。server收到ACK之后才能关闭。</p>
+<p>有状况：<br>如果client没接到信息或者信息错了，按照选择重传，不会有动作，server重传没毛病；如果client给的ACK丢了，server不能确定client已经收到，也会重传，所以client不可能在发送完ACK就关闭，而是影该等待server的回执，让server知道我已经知道我拿到完整的包了。一旦等到，立即关闭。<br>所以client这边对于最后一个包的动作是：recv-&gt;收到错报，不动，等重传/收到对的包，回复ACK同时启动一个超时重传机制，开始接收server的回执，不管接受到了什么，关闭。（因为这个时候server只要收到了client的东西就证明client肯定已经知道包已经传完了）<br>因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
+<p>server的动作是-&gt;发送最后一个结束包-&gt;超时重传/接收到client的信息-&gt;发送一个ACK，关闭。</p>
+<p>server也知道client这时server也已经关闭</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 大三的课 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 网络课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[计算机网络运输层之二]]></title>
       <url>/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82%E4%B9%8B%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/</url>
       <content type="html"><![CDATA[<h1 id="UDP概述"><a href="#UDP概述" class="headerlink" title="UDP概述"></a>UDP概述</h1><p>UDP很弱，除了上一节提到的复用分解机制以及少量的差错检验之外，基本没有功能了，如果程序员选择了UDP，那基本上就是在与IP打交道了。</p>
@@ -169,7 +203,7 @@
 <h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><p>rdt3.0对于错误处理已经比较完善了，但是他的问题在于他是一个停等协议。停等协议对链路的利用率低到令人发指！</p>
 <blockquote>
 <p>对于一个速度是1Gbps的链路，发送一个大小1000Byte的包：</p>
-<p>进入所需时间：$$t=\frac{L}{R}=\frac{8000bit/pkt}{10^9bit/s}=8us/pkt</p>
+<p>进入所需时间：$$t=\frac{L}{R}=\frac{8000bit/pkt}{10^9bit/s}=8us/pkt$$</p>
 <p>假设传输所需时间是15ms，那么信道的利用率是：</p>
 <p>$$U_sender=\frac{\frac{L}{R}}{RTT+\frac{L}{R}}=\frac{0.008}{30.008}=0.00027$$</p>
 </blockquote>
@@ -182,11 +216,43 @@
 <p>发送端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/56361901.jpg" alt=""></p>
 <p>接收端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/32672336.jpg" alt=""></p>
 <p>在这个FSM中存在变量，初始化是需要的。<br>在发送端，当上层请求发送数据时，有一个判断：如果还可以继续发送（nextseqnum&lt; base+N），就继续发送，如果在发送这个之前所有的包都已经被确认过了，就需要开一个定时器，<strong>从这里可以看出：计时器以最左边界启动</strong>。如果不能再发送了，拒绝发送数据。这时可能有三种处理方式：将该数据返回给上层，隐含地表示已经不能再传了；缓存这些数据；使用同步机制只允许上层在窗口不满的时候才能调用rdt_send。<br>数据发送出去之后，如果按时接收到了一个ACK，比如说是ACK(i)，那么说明从base到i都已经被确认了。假如这时已经没有未确认包了，计时器停止，否则，重新为新的最左包启动一个定时器。<br>如果ACK损坏了，什么也不做。因为有定时装置，只需等待重传。这与rdt3.0的机制是相同的。<br>好了，timeout了，将现在所有的未确认全部重传，然后重启定时器。</p>
-<p>在接收端，同样初始化。<br>接收端只会等待需要等待的按序的包，如果不是按序的，不予接收，并将上一个确认信息给发送方。类似于rdt2.0的处理方式。发送方收到的这个包并不会对发送方有什么影响，只是由于timer不能被停止或重启，一定时间之后便会触发重传。<br>如果接受端收到了一个按序的、在检错能力之内没有错误的包，才对他进行处理，更新自己的期望包序号，并向发送方发出自己的确认信息。</p>
+<p>在接收端，同样初始化。<br>接收端只会等待需要等待的按序的包，如果不是按序的，不予接收，并将上一个确认信息给发送方。类似于rdt2.0的处理方式。发送方收到的这个包并不会对发送方有什么影响，只是由于timer不能被停止或重启，一定时间之后便会触发重传。但是对于那些ACK丢失的包有重大意义：推动sendbase向前。<br>如果接受端收到了一个按序的、在检错能力之内没有错误的包，才对他进行处理，更新自己的期望包序号，并向发送方发出自己的确认信息。</p>
 <p>这种方式的弊端在于失序数据的丢弃。</p>
 <p>假如发送方一口气发送了N个包，恰巧第一个包坏了，其他都好的，由于接收端拒绝接受第一个坏的包，其他包也被丢弃了，只能重传所有的N个包。<br><del>或者，其实这N个包都好好的到了接收端，接收端返回了N个确认包。</del> emmm其实这里做的比较好，因为反回了N就代表N以及以前的都已经收到了。</p>
 <h2 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h2><p>对上一小节最后提出的回退N步的弊端，在选择重传之中得到了解决。但是应该知道，功能的增强需要结构的复杂作为代价。</p>
-<p>最后，我需要补充一下端口号与进程之间的关系：</p>
+<p>允许失序，接收方会对一些失序的包进行缓存。这样，确认接收的机制也需要进行修改、接收方也需要拥有一个缓存区来实现。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/94806677.jpg" alt=""></p>
+<p>在这种方式中，其实在上一节最后说的那点优点是不可能存在了，因为需要选择重传，必然是选择确认。而且，每个分组都必须有自己的定时器，而不能像上面一样按最左来做定时器。</p>
+<p>在发送端，base只能移动到没有已发送但未确认的最右。对于上图，发送端的绿色必定对应接收端的粉色或者无色，接收端的灰色必定对应发送端的黄色，在sendbase右边不可能有对应接收端灰色的色块。</p>
+<p>发送方的动作与前面类似，只是需要将确认机制修改成单独确认，接收方的动作如下：</p>
+<ol>
+<li>如果收到了[recvbase,recvbase+N-1]内的包，是正常的，把收到的包的对应序号ACK，如果在这之内的某个包出了问题不用管，丢掉。如果等于recvbase了，就更新recvbase。（这也使得2.是必要的）</li>
+<li>收到了[recvbase-N,recvbase-1]之内的包，可能是这之内的包已经被接收端ACK了，但是没有被发送端ACK，一定需要传一个ACK包给发送端，否则会使得sendbase无法前进。</li>
+<li>其他情况忽略即可。</li>
+</ol>
+<p>情况2.也说明了为什么需要2*N个序号：</p>
+<p>尴尬的情况：究竟是重复包还是新包？<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/59249922.jpg" alt=""></p>
+<blockquote>
+<p>在书中提到了<strong>分组重排</strong>，我不是十分理解：</p>
+<p>分组重拍的一个表现是具有确认号x的旧副本可能会在网络中出现，即使现在发送端与接收端的窗口中可能都包含x。对于分组重排，信道可被基本看成是在缓存分组，并在将来的任意时刻自然地释放这些分组。因为序列号要被重用，所以这种情况要十分小心。<br>实际采用的一个方法是直到发送方确认网络中不会在存在x分组。这通过设置一个分组在网络中的最大存活时间来限定。<br>在高速网络的TCP扩展中，一般是3min。<br>[sunshine 1978]描述了一种使用序号的方法，可以使重新排序问题完全被避免。</p>
+</blockquote>
+<h1 id="端口与进程"><a href="#端口与进程" class="headerlink" title="端口与进程"></a>端口与进程</h1><p>最后，我需要补充一下端口号与进程之间的关系：</p>
+<p>首先：缓冲区对应的是谁？在上一篇中就应该明确，是socket。</p>
+<p><strong>端口号是什么？</strong></p>
+<p>在网络技术中，端口大致有两种意思：一是物理意义上的端口，比如，ADSL Modem、集线器、交换机、路由器用 于连接其他网络设备的接口，如RJ-45端口、SC端口等等。二是逻辑意义上的端口，一般是指TCP/IP协议中的端口，端口号的范围从0到65535，比如用于浏览网页服务的80端口，用于FTP服务的21端口等等。我们这里将要介绍的就是逻辑意义上的端口。</p>
+<p>服务器一般通过知名端口号来识别。例如，对于每个TCP/IP实现来说，FTP服务器的TCP端口号都是21，每个Telnet服务器的TCP端口号都是23，每个TFTP(简单文件传送协议)服务器的UDP端口号都是69。任何TCP/IP实现所提供的服务都用知名的1～1023之间的端口号。这些知名端口号由Internet号分配机构（InternetAssignedNumbersAuthority,IANA）来管理。</p>
+<p>端口号的作用正是为了区分不同的网络服务。</p>
+<p>上面的比较官方，下面将由我自己写的程序来——</p>
+<p>TCP里面，一个端口号可以被多个socket绑定。而UDP不行，我的理解是数据不知道要给谁。</p>
+<p>已经被绑定之后，再次要求绑定：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/88853868.jpg" alt=""></p>
+<p>这是再次运行，也就是说，其实这个并不是一个进程不能绑定同一个端口号，而是两个UDP的socket不能绑定同一个端口。跟进程没有什么关系。fork子线程的时候，也可以使用其他的socket绑定其他的端口号。</p>
+<p>端口这个概念就是计算机网络领域的概念，有网友直言说进程与端口号没有什么关系，其实是对的。</p>
+<p><a href="http://wps.pearsoned.com/ecs_kurose_compnetw_6/216/55463/14198700.cw/index.html" target="_blank" rel="external">在本书配套的网站上有十分精致的动画介绍</a></p>
+<p>这些都搞清楚了之后，<strong>TCP</strong>隆重登场~</p>
+<p>thanks for ur help!</p>
+<p>[1] <a href="http://www.cnblogs.com/BoyXiao/archive/2012/02/20/2359273.html" target="_blank" rel="external">进程与端口映射</a></p>
+<p>[2] <a href="https://baike.1688.com/doc/view-d2361261.html" target="_blank" rel="external">端口号是什么？</a></p>
+<p>[3]<a href="https://www.ibm.com/support/knowledgecenter/zh/SSGMGV_3.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl2d.html" target="_blank" rel="external">IBM Knowledge Center</a>  这个有很多东西，不止端口号</p>
 ]]></content>
       
         <categories>
@@ -400,74 +466,53 @@
     </entry>
     
     <entry>
-      <title><![CDATA[归并、快排、堆排序]]></title>
-      <url>/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/</url>
-      <content type="html"><![CDATA[<hr>
-<p>归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。</p>
-<hr>
-<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><p>归并排序也是一种排序算法。<br>问题：将n个数由从小到大地排序。<br>归并提出的解决是：</p>
-<ol>
-<li>将这列数分成两半</li>
-<li>递归地将每一半排序</li>
-<li>将两个有序列合并成一整列</li>
+      <title><![CDATA[Linux、Vim、Git常用命令——简明扼要版]]></title>
+      <url>/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      <content type="html"><![CDATA[<p>第一次操作系统实验课记录：</p>
+<h2 id="一。linux下常用命令"><a href="#一。linux下常用命令" class="headerlink" title="一。linux下常用命令"></a>一。linux下常用命令</h2><h2 id="二。vim编辑器用法命令"><a href="#二。vim编辑器用法命令" class="headerlink" title="二。vim编辑器用法命令"></a>二。vim编辑器用法命令</h2><ol>
+<li>首先确保linux下安装有vim。可以使用上述命令sudo apt-get install vim来确定。如果已经安装了vim，会显示没有变化，否则会帮你安装vim。</li>
+<li>然后就可以开始使用vim啦！</li>
 </ol>
-<p>归并排序在做串的切分时不考虑大小因素，只从中间切分。于是在合并时便需要对两个有序串做一定处理才能保证结果串的有序性。<br>为此，一个容易想到的方法是创建一个临时的数组存储有序列。如图：</p>
-<p><img src="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>每次都比较1串与2串当前位置元素大小，将较小的那一个输出到TMP数组中当前位置并加一，将输出串的当前位置加一。直到两个串都输出完毕。<br>这种方式所用的额外空间是O(n)，只需要O(n)次比较。</p>
-<p>实际上，归并排序一般是递归进行一直到每个串的长度是1，主要运算过程全部落在合并上面。下面由递归式分析归并排序算法的时间复杂度。</p>
-<p><strong>归并时间空间复杂度分析：</strong></p>
-<p>设T(n)表示该算法在规模为n的输入实例上最坏的运行时间，假设n是2的整数次幂，可以得到递推公式如下：</p>
-<p><img src="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="公式"></p>
-<p>则有递推关系：</p>
-<p><img src="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>将这些时间都加在一起即为nlog2N。即归并的时间复杂度是O(nlogn)级别。</p>
-<p>下面将严格证明这个命题：</p>
-<p>——————这个过程线省略————</p>
-<p><strong>归并的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  </div><div class="line">  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  </div><div class="line">   <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
-<ol>
-<li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
-<li>对两边分别递归地使用快排</li>
-<li>合并</li>
-</ol>
-<p>与归并相似的一点是，二者都采用递归方法解决问题，但是归并的排序工作都留在了合并过程中完成，而快排正与之相反，排序工作都在分割的过程中完成。</p>
-<p><img src="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KP"></p>
-<p>从图中可以明显看出，快排最终得到的串就是一个有序的串。</p>
-<p><strong>快排时间空间复杂度：</strong></p>
-<p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
-<p><strong>快排的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;</div><div class="line">  <span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
-<p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
-<p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
-<hr>
-<p>堆是一种数据结构，可以看做是一棵任一孩子结点都小于（大顶堆）或都大于（小顶堆）父亲结点的完全二叉树。这样根结点总是整个堆中最大或小的结点，每次只需将根取出来即可保证有序。但是，每添加或减少一个结点都需要对堆进行必要的维护。<br>于是，堆排序中最关键的操作就是将一个序列调整成为堆。</p>
-<p>堆排序给出的解决方法：</p>
-<ol>
-<li>将序列建成堆</li>
-<li>迭代地取根进入有序队列并调整堆直到堆为有序序列</li>
-</ol>
-<p>堆的产生过程其实就是一个调整过程，下面给出堆的调整过程（以大根堆为例）：</p>
-<p><img src="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终取出数字的顺序即为最终顺序。</p>
-<p>堆排序适合于结点数较多情况下的要求前几个结点。当记录数较少时，不推荐使用堆排序。</p>
-<p>hash表+堆排序是处理海量数据的绝佳组合。</p>
-<p><strong>堆排序时间空间复杂度</strong></p>
-<p>完全二叉树高度log(n+1)，即对每个节点进行调整的时间复杂度是O(logn)，包括建堆的时间耗费与取值和调整，整个算法时间复杂度是O(nlogn)。额外空间只有temp用来存取出的数，O(1)。</p>
-<p><strong>堆排序的代码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;<span class="keyword">this</span>.length;++i)&#123;</div><div class="line">      <span class="keyword">for</span>(var j=i,k=(j-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;k&gt;=<span class="number">0</span>;j=k,k=(k-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&gt;=<span class="keyword">this</span>[j])<span class="keyword">break</span>;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="keyword">this</span>.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;--i)&#123;</div><div class="line">      <span class="keyword">this</span>.swap(<span class="number">0</span>,i);</div><div class="line">      <span class="keyword">for</span>(var j=<span class="number">0</span>;k=(j+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>;k&lt;=i;j=k,k=(k+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(k==i||<span class="keyword">this</span>[k]&lt;<span class="keyword">this</span>[k-<span class="number">1</span>])--k;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&lt;=<span class="keyword">this</span>[j])braek;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>本篇文章中的代码部分来自于作者twobin于网址<a href="http://www.cnblogs.com/twobin的博文《排序算法性能比较》。" target="_blank" rel="external">http://www.cnblogs.com/twobin的博文《排序算法性能比较》。</a></p>
+<p>你使用 vim 或vim filename.suffix 进入了vim的命令模式。</p>
 </blockquote>
+<p>在命令模式下，不能进行文本编辑操作，需要按下A/a/I/i进入插入模式，在这个模式下可以像notepad一样进行文本编辑。</p>
+<p><strong>如果使用第二种命令进入vim，vim将会自动帮你确定文件类型</strong>。这样说吧，比如你创建了一个yayicpp.cpp文件进入编辑，vim将会使代码高亮、进行括号匹配等操作。</p>
+<blockquote>
+<p>好的！进入文本编辑模式之后，你迫不及待地写了一段helloworld。代码完成之后，你觉得只打印一行helloworld不太够，你想知道有没有类似于VS环境中那种Ctrl+C和Ctrl+V的操作。</p>
+</blockquote>
+<p>其实是有的。这个时候需要按下Esc重新进入命令模式。在命令模式下有很多功能组合，上述的复制粘贴就是其中一种，但是这里并不想以复制粘贴作为第一个被介绍的命令，让我们先从光标的移动开始。</p>
+<ol>
+<li>按下h键，光标左移；j光标下移；k光标上移；l光标右移。</li>
+<li>按下d键进入删除模式，这时按下h可删除光标左侧的一个字符，按下j可删除光标所在行以及下面一行；按下k可删除光标所在行与其上面一行；按下l可删除光标所在的字符。双击d键删除光标所在行。</li>
+<li>按下u键可以撤销前一步所做的改变。</li>
+<li>按下V（Shift+v）或是v可以进入到一个选择的可视化界面，同样可以使用hjkl控制选择范围，v按照字符选择，V按照行数选择。选择完成之后按下y就可以复制选定内容。按下p就可以将复制内容粘贴到选定的位置。</li>
+<li>按两下y可以复制光标所在行。</li>
+</ol>
+<blockquote>
+<p>写到这里，你觉得可以了，可以从vim里面退出来了。</p>
+</blockquote>
+<ol>
+<li>在命令模式下输入冒号，进入最后行模式。在最低端出现了光标。</li>
+<li>在光标位置输入w，保存文件。</li>
+<li>输入q，退出。</li>
+<li>这些命令可以进行组合wq。wq可以用x替代。</li>
+</ol>
+<blockquote>
+<p>你进入了最后行模式，又不想退出了，想继续编辑。</p>
+</blockquote>
+<ol>
+<li>按下Esc或者Backspace可以回到命令模式。</li>
+</ol>
+<h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
 ]]></content>
       
         
         <tags>
             
-            <tag> 算法 </tag>
+            <tag> Git </tag>
             
-            <tag> 数据结构 </tag>
+            <tag> Linux </tag>
             
         </tags>
         
@@ -536,53 +581,74 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Linux、Vim、Git常用命令——简明扼要版]]></title>
-      <url>/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-      <content type="html"><![CDATA[<p>第一次操作系统实验课记录：</p>
-<h2 id="一。linux下常用命令"><a href="#一。linux下常用命令" class="headerlink" title="一。linux下常用命令"></a>一。linux下常用命令</h2><h2 id="二。vim编辑器用法命令"><a href="#二。vim编辑器用法命令" class="headerlink" title="二。vim编辑器用法命令"></a>二。vim编辑器用法命令</h2><ol>
-<li>首先确保linux下安装有vim。可以使用上述命令sudo apt-get install vim来确定。如果已经安装了vim，会显示没有变化，否则会帮你安装vim。</li>
-<li>然后就可以开始使用vim啦！</li>
-</ol>
-<blockquote>
-<p>你使用 vim 或vim filename.suffix 进入了vim的命令模式。</p>
-</blockquote>
-<p>在命令模式下，不能进行文本编辑操作，需要按下A/a/I/i进入插入模式，在这个模式下可以像notepad一样进行文本编辑。</p>
-<p><strong>如果使用第二种命令进入vim，vim将会自动帮你确定文件类型</strong>。这样说吧，比如你创建了一个yayicpp.cpp文件进入编辑，vim将会使代码高亮、进行括号匹配等操作。</p>
-<blockquote>
-<p>好的！进入文本编辑模式之后，你迫不及待地写了一段helloworld。代码完成之后，你觉得只打印一行helloworld不太够，你想知道有没有类似于VS环境中那种Ctrl+C和Ctrl+V的操作。</p>
-</blockquote>
-<p>其实是有的。这个时候需要按下Esc重新进入命令模式。在命令模式下有很多功能组合，上述的复制粘贴就是其中一种，但是这里并不想以复制粘贴作为第一个被介绍的命令，让我们先从光标的移动开始。</p>
+      <title><![CDATA[归并、快排、堆排序]]></title>
+      <url>/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/</url>
+      <content type="html"><![CDATA[<hr>
+<p>归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。</p>
+<hr>
+<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><p>归并排序也是一种排序算法。<br>问题：将n个数由从小到大地排序。<br>归并提出的解决是：</p>
 <ol>
-<li>按下h键，光标左移；j光标下移；k光标上移；l光标右移。</li>
-<li>按下d键进入删除模式，这时按下h可删除光标左侧的一个字符，按下j可删除光标所在行以及下面一行；按下k可删除光标所在行与其上面一行；按下l可删除光标所在的字符。双击d键删除光标所在行。</li>
-<li>按下u键可以撤销前一步所做的改变。</li>
-<li>按下V（Shift+v）或是v可以进入到一个选择的可视化界面，同样可以使用hjkl控制选择范围，v按照字符选择，V按照行数选择。选择完成之后按下y就可以复制选定内容。按下p就可以将复制内容粘贴到选定的位置。</li>
-<li>按两下y可以复制光标所在行。</li>
+<li>将这列数分成两半</li>
+<li>递归地将每一半排序</li>
+<li>将两个有序列合并成一整列</li>
 </ol>
-<blockquote>
-<p>写到这里，你觉得可以了，可以从vim里面退出来了。</p>
-</blockquote>
+<p>归并排序在做串的切分时不考虑大小因素，只从中间切分。于是在合并时便需要对两个有序串做一定处理才能保证结果串的有序性。<br>为此，一个容易想到的方法是创建一个临时的数组存储有序列。如图：</p>
+<p><img src="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>每次都比较1串与2串当前位置元素大小，将较小的那一个输出到TMP数组中当前位置并加一，将输出串的当前位置加一。直到两个串都输出完毕。<br>这种方式所用的额外空间是O(n)，只需要O(n)次比较。</p>
+<p>实际上，归并排序一般是递归进行一直到每个串的长度是1，主要运算过程全部落在合并上面。下面由递归式分析归并排序算法的时间复杂度。</p>
+<p><strong>归并时间空间复杂度分析：</strong></p>
+<p>设T(n)表示该算法在规模为n的输入实例上最坏的运行时间，假设n是2的整数次幂，可以得到递推公式如下：</p>
+<p><img src="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="公式"></p>
+<p>则有递推关系：</p>
+<p><img src="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>将这些时间都加在一起即为nlog2N。即归并的时间复杂度是O(nlogn)级别。</p>
+<p>下面将严格证明这个命题：</p>
+<p>——————这个过程线省略————</p>
+<p><strong>归并的代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  </div><div class="line">  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  </div><div class="line">   <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
 <ol>
-<li>在命令模式下输入冒号，进入最后行模式。在最低端出现了光标。</li>
-<li>在光标位置输入w，保存文件。</li>
-<li>输入q，退出。</li>
-<li>这些命令可以进行组合wq。wq可以用x替代。</li>
+<li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
+<li>对两边分别递归地使用快排</li>
+<li>合并</li>
 </ol>
-<blockquote>
-<p>你进入了最后行模式，又不想退出了，想继续编辑。</p>
-</blockquote>
+<p>与归并相似的一点是，二者都采用递归方法解决问题，但是归并的排序工作都留在了合并过程中完成，而快排正与之相反，排序工作都在分割的过程中完成。</p>
+<p><img src="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KP"></p>
+<p>从图中可以明显看出，快排最终得到的串就是一个有序的串。</p>
+<p><strong>快排时间空间复杂度：</strong></p>
+<p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
+<p><strong>快排的代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;</div><div class="line">  <span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
+<p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
+<p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
+<hr>
+<p>堆是一种数据结构，可以看做是一棵任一孩子结点都小于（大顶堆）或都大于（小顶堆）父亲结点的完全二叉树。这样根结点总是整个堆中最大或小的结点，每次只需将根取出来即可保证有序。但是，每添加或减少一个结点都需要对堆进行必要的维护。<br>于是，堆排序中最关键的操作就是将一个序列调整成为堆。</p>
+<p>堆排序给出的解决方法：</p>
 <ol>
-<li>按下Esc或者Backspace可以回到命令模式。</li>
+<li>将序列建成堆</li>
+<li>迭代地取根进入有序队列并调整堆直到堆为有序序列</li>
 </ol>
-<h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
+<p>堆的产生过程其实就是一个调整过程，下面给出堆的调整过程（以大根堆为例）：</p>
+<p><img src="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>最终取出数字的顺序即为最终顺序。</p>
+<p>堆排序适合于结点数较多情况下的要求前几个结点。当记录数较少时，不推荐使用堆排序。</p>
+<p>hash表+堆排序是处理海量数据的绝佳组合。</p>
+<p><strong>堆排序时间空间复杂度</strong></p>
+<p>完全二叉树高度log(n+1)，即对每个节点进行调整的时间复杂度是O(logn)，包括建堆的时间耗费与取值和调整，整个算法时间复杂度是O(nlogn)。额外空间只有temp用来存取出的数，O(1)。</p>
+<p><strong>堆排序的代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;<span class="keyword">this</span>.length;++i)&#123;</div><div class="line">      <span class="keyword">for</span>(var j=i,k=(j-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;k&gt;=<span class="number">0</span>;j=k,k=(k-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&gt;=<span class="keyword">this</span>[j])<span class="keyword">break</span>;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="keyword">this</span>.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;--i)&#123;</div><div class="line">      <span class="keyword">this</span>.swap(<span class="number">0</span>,i);</div><div class="line">      <span class="keyword">for</span>(var j=<span class="number">0</span>;k=(j+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>;k&lt;=i;j=k,k=(k+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(k==i||<span class="keyword">this</span>[k]&lt;<span class="keyword">this</span>[k-<span class="number">1</span>])--k;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&lt;=<span class="keyword">this</span>[j])braek;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>本篇文章中的代码部分来自于作者twobin于网址<a href="http://www.cnblogs.com/twobin的博文《排序算法性能比较》。" target="_blank" rel="external">http://www.cnblogs.com/twobin的博文《排序算法性能比较》。</a></p>
+</blockquote>
 ]]></content>
       
         
         <tags>
             
-            <tag> Git </tag>
+            <tag> 算法 </tag>
             
-            <tag> Linux </tag>
+            <tag> 数据结构 </tag>
             
         </tags>
         
