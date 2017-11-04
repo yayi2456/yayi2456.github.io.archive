@@ -7,7 +7,7 @@
 
     
 
-    <title>计算机网络运输层之初涉江湖 | 最喜欢你啦！</title>
+    <title>计算机网络运输层之一 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="计算机网络运输层之初涉江湖"/>
+    <meta property="og:title" content="计算机网络运输层之一"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -172,7 +172,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/计算机网络/">
-                    计算机网络 <span class="right">3 篇</span></a>
+                    计算机网络 <span class="right">4 篇</span></a>
                 </a>
             </li>
 
@@ -188,7 +188,7 @@
 
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/计算机网络/大三的课/">
-                    大三的课 <span class="right">1 篇</span></a>
+                    大三的课 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -265,7 +265,7 @@
             <div class="article-title">
                 
     
-        <h1>计算机网络运输层之初涉江湖</h1>
+        <h1>计算机网络运输层之一</h1>
     
 
 
@@ -286,7 +286,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#概述与运输层服务"><span class="section table-of-contents-text">概述与运输层服务</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#运输层的多路复用与多路分解"><span class="section table-of-contents-text">运输层的多路复用与多路分解</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-无连接的"><span class="section table-of-contents-text">1. 无连接的</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#概述与运输层服务"><span class="section table-of-contents-text">概述与运输层服务</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#运输层的多路复用与多路分解"><span class="section table-of-contents-text">运输层的多路复用与多路分解</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-无连接的"><span class="section table-of-contents-text">1. 无连接的</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-面向连接的"><span class="section table-of-contents-text">2. 面向连接的</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-Web-Server与TCP"><span class="section table-of-contents-text">3. Web Server与TCP</span></a></li></ol></li></ol>
 </div>
 
 
@@ -301,9 +301,28 @@
 <p>因特网的网络层协议是IP协议（网际协议）。IP非常不可靠，他是<strong>尽力而为交付服务</strong>，一不确保报文段的交付，二不保证报文段交付的按序，三不保证报文段交付的完整性，被称为<strong>不可靠服务</strong>。</p>
 <p>TCP与UDP的基本职责是将两个端系统之间的IP交付服务扩展为运行在两个端系统之上的两个进程之间的信息交付服务。将主机之间的交付扩展为进程之间的交付就是<strong>运输层的多路复用与多路分解</strong>。</p>
 <h1 id="运输层的多路复用与多路分解"><a href="#运输层的多路复用与多路分解" class="headerlink" title="运输层的多路复用与多路分解"></a>运输层的多路复用与多路分解</h1><p>多路复用与多路分解服务是所有计算机网络都需要的。</p>
-<p>我们知道，实现运输层的服务需要借助于socket，一个进程可以对应一个或几个socket（？）。在send端，运输层在报文段中加了首部信息之后，把各进程产生的数据无差别的交给网络层；在rev端，运输层从网络层那里拿出数据，解析报文段的首部信息从而定位socket，把<strong>分解后的</strong>报文段信息给对应的socket。</p>
-<p>为了实现这种服务，在首部信息里面一定封装有<strong>端口号</strong>，关于端口号的更多信息，可以访问<a href="http://www.iana.org" target="_blank" rel="external">RFC 3232</a>获得。</p>
-<h2 id="1-无连接的"><a href="#1-无连接的" class="headerlink" title="1. 无连接的"></a>1. 无连接的</h2>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43018259.jpg" alt="复用与分解机制"></p>
+<p>我们知道，实现运输层的服务需要借助于socket，一个进程可以对应一个或几个socket（？）。在send端，运输层在报文段中加了首部信息之后，把各进程产生的数据无差别的交给网络层；在rev端，运输层从网络层那里拿出数据，解析报文段的首部信息从而==定位socket==，把<strong>分解后的</strong>报文段信息给对应的socket。</p>
+<p>为了实现这种服务，在首部信息里面一定封装有<strong>端口号</strong>。<br>端口号是一个16bit的数，在0-65535之间，其中0-1023的端口号是周知端口号，他们被保留给周知应用层协议来使用。一般来说，服务器端都是一个固定的端口号，而客户端则是随机分配。<br>关于端口号的更多信息，可以访问<a href="http://www.iana.org" target="_blank" rel="external">RFC 3232</a>获得。</p>
+<h2 id="1-无连接的"><a href="#1-无连接的" class="headerlink" title="1. 无连接的"></a>1. 无连接的</h2><p>首先了解UDP的套接字标志方法：UDP的socket以一个二元组(dstaddr,dstport)来标识，与源信息无关。也就是说，虽与一个机器无论是从什么地方发送过来的数据，只要给的是同一个port，都将被同一个socket处理。这样，容易理解，在UDP中，每一个port会对应一个自己的缓冲区。</p>
+<p>关于这个缓冲区，<del>UDP不可靠也会体现在这里</del>，在发送UDP包的时候不能过大，也是出于对缓冲区大小的考虑。如果新到来的包太大了、不能塞进缓冲区了，这个包会被直接抛弃。app层不会知道，只有通过发送端的超时重传机制对包进行重传。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/79842537.jpg" alt="UDP复用与分解机制"></p>
+<h2 id="2-面向连接的"><a href="#2-面向连接的" class="headerlink" title="2. 面向连接的"></a>2. 面向连接的</h2><p>TCP的套接字标志方法与UDP不同，TCO使用(srcaddr,srcport,dstaddr,dstport)，这样，只有四个值都相同才会被定向到同一个socket，放到同一个缓冲区。</p>
+<p>![<a href="http://oysmkdi7t.bkt.clouddn.com/17-11-4/6848958.jpg" target="_blank" rel="external">TCP复用与分解机制</a></p>
+<blockquote>
+<p>这里只是简单一提：关于安全性的问题。攻击者可以利用在某个端口监听的有缺陷的应用程序攻陷目的主机。我不了解安全，这里只是复述了《自顶向下方法》中的解释。</p>
+<p>使用<a href="http://nmap.org" target="_blank" rel="external">nmap</a>既可以扫描到<strong>因特网</strong>中任一台主机，顺序的扫描主机的各个端口，对TCP/UDP，寻找能接收TCP连接/能对UDP报文段进行处理的端口号，并返回打开的、关闭的、不可达的端口号列表。</p>
+</blockquote>
+<h2 id="3-Web-Server与TCP"><a href="#3-Web-Server与TCP" class="headerlink" title="3. Web Server与TCP"></a>3. Web Server与TCP</h2><p>其实没什么新东西，列举：</p>
+<ol>
+<li><p>连接套接字与进程之间并非一一对应的关系。先进的高性能Web server只有一个进程，但是为每一个连接的<strong>新客户</strong>（不是客户机喔）创建一个新的线程。</p>
+</li>
+<li><p>非持续HTTP会严重影响web server的性能。（在应用层中涉及），有些OS技巧可以减轻这个问题的影响。（参见[Nielsen 1997,Nahum 2002]）</p>
+</li>
+</ol>
+<p>他的复用与分解是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/41975538.jpg" alt="Web"></p>
+
                 
 <p class="pink-link-context">
     <a href="/2017/11/03/覆千秋1/" rel="next" title="覆千秋1">

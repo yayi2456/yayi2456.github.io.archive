@@ -7,7 +7,7 @@
 
     
 
-    <title>在MFC中创建控制台 | 最喜欢你啦！</title>
+    <title>计算机网络运输层之二 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="在MFC中创建控制台"/>
+    <meta property="og:title" content="计算机网络运输层之二"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -246,6 +246,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/计算机网络/">计算机网络</a><a class="breadcrumb" href="/categories/计算机网络/大三的课/">大三的课</a>
+
 
         
 
@@ -261,12 +265,12 @@
             <div class="article-title">
                 
     
-        <h1>在MFC中创建控制台</h1>
+        <h1>计算机网络运输层之二</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/在MFC中创建控制台/">2017-10-31</a></time>
+            <time class="pink-link-context" datetime="2017-11-04T04:35:40.000Z"><a href="/2017/11/04/计算机网络运输层之循序渐进/">2017-11-04</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -276,44 +280,77 @@
             
     <div class="tags-row">
         
-            <a href="/tags/MFC/" class="chip blue lighten-1">MFC</a>
-        
-            <a href="/tags/可视化/" class="chip blue lighten-1">可视化</a>
+            <a href="/tags/网络课/" class="chip blue lighten-1">网络课</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#UDP概述"><span class="section table-of-contents-text">UDP概述</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-UDP特点"><span class="section table-of-contents-text">1. UDP特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-UDP报文"><span class="section table-of-contents-text">2. UDP报文</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <hr>
-<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
-<hr>
-<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
-<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _DEBUG</span></div><div class="line">   AllocConsole()</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></div></pre></td></tr></table></figure>
-<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
-<p>使用步骤如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=<span class="string">""</span>;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
-<p>这段代码完成了将CString类型的str输出的任务。</p>
+                <h1 id="UDP概述"><a href="#UDP概述" class="headerlink" title="UDP概述"></a>UDP概述</h1><p>UDP很弱，除了上一节提到的复用分解机制以及少量的差错检验之外，基本没有功能了，如果程序员选择了UDP，那基本上就是在与IP打交道了。</p>
+<blockquote>
+<p>以一个DNS查询为例：应用层给出了一个查询报文交给运输层，UDP加了首部段，交给网络层，网络层将他封装进一个IP数据报，发送给一个名字服务器。DNS如果没有收到对方的回应，要么向另一个服务器发送请求，要么告知调用它的应用程序没有响应。</p>
+</blockquote>
+<h2 id="1-UDP特点"><a href="#1-UDP特点" class="headerlink" title="1. UDP特点"></a>1. UDP特点</h2><ul>
+<li><p>无连接：</p>
+<ol>
+<li>两个UDP之间没有握手；</li>
+<li>UDP报文段彼此独立</li>
+</ol>
+</li>
+<li><p>不可靠：</p>
+<ol>
+<li>没有确认接收；</li>
+<li>没有重传；</li>
+<li>没有检查包丢失与包失序</li>
+<li>检验和只覆盖部分信息</li>
+<li>没有拥塞控制</li>
+</ol>
+</li>
+</ul>
+<p>UDP很弱，为什么不使用更加可靠的TCP呢？</p>
+<ol>
+<li><p>关于何时发送什么样的数据的控制更为精细。UDP是只要应用层交付，UDP就立即给网络层，而TCP有一个拥塞控制机制，可能会遏制发送方，是数据传输变得缓慢。</p>
+</li>
+<li><p>无需建立连接，减少时延。</p>
+</li>
+<li><p>无连接状态，不需要维护连接状态。连接状态包括接收和发送数据缓存、拥塞控制参数、序号以及确认号的参数等。某些应用程序运行在UDP之上可以支持更多的活跃用户。</p>
+</li>
+<li><p>分组首部开销小</p>
+</li>
+</ol>
+<p>UDP的这些特点使得：</p>
+<ol>
+<li>DNS简单查询；</li>
+<li>流媒体应用；</li>
+<li>P2P应用</li>
+<li>网络管理应用：通产工作在高压状态之下；</li>
+<li>路由转换协议</li>
+</ol>
+<p>等将有更佳的适用度。</p>
+<blockquote>
+<p>现今，由于出于安全考虑，某些机构阻塞UDP流量，而且当丢包率低时，TCP将更多的用于流媒体应用。</p>
+<p>然而，由于UDP没有拥塞控制机制，当网络繁忙时，路由器会有大量的分组溢出，几乎没有UDP分组能够成功通过路由器到达目的地。而且，具有拥塞控制机制的TCP发送方会减慢自己的速率。UDP没有拥塞控制机制不仅造成了UDP会话之间的高丢包率，也挤垮了TCP会话。很多研究人员已经提出了新的机制，使所有数据源执行自适应的拥塞控制。</p>
+<p>希望使用UDP实现可靠传输的话需要在应用层协议上加上可靠性保证。这种方法既可以保证可靠传输，又可以拒绝拥塞控制的影响。</p>
+</blockquote>
+<center>表1：流行的因特网应用及其下协议</center>
+
+<center><br><br>|应用|应用层协议|下层运输协议|<br>|:–:|:–:|:–:|<br>电子邮件|SMTP|TCP<br>远程终端访问|Talnet|TCP<br>Web|HTTP|TCP<br>文件传输|FTP|TCP<br>远程文件服务器|NFS|通常UDP<br>流式多媒体|通常专用|UDP或TCP<br>因特网电话|通常专用|UDP或TCP<br>网络管理|SNMP|通常UDP<br>路由选择协议|RIP|通常UDP<br>名字转换|DNS|通常UDP<br><br></center>
+
+<h2 id="2-UDP报文"><a href="#2-UDP报文" class="headerlink" title="2. UDP报文"></a>2. UDP报文</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/9685377.jpg" alt="UDP头信息"></p>
+<p>长度：指明了包括首部信息在内的UDP报文段长度（单位：字节：Byte）；</p>
+<p>下面重点说<strong>检验和</strong>：</p>
 
                 
-<p class="pink-link-context">
-    <a href="/2017/11/01/Cloud RAN for Mobile Networks——A Technology Overview/" rel="next" title="">
-    上一篇：
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2017/10/31/归并、快排、堆排序/" rel="next" title="归并、快排、堆排序">
-    下一篇：归并、快排、堆排序
+    <a href="/2017/11/03/覆千秋1/" rel="next" title="覆千秋1">
+    下一篇：覆千秋1
   </a>
 </p>
 
