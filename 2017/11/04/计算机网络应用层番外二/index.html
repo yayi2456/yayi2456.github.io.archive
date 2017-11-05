@@ -172,7 +172,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/计算机网络/">
-                    计算机网络 <span class="right">5 篇</span></a>
+                    计算机网络 <span class="right">6 篇</span></a>
                 </a>
             </li>
 
@@ -180,7 +180,7 @@
 
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/计算机网络/实验室/">
-                    实验室 <span class="right">2 篇</span></a>
+                    实验室 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -286,12 +286,12 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#最终交付"><span class="section table-of-contents-text">最终交付</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#计算机网络书面作业：网络协议设计"><span class="section table-of-contents-text">  计算机网络书面作业：网络协议设计 </span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
 <p>多用户并发访问与可靠文件传输，不能有下载大小的限制。</p>
 <p>为了用UDP实现多用户并发访问，一定是需要使用多个socket。仿照FTP的协议设计：使用一个UDP的socket在master进行监听，这个socket绑定一个确定的端口号，用户客户机连接服务器发请求使用。</p>
 <p>考虑的请求比较小，可以使用一个包传送完成：</p>
@@ -303,8 +303,41 @@
 <p>有状况：<br>如果client没接到信息或者信息错了，按照选择重传，不会有动作，server重传没毛病；如果client给的ACK丢了，server不能确定client已经收到，也会重传，所以client不可能在发送完ACK就关闭，而是影该等待server的回执，让server知道我已经知道我拿到完整的包了。一旦等到，立即关闭。<br>所以client这边对于最后一个包的动作是：recv-&gt;收到错报，不动，等重传/收到对的包，回复ACK同时启动一个超时重传机制，开始接收server的回执，不管接受到了什么，关闭。（因为这个时候server只要收到了client的东西就证明client肯定已经知道包已经传完了）<br>因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
 <p>server的动作是-&gt;发送最后一个结束包-&gt;超时重传/接收到client的信息-&gt;发送一个ACK，关闭。</p>
 <p>server也知道client这时server也已经关闭</p>
+<h1 id="最终交付"><a href="#最终交付" class="headerlink" title="最终交付"></a>最终交付</h1><h2 id="计算机网络书面作业：网络协议设计"><a href="#计算机网络书面作业：网络协议设计" class="headerlink" title="  计算机网络书面作业：网络协议设计 "></a><center>  计算机网络书面作业：网络协议设计 </center></h2><center>yayi2456</center>
+
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本协议仿照了FTP协议以允许多客户机的并行操作，使用选择重传的方法在UDP的基础上进行一定程度的可靠性的保证与效率的保证，加入其他机制保证大文件的可靠传输。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server端的主socket绑定一个端口号，进行对客户请求的监听。一旦监听到客户机的请求，立即fork一个子线程，在子线程中重新绑定一个socket，由这个socket与客户机进行通信。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client端根据程序并行度可选择是否需要在子线程发出请求，这取决于不同的应用程序的动作，不做讨论。提到client的动作时，并不指定是在哪个进程。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>将该协议描述如下：</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server监听端口A，一旦监听到client的请求，立即fork子线程。在子线程中对该请求进行分析，并决定需要发送给client的数据。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client向server发送请求，并启动一个定时器，当超过一定时间仍未收到server传回的第一个包，client重新发送请求信息。使recvbase为0，收到第一个数据包之后，<code>recv=(recv+1)%(2*N)</code>，该定时器关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>注</strong>：在server收到请求之后，并没有立即发送ACK通知client自己已经收到了请求。原因在于server最终一定会发送数据给client，只需要把第一个数据包作为server收到的确认信息即可，同时也减少了可靠性保证所花费的额外的时间。但是由于server对准备发送的数据需要做一定的处理，这个时延可能会稍长。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server开始向client发送包。采用选择重传机制，server为每一个包附上一个<strong>序号</strong>，同时利用UDP头本身具有的checksum字段进行一定程度的检错判断。server每次最多传送N个报文段，协议中具有2*N个序号。初始时，发送缓冲区中的sendbase是0，server每传送一个报文段就会启动一个对应于该报文段的定时器，当某个报文段的定时器超时之后，server对该报文段进行重传；当server收到了某个序号的报文段的ACK之后，将该序号置为“已确认”，如果该序号是sendbase，那么将<code>sendbase=(sendbase+1)%(2*N)</code>，如果sendbase是“已确认”，再将<code>sendbase=(sendbase+1)%(2*N)</code>，直到sendbase是“已发送但未确认”或是“可用”。同时，当sendbase改变时，如果包尚未发送完，则可以使用新的“可用”来发送新的报文段。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client接受到第一个数据包之后关闭第一个定时器，并向服务器发送对第一个数据包对应的序号的ACK，随后开始接收其他数据包，每接收到一个检验和没有错的数据包，返回一个对应该数据包序号的ACK包。无论是不是server端没有接收到上一个对应该序号的ACK，返回一个ACK，对于最大为2*N的空间来说，是没有问题的。对于在[recvbase,recvbase+N-1]空间中的序号对应的包加以解析送给应用层使用或者是缓存之后将对应的序号标为“接收已确认”，而另外的序号对应的数据包只返回ACK，对数据包直接丢弃。每次接收到一个被“接收已确认”的数据包，如果该数据包的序号是recvbase，<code>recv=(recv+1)%(2*N)</code>，如果这时recvbase对应序号仍是“接收已确认”，<code>recv=(recv+1)%(2*N)</code>，直到recvbase对应序号是“期待但未收到”或是“可用”。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在所有的有用数据包传送完成之后，server需要告知client，有用的数据已经传送完了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;场景分析如下：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当server的所有发出的包已经发送完毕并且所有的已发送包都得到回执ACK之后，向client发送最终的发送完毕包。这个包在发送完之后，client接收到之后必须给ACK。server收到ACK之后才能关闭，否则可能导致client不知道自己已经拿到完整的数据而陷入空转。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果client没接到最终包信息或者信息错了，按照选择重传，client不会有动作，server等待超时之后重传；如果client回复的ACK丢了，server不能确定client已经收到，必须重传来确认client已经知道自己可以关闭连接了，所以client不可能在发送完ACK就关闭，而是该等待server的回执，让server知道client已经知道client拿到完整的包了，否则可能会使server陷入无尽的重传。一旦等到server的回执，client立即关闭。若许久都未等到回执，关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面对最后的动作进行描述：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server的动作是：发送最后一个结束包，启动定时器，若超时则进行重传；直到接收到client的信息之后，关闭定时器，server发送一个ACK，立即关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client最终的动作是：等待接收数据，如果收到错误的包，等重传；如果收到对的包，回复ACK同时启动一个定时器，启动超时重传机制，并开始接收server的回执，不管接受到了什么，关闭。若超时一定次数之后仍未接收到server的回执，因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
+<p>从宏观的角度来看，客户机与服务器的交互是：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/15535425.jpg" alt=""></p>
+<p><strong>扩展FSM：</strong></p>
+<p><strong>server：</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/73814791.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/41957911.jpg" alt=""></p>
+<p><strong>client：</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/90929804.jpg" alt=""></p>
 
                 
+<p class="pink-link-context">
+    <a href="/2017/11/05/JUnit之一/" rel="next" title="JUnit之一">
+    上一篇：JUnit之一
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
