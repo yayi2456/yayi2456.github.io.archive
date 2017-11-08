@@ -27,9 +27,10 @@
     <link rel="stylesheet" href="/css/lib/materialize.min.css">
     <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+    <!--<link rel="stylesheet" href="/css/prettify.css" media="screen" type="text/css">-->
 
     
-        <link rel="stylesheet" href="/css/lib/tomorrow-night-eighties.css" type="text/css">
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -203,6 +204,22 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/编译原理/">
+                    编译原理 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/编译原理/听课/">
+                    听课 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/我的故事/">
                     我的故事 <span class="right">1 篇</span></a>
                 </a>
@@ -350,7 +367,12 @@
 <ol>
 <li>首先，我又运行了1.6的compile，还是不行，这次我决定把电脑里面的jdk换成8。</li>
 </ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/36756939.jpg" alt=""></p>
+<p>如图，配置好的环境变量在cmd竟然没有更换！<br>这也是导致javac不能用的一个原因。<br>如果你确认自己配的环境变量肯定是对的，关掉cmd重新打开，就可以了。</p>
+<p>环境变量配置应如下：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/16489027.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/44100075.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/61239558.jpg" alt=""><br>这次compile的结果。（jdk9不支持那个选项了？<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/64651101.jpg" alt=""><br>好了，这次使用one.bat也可以运行了。（jdk9：exm？？？</p>
+<p>but….eclipse测试还是没过….<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/11070078.jpg" alt=""></p>
 <hr>
+<p>C:\ProgramData\Oracle\Java\javapath</p>
 <h1 id="了解运行方法与配置信息"><a href="#了解运行方法与配置信息" class="headerlink" title="了解运行方法与配置信息"></a>了解运行方法与配置信息</h1><p>将参数设置为：[-b times] [ur conf_files]</p>
 <p>-b后必须跟一个数字，这个数字表示simulation将会在batch mode（批处理）下运行，不会出现可视化界面，而是打印信息。后面的数字代表运行次数或者是num1:num2的形式来确定一个范围。</p>
 <p>conf_files是一系列你自己写的conf file的文件名，数量任意。如果没有这个参数，会使用default_setting.txt。需要注意的是，如果多个conf设计同一个属性，那么在后面的设定将会覆盖前面的设定。</p>
@@ -388,7 +410,7 @@
 <p>所有报告都有许多可配置的设置，可以使用ReportClassName.settingKey -syntax来定义。有关详细信息，请参阅Report类的javadocs和特定报告类（查找“设置id”定义）。</p>
 <h1 id="主机组"><a href="#主机组" class="headerlink" title="主机组"></a>主机组</h1><p>一个host group是一组分享同样的运动和路由设置的主机。不同的组的设置值不一样，这样的话，它们可以表示不同类型的节点。可以在“组”（Group）命名空间中定义基本设置，不同的节点组可以覆盖这些设置或在其特定的命名空间（组1，组2等）中定义新的设置。</p>
 <h1 id="the-settings"><a href="#the-settings" class="headerlink" title="the settings"></a>the settings</h1><p>有很多设置可以被设置。非常多，这里不提了。有关详细信息，请参阅类，尤其是report，routing和movement class的javadoc。另请参阅包含设置文件的示例。也许最重要的设置如下。</p>
-<h2 id="脚本设置（Scenario-setting）"><a href="#脚本设置（Scenario-setting）" class="headerlink" title="脚本设置（Scenario setting）"></a>脚本设置（Scenario setting）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Scenario.name</div><div class="line"></div><div class="line"> <span class="comment">//脚本的名字，所有报告默认以此为前缀</span></div><div class="line"></div><div class="line">Scenario.simulateConnections </div><div class="line"></div><div class="line"><span class="comment">//connection是否应该被模拟。如果只对运动模型感兴趣，这个可以被disable，以获得更快的模拟速度。通常情况下，是enable的。</span></div><div class="line"></div><div class="line">Scenario.updateInterval </div><div class="line"></div><div class="line"><span class="comment">//每次更新时需要几秒。增加数值使模拟更快，但是可能以精度损失为代价。0.1-2 are good</span></div><div class="line"></div><div class="line">Scenario.endTime </div><div class="line"></div><div class="line"><span class="comment">//How many simulated seconds to simulate.</span></div><div class="line"></div><div class="line">Scenario.nrofHostGroups </div><div class="line"></div><div class="line"><span class="comment">//现在在模拟中有几个hosts group</span></div></pre></td></tr></table></figure>
+<h2 id="脚本设置（Scenario-setting）"><a href="#脚本设置（Scenario-setting）" class="headerlink" title="脚本设置（Scenario setting）"></a>脚本设置（Scenario setting）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Scenario.name</div><div class="line"></div><div class="line"> <span class="comment">//脚本的名字，所有报告默认以此为前缀</span></div><div class="line"></div><div class="line">Scenario.simulateConnections </div><div class="line"></div><div class="line"><span class="comment">//connection是否应该被模拟。如果只对运动模型感兴趣，这个可以被disable，以获得更快的模拟速度。通常情况下，是enable的。</span></div><div class="line"></div><div class="line">Scenario.updateInterval </div><div class="line"></div><div class="line"><span class="comment">//每次更新时需要几秒。增加数值使模拟更快，但是可能以精度损失为代价。0.1-2 are good</span></div><div class="line"></div><div class="line">Scenario.endTime </div><div class="line"></div><div class="line"><span class="comment">//How many simulated seconds to simulate.</span></div><div class="line"></div><div class="line">Scenario.nrofHostGroups </div><div class="line"></div><div class="line"><span class="comment">//现在在模拟中有几个hosts group</span></div><div class="line"></div></pre></td></tr></table></figure>
 <h2 id="接口设置（用来定义node可能会使用到的接口）"><a href="#接口设置（用来定义node可能会使用到的接口）" class="headerlink" title="接口设置（用来定义node可能会使用到的接口）"></a>接口设置（用来定义node可能会使用到的接口）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">type <span class="comment">//这个接口使用了什么类（来自接口目录）</span></div><div class="line"></div><div class="line"><span class="comment">//其余设置是特定于类的。可以是例如：</span></div><div class="line"></div><div class="line">transmitRange <span class="comment">//接口范围（meters）</span></div><div class="line"></div><div class="line">transmitSpeed <span class="comment">//接口的传输速度（bytes per second）</span></div></pre></td></tr></table></figure>
 <h2 id="主机组设置（在Group或GroupN的命名空间使用）"><a href="#主机组设置（在Group或GroupN的命名空间使用）" class="headerlink" title="主机组设置（在Group或GroupN的命名空间使用）"></a>主机组设置（在Group或GroupN的命名空间使用）</h2>
                 
@@ -485,7 +507,7 @@
         </div>
     </div>
     
-
+    
     <div class="footer-copyright pink-link-context">
         <div class="container">
             © 2017 yayi2456.github.io, All rights reserved.

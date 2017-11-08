@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-06T08:58:49.279Z</updated>
+  <updated>2017-11-08T17:54:40.225Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>编译原理——词法分析</title>
+    <link href="http://yoursite.com/2017/11/09/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    <id>http://yoursite.com/2017/11/09/编译原理——词法分析/</id>
+    <published>2017-11-08T16:44:47.000Z</published>
+    <updated>2017-11-08T17:54:40.225Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….&lt;/p&gt;
+&lt;h1 id=&quot;从正则表达式到自动机&quot;&gt;&lt;a href=&quot;#从正则表达式到自动机&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+      <category term="听课" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E5%90%AC%E8%AF%BE/"/>
+    
+    
+      <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>OS:内存管理</title>
@@ -195,7 +224,7 @@
     <link href="http://yoursite.com/2017/11/01/the%20One%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%951/"/>
     <id>http://yoursite.com/2017/11/01/the One使用记录1/</id>
     <published>2017-11-01T09:10:19.000Z</published>
-    <updated>2017-11-06T09:17:10.817Z</updated>
+    <updated>2017-11-06T14:11:15.393Z</updated>
     
     <summary type="html">
     
@@ -280,33 +309,6 @@
   </entry>
   
   <entry>
-    <title>Linux、Vim、Git常用命令——简明扼要版</title>
-    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:48:45.725Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
-&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>归并、快排、堆排序</title>
     <link href="http://yoursite.com/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
     <id>http://yoursite.com/2017/10/31/归并、快排、堆排序/</id>
@@ -336,6 +338,33 @@
   </entry>
   
   <entry>
+    <title>Linux、Vim、Git常用命令——简明扼要版</title>
+    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
+    <published>2017-10-31T14:57:47.000Z</published>
+    <updated>2017-10-31T15:48:45.725Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
+&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>树莓派解析域名失败导致apt-get update不可用</title>
     <link href="http://yoursite.com/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/"/>
     <id>http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/</id>
@@ -352,30 +381,6 @@
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
       <category term="物联网" scheme="http://yoursite.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>序列比较</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/"/>
-    <id>http://yoursite.com/2017/10/31/序列比较/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:47:59.692Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -432,6 +437,30 @@
       <category term="MFC" scheme="http://yoursite.com/tags/MFC/"/>
     
       <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>序列比较</title>
+    <link href="http://yoursite.com/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/"/>
+    <id>http://yoursite.com/2017/10/31/序列比较/</id>
+    <published>2017-10-31T14:57:47.000Z</published>
+    <updated>2017-10-31T15:47:59.692Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

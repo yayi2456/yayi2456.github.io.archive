@@ -7,7 +7,7 @@
 
     
 
-    <title>第 2 页 | 最喜欢你啦！</title>
+    <title>编译原理——词法分析 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="编译原理——词法分析"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -265,347 +265,102 @@
 
 
     <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper red accent-2">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/编译原理/">编译原理</a><a class="breadcrumb" href="/categories/编译原理/听课/">听课</a>
+
+
         
 
-<div class="slider">
-    <ul class="slides">
-    
-       <li>
-           <a href="/categories/我的故事/">
-               <img class="slider-image" src="https://images.unsplash.com/photo-1500817487388-039e623edc21?auto=format&amp;fit=crop&amp;w=1535&amp;q=60&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-               <div class="caption center-align">
-                 <h4>忽然好想你 你会在哪里</h3>
-                 <h5 class="light grey-text text-lighten-3">不管幸福或委屈</h5>
-               </div>
-           </a>
-       </li>
-    
-       <li>
-           <a href="/categories/计算机网络/">
-               <img class="slider-image" src="https://images.unsplash.com/photo-1500754088824-ce0582cfe45f?auto=format&amp;fit=crop&amp;w=1510&amp;q=60&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-               <div class="caption left-align">
-                 <h4>而今听雨僧庐下 鬓已星星也</h3>
-                 <h5 class="light grey-text text-lighten-3"></h5>
-               </div>
-           </a>
-       </li>
-    
-       <li>
-           <a href="javascript:;">
-               <img class="slider-image" src="https://images.unsplash.com/photo-1491245338813-c6832976196e?auto=format&amp;fit=crop&amp;w=750&amp;q=60&amp;ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-               <div class="caption right-align">
-                 <h4>就寻常人家 一支笔 一作画</h3>
-                 <h5 class="light grey-text text-lighten-3">你犹看那达官贵人不能作此潇洒！</h5>
-               </div>
-           </a>
-       </li>
-    
-   </ul>
- </div>
+        
+    </div>
+</nav>
 
-
-
-<div id="article-list" class="container main-container">
-    
-        <article class="simple-article">
+<article>
     <div class="card">
         <div class="card-content">
+            
+
             <div class="article-title">
                 
     
-        <h1 class="pink-link-context"><a href="/2017/10/31/归并、快排、堆排序/">归并、快排、堆排序</a></h1>
+        <h1>编译原理——词法分析</h1>
     
 
 
             </div>
+            <time class="pink-link-context" datetime="2017-11-08T16:44:47.000Z"><a href="/2017/11/09/编译原理——词法分析/">2017-11-09</a></time>
 
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/归并、快排、堆排序/">2017-10-31</a></time>
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
 
             
     <div class="tags-row">
         
-            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
-        
-            <a href="/tags/数据结构/" class="chip blue lighten-1">数据结构</a>
+            <a href="/tags/编译原理/" class="chip blue lighten-1">编译原理</a>
         
     </div>
 
 
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#从正则表达式到自动机"><span class="section table-of-contents-text">从正则表达式到自动机</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#正则-gt-NFA"><span class="section table-of-contents-text">正则 -> NFA</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#自动机运转"><span class="section table-of-contents-text">自动机运转</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#DFA优化"><span class="section table-of-contents-text">DFA优化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#补充：从自动机到正则表达式"><span class="section table-of-contents-text">补充：从自动机到正则表达式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#能不能与好不好"><span class="section table-of-contents-text">能不能与好不好</span></a></li></ol>
+</div>
 
-            
-        </div>
 
-        
-    </div>
-</article>
+            <div class="entry pink-link-context">
+                <p>我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….</p>
+<h1 id="从正则表达式到自动机"><a href="#从正则表达式到自动机" class="headerlink" title="从正则表达式到自动机"></a>从正则表达式到自动机</h1><p>在这一节里，将介绍两个过程：一个是正则表达式到NFA，另一个是NFA到DFA。之所以让NFA做一个过渡，是因为正则表达式直接到DFA的算法很复杂。本次更新掠过。</p>
+<p>NFA与DFA的性能差别很大：NFA占用空间比较少，但是使用NFA进行词法分析需要在错误态停止，可能需要花费<code>$O(2^n)$</code>的时间复杂度；DFA占用空间很大（最坏情况下$$O(2^n)$$），但是使用它进行词法分析的时候接近线性时间。</p>
+<h2 id="正则-gt-NFA"><a href="#正则-gt-NFA" class="headerlink" title="正则 -&gt; NFA"></a>正则 -&gt; NFA</h2><p>正则表达式构造NFA使用<strong>MacMaughton-Yamada-Thompson算法</strong>。简称<strong>Thompson算法</strong>。这个算法描述如下：</p>
+<p><strong>基本规则：</strong></p>
+<h2 id="自动机运转"><a href="#自动机运转" class="headerlink" title="自动机运转"></a>自动机运转</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">s $$\leftarrow$$ e -closure(&#123;s0&#125;);</div><div class="line">c $$\leftarrow$$ nextchar;</div><div class="line"><span class="keyword">while</span> c $$\neq$$ eof <span class="keyword">do</span></div><div class="line">  s $$\leftarrow$$ e -closure(d(s,c));</div><div class="line">  c $$\leftarrow$$ nextchar;</div><div class="line">end;</div><div class="line"><span class="keyword">if</span> S$$\cap$$F$$\neq$$ $$\varnothing$$ then <span class="keyword">return</span> “yes”</div><div class="line">          <span class="keyword">else</span> <span class="keyword">return</span> “no”</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">s $$\leftarrow$$ s0;</div><div class="line">c $$\leftarrow$$ nextchar;</div><div class="line"><span class="keyword">while</span> c $$\neq$$ eof <span class="keyword">do</span></div><div class="line">  s $$\leftarrow$$ d(s,c);</div><div class="line">  c $$\leftarrow$$ nextchar;</div><div class="line">end;</div><div class="line"><span class="keyword">if</span> s is in F then <span class="keyword">return</span> “yes”</div><div class="line">             <span class="keyword">else</span> <span class="keyword">return</span> “no”</div></pre></td></tr></table></figure>
+<p>前面提到了，NFA占空间更少，DFA识别字符串更快，贪心的人类啊希望能糅合这两者的优点。看前面的NFA代码，其实在第四行那句，实际上就是前面提到的构造DFA的过程。人们想到使用Cache。使用NFA，当NFA构造出DFA的一个状态时，就把这个状态构造的条件以及状态本身存到cache里面。当while进一个c的时候，首先看一看现今状态加上c到达的态是不是已经存在cache，如果存在里面，最耗时间的那一部分就不用运行了。cache的管理仍然是程序局限性原则。占用空间不会太大以期望达到折衷的效果。</p>
+<p>如果要构造出一个Lax，需要将所有的正则表达式得到的NFA进行一个并操作（保留各自的终态以区分）。然后构造它的DFA。</p>
+<p>值得注意的是，这样不能在一个终态停止，而是在错误态终止并退回到最近经过的那个终态（每经过一个终态，记录当前的<strong>输入指针</strong>以及<strong>匹配模式</strong>）。以防止找到前缀，产生错误。这种方法是<strong>最长前缀法</strong>，在前面已经提到过。</p>
+<h1 id="DFA优化"><a href="#DFA优化" class="headerlink" title="DFA优化"></a>DFA优化</h1><p>DFA状态数其实不会太多的影响时间复杂度，当状态变少的时候，将会减少存储空间的消耗。</p>
+<p><strong>区分：</strong>一个符号串可区分两个状态：这两个串在DFA上得到的结果一个是accept，一个是reject。在做区分的时候，其实可以看到：最终字符串得到的终态在不同集合，则他们是可区分的。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-9/60487283.jpg" alt=""></p>
+<p>在区分的过程中发现了这样一个规律：如果对于串s，A状态与B状态经过了s都到达同一个状态C，那么以s做前缀的字符串都不可能区分A与B了。当所有字符串都不能区分A与B的时候，可以把A与B合并成同一个状态。但是对于无穷的字符串，怎么确定 “所有都不行” 呢？ 在前面，我们已经提出了一个解决方案——当前缀s不行的时候，所有的sx都不行了。</p>
+<p>真正在执行的时候，实行的是<strong>分裂</strong>，这样，通过有顺序地枚举字符串，将能被区分开的状态分开。这样对于前面的<strong>不同集合</strong>的说法，也能更好地理解。</p>
+<p><strong>算法描述：</strong>首先使用$$\epsilon$$区分终态与非终态，将它们分为两个集合。随后，像子集构造法那样，有顺序地枚举输入字符串，将那些经过状态迁移能到达终态（不同集合）的状态剔除出去组成一个新的集合（如果两者到达同一个集合，这两者是不能区分的，应该在同一个集合），对于那些含有多个元素的集合，如果经过一系列不同的状态迁移到达不同的集合，仍需要继续分开。直到不再产生新的集合。</p>
+<p>看一个例子：</p>
+<h1 id="补充：从自动机到正则表达式"><a href="#补充：从自动机到正则表达式" class="headerlink" title="补充：从自动机到正则表达式"></a>补充：从自动机到正则表达式</h1><h1 id="能不能与好不好"><a href="#能不能与好不好" class="headerlink" title="能不能与好不好"></a>能不能与好不好</h1><p>在龙书的第九章。</p>
+<ol>
+<li><p>流程可否更加简洁？ 正则 -&gt; DFA：本质上还是做子集构造法-吧正则的某些位置对应NFA里面状态，位置集对应NFA的状态集</p>
+</li>
+<li><p>优化结果？ 最小DFA</p>
+</li>
+</ol>
 
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
                 
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/linux、vim、git常用命令/">Linux、Vim、Git常用命令——简明扼要版</a></h1>
-    
+
+
+<p class="pink-link-context">
+    <a href="/2017/11/06/OS-内存管理/" rel="next" title="OS:内存管理">
+    下一篇：OS:内存管理
+  </a>
+</p>
 
 
             </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/linux、vim、git常用命令/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/Linux/" class="chip blue lighten-1">Linux</a>
-        
-            <a href="/tags/Git/" class="chip blue lighten-1">Git</a>
-        
-    </div>
-
-
-
-            
+			
         </div>
-
-        
     </div>
 </article>
 
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">树莓派解析域名失败导致apt-get update不可用</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/OS/" class="chip blue lighten-1">OS</a>
-        
-            <a href="/tags/物联网/" class="chip blue lighten-1">物联网</a>
-        
-    </div>
 
 
 
-            
-                <div class="entry pink-link-context">
-                    <p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
-                </div>
-            
-        </div>
 
-        
-        <div class="card-action pink-link-context">
-            <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">阅读全文</a>
-        </ div>
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/背包问题/">背包问题初涉</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/背包问题/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/在MFC中创建控制台/">在MFC中创建控制台</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/在MFC中创建控制台/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/MFC/" class="chip blue lighten-1">MFC</a>
-        
-            <a href="/tags/可视化/" class="chip blue lighten-1">可视化</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/序列比较/">序列比较</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/序列比较/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/31/OS-Lab1/">OS Lab1</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T09:57:47.000Z"><a href="/2017/10/31/OS-Lab1/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/OS/" class="chip blue lighten-1">OS</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/29/first-try/">first try</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-29T09:56:10.000Z"><a href="/2017/10/29/first-try/">2017-10-29</a></time>
-
-            
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="pink-link-context"><a href="/2017/10/29/hello-world/">Hello World</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-29T09:08:32.942Z"><a href="/2017/10/29/hello-world/">2017-10-29</a></time>
-
-            
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-
-    <ul class="pagination center-align">
-    <li class="">
-        <a href="/"><i class="fa fa-angle-left"></i></a>
-    </li>
-    
-    
-        <li class="waves-effect"><a href="/">1</a></li>
-    
-        <li class="active blue lighten-1"><a href="/page/2">2</a></li>
-    
-    
-    <li class="disabled">
-        <a href="/"><i class="fa fa-angle-right"></i></a>
-    </li>
- </ul>
 
 </div>
 
