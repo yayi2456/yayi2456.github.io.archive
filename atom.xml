@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-08T17:54:40.225Z</updated>
+  <updated>2017-11-10T10:45:47.139Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>张爱玲——出名要趁早</title>
+    <link href="http://yoursite.com/2017/11/10/Untitled-1/"/>
+    <id>http://yoursite.com/2017/11/10/Untitled-1/</id>
+    <published>2017-11-10T08:43:13.000Z</published>
+    <updated>2017-11-10T10:45:47.139Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;张爱玲对“成名”二字&lt;/p&gt;
+
+        
+      
+    
+    </summary>
+    
+      <category term="我的精神" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E7%B2%BE%E7%A5%9E/"/>
+    
+    
+      <category term="我的精神" scheme="http://yoursite.com/tags/%E6%88%91%E7%9A%84%E7%B2%BE%E7%A5%9E/"/>
+    
+  </entry>
+  
+  <entry>
     <title>编译原理——词法分析</title>
     <link href="http://yoursite.com/2017/11/09/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2017/11/09/编译原理——词法分析/</id>
     <published>2017-11-08T16:44:47.000Z</published>
-    <updated>2017-11-08T17:54:40.225Z</updated>
+    <updated>2017-11-10T14:28:34.052Z</updated>
     
     <summary type="html">
     
@@ -309,11 +336,11 @@
   </entry>
   
   <entry>
-    <title>归并、快排、堆排序</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
-    <id>http://yoursite.com/2017/10/31/归并、快排、堆排序/</id>
+    <title>序列比较</title>
+    <link href="http://yoursite.com/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/"/>
+    <id>http://yoursite.com/2017/10/31/序列比较/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T16:10:09.723Z</updated>
+    <updated>2017-10-31T15:47:59.692Z</updated>
     
     <summary type="html">
     
@@ -321,10 +348,7 @@
       
         
         
-          &lt;hr&gt;
-&lt;p&gt;归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;归并&quot;&gt;&lt;a href=&quot;#归并&quot;
+          &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div
         
       
     
@@ -332,35 +356,6 @@
     
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux、Vim、Git常用命令——简明扼要版</title>
-    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:48:45.725Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
-&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
@@ -412,6 +407,33 @@
   </entry>
   
   <entry>
+    <title>Linux、Vim、Git常用命令——简明扼要版</title>
+    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
+    <published>2017-10-31T14:57:47.000Z</published>
+    <updated>2017-10-31T15:48:45.725Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
+&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>在MFC中创建控制台</title>
     <link href="http://yoursite.com/2017/10/31/%E5%9C%A8MFC%E4%B8%AD%E5%88%9B%E5%BB%BA%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
     <id>http://yoursite.com/2017/10/31/在MFC中创建控制台/</id>
@@ -441,11 +463,11 @@
   </entry>
   
   <entry>
-    <title>序列比较</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/"/>
-    <id>http://yoursite.com/2017/10/31/序列比较/</id>
+    <title>归并、快排、堆排序</title>
+    <link href="http://yoursite.com/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2017/10/31/归并、快排、堆排序/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:47:59.692Z</updated>
+    <updated>2017-10-31T16:10:09.723Z</updated>
     
     <summary type="html">
     
@@ -453,7 +475,10 @@
       
         
         
-          &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div
+          &lt;hr&gt;
+&lt;p&gt;归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;归并&quot;&gt;&lt;a href=&quot;#归并&quot;
         
       
     
@@ -461,6 +486,8 @@
     
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
