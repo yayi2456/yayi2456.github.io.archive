@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-12T15:57:34.055Z</updated>
+  <updated>2017-11-14T15:55:32.885Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,16 +17,82 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>OS-Lab3</title>
+    <link href="http://yoursite.com/2017/11/14/OS-Lab3/"/>
+    <id>http://yoursite.com/2017/11/14/OS-Lab3/</id>
+    <published>2017-11-14T14:05:33.000Z</published>
+    <updated>2017-11-14T15:55:32.885Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Lab3：User-Environment&quot;&gt;&lt;a href=&quot;#Lab3：User-Environment&quot; class=&quot;headerlink&quot; title=&quot;Lab3：User Environment&quot;&gt;&lt;/a&gt;Lab3：User
+        
+      
+    
+    </summary>
+    
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/11/13/OS4+Memory%20and%20Process/"/>
+    <id>http://yoursite.com/2017/11/13/OS4+Memory and Process/</id>
+    <published>2017-11-13T10:48:27.905Z</published>
+    <updated>2017-11-13T11:51:06.799Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;hr&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;系统调用&quot;&gt;&lt;a href=&quot;#系统调用&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>哈希</title>
     <link href="http://yoursite.com/2017/11/12/%E5%93%88%E5%B8%8C/"/>
     <id>http://yoursite.com/2017/11/12/哈希/</id>
     <published>2017-11-12T15:57:33.000Z</published>
-    <updated>2017-11-12T15:57:34.055Z</updated>
+    <updated>2017-11-13T17:40:52.538Z</updated>
     
     <summary type="html">
     
+      
+      
+        
+        
+          &lt;hr&gt;
+&lt;p&gt;emmm…大二的时候DS只考了80，出来混的，总是要还的。&lt;/p&gt;
+&lt;h2 id=&quot;不希望文件太多都小于512k，会占我的空间。&quot;&gt;&lt;a href=&quot;#不希望文件太多都小于512k，会占我的空间。&quot; class=&quot;headerlink&quot;
+        
+      
+    
     </summary>
     
+      <category term="数据结构" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -377,59 +443,6 @@
   </entry>
   
   <entry>
-    <title>归并、快排、堆排序</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
-    <id>http://yoursite.com/2017/10/31/归并、快排、堆排序/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T16:10:09.723Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;hr&gt;
-&lt;p&gt;归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;归并&quot;&gt;&lt;a href=&quot;#归并&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>序列比较</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/"/>
-    <id>http://yoursite.com/2017/10/31/序列比较/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:47:59.692Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title>树莓派解析域名失败导致apt-get update不可用</title>
     <link href="http://yoursite.com/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/"/>
     <id>http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/</id>
@@ -477,11 +490,11 @@
   </entry>
   
   <entry>
-    <title>Linux、Vim、Git常用命令——简明扼要版</title>
-    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
+    <title>归并、快排、堆排序</title>
+    <link href="http://yoursite.com/2017/10/31/%E5%BD%92%E5%B9%B6%E3%80%81%E5%BF%AB%E6%8E%92%E3%80%81%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2017/10/31/归并、快排、堆排序/</id>
     <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:48:45.725Z</updated>
+    <updated>2017-10-31T16:10:09.723Z</updated>
     
     <summary type="html">
     
@@ -489,17 +502,19 @@
       
         
         
-          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
-&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
+          &lt;hr&gt;
+&lt;p&gt;归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;归并&quot;&gt;&lt;a href=&quot;#归并&quot;
         
       
     
     </summary>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -533,11 +548,11 @@
   </entry>
   
   <entry>
-    <title>OS Lab1</title>
-    <link href="http://yoursite.com/2017/10/31/OS-Lab1/"/>
-    <id>http://yoursite.com/2017/10/31/OS-Lab1/</id>
-    <published>2017-10-31T09:57:47.000Z</published>
-    <updated>2017-10-31T15:45:31.126Z</updated>
+    <title>Linux、Vim、Git常用命令——简明扼要版</title>
+    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
+    <published>2017-10-31T14:57:47.000Z</published>
+    <updated>2017-10-31T15:48:45.725Z</updated>
     
     <summary type="html">
     
@@ -545,14 +560,17 @@
       
         
         
-          &lt;h1 id=&quot;OSLab1：MIT的Lab1&quot;&gt;&lt;a href=&quot;#OSLab1：MIT的Lab1&quot; class=&quot;headerlink&quot;
+          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
+&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
         
       
     
     </summary>
     
     
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   

@@ -7,7 +7,7 @@
 
     
 
-    <title>实验室 | 最喜欢你啦！</title>
+    <title>OS-Lab3 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="OS-Lab3"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -298,42 +298,97 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/OS/">OS</a><a class="breadcrumb" href="/categories/OS/MIT-Lab/">MIT Lab</a>
+
 
         
-            <a class="breadcrumb" href="/tags/实验室/">实验室</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>OS-Lab3</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2017-11-14T14:05:33.000Z"><a href="/2017/11/14/OS-Lab3/">2017-11-14</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/11/05/JUnit之一/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-05T07:27:08.000Z">2017-11-05</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JUnit之一
-            </a>
-        
-            <a href="/2017/11/01/the One使用记录1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-01T09:10:19.000Z">2017-11-01</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                the One使用记录
-            </a>
-        
-            <a href="/2017/11/01/CN1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-01T09:04:55.000Z">2017-11-01</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                实验室心情全记录
-            </a>
+            <a href="/tags/OS/" class="chip blue lighten-1">OS</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Lab3：User-Environment"><span class="section table-of-contents-text">Lab3：User Environment</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Pre：实验准备知识"><span class="section table-of-contents-text">Pre：实验准备知识</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#GCC内联汇编"><span class="section table-of-contents-text">GCC内联汇编</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#特权降级"><span class="section table-of-contents-text">特权降级</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#基础知识准备"><span class="section table-of-contents-text">基础知识准备</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#正题：特权降级"><span class="section table-of-contents-text">正题：特权降级</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#特权级提升"><span class="section table-of-contents-text">特权级提升</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#中断"><span class="section table-of-contents-text">中断</span></a></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
+<p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
+<p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
+<hr>
+<p><strong>iret</strong>：系统指令，从中断中返回。<br><strong>ret</strong>：从函数中返回<br><strong>retf</strong>：与ret基本一样，从函数中返回。（弹出栈，拿出返回地址（就是下一条语句）返回值，丢掉压栈参数）</p>
+<p>中断是一个硬件的事件，中断返回与函数返回不同。当一个中断来了，不管你当时在干嘛，就乖乖地保存一下现场去响应中断。这个<strong>保存现场</strong>，包括了硬件将会自动帮你保存的一些现场，比如CS、SS、Flag等等，这些是自动存下的，iret的作用就是自动地将这些东西都弹出。但是这些现场保存并不够，通用寄存器是不会帮你保存的。</p>
+<p>ret、iret等等在汇编之中可以随意调用，并不需要其他约束。如果当你在汇编中不是函数（中断）的里面调用了这些，它会干些什么呢？<br>他会把自己认为的自己保存进去的那些东西弹出来，一个是返回地址给PC，一个是返回值给保存返回值的东西。即使没有调用函数，ret的行为也是固定的：<strong>从栈顶弹出两个值，一个给PC，一个给存储返回值的东西</strong>，iret的行为也是固定的，就是从栈顶弹出东西给那些变量。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg" alt=""><br>这就是保护现场之后的栈。<br>ret是弹出到eip，retf弹出到CS，iret弹出到CS（代码段）、EFLAGS，根据是否改变特权等级，iret会连下面的SS以及esp一起弹出来。</p>
+<p>这样，如果一个程序在栈中事先在栈中存了一些数据，然后调用了iret，iret不管栈中究竟是什么，就会弹出5（3）个元素，给对应的寄存器。ret和retf也类似。因此，在汇编中ret们与高级语言的return们的作用不同，汇编中的ret们只是<strong>提供了一个批量修改寄存器的方法</strong>。</p>
+<p>系统中有两种中断。中断可能在任意时间发生。在用户模式下与在特权模式下中断发生后系统的动作是不相同的。</p>
+<p>在用户模式下，系统会保存这些东西：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg" alt=""><br>还记得在“内存管理”的lab里面讲过的<strong>段选择子</strong>，其中有两个bit标识自己处在什么特权模式下的特权位。这里面有两个段选择子，一个是栈的，一个是代码段的，由于在用户模式下，可以看到CS代码段选择子与SS栈选择子的特权位RPL都是3。</p>
+<p>在特权模式下，一旦发生中断：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/84089468.jpg" alt=""><br>这时保存的东西比较少。</p>
+<p>无论在哪种模式下一旦调用iret，就把这些东西（其实不一定是这些东西，只是对应栈顶的几个数据）弹出去给对应的寄存器。</p>
+<h3 id="正题：特权降级"><a href="#正题：特权降级" class="headerlink" title="正题：特权降级"></a>正题：特权降级</h3><p>考虑做完lab2，系统在特权级是0的模式下，这是需要现将自己降级成为特权3的模式，再去运行用户程序。怎么降？</p>
+<p>要伪造一个场景：刚刚一个用户程序产生了一个中断所以我升级了，现在我要中断返回。于是我去伪造了一个栈，在栈里头存上了iret希望的那5个数据，每一个是32位。然后调用iret，这些就会从栈中弹出来到达对应的寄存器，然后我就回到了用户模式，那两个段选择子的特权级值就被改为了3。<br>这里需要注意的是，系统原来使用的特权级是0的栈，iret之后这个栈空掉了，但是系统不再使用这个栈，而是重新为用户态开避了一个新的栈，这个栈不再是以前的那个栈了，这个栈放在用户空间的数据段里，它的权限也是3。</p>
+<blockquote>
+<p>为什么要这样设计呢？在特权模式下，系统并不想和特权级更低的用户态共用一个特权级更高的栈。另一个方面从安全考虑，为了防止用户态随意弹出数据随意插入数据破坏内核运行。</p>
+</blockquote>
+<p>从特权模式到达用户模式，新创建了一个栈给用户程序使用，这是在刚上电的时候，还没有用户程序运行。用户程序运行过程中可能会有系统调用回到特权模式下，这是将会使用前面提到的系统用的那个栈，系统调用完成之后，不会再为用户程序创建新的栈了，一是占空间，一是以前的运行态不能就这样丢掉。就还让它回到自己原来的栈。</p>
+<h2 id="特权级提升"><a href="#特权级提升" class="headerlink" title="特权级提升"></a>特权级提升</h2><p>中断、异常、系统调用：我需要更高特权的东西帮帮我。</p>
+<p>在80386中，系统调用就是一个中断。异常是需要紧急处理的中断。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>在32位机器上的中断是一个很复杂的机制，因为那时保护模式已经建立了起来，整个运行在虚拟地址空间上。所以当中段发生的时候，系统使用<strong>中断描述符表</strong>，写着自己所有的中断号。<br>中断描述符寄存器（IDTR）中存的就是中断描述符表（IDT）在内存中的位置以及大小。表按照中断号排序，每一个中断描述符在80386中被叫做一个门，<strong>中断门</strong>（中断），<strong>陷阱门</strong>（异常）。会根据终端发生的编号从表中取出对应的描述符，</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/11/13/OS4+Memory and Process/" rel="next" title="">
+    下一篇：
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

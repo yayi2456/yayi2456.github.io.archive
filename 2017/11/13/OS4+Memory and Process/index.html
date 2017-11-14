@@ -7,7 +7,7 @@
 
     
 
-    <title>实验室 | 最喜欢你啦！</title>
+    <title>最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -298,42 +298,91 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
 
         
-            <a class="breadcrumb" href="/tags/实验室/">实验室</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>无题</h1>
+    
 
 
-    <div class="collection mt-0">
-        
-            <a href="/2017/11/05/JUnit之一/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-05T07:27:08.000Z">2017-11-05</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JUnit之一
-            </a>
-        
-            <a href="/2017/11/01/the One使用记录1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-01T09:10:19.000Z">2017-11-01</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                the One使用记录
-            </a>
-        
-            <a href="/2017/11/01/CN1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-01T09:04:55.000Z">2017-11-01</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                实验室心情全记录
-            </a>
-        
+            </div>
+            <time class="pink-link-context" datetime="2017-11-13T10:48:27.905Z"><a href="/2017/11/13/OS4+Memory and Process/">2017-11-13</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#系统调用"><span class="section table-of-contents-text">系统调用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#系统调用与函数调用"><span class="section table-of-contents-text">系统调用与函数调用</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#进程间的通信"><span class="section table-of-contents-text">进程间的通信</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#直接通信与间接通信"><span class="section table-of-contents-text">直接通信与间接通信</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#阻塞通信与非阻塞通信"><span class="section table-of-contents-text">阻塞通信与非阻塞通信</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#通信链路缓冲"><span class="section table-of-contents-text">通信链路缓冲</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#信号"><span class="section table-of-contents-text">信号</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#管道"><span class="section table-of-contents-text">管道</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#消息队列"><span class="section table-of-contents-text">消息队列</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#共享内存"><span class="section table-of-contents-text">共享内存</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <hr>
+<hr>
+<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
+<ol>
+<li>在每一个像素有一种颜色</li>
+<li>文本模式</li>
+</ol>
+<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
+<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
+<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
+<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
+<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
+<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
+<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
+<p>由一个“可否使用cache”的位</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2017/11/14/OS-Lab3/" rel="next" title="OS-Lab3">
+    上一篇：OS-Lab3
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/11/12/哈希/" rel="next" title="哈希">
+    下一篇：哈希
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
     </div>
+</article>
+
+
+
+
 
 
 </div>

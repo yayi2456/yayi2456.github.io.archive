@@ -205,7 +205,15 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/OS/">
-                    OS <span class="right">1 篇</span></a>
+                    OS <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/OS/MIT-Lab/">
+                    MIT-Lab <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -259,6 +267,14 @@
 
         
 
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据结构/">
+                    数据结构 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
     </ul>
 </div>
 
@@ -287,6 +303,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/数据结构/">数据结构</a>
+
 
         
 
@@ -315,15 +335,34 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/数据结构/" class="chip blue lighten-1">数据结构</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#不希望文件太多都小于512k，会占我的空间。"><span class="section table-of-contents-text">不希望文件太多都小于512k，会占我的空间。</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#哈希"><span class="section table-of-contents-text">哈希</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#开哈希"><span class="section table-of-contents-text">开哈希</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#闭哈希"><span class="section table-of-contents-text">闭哈希</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
+                <hr>
+<p>emmm…大二的时候DS只考了80，出来混的，总是要还的。</p>
+<h2 id="不希望文件太多都小于512k，会占我的空间。"><a href="#不希望文件太多都小于512k，会占我的空间。" class="headerlink" title="不希望文件太多都小于512k，会占我的空间。"></a>不希望文件太多都小于512k，会占我的空间。</h2><h1 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h1><p>哈希其实没什么神秘的，不过是一群贪心的人的产物。</p>
+<p>散列函数，将key转化为对应的value值得到索引。这个有诸如<strong>取模</strong>，<strong>ASCII平均</strong>，等等方法。橙皮书上有一种sfold，似乎性能会更好一些。</p>
+<h2 id="开哈希"><a href="#开哈希" class="headerlink" title="开哈希"></a>开哈希</h2><p>开哈希类似于静态链表，每一个value对应一个链表，成为挂着的桶。</p>
+<h2 id="闭哈希"><a href="#闭哈希" class="headerlink" title="闭哈希"></a>闭哈希</h2><p>闭哈希将node存储在给定的一个数组中。这个数组的下标将作为value的索引值，由于value可能重复，需要探查方式，有很多方式，比如线性探查与二次探查。</p>
+<p>关于闭哈希的删除，其实不必真的每次都向前挪，而是增加一个“墓碑”，它代表这里没有数据可以被插入，但是又不是真的空因为需要继续向前探查。<br>当次数多了性能就会下降，一种解决方式是向前挪，另一种是重新散列。</p>
+
                 
-                
+<p class="pink-link-context">
+    <a href="/2017/11/13/OS4+Memory and Process/" rel="next" title="">
+    上一篇：
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
