@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-15T14:17:35.925Z</updated>
+  <updated>2017-11-15T15:20:35.684Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2017/11/15/%E7%AE%80%E5%8D%95udp%E9%80%9A%E4%BF%A1%E5%AE%9E%E7%8E%B0-java/"/>
     <id>http://yoursite.com/2017/11/15/简单udp通信实现-java/</id>
     <published>2017-11-15T14:12:40.000Z</published>
-    <updated>2017-11-15T14:17:35.925Z</updated>
+    <updated>2017-11-15T15:20:35.684Z</updated>
     
     <summary type="html">
     
@@ -30,7 +30,8 @@
         
         
           &lt;p&gt;今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。&lt;/p&gt;
-&lt;h2 id=&quot;UDP介绍&quot;&gt;&lt;a href=&quot;#UDP介绍&quot; class=&quot;headerlink&quot;
+&lt;p&gt;woaibianyi,bianyibangwojiejueledaiamdewenti.xieixeni.&lt;/p&gt;
+&lt;h2 id=&quot;UDP介绍&quot;&gt;&lt;a
         
       
     
@@ -43,7 +44,9 @@
       <category term="作业" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/%E4%BD%9C%E4%B8%9A/"/>
     
     
-      <category term="网络课,java" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE-java/"/>
+      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
