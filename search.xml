@@ -5,12 +5,12 @@
     <entry>
       <title><![CDATA[简单UDP通信实现+简单cmd界面实现]]></title>
       <url>/2017/11/15/%E7%AE%80%E5%8D%95udp%E9%80%9A%E4%BF%A1%E5%AE%9E%E7%8E%B0-java/</url>
-      <content type="html"><![CDATA[<p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
+      <content type="html"><![CDATA[<h1 id="UDP-CMD"><a href="#UDP-CMD" class="headerlink" title="UDP CMD"></a>UDP CMD</h1><p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
 <p>woaibianyi,bianyibangwojiejueledaiamdewenti.xieixeni.</p>
 <h2 id="UDP介绍"><a href="#UDP介绍" class="headerlink" title="UDP介绍"></a>UDP介绍</h2><p>UDP通信使用两个类：<strong>DatagramPacket</strong>与<strong>DatagramSocket</strong>。前者是对UDP包的一个封装，后者是完成两端之间的交流。<br>在UDP里面Server与Client地位同等，彼此没有区分。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length,addr,port);<span class="comment">//发送包</span></div><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length);<span class="comment">//接收包</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(port);<span class="comment">//指定端口号的socket</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();<span class="comment">//自动分配一个可用端口号</span></div></pre></td></tr></table></figure>
 <p>不得不说端口号与进程、socket之间的关系：端口号与进程毛关系没有。一个udp socket只能绑一个端口，一个port只能被一个socket绑。这个原因是在多路复用与多路分解讲到的。否则不知道pck究竟该给谁。</p>
-]]></content>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2>]]></content>
       
         <categories>
             
