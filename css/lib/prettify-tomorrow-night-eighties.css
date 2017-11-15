@@ -2,7 +2,7 @@
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 .prettyprint {
   background: #1D1F21;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Verdana, monospace;
   font-size: 13px;
   line-height: 1.5;
   border: 1px solid #ccc;
@@ -82,7 +82,7 @@
 
   .com {
     color: #600;
-    font-style: italic;
+    /*font-style: italic;*/
   }
 
   .typ {
