@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-20T15:47:24.899Z</updated>
+  <updated>2017-11-21T13:52:11.770Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机网络概述</title>
+    <link href="http://yoursite.com/2017/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
+    <id>http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/</id>
+    <published>2017-11-21T13:51:40.000Z</published>
+    <updated>2017-11-21T13:52:11.770Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这是第一次课！时隔许久，也算是复习啦~&lt;/p&gt;
+
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+    
+    
+      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>网络编程一：UDP,CMD,TCP,WebServer</title>
@@ -330,10 +359,10 @@
   
   <entry>
     <title>计算机网络运输层</title>
-    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/"/>
-    <id>http://yoursite.com/2017/11/02/计算机网络运输层/</id>
+    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/"/>
+    <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络运输层/</id>
     <published>2017-11-02T14:12:40.000Z</published>
-    <updated>2017-11-20T15:52:11.652Z</updated>
+    <updated>2017-11-21T15:30:19.413Z</updated>
     
     <summary type="html">
     
@@ -449,26 +478,6 @@
   </entry>
   
   <entry>
-    <title>树莓派解析域名失败导致apt-get update不可用</title>
-    <link href="http://yoursite.com/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/"/>
-    <id>http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-11-01T05:51:29.799Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…&lt;br&gt;没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。&lt;br&gt;后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-      <category term="物联网" scheme="http://yoursite.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
     <title>背包问题初涉</title>
     <link href="http://yoursite.com/2017/10/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     <id>http://yoursite.com/2017/10/31/背包问题/</id>
@@ -492,6 +501,26 @@
     
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树莓派解析域名失败导致apt-get update不可用</title>
+    <link href="http://yoursite.com/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/"/>
+    <id>http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/</id>
+    <published>2017-10-31T14:57:47.000Z</published>
+    <updated>2017-11-01T05:51:29.799Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…&lt;br&gt;没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。&lt;br&gt;后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+      <category term="物联网" scheme="http://yoursite.com/tags/%E7%89%A9%E8%81%94%E7%BD%91/"/>
     
   </entry>
   
@@ -550,33 +579,6 @@
       <category term="MFC" scheme="http://yoursite.com/tags/MFC/"/>
     
       <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux、Vim、Git常用命令——简明扼要版</title>
-    <link href="http://yoursite.com/2017/10/31/linux%E3%80%81vim%E3%80%81git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2017/10/31/linux、vim、git常用命令/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T15:48:45.725Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;第一次操作系统实验课记录：&lt;/p&gt;
-&lt;h2 id=&quot;一。linux下常用命令&quot;&gt;&lt;a href=&quot;#一。linux下常用命令&quot; class=&quot;headerlink&quot; title=&quot;一。linux下常用命令&quot;&gt;&lt;/a&gt;一。linux下常用命令&lt;/h2&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
