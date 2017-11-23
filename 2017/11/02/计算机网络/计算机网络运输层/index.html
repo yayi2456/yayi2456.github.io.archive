@@ -173,7 +173,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/计算机网络/">
-                    计算机网络 <span class="right">7 篇</span></a>
+                    计算机网络 <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -189,7 +189,7 @@
 
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/计算机网络/大三的课/">
-                    大三的课 <span class="right">4 篇</span></a>
+                    大三的课 <span class="right">6 篇</span></a>
                 </a>
             </li>
 
@@ -197,7 +197,7 @@
 
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/计算机网络/大三的课/作业/">
-                    作业 <span class="right">2 篇</span></a>
+                    作业 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -213,7 +213,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/OS/">
-                    OS <span class="right">2 篇</span></a>
+                    OS <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -602,7 +602,7 @@
 <p><strong>客户进程</strong>：发起连接的进程；<strong>服务器进程</strong>：接收连接的进程</p>
 <p><strong>三次握手</strong>：客户首先发一条特殊报文，服务器用另一个特殊报文来响应，最后客户用第三个特殊报文响应。$\color{red}{前两个报文不承载有效载荷，而最后一个可以有}$</p>
 <p>当app层给运输层TCP一些数据，会被放入<strong>发送缓存</strong>里，<strong>在TCP方便的时候</strong>，就会从缓存中拿出一些数据发送。</p>
-<p><strong>最大报文段长度MSS</strong>（Max Segment Size）常根据<strong>最大传输单元</strong>设置，典型值是1460。</p>
+<p><strong>最大报文段长度MSS</strong>（Max Segment Size）常根据<strong>最大传输单元</strong>设置，典型值是1460<strong>字节</strong>。注意不包括各种首部，只包括应用层数据大小。TCP/IP首部一般是40bytes。</p>
 <p><strong>最大传输单元MTU</strong>（Max Transmission Unit）：本地主机发送的最大链路层帧长度</p>
 <p><strong>TCP报文段</strong>：TCP将这次要发送的数据用一个TCP首部进行封装。</p>
 <p>就像前面说到的，MSS限制了TCP报文段的最大长度。当一个大文件被发送的时候，它将被分为许多长度为MSS的报文段发出。<br>另一方面，对于那些不需要传递大量数据的交互应用，也可以发送较小的数据段。<br>那么什么叫<strong>TCP方便的时候</strong>呢？一般来说，TCP会在三种情况下发送数据：</p>
@@ -783,8 +783,8 @@
 
 
 <p class="pink-link-context">
-    <a href="/2017/11/01/the One使用记录1/" rel="next" title="the One使用记录">
-    下一篇：the One使用记录
+    <a href="/2017/11/02/计算机网络/计算机网络网络层/" rel="next" title="计算机网络网络层">
+    下一篇：计算机网络网络层
   </a>
 </p>
 

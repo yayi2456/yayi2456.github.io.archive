@@ -173,7 +173,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/计算机网络/">
-                    计算机网络 <span class="right">7 篇</span></a>
+                    计算机网络 <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -189,7 +189,7 @@
 
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/计算机网络/大三的课/">
-                    大三的课 <span class="right">4 篇</span></a>
+                    大三的课 <span class="right">6 篇</span></a>
                 </a>
             </li>
 
@@ -197,7 +197,7 @@
 
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/计算机网络/大三的课/作业/">
-                    作业 <span class="right">2 篇</span></a>
+                    作业 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -213,7 +213,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/OS/">
-                    OS <span class="right">2 篇</span></a>
+                    OS <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -366,7 +366,7 @@
 <p>现在计算发送三个分组，从源发送第一个分组到达目的地接收到全部三个分组的时间：<br>在L/R，第一个分组被转发出去，这时源也开始发出第二个分组，2L/R，第一个已经被路由器转发完毕，目的端收到，路由器开始接收第三个分组，源开始发送第三个分组，3L/R，路由器接收第三个分组完成，第二个分组已经送出去被目的接收到，源端发送完毕，4L/R第三个分组完全传送出去，目的端接收到第三个分组。一共4L/R时间。</p>
 <p>考虑N条速率均为R的链路（所以一共有N-1个路由器），发送一个分组所需时间是$t=N*\frac{L}{R}$。</p>
 <p>如果像上面一样分组发送：</p>
-<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=N*\frac{c+1}{c}*\frac{L}{R}$！！</p>
+<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=(c+N-1)*\frac{L}{c*R}$！！</p>
 
                 
 

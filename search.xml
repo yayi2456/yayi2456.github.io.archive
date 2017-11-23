@@ -15,7 +15,7 @@
 <p>现在计算发送三个分组，从源发送第一个分组到达目的地接收到全部三个分组的时间：<br>在L/R，第一个分组被转发出去，这时源也开始发出第二个分组，2L/R，第一个已经被路由器转发完毕，目的端收到，路由器开始接收第三个分组，源开始发送第三个分组，3L/R，路由器接收第三个分组完成，第二个分组已经送出去被目的接收到，源端发送完毕，4L/R第三个分组完全传送出去，目的端接收到第三个分组。一共4L/R时间。</p>
 <p>考虑N条速率均为R的链路（所以一共有N-1个路由器），发送一个分组所需时间是$t=N*\frac{L}{R}$。</p>
 <p>如果像上面一样分组发送：</p>
-<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=N*\frac{c+1}{c}*\frac{L}{R}$！！</p>
+<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=(c+N-1)*\frac{L}{c*R}$！！</p>
 ]]></content>
       
         <categories>
@@ -437,6 +437,124 @@
     </entry>
     
     <entry>
+      <title><![CDATA[进程与线程]]></title>
+      <url>/2017/11/06/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<h1 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h1><p>进程模型的进化：</p>
+<ol>
+<li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
+<li>第二代：批处理系统：一个程序完成所有工作。</li>
+<li>带三代：mutiprogramming and timesharing。CPU可以切换运行。</li>
+<li>第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。</li>
+</ol>
+<p><strong>进程</strong>：计算机上所有可以运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程。它包括输入输出程序与状态。</p>
+<p>需要区分进程与程序。</p>
+<p>进程创建：系统初始化、运行进程的创建进程系统调用被执行、用户请求、批处理作业初始化。</p>
+<p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
+<p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
+<h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><p>进程的基本状态有<strong>运行态（Running）</strong>、<strong>就绪态（Ready）</strong>、<strong>阻塞态（Blocked）</strong>。<br>其他运行态还有<strong>创建（New）</strong>、<strong>挂起（Suspended）</strong>、<strong>退出（Exit）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">状态</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">运行</td>
+<td style="text-align:center">目前获得了CPU使用权</td>
+</tr>
+<tr>
+<td style="text-align:center">准备</td>
+<td style="text-align:center">可运行，但由于CPU被其他占用而暂时停止</td>
+</tr>
+<tr>
+<td style="text-align:center">阻塞</td>
+<td style="text-align:center">除非某种外部事件发生，否则不可运行</td>
+</tr>
+<tr>
+<td style="text-align:center">–</td>
+<td style="text-align:center">–</td>
+</tr>
+<tr>
+<td style="text-align:center">创建</td>
+<td style="text-align:center">进程的数据结构已经准备好，但是running image还没准备好</td>
+</tr>
+<tr>
+<td style="text-align:center">退出</td>
+<td style="text-align:center">进程已经完成了自己的工作，但是数据结构还没有删除</td>
+</tr>
+<tr>
+<td style="text-align:center">挂起</td>
+<td style="text-align:center">running image被交换到了硬盘</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>阻塞是由于他自己的原因需要等待输入输出等的操作，逻辑上不能继续运行；<br>而准备是系统把他调度下来了，即使它本身还可以继续运行。</p>
+</blockquote>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/96592015.jpg" alt=""></p>
+<p>观察上面的状态迁移图发现：阻塞态是不能直接进入运行态的，必须经过准备状态。同样，在准备状态的进程根本没有得到CPU资源，也不存在执行到需要外部事件的程度，因此也不可能有向阻塞的转变。</p>
+<p>如果加上另外两个状态：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/91158063.jpg" alt=""></p>
+<p>对于挂起状态：<br>有时需要对进程做分级处理，引入优先级会使某进程等待时间过长而被换至外存，这被称为进程挂起，目的是：提高处理机效率：就绪进程表为空时，要提交新进程，以提高处理机效率；为运行进程提供足够内存：资源紧张时，暂停某些进程，如CPU繁忙（或实时任务执行）时内存会比较紧张；便于调试：在调试时，挂起被调试进程对其地址空间进行读写。</p>
+<p>双挂起：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/56244337.jpg" alt=""></p>
+<p>在这个图中，挂起状态下对应进程的数据都在外存中，而其他状态下对应的数据应该在内存中。从进程一旦被调入外存，必须在所有都准备好之后才可能被从外存调入。等待外部事件发生的进程在外存中等待完之后才可能有机会进入就绪状态准备运行。</p>
+<p>相对于内存，外存的速度很慢，什么导致了进程数据被移到外存？一是就绪进程需要更多的内存资源，只能把那些现在还不可能就绪运行的进程移出去，这是进入阻塞挂起状态，二是更高优先级的阻塞（阻塞挂起）进程终于等到了自己的外部事件，要求先运行，所以较低优先级的进程就被移入了外存，这是进入就绪挂起状态。对抢先式分时系统，当有高优先级等待挂起进程因事件出现而进入就绪挂起（运行-&gt;就绪挂起）</p>
+<p>什么时候把外存的数据转移到内存呢？一是没有就绪进程或挂起就绪进程优先级高于就绪进程，这时进入就绪状态；二是一个进程释放足够内存，并有高优先级等待挂起进程，这是进入阻塞状态。</p>
+<p>在不同的OS中，进程状态差异较大！！</p>
+<h3 id="Linux中的进程状态"><a href="#Linux中的进程状态" class="headerlink" title="Linux中的进程状态"></a>Linux中的进程状态</h3><p>windows中的进程状态（XP）与上述双挂起状态迁移类似，下面讨论Linux中的进程状态。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">状态</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">TASK_RUNNING</td>
+<td style="text-align:center">进程正占用CPU或是等待被执行</td>
+</tr>
+<tr>
+<td style="text-align:center">TASK_INTERRUPTIBLE</td>
+<td style="text-align:center">进程被阻塞，直到外部事件发生。发起中断系统资源释放或某种信号都能唤醒进程为RUNNING</td>
+</tr>
+<tr>
+<td style="text-align:center">TASK_UNITERRUPTIBLE</td>
+<td style="text-align:center">除了传递一个信号给睡眠进程保持其状态不变</td>
+</tr>
+<tr>
+<td style="text-align:center">TASK_STOPPED</td>
+<td style="text-align:center">进程停止运行，在接收到SIGSTOP、SIGTSTP、SIGTTIN、SIGTTOU后</td>
+</tr>
+<tr>
+<td style="text-align:center">TASK_TRACED</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>所谓running image</p>
+</blockquote>
+<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1>]]></content>
+      
+        <categories>
+            
+            <category> OS </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> OS </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[OS:内存管理]]></title>
       <url>/2017/11/06/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
       <content type="html"><![CDATA[<p>#</p>
@@ -489,6 +607,49 @@
             <tag> 计算机网络 </tag>
             
             <tag> 模拟器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[计算机网络番外三]]></title>
+      <url>/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%95%AA%E5%A4%963/</url>
+      <content type="html"><![CDATA[<h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
+<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
+<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*8Mb/2Mbps=12s$</p>
+<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
+<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
+<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
+<ol>
+<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
+<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
+<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
+<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
+<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
+<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
+<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 大三的课 </category>
+            
+            <category> 作业 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 网络课 </tag>
             
         </tags>
         
@@ -841,7 +1002,7 @@
 <p><strong>客户进程</strong>：发起连接的进程；<strong>服务器进程</strong>：接收连接的进程</p>
 <p><strong>三次握手</strong>：客户首先发一条特殊报文，服务器用另一个特殊报文来响应，最后客户用第三个特殊报文响应。$\color{red}{前两个报文不承载有效载荷，而最后一个可以有}$</p>
 <p>当app层给运输层TCP一些数据，会被放入<strong>发送缓存</strong>里，<strong>在TCP方便的时候</strong>，就会从缓存中拿出一些数据发送。</p>
-<p><strong>最大报文段长度MSS</strong>（Max Segment Size）常根据<strong>最大传输单元</strong>设置，典型值是1460。</p>
+<p><strong>最大报文段长度MSS</strong>（Max Segment Size）常根据<strong>最大传输单元</strong>设置，典型值是1460<strong>字节</strong>。注意不包括各种首部，只包括应用层数据大小。TCP/IP首部一般是40bytes。</p>
 <p><strong>最大传输单元MTU</strong>（Max Transmission Unit）：本地主机发送的最大链路层帧长度</p>
 <p><strong>TCP报文段</strong>：TCP将这次要发送的数据用一个TCP首部进行封装。</p>
 <p>就像前面说到的，MSS限制了TCP报文段的最大长度。当一个大文件被发送的时候，它将被分为许多长度为MSS的报文段发出。<br>另一方面，对于那些不需要传递大量数据的交互应用，也可以发送较小的数据段。<br>那么什么叫<strong>TCP方便的时候</strong>呢？一般来说，TCP会在三种情况下发送数据：</p>
@@ -1011,6 +1172,29 @@
 <p>[2] <a href="https://baike.1688.com/doc/view-d2361261.html" target="_blank" rel="external">端口号是什么？</a></p>
 <p>[3]<a href="https://www.ibm.com/support/knowledgecenter/zh/SSGMGV_3.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl2d.html" target="_blank" rel="external">IBM Knowledge Center</a>  这个有很多东西，不止端口号</p>
 <p>[4]<a href="http://wiki.xiaohansong.com/network/tcp.html" target="_blank" rel="external">TCP</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 计算机网络 </category>
+            
+            <category> 大三的课 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 网络课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[计算机网络网络层]]></title>
+      <url>/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/</url>
+      <content type="html"><![CDATA[<p># </p>
 ]]></content>
       
         <categories>
@@ -1206,30 +1390,14 @@
     </entry>
     
     <entry>
-      <title><![CDATA[树莓派解析域名失败导致apt-get update不可用]]></title>
-      <url>/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/</url>
-      <content type="html"><![CDATA[<p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
-<a id="more"></a>
-<p>除了这个，我还按照网上各路大神的说法，改了好几个地方，这里一一记下来，以便以后查找。</p>
-<ol>
-<li>删除某个目录的内容，只记得是/ect/apt/…/partial什么的</li>
-<li>修改/etc/apt/resolv.conf的内容，数字改成8.8.8.8</li>
-<li>修改源。据说给的源是国外源，速度慢。国内有很多源可用，网址如下：<a href="http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html</a></li>
-</ol>
-<hr>
-<p>除此之外，倒是了解了一些些关于远程与vnc。<br>实现这两者需要安装东西，并不是装了系统就可以连远程的。这个百度一下很多教程。</p>
-<hr>
-<p>另外是在Linux命令行下的vi(vim)与nano编辑器。<br>相较而言当然是nano好用。<br>用nano编辑/etc/apt/s文件命令：sudo nano /etc/apt/s<br>用vi编辑只需将nano改为vi<br>nano内有提示，只需按照提示来就好，而vi就比较复杂。<br><a href="http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html</a><br>该网址内容详尽。注意的是，vi命令模式不是命令行界面，按下esc并不会有界面上的变化，并不是教程错了。</p>
-<hr>
-<p>Linux下的文件相关命令</p>
-]]></content>
+      <title><![CDATA[序列比较]]></title>
+      <url>/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/</url>
+      <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">truetruea = x; b = y;</div><div class="line">true&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">else</span> &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">true<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">trueM[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">trueM[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">truetrueM[<span class="number">0</span>][i] = beta*i;</div><div class="line">true&#125;	</div><div class="line">trueM[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">truetrueM[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">true<span class="keyword">delete</span>[]M;</div><div class="line">true<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">truetrue<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">truetrue<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">truetruetrueM[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">truetruetrueM[i][<span class="number">0</span>] = beta*i;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">truetruetrueM[<span class="number">0</span>][i] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">truetruetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">truetruetruetrueM[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">truetruetrue&#125;</div><div class="line"></div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetrue<span class="keyword">int</span> j = y - r;</div><div class="line">truetruetrue<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetruetruetrue<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruej -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetruetrue<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">return</span>;</div><div class="line">true&#125;</div><div class="line">true</div><div class="line">true<span class="built_in">string</span> a2;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">true<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">true<span class="keyword">int</span> min;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">truetruea2 = a.substr(i, x-o);</div><div class="line">truetrueq[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">truetrueq[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">truetrue<span class="keyword">else</span> &#123;</div><div class="line">truetruetrue<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">truetruetruetruemin = q[<span class="number">0</span>];</div><div class="line">truetruetruetrueq[<span class="number">1</span>] = i;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">truemin = q[<span class="number">1</span>]+o;</div><div class="line">truePixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">trueP-&gt;push(*p);</div><div class="line">true</div><div class="line">trueDACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truea2 = a.substr(min-o , x-o);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">trueDACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">true<span class="built_in">string</span> A, B;</div><div class="line">true<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">truetrue<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrueDACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">truetruetruetruePixel p = (P-&gt;top());</div><div class="line">truetruetruetrueP-&gt;pop();</div><div class="line">truetruetruetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue<span class="keyword">delete</span> P;</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
       
         
         <tags>
             
-            <tag> OS </tag>
-            
-            <tag> 物联网 </tag>
+            <tag> 算法 </tag>
             
         </tags>
         
@@ -1391,14 +1559,30 @@
     </entry>
     
     <entry>
-      <title><![CDATA[序列比较]]></title>
-      <url>/2017/10/31/%E5%BA%8F%E5%88%97%E6%AF%94%E8%BE%83/</url>
-      <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">truetruea = x; b = y;</div><div class="line">true&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">else</span> &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">true<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">trueM[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">trueM[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">truetrueM[<span class="number">0</span>][i] = beta*i;</div><div class="line">true&#125;	</div><div class="line">trueM[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">truetrueM[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">true<span class="keyword">delete</span>[]M;</div><div class="line">true<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">truetrue<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">truetrue<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">truetruetrueM[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">truetruetrueM[i][<span class="number">0</span>] = beta*i;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">truetruetrueM[<span class="number">0</span>][i] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">truetruetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">truetruetruetrueM[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">truetruetrue&#125;</div><div class="line"></div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetrue<span class="keyword">int</span> j = y - r;</div><div class="line">truetruetrue<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetruetruetrue<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruej -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetruetrue<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">return</span>;</div><div class="line">true&#125;</div><div class="line">true</div><div class="line">true<span class="built_in">string</span> a2;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">true<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">true<span class="keyword">int</span> min;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">truetruea2 = a.substr(i, x-o);</div><div class="line">truetrueq[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">truetrueq[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">truetrue<span class="keyword">else</span> &#123;</div><div class="line">truetruetrue<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">truetruetruetruemin = q[<span class="number">0</span>];</div><div class="line">truetruetruetrueq[<span class="number">1</span>] = i;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">truemin = q[<span class="number">1</span>]+o;</div><div class="line">truePixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">trueP-&gt;push(*p);</div><div class="line">true</div><div class="line">trueDACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truea2 = a.substr(min-o , x-o);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">trueDACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">true<span class="built_in">string</span> A, B;</div><div class="line">true<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">truetrue<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrueDACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">truetruetruetruePixel p = (P-&gt;top());</div><div class="line">truetruetruetrueP-&gt;pop();</div><div class="line">truetruetruetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue<span class="keyword">delete</span> P;</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+      <title><![CDATA[树莓派解析域名失败导致apt-get update不可用]]></title>
+      <url>/2017/10/31/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D%E5%A4%B1%E8%B4%A5%E5%AF%BC%E8%87%B4apt-get%20update%E4%B8%8D%E5%8F%AF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
+<a id="more"></a>
+<p>除了这个，我还按照网上各路大神的说法，改了好几个地方，这里一一记下来，以便以后查找。</p>
+<ol>
+<li>删除某个目录的内容，只记得是/ect/apt/…/partial什么的</li>
+<li>修改/etc/apt/resolv.conf的内容，数字改成8.8.8.8</li>
+<li>修改源。据说给的源是国外源，速度慢。国内有很多源可用，网址如下：<a href="http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/08/31/raspbian-chinese-software-source.html</a></li>
+</ol>
+<hr>
+<p>除此之外，倒是了解了一些些关于远程与vnc。<br>实现这两者需要安装东西，并不是装了系统就可以连远程的。这个百度一下很多教程。</p>
+<hr>
+<p>另外是在Linux命令行下的vi(vim)与nano编辑器。<br>相较而言当然是nano好用。<br>用nano编辑/etc/apt/s文件命令：sudo nano /etc/apt/s<br>用vi编辑只需将nano改为vi<br>nano内有提示，只需按照提示来就好，而vi就比较复杂。<br><a href="http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html" target="_blank" rel="external">http://shumeipai.nxez.com/2013/12/26/linux-on-vim-editor-tutorials.html</a><br>该网址内容详尽。注意的是，vi命令模式不是命令行界面，按下esc并不会有界面上的变化，并不是教程错了。</p>
+<hr>
+<p>Linux下的文件相关命令</p>
+]]></content>
       
         
         <tags>
             
-            <tag> 算法 </tag>
+            <tag> OS </tag>
+            
+            <tag> 物联网 </tag>
             
         </tags>
         
