@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-22T09:46:38.055Z</updated>
+  <updated>2017-11-28T15:54:58.417Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lab3_Document</title>
+    <link href="http://yoursite.com/2017/11/27/Lab3_Document/"/>
+    <id>http://yoursite.com/2017/11/27/Lab3_Document/</id>
+    <published>2017-11-27T11:00:00.000Z</published>
+    <updated>2017-11-28T15:54:58.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Lab3-Document&quot;&gt;&lt;a href=&quot;#Lab3-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab3 Document&quot;&gt;&lt;/a&gt;Lab3 Document&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>计算机网络概述</title>
@@ -242,11 +264,11 @@
   </entry>
   
   <entry>
-    <title>进程与线程</title>
-    <link href="http://yoursite.com/2017/11/06/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2017/11/06/进程与线程/</id>
+    <title>OS:内存管理</title>
+    <link href="http://yoursite.com/2017/11/06/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>http://yoursite.com/2017/11/06/OS-内存管理/</id>
     <published>2017-11-06T06:13:37.000Z</published>
-    <updated>2017-11-23T15:05:35.342Z</updated>
+    <updated>2017-11-23T11:36:23.576Z</updated>
     
     <summary type="html">
     
@@ -254,9 +276,8 @@
       
         
         
-          &lt;h1 id=&quot;进程与线程&quot;&gt;&lt;a href=&quot;#进程与线程&quot; class=&quot;headerlink&quot; title=&quot;进程与线程&quot;&gt;&lt;/a&gt;进程与线程&lt;/h1&gt;&lt;p&gt;进程模型的进化：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;第一代：relay , vacuum tubes and
+          &lt;p&gt;#&lt;/p&gt;
+
         
       
     
@@ -272,11 +293,11 @@
   </entry>
   
   <entry>
-    <title>OS:内存管理</title>
-    <link href="http://yoursite.com/2017/11/06/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2017/11/06/OS-内存管理/</id>
+    <title>进程与线程</title>
+    <link href="http://yoursite.com/2017/11/06/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2017/11/06/进程与线程/</id>
     <published>2017-11-06T06:13:37.000Z</published>
-    <updated>2017-11-23T11:36:23.576Z</updated>
+    <updated>2017-11-23T15:05:35.342Z</updated>
     
     <summary type="html">
     
@@ -284,8 +305,9 @@
       
         
         
-          &lt;p&gt;#&lt;/p&gt;
-
+          &lt;h1 id=&quot;进程与线程&quot;&gt;&lt;a href=&quot;#进程与线程&quot; class=&quot;headerlink&quot; title=&quot;进程与线程&quot;&gt;&lt;/a&gt;进程与线程&lt;/h1&gt;&lt;p&gt;进程模型的进化：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一代：relay , vacuum tubes and
         
       
     
@@ -419,6 +441,34 @@
   </entry>
   
   <entry>
+    <title>计算机网络网络层</title>
+    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/</id>
+    <published>2017-11-02T14:12:40.000Z</published>
+    <updated>2017-11-23T11:35:21.441Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;#
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+    
+    
+      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>计算机网络运输层</title>
     <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/"/>
     <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络运输层/</id>
@@ -435,34 +485,6 @@
 &lt;p&gt;这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;概述与运输层服务&quot;&gt;&lt;a href=&quot;#概述与运输层服务&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
-    
-    
-      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>计算机网络网络层</title>
-    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
-    <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/</id>
-    <published>2017-11-02T14:12:40.000Z</published>
-    <updated>2017-11-23T11:35:21.441Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;#
         
       
     
@@ -563,33 +585,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>背包问题初涉</title>
-    <link href="http://yoursite.com/2017/10/31/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2017/10/31/背包问题/</id>
-    <published>2017-10-31T14:57:47.000Z</published>
-    <updated>2017-10-31T16:09:51.245Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;hr&gt;
-&lt;p&gt;算法上机考试，怎么说，虽然没做出来但是收获很多？好吧也只能这么安慰自己了&lt;/p&gt;
-&lt;hr&gt;
-&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
