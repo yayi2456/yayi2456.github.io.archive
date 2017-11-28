@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-28T16:11:34.696Z</updated>
+  <updated>2017-11-28T16:17:10.630Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2017/11/27/Lab3_Document/"/>
     <id>http://yoursite.com/2017/11/27/Lab3_Document/</id>
     <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2017-11-28T16:11:34.696Z</updated>
+    <updated>2017-11-28T16:17:10.630Z</updated>
     
     <summary type="html">
     
@@ -35,6 +35,12 @@
     
     </summary>
     
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
