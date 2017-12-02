@@ -12,7 +12,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if('password'){
+            if (prompt('请输入文章密码') !== 'password'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
 
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
 
 
 
@@ -89,7 +106,7 @@
 <meta property="og:site_name" content="Be With Me">
 <meta property="og:description" content="我的编译器环境配置PG的配置VS属性的配置好了，这时在PG中的任务已经完成了，接下来想要使用VS来执行PG生成的程序，还需要进行一些属性的配置。多种组合可行。这里只说明了我自己用的一种组合，路径也以我的电脑为准。我的机器VS2015，win10。 在属性页面添加：  配置属性 -&amp;gt; VC++目录 -&amp;gt; 包含目录：D:/Program Files（x86）/Parser Generato">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-02T14:31:13.712Z">
+<meta property="og:updated_time" content="2017-12-02T17:20:41.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的编译器">
 <meta name="twitter:description" content="我的编译器环境配置PG的配置VS属性的配置好了，这时在PG中的任务已经完成了，接下来想要使用VS来执行PG生成的程序，还需要进行一些属性的配置。多种组合可行。这里只说明了我自己用的一种组合，路径也以我的电脑为准。我的机器VS2015，win10。 在属性页面添加：  配置属性 -&amp;gt; VC++目录 -&amp;gt; 包含目录：D:/Program Files（x86）/Parser Generato">
@@ -457,6 +474,15 @@
           
         </div>
       
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
 
       
       
@@ -692,6 +718,11 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共47.1k字</span>
+</div>
+
 
 
         
@@ -841,6 +872,36 @@
   
 
   
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/wanko.model.json", 0.5);});
+})();
+</script>
 
 </body>
 </html>
