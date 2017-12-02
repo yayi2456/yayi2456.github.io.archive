@@ -7,7 +7,7 @@
 
     
 
-    <title>编译原理——语法分析 | 最喜欢你啦！</title>
+    <title>我的编译器 | 最喜欢你啦！</title>
     <meta name="author" content="YaYi">
     
     <meta name="description" content="yayi&#39;s blog">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="编译原理——语法分析"/>
+    <meta property="og:title" content="我的编译器"/>
     <meta property="og:site_name" content="Be With Me"/>
 
     
@@ -322,7 +322,7 @@
             <div class="article-title">
                 
     
-        <h1>编译原理——语法分析</h1>
+        <h1>我的编译器</h1>
     
 
 
@@ -343,18 +343,35 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#我的编译器"><span class="section table-of-contents-text">我的编译器</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语法分析部分"><span class="section table-of-contents-text">语法分析部分</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#lex与yacc的结合"><span class="section table-of-contents-text">lex与yacc的结合</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#“default”标签跳过“-”的初始化操作"><span class="section table-of-contents-text">“default”标签跳过“ ”的初始化操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#yylval：无法解析的外部符号"><span class="section table-of-contents-text">yylval：无法解析的外部符号</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#我的编译器"><span class="section table-of-contents-text">我的编译器</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#环境配置"><span class="section table-of-contents-text">环境配置</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#PG的配置"><span class="section table-of-contents-text">PG的配置</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#VS属性的配置"><span class="section table-of-contents-text">VS属性的配置</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语法分析部分"><span class="section table-of-contents-text">语法分析部分</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#lex与yacc的结合"><span class="section table-of-contents-text">lex与yacc的结合</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#“default”标签跳过“-”的初始化操作"><span class="section table-of-contents-text">“default”标签跳过“ ”的初始化操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#yylval：无法解析的外部符号"><span class="section table-of-contents-text">yylval：无法解析的外部符号</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1><h2 id="语法分析部分"><a href="#语法分析部分" class="headerlink" title="语法分析部分"></a>语法分析部分</h2><h3 id="lex与yacc的结合"><a href="#lex与yacc的结合" class="headerlink" title="lex与yacc的结合"></a>lex与yacc的结合</h3><p><a href="http://blog.csdn.net/lpstudy/article/details/51328851" target="_blank" rel="external">lipeng的结合参考</a>算了。没什么特别大的参考价值，他的着重点与我的不同。</p>
+                <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="PG的配置"><a href="#PG的配置" class="headerlink" title="PG的配置"></a>PG的配置</h3><h3 id="VS属性的配置"><a href="#VS属性的配置" class="headerlink" title="VS属性的配置"></a>VS属性的配置</h3><p>好了，这时在PG中的任务已经完成了，接下来想要使用VS来执行PG生成的程序，还需要进行一些属性的配置。<br>多种组合可行。这里只说明了我自己用的一种组合，路径也以我的电脑为准。我的机器VS2015，win10。</p>
+<p>在<strong>属性</strong>页面添加：</p>
+<ol>
+<li>配置属性 -&gt; VC++目录 -&gt; 包含目录：D:/Program Files（x86）/Parser Generator 2/Cpp/Include</li>
+<li>配置属性 -&gt; VC++目录 -&gt; 库目录：D:/Program Files（x86）/Parser Generator 2/Cpp/Lib</li>
+<li>C/C++ -&gt; 预处理器 -&gt; 预处理器定义：YYDEBUG,_MBCS;</li>
+<li>C/C++ -&gt; 代码生成 -&gt;运行库：多线程调试(/MTd)</li>
+<li>链接器 -&gt; 输入 -&gt; 附加依赖项：ylmtd.lib;</li>
+</ol>
+<p>是YYDEBUG,_MBCS;中间是<strong>逗号</strong>。</p>
+<p>$$\color{red}{注意！上述除了”多线程调试“，其他均是在原有的基础上添加。}$$</p>
+<h2 id="语法分析部分"><a href="#语法分析部分" class="headerlink" title="语法分析部分"></a>语法分析部分</h2><h3 id="lex与yacc的结合"><a href="#lex与yacc的结合" class="headerlink" title="lex与yacc的结合"></a>lex与yacc的结合</h3><p><a href="http://blog.csdn.net/lpstudy/article/details/51328851" target="_blank" rel="external">lipeng的结合参考</a>算了。没什么特别大的参考价值，他的着重点与我的不同。</p>
 <p><a href="https://docs.oracle.com/cd/E62103_01/html/E62875/lex-1.html" target="_blank" rel="external">oracle的文档：lex</a></p>
-<p><a href="https://www.ibm.com/developerworks/cn/linux/sdk/lex/" target="_blank" rel="external">IBM的文档：lex</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/sdk/lex/" target="_blank" rel="external">IBM的文档：lex</a>–最终问题在这里面解决。<br>查看其“结合”部分。</p>
 <p>在lex中没有main函数，yylval是在lex中定义的一个变量，使用extern YYSTYPE yylval在yacc中使用。</p>
 <h4 id="“default”标签跳过“-”的初始化操作"><a href="#“default”标签跳过“-”的初始化操作" class="headerlink" title="“default”标签跳过“ ”的初始化操作"></a>“default”标签跳过“ ”的初始化操作</h4><p><a href="https://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&amp;l=ZH-CN&amp;k=k(C2361" target="_blank" rel="external">编译器错误C2361:“default”标签跳过“ ”的初始化操作</a>&amp;rd=true)<br><a href="http://blog.csdn.net/t19870905/article/details/23608547" target="_blank" rel="external">“default”标签跳过“ ”的初始化操作解决</a></p>
 <p>出现“default”标签跳过yylval的初始化操作的原因是：在lex中，我把rule section的正则语义动作定义段写在了对yylval的extract之前。只要挪到后面，这个错误就不见了。（这个看一看在cpp中的错误代码就能发现异常。）</p>
-<h4 id="yylval：无法解析的外部符号"><a href="#yylval：无法解析的外部符号" class="headerlink" title="yylval：无法解析的外部符号"></a>yylval：无法解析的外部符号</h4>
+<h4 id="yylval：无法解析的外部符号"><a href="#yylval：无法解析的外部符号" class="headerlink" title="yylval：无法解析的外部符号"></a>yylval：无法解析的外部符号</h4><p>写错地方了。yylval是在yacc里面的，写extern应该在lex里面写。</p>
+<p>在yacc中无需用到yylval，这是因为在语义动作上，比如NUMBER，如果不写他的语义动作，他将会自动把产生式左部的值赋为与NUMBER一起给yacc的yylval的值。</p>
+<p>成功！现在来总结一下叭！</p>
+<blockquote>
+<p>现在拥有：一个yacc文件名叫myparser.y，一个lex文件名叫mylexer.l。<br>创建了一个新的既有lex又有yacc的项目。<br>把原来lex中的除了main函数之外的东西拷贝到新程序的对应位置（不建议直接全部复制，因为可能会有细小问题出现。特别注意你在生成project的时候定义的lexer的名字！）注意上面提到过的那个rule section的问题。<br>在lexer的include句之后定义<code>extern string yylval</code>（我这里使用string只是因为我的YYSTYPE是string，我的不能直接使用宏YYSTYPE）<br>在lex的匹配语义动作中加上对yylval的赋值（<code>yylval=yytext;</code>这句将匹配对应的字符串给yylval。同样因为我的yylval是string，不是string可以自己转换一下。<br>在lex的语义动作最后加上<code>return NUBER;</code>（NUBER只是一个例子，应该返回这个匹配对应的token。<br>把原来yacc中的代码拷到新程序的对应位置（同样不建议直接全部复制。<br>如果原来不懂yylavl的意义，在单token行也写了语义动作赋值，把这个语义动作删掉，或者使用\$1对这个值做你想要的处理之后赋给\$\$。<br>好了！生成之后，在VS项目中运行就好啦！</p>
+</blockquote>
+
                 
 
 

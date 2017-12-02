@@ -343,7 +343,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#GIT"><span class="section table-of-contents-text">GIT</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#分支"><span class="section table-of-contents-text">分支</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#我见过的错误解决方法"><span class="section table-of-contents-text">我见过的错误解决方法</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#GIT"><span class="section table-of-contents-text">GIT</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#分支"><span class="section table-of-contents-text">分支</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#我见过的错误解决方法"><span class="section table-of-contents-text">我见过的错误解决方法</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#VS"><span class="section table-of-contents-text">VS</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#cmd运行完之后闪退"><span class="section table-of-contents-text">cmd运行完之后闪退</span></a></li></ol></li></ol>
 </div>
 
 
@@ -375,11 +375,13 @@
 <li>在 git merge lab3之后产生冲突，人为解决之后再次merge无法merge：<br>只需根据提示：</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &quot;mesage&quot;</div><div class="line">git merge lab3</div></pre></td></tr></table></figure>
+<h2 id="VS"><a href="#VS" class="headerlink" title="VS"></a>VS</h2><h3 id="cmd运行完之后闪退"><a href="#cmd运行完之后闪退" class="headerlink" title="cmd运行完之后闪退"></a>cmd运行完之后闪退</h3><p>可以通过更改属性的方式解决。什么system(“pause”)啊也行吧，但是我觉得没有属性来的方便永久。</p>
+<p>“配置属性”–&gt;“链接器”–&gt;“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）“。</p>
 
                 
 <p class="pink-link-context">
-    <a href="/2017/12/02/编译原理/我的编译器/" rel="next" title="编译原理——语法分析">
-    上一篇：编译原理——语法分析
+    <a href="/2017/12/02/编译原理/我的编译器/" rel="next" title="我的编译器">
+    上一篇：我的编译器
   </a>
 </p>
 
