@@ -1,686 +1,765 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
-    
 
-    <title>序列比较 | 最喜欢你啦！</title>
-    <meta name="author" content="YaYi">
-    
-    <meta name="description" content="yayi&#39;s blog">
-    
-    
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="序列比较"/>
-    <meta property="og:site_name" content="Be With Me"/>
 
-    
-    <meta property="og:image" content=""/>
-    
 
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml">
-    <link rel="stylesheet" href="/css/lib/materialize.min.css">
-    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-    <!--<link rel="stylesheet" href="/css/prettify.css" media="screen" type="text/css">-->
 
-    
-        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
-    
-    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="序列比较">
+<meta property="og:url" content="http://yoursite.com/2017/10/31/序列比较/index.html">
+<meta property="og:site_name" content="Be With Me">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-31T15:47:59.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="序列比较">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/31/序列比较/"/>
+
+
+
+
+
+  <title>序列比较 | Be With Me</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-<body>
-    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+  
+  
+    
+  
 
-    <nav class="red accent-1">
-    <div class="nav-wrapper">
-        <a href="#" data-activates="main-menu" class="button-collapse">
-            <i class="fa fa-navicon"></i>
-        </a>
-        <div class="">
-            <a href="/" class="brand-logo hide-on-med-and-down">Be With Me</a>
-            <ul class="right hide-on-med-and-down">
-                
-                    <li>
-                        <a class="menu-home " href="/" >
-                            <i class="fa fa-home "></i>
-                            
-                            首页
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a class="menu-archive " href="/archives" >
-                            <i class="fa fa-archive "></i>
-                            
-                            归档
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
-                            <i class="fa fa-bookmark "></i>
-                            
-                            分类
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a class="menu-reading " href="/reading" >
-                            <i class="fa fa-book "></i>
-                            
-                            读书
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a class="menu-about " href="/about" >
-                            <i class="fa fa-user "></i>
-                            
-                            关于
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a class="menu-search modal-trigger " href="#search" >
-                            <i class="fa fa-search "></i>
-                            
-                            搜索
-                        </a>
-                    </li>
-                
-            </ul>
-            <div>
-    <ul class="side-nav red accent-1" id="main-menu">
-        
-        <li class="side-user">
-            <div class="row">
-                <div class="col s4 no-padding">
-                    <img class="avatar-image circle responsive-img" src="http://note.youdao.com/yws/public/resource/7142a0b5e85b1e27701fdf866b4f5654/xmlnote/WEBRESOURCEcb17190374049fb665b3d096e598218b/6370" alt="User Avatar">
-                </div>
-                <div class="info col s8 valign-wrapper no-padding">
-                    <div class="valign">
-                        <p class="name">YaYi</p>
-                        <p class="desc">轻度技术爱好者-混各种奇怪的圈子</p>
-                    </div>
-                </div>
-            </div>
-        </li>
-        
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
 
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-home " href="/" >
-                    <i class="fa fa-home "></i>
-                    
-                    首页
-                </a>
-            </li>
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-archive " href="/archives" >
-                    <i class="fa fa-archive "></i>
-                    
-                    归档
-                </a>
-            </li>
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
-                    <i class="fa fa-bookmark "></i>
-                    
-                    分类
-                </a>
-            </li>
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-reading " href="/reading" >
-                    <i class="fa fa-book "></i>
-                    
-                    读书
-                </a>
-            </li>
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-about " href="/about" >
-                    <i class="fa fa-user "></i>
-                    
-                    关于
-                </a>
-            </li>
-        
-            <li class="no-padding">
-                <a class="waves-effect menu-search modal-trigger " href="#search" >
-                    <i class="fa fa-search "></i>
-                    
-                    搜索
-                </a>
-            </li>
-        
-    </ul>
-
-    <ul class="side-nav red accent-1" id="category-menu">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
 
-            
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/计算机网络/">
-                    计算机网络 <span class="right">9 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/计算机网络/实验室/">
-                    实验室 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/计算机网络/大三的课/">
-                    大三的课 <span class="right">6 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/计算机网络/大三的课/作业/">
-                    作业 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/OS/">
-                    OS <span class="right">4 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/OS/MIT-Lab/">
-                    MIT-Lab <span class="right">2 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/编译原理/">
-                    编译原理 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/我的故事/">
-                    我的故事 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/我的故事/枯骨流沙/">
-                    枯骨流沙 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/我的故事/枯骨流沙/覆千秋/">
-                    覆千秋 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/语言/">
-                    语言 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/数据结构/">
-                    数据结构 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/琐碎/">
-                    琐碎 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-    </ul>
-</div>
-
-        </div>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Be With Me</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-</nav>
-
-<div id="search" class="modal search-modal">
-    <div class="row">
-        <div class="input-field col s12">
-              <input id="search-input" type="text">
-              <label for="search-input">搜索</label>
-        </div>
-
-    </div>
-    <div id="search-result" class="search-result col s12">
-
-    </div>
-</div>
-
-
-    <main>
-        <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
-    <div class="nav-wrapper red accent-2">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-
-        
-
-        
-    </div>
-</nav>
-
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>序列比较</h1>
-    
-
-
-            </div>
-            <time class="pink-link-context" datetime="2017-10-31T14:57:47.000Z"><a href="/2017/10/31/序列比较/">2017-10-31</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/算法/" class="chip blue lighten-1">算法</a>
-        
-    </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    
-</div>
-
-
-            <div class="entry pink-link-context">
-                <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">truetruea = x; b = y;</div><div class="line">true&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">else</span> &#123;</div><div class="line">truetrue<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">truetrue<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">true<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">trueM[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">trueM[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">truetrueM[<span class="number">0</span>][i] = beta*i;</div><div class="line">true&#125;	</div><div class="line">trueM[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">truetrueM[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">truetruetrueM[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">true<span class="keyword">delete</span>[]M;</div><div class="line">true<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">true<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">truetrue<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">truetrue<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">truetruetrueM[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">truetruetrueM[i][<span class="number">0</span>] = beta*i;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">truetruetrueM[<span class="number">0</span>][i] = i*beta;</div><div class="line">truetrue<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">truetruetrue<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">truetruetruetrueM[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">truetruetrue&#125;</div><div class="line"></div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetrue<span class="keyword">int</span> j = y - r;</div><div class="line">truetruetrue<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">truetruetruetrue<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruei -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">truetruetruetruetruePixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">truetruetruetruetrueP-&gt;push(*p);</div><div class="line">truetruetruetruetruej -= <span class="number">1</span>; </div><div class="line">truetruetruetrue&#125;</div><div class="line">truetruetruetrue<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetruetrue<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">truetrue&#125;</div><div class="line">truetrue<span class="keyword">return</span>;</div><div class="line">true&#125;</div><div class="line">true</div><div class="line">true<span class="built_in">string</span> a2;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">true<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">true<span class="keyword">int</span> min;</div><div class="line">true<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">truetruea2 = a.substr(i, x-o);</div><div class="line">truetrueq[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">truetrueq[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">truetrue<span class="keyword">else</span> &#123;</div><div class="line">truetruetrue<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">truetruetruetruemin = q[<span class="number">0</span>];</div><div class="line">truetruetruetrueq[<span class="number">1</span>] = i;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line">truemin = q[<span class="number">1</span>]+o;</div><div class="line">truePixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">trueP-&gt;push(*p);</div><div class="line">true</div><div class="line">trueDACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truea2 = a.substr(min-o , x-o);</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">true<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">trueDACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">true<span class="built_in">string</span> A, B;</div><div class="line">true<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">truetrue<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrueDACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">truetrue<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">truetruetruetruePixel p = (P-&gt;top());</div><div class="line">truetruetruetrueP-&gt;pop();</div><div class="line">truetruetruetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">truetruetrue&#125;</div><div class="line">truetrue<span class="keyword">delete</span> P;</div><div class="line">truetrue<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-                
-<p class="pink-link-context">
-    <a href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" rel="next" title="树莓派解析域名失败导致apt-get update不可用">
-    上一篇：树莓派解析域名失败导致apt-get update不可用
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/10/31/归并、快排、堆排序/" rel="next" title="归并、快排、堆排序">
-    下一篇：归并、快排、堆排序
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-</div>
-
-        <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large blue lighten-1">
-      <i class="fa fa-caret-square-o-up"></i>
-    </a>
-    <ul>
-      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
-      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
-    </ul>
+      
+        <p class="site-subtitle">最喜欢你啦！</p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/序列比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">序列比较</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">		a = x; b = y;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = beta*i;</div><div class="line">	&#125;	</div><div class="line">	M[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">	<span class="keyword">delete</span>[]M;</div><div class="line">	<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">			M[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">			M[i][<span class="number">0</span>] = beta*i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">			M[<span class="number">0</span>][i] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">				M[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">		<span class="keyword">int</span> j = y - r;</div><div class="line">			<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">				<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					j -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="built_in">string</span> a2;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">	<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> min;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">		a2 = a.substr(i, x-o);</div><div class="line">		q[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">		q[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">				min = q[<span class="number">0</span>];</div><div class="line">				q[<span class="number">1</span>] = i;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	min = q[<span class="number">1</span>]+o;</div><div class="line">	Pixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">	P-&gt;push(*p);</div><div class="line">	</div><div class="line">	DACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	a2 = a.substr(min-o , x-o);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">	DACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">string</span> A, B;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">		<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		DACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">				Pixel p = (P-&gt;top());</div><div class="line">				P-&gt;pop();</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="keyword">delete</span> P;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/OS-Lab12/" rel="next" title="OS Lab1">
+                <i class="fa fa-chevron-left"></i> OS Lab1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/31/linux、vim、git常用命令/" rel="prev" title="Linux、Vim、Git常用命令——简明扼要版">
+                Linux、Vim、Git常用命令——简明扼要版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="YaYi" />
+            
+              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
     </main>
-    <footer class="page-footer red accent-2 darken-1">
-    
-    <div class="footer-container container">
-        <div class="row">
-            
-            <div class="social-group col m4 s12">
-                <h5 class="white-text">社交</h5>
-                
-                    <a class="social-link" href="http://weibo.com/2723381840" target="_blank">
-                        <i class="fa fa-2x fa-weibo"></i>
-                    </a>
-                
-                    <a class="social-link" href="https://github.com/yayi2456" target="_blank">
-                        <i class="fa fa-2x fa-github"></i>
-                    </a>
-                
-                    <a class="social-link" href="/atom.xml" target="_blank">
-                        <i class="fa fa-2x fa-rss"></i>
-                    </a>
-                
-                
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-    </script>
-    <div class="site-visitors-container white-text">
-        <span>
-            <i class="fa fa-user"></i>
-            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-        </span>
-        <span>&nbsp;|&nbsp;</span>
-        <span>
-            <i class="fa fa-eye"></i>
-            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-        </span>
-    </div>
 
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YaYi</span>
 
-            </div>
-            
-
-            
-            <div class="col m8 s12">
-                <h5 class="white-text">友情链接</h5>
-                
-                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
-                
-                    <a class="social-link" href="http://unsplash.com" target="_blank">unsplash--谢谢你的免费图片！</a>
-                
-                    <a class="social-link" href="http://www.iconfont.cn" target="_blank">iconfont-阿里巴巴矢量图片库</a>
-                
-            </div>
-            
-        </div>
-    </div>
-    
-    
-    <div class="footer-copyright pink-link-context">
-        <div class="container">
-            © 2017 yayi2456.github.io, All rights reserved.
-            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
-        </div>
-    </div>
-</footer>
-
-
-    <noscript>
-    <div class="noscript">
-        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
-    </div>
-</noscript>
-<div class="noscript">
-    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+  
 </div>
 
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/materialize.min.js"></script>
-
-<script>
-    (function($) {
-        $(document).ready(function() {
-            // 隐藏禁用javascript（针对微信内置浏览器）的提示
-            $('.noscript').hide();
-
-            // 图片缩放效果
-            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
-
-            // 给图片加上点击放大效果（materialbox插件）
-            $imgs.addClass('materialboxed').each(function(i, el) {
-                $(this).attr('data-caption', $(this).attr('alt') || ' ');
-            }).materialbox();
-
-            // 优化表格的显示
-            $('table').each(function() {
-                var $table = $(this);
-                // 除去多行代码的情况
-                if ($table.find('pre').length == 0) {
-                    $table.addClass('responsive-table striped bordered');
-                }
-            });
-
-            // 首页幻灯片
-            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
-
-            $(".button-collapse").sideNav();
-            $(".category-menu").sideNav();
-
-            // 针对gallery post
-            $('.carousel').carousel({full_width: true});
-            $('.carousel-control.prev').click(function() {
-                $('.carousel').carousel('prev');
-            });
-            $('.carousel-control.next').click(function() {
-                $('.carousel').carousel('next');
-            });
-
-            // 文章目录
-            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
-
-            // 目录随屏幕滚动（防止目录过长越过footer）
-            var $toc = $('.toc');
-            var scrollTargetTop = 0;
-            $(window).scroll(function() {
-                var $activeLink = $toc.find('a.active.section');
-                if ($(window).scrollTop() < 100) {
-                    scrollTargetTop = 0;
-                } else {
-                    if ($activeLink[0]) {
-                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
-                    }
-                }
-                $toc.css('top', '-' + scrollTargetTop + 'px');
-            });
-
-            // 修正文章目录的left-border颜色
-            var color = $('.table-of-contents-text').css('color');
-            $('.table-of-contents-link').css('border-left-color', color);
-
-            // 针对移动端做的优化：FAB按钮点击一下收回
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                $('.fixed-action-btn').addClass('click-to-toggle');
-            }
-            // 回到顶部
-            $('.btn-return-top').click(function() {
-                $('body, html').animate({
-                    scrollTop: 0
-                }, 500);
-            });
-
-            // 重置读书页面的Tab标签页的颜色
-            $('li.tab a').hover(function() {
-                $(this).toggleClass('text-lighten-4');
-            });
-            $('.indicator').addClass('pink lighten-2');
-
-            
-            // 添加new标签
-            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
-            
-
-            // 搜索功能
-            $('.modal-trigger').leanModal({
-                // 打开搜索框时自动聚焦
-                ready: function() {
-                    if ($('#search').is(":visible")) {
-                        $('#search-input').focus();
-                    }
-                }
-            });
-            var searchXml = "search.xml";
-            if (searchXml.length == 0) {
-             	searchXml = "search.xml";
-            }
-            var searchPath = "/" + searchXml;
-            initSearch(searchPath, 'search-input', 'search-result');
-        });
-
-        // 初始化搜索与匹配函数
-        var initSearch = function(path, search_id, content_id) {
-            'use strict';
-            $.ajax({
-                url: path,
-                dataType: "xml",
-                success: function(xmlResponse) {
-                    // get the contents from search data
-                    var datas = $("entry", xmlResponse).map(function() {
-                        return {
-                            title: $("title", this).text(),
-                            content: $("content", this).text(),
-                            url: $("url", this).text()
-                        };
-                    }).get();
-                    var $input = document.getElementById(search_id);
-                    var $resultContent = document.getElementById(content_id);
-                    $input.addEventListener('input', function() {
-                        var str = '<ul class=\"search-result-list\">';
-                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                        $resultContent.innerHTML = "";
-                        if (this.value.trim().length <= 0) {
-                            return;
-                        }
-                        // perform local searching
-                        datas.forEach(function(data) {
-                            var isMatch = true;
-                            var content_index = [];
-                            var data_title = data.title.trim().toLowerCase();
-                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                            var data_url = data.url;
-                            var index_title = -1;
-                            var index_content = -1;
-                            var first_occur = -1;
-                            // only match artiles with not empty titles and contents
-                            if (data_title != '' && data_content != '') {
-                                keywords.forEach(function(keyword, i) {
-                                    index_title = data_title.indexOf(keyword);
-                                    index_content = data_content.indexOf(keyword);
-                                    if (index_title < 0 && index_content < 0) {
-                                        isMatch = false;
-                                    } else {
-                                        if (index_content < 0) {
-                                            index_content = 0;
-                                        }
-                                        if (i == 0) {
-                                            first_occur = index_content;
-                                        }
-                                    }
-                                });
-                            }
-                            // show search results
-                            if (isMatch) {
-                                keywords.forEach(function(keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
-                                });
-
-                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                                var content = data.content.trim().replace(/<[^>]+>/g, "");
-                                if (first_occur >= 0) {
-                                    // cut out 100 characters
-                                    var start = first_occur - 20;
-                                    var end = first_occur + 80;
-                                    if (start < 0) {
-                                        start = 0;
-                                    }
-                                    if (start == 0) {
-                                        end = 100;
-                                    }
-                                    if (end > content.length) {
-                                        end = content.length;
-                                    }
-                                    var match_content = content.substring(start, end);
-                                    // highlight all keywords
-                                    keywords.forEach(function(keyword) {
-                                        var regS = new RegExp(keyword, "gi");
-                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
-                                    });
-
-                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
-                                }
-                                str += "</li>";
-                            }
-                        });
-                        str += "</ul>";
-                        $resultContent.innerHTML = str;
-                    });
-                }
-            });
-        }
-    })(jQuery);
-</script>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
-<script src="/js/prettify.js"></script>
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("pre").addClass("prettyprint");
-        prettyPrint();
-    });
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
 
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=64002140" charset="UTF-8"></script>
 
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
-<script type="text/javascript" async
-  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
