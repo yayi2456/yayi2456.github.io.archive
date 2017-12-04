@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-12-04T03:00:49.367Z</updated>
+  <updated>2017-12-04T08:29:45.445Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2017/12/02/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%88%91%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8/"/>
     <id>http://yoursite.com/2017/12/02/编译原理/我的编译器/</id>
     <published>2017-12-02T07:28:47.000Z</published>
-    <updated>2017-12-04T03:00:49.367Z</updated>
+    <updated>2017-12-04T08:29:45.445Z</updated>
     
     <summary type="html">
     
@@ -425,11 +425,11 @@
   </entry>
   
   <entry>
-    <title>计算机网络应用层之番外二</title>
-    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82%E7%95%AA%E5%A4%96%E4%BA%8C/"/>
-    <id>http://yoursite.com/2017/11/04/计算机网络应用层番外二/</id>
+    <title>计算机网络番外三</title>
+    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%95%AA%E5%A4%963/"/>
+    <id>http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/</id>
     <published>2017-11-04T13:12:40.000Z</published>
-    <updated>2017-11-15T14:11:40.722Z</updated>
+    <updated>2017-11-22T12:54:32.119Z</updated>
     
     <summary type="html">
     
@@ -437,7 +437,7 @@
       
         
         
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;第二次书面作业&quot;&gt;&lt;a href=&quot;#第二次书面作业&quot; class=&quot;headerlink&quot;
         
       
     
@@ -455,11 +455,11 @@
   </entry>
   
   <entry>
-    <title>计算机网络番外三</title>
-    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%95%AA%E5%A4%963/"/>
-    <id>http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/</id>
+    <title>计算机网络应用层之番外二</title>
+    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82%E7%95%AA%E5%A4%96%E4%BA%8C/"/>
+    <id>http://yoursite.com/2017/11/04/计算机网络应用层番外二/</id>
     <published>2017-11-04T13:12:40.000Z</published>
-    <updated>2017-11-22T12:54:32.119Z</updated>
+    <updated>2017-11-15T14:11:40.722Z</updated>
     
     <summary type="html">
     
@@ -467,7 +467,7 @@
       
         
         
-          &lt;h1 id=&quot;第二次书面作业&quot;&gt;&lt;a href=&quot;#第二次书面作业&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
         
       
     
@@ -511,34 +511,6 @@
   </entry>
   
   <entry>
-    <title>计算机网络网络层</title>
-    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
-    <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/</id>
-    <published>2017-11-02T14:12:40.000Z</published>
-    <updated>2017-11-23T11:35:21.441Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;#
-        
-      
-    
-    </summary>
-    
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
-    
-    
-      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
-    
-  </entry>
-  
-  <entry>
     <title>计算机网络运输层</title>
     <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/"/>
     <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络运输层/</id>
@@ -555,6 +527,34 @@
 &lt;p&gt;这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;概述与运输层服务&quot;&gt;&lt;a href=&quot;#概述与运输层服务&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+    
+    
+      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机网络网络层</title>
+    <link href="http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    <id>http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/</id>
+    <published>2017-11-02T14:12:40.000Z</published>
+    <updated>2017-11-23T11:35:21.441Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;#
         
       
     
