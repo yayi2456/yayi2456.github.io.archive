@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,8 +14,8 @@
 
 <script>
     (function(){
-        if('password'){
-            if (prompt('请输入文章密码') !== 'password'){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
                 alert('密码错误！');
                 history.back();
             }
@@ -33,6 +33,10 @@
 
 
 
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
 
 
 
@@ -98,18 +102,18 @@
 
 
 
-<meta name="description" content="我的编译器">
+<meta name="description" content="我的编译器password: password">
 <meta name="keywords" content="编译原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的编译器">
 <meta property="og:url" content="http://yoursite.com/2017/12/02/编译原理/我的编译器/index.html">
 <meta property="og:site_name" content="Be With Me">
-<meta property="og:description" content="我的编译器">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-02T17:32:44.638Z">
+<meta property="og:description" content="我的编译器password: password">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-04T03:00:49.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的编译器">
-<meta name="twitter:description" content="我的编译器">
+<meta name="twitter:description" content="我的编译器password: password">
 
 
 
@@ -125,12 +129,12 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
-      apiKey: '',
-      indexName: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -167,7 +171,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -215,7 +219,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -225,7 +229,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -235,7 +239,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -245,7 +249,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -255,7 +259,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -265,7 +269,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
-            Schedule
+            日程表
           </a>
         </li>
       
@@ -275,7 +279,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
             
-            Sitemap
+            站点地图
           </a>
         </li>
       
@@ -285,15 +289,56 @@
             
               <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            Commonweal 404
+            公益404
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -349,9 +394,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-02T15:28:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-02T15:28:47+08:00">
                 2017-12-02
               </time>
             
@@ -370,7 +415,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -409,13 +454,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
 
       
-        <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1><a id="more"></a>
+        <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1><p>password: password<br><a id="more"></a></p>
 <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="PG的配置"><a href="#PG的配置" class="headerlink" title="PG的配置"></a>PG的配置</h3><h3 id="VS属性的配置"><a href="#VS属性的配置" class="headerlink" title="VS属性的配置"></a>VS属性的配置</h3><p>好了，这时在PG中的任务已经完成了，接下来想要使用VS来执行PG生成的程序，还需要进行一些属性的配置。<br>多种组合可行。这里只说明了我自己用的一种组合，路径也以我的电脑为准。我的机器VS2015，win10。</p>
 <p>在<strong>属性</strong>页面添加：</p>
 <ol>
@@ -439,7 +484,16 @@
 <blockquote>
 <p>现在拥有：一个yacc文件名叫myparser.y，一个lex文件名叫mylexer.l。<br>创建了一个新的既有lex又有yacc的项目。<br>把原来lex中的除了main函数之外的东西拷贝到新程序的对应位置（不建议直接全部复制，因为可能会有细小问题出现。特别注意你在生成project的时候定义的lexer的名字！）注意上面提到过的那个rule section的问题。<br>在lexer的include句之后定义<code>extern string yylval</code>（我这里使用string只是因为我的YYSTYPE是string，我的不能直接使用宏YYSTYPE）<br>在lex的匹配语义动作中加上对yylval的赋值（<code>yylval=yytext;</code>这句将匹配对应的字符串给yylval。同样因为我的yylval是string，不是string可以自己转换一下。<br>在lex的语义动作最后加上<code>return NUBER;</code>（NUBER只是一个例子，应该返回这个匹配对应的token。<br>把原来yacc中的代码拷到新程序的对应位置（同样不建议直接全部复制。<br>如果原来不懂yylavl的意义，在单token行也写了语义动作赋值，把这个语义动作删掉，或者使用\$1对这个值做你想要的处理之后赋给\$\$。<br>好了！生成之后，在VS项目中运行就好啦！</p>
 </blockquote>
-<h3 id="YACC部分"><a href="#YACC部分" class="headerlink" title="YACC部分"></a>YACC部分</h3><p>注意：yacc中的文法定义顺序是非常有关系的。不一样的顺序将会带来不一样的结果。越靠上的文法，越会先被匹配。<br>在添加产生式的过程中出现了”rules are never reduced”。在第一次写作业时也出现了，但是那时没有好好积累。<br>shift在这里是”移入“，reduce是”归约“。这是LR算法中的语言。</p>
+<h3 id="符号表的设计"><a href="#符号表的设计" class="headerlink" title="符号表的设计"></a>符号表的设计</h3><p>由于支持函数类等操作，所以要增加多个生存期作用域，需要多个符号表。这些符号表将动态生成，压进栈中。这也是考虑到作用域的特性。另一方面，由于作用域与语法相关，符号表的创建（除了全局符号表）在yacc中完成。yacc获取栈，lex获取栈，共同操作。</p>
+<p><a href="http://blog.csdn.net/livecoldsun/article/details/25011413" target="_blank" rel="external">C++标准库栈</a><br>上述链接其实没什么特别多的东西，记住两点三函数：</p>
+<ol>
+<li>使用stack需要包括头文件<code>#include&lt;stack&gt;</code></li>
+<li>这是个模板类，使用时指定类型：<code>stack&lt;CHash*&gt; mystack;</code></li>
+<li>函数们：<br>|函数名|作用|<br>|:–:|:–:|<br>|top()|返回栈顶元素，不弹出|<br>|pop()|弹出栈顶元素，不返回|<br>|push(member)|将member压栈|<br>|size()|返回栈中元素个数|<br>|empty()|检查栈是不是空|</li>
+</ol>
+<p>简直是救星！<a href="http://greatverve.cnblogs.com/archive/2012/10/24/cpp-int-string.html" target="_blank" rel="external">string CString int char等互转</a></p>
+<h3 id="语法树的生成"><a href="#语法树的生成" class="headerlink" title="语法树的生成"></a>语法树的生成</h3><p><a href="http://www.cnblogs.com/likebeta/archive/2012/06/16/2551662.html" target="_blank" rel="external">C++的文件操作</a></p>
+<h3 id="编译器对函数的处理"><a href="#编译器对函数的处理" class="headerlink" title="编译器对函数的处理"></a>编译器对函数的处理</h3><h3 id="YACC部分"><a href="#YACC部分" class="headerlink" title="YACC部分"></a>YACC部分</h3><p>注意：yacc中的文法定义顺序是非常有关系的。不一样的顺序将会带来不一样的结果。越靠上的文法，越会先被匹配。<br>在添加产生式的过程中出现了”rules are never reduced”。在第一次写作业时也出现了，但是那时没有好好积累。<br>shift在这里是”移入“，reduce是”归约“。这是LR算法中的语言。</p>
 <p><a href="https://stackoverflow.com/questions/30447829/rules-are-never-reduced-understanding-why" target="_blank" rel="external">理解”rules are never reduced”-stackoverflow</a></p>
 <p><a href="https://stackoverflow.com/questions/6839844/yacc-rules-not-getting-reduced" target="_blank" rel="external">not getting reduced</a></p>
 <p><a href="https://stackoverflow.com/questions/29135724/yacc-rules-not-reduced" target="_blank" rel="external">rules are never reduced</a></p>
@@ -453,7 +507,8 @@
 <blockquote>
 <p>In general, you want to use the -v option to get yacc to prodcue a y.output file with detailed information about your grammar. This file will tell you specifically about all the conflicts and unused rules – what they are and how they come about – while the messages just give you a summary of the problems.(使用-v选项来获取更详细的输出信息。)</p>
 </blockquote>
-<p>有时即使没有错误或者警告，程序也运行不出来，大概是匹配了不是本意的文法，自己看吧。我心情不好。</p>
+<p>有时即使没有错误或者警告，程序也运行不出来，大概是匹配了不是本意的文法，自己看吧。我心情不好。<br>一直感觉文法是对的，一直运行不出来。我的lex没有返回一些token给yacc。能运行就怪了。</p>
+<p>没有好好理解VS里面.h与.cpp，不要随便在里面写一些函数，然后包括去使用。</p>
 <h3 id="LEX部分"><a href="#LEX部分" class="headerlink" title="LEX部分"></a>LEX部分</h3>
       
     </div>
@@ -465,6 +520,24 @@
 
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YaYi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/12/02/编译原理/我的编译器/" title="我的编译器">http://yoursite.com/2017/12/02/编译原理/我的编译器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -553,10 +626,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -580,8 +653,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -592,7 +665,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">13</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -603,7 +676,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">17</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -670,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的编译器"><span class="nav-number">1.</span> <span class="nav-text">我的编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PG的配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">PG的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VS属性的配置"><span class="nav-number">1.1.2.</span> <span class="nav-text">VS属性的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法分析部分"><span class="nav-number">1.2.</span> <span class="nav-text">语法分析部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lex与yacc的结合"><span class="nav-number">1.2.1.</span> <span class="nav-text">lex与yacc的结合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“default”标签跳过“-”的初始化操作"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">“default”标签跳过“ ”的初始化操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yylval：无法解析的外部符号"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">yylval：无法解析的外部符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YACC部分"><span class="nav-number">1.2.2.</span> <span class="nav-text">YACC部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEX部分"><span class="nav-number">1.2.3.</span> <span class="nav-text">LEX部分</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的编译器"><span class="nav-number">1.</span> <span class="nav-text">我的编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PG的配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">PG的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VS属性的配置"><span class="nav-number">1.1.2.</span> <span class="nav-text">VS属性的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法分析部分"><span class="nav-number">1.2.</span> <span class="nav-text">语法分析部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lex与yacc的结合"><span class="nav-number">1.2.1.</span> <span class="nav-text">lex与yacc的结合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“default”标签跳过“-”的初始化操作"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">“default”标签跳过“ ”的初始化操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yylval：无法解析的外部符号"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">yylval：无法解析的外部符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表的设计"><span class="nav-number">1.2.2.</span> <span class="nav-text">符号表的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法树的生成"><span class="nav-number">1.2.3.</span> <span class="nav-text">语法树的生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器对函数的处理"><span class="nav-number">1.2.4.</span> <span class="nav-text">编译器对函数的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YACC部分"><span class="nav-number">1.2.5.</span> <span class="nav-text">YACC部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEX部分"><span class="nav-number">1.2.6.</span> <span class="nav-text">LEX部分</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -700,7 +773,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -710,7 +783,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
 
 
 	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -721,7 +794,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共47.1k字</span>
+  <span class="post-count">博客全站共47.5k字</span>
 </div>
 
 
@@ -861,14 +934,64 @@
 
 
 
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.3"></script>
+
+
 
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
