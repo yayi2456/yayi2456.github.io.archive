@@ -105,7 +105,7 @@
 <meta name="description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OS-Lab3">
+<meta property="og:title" content="OS-各实验初讲">
 <meta property="og:url" content="http://yoursite.com/2017/11/14/OS-Lab3/index.html">
 <meta property="og:site_name" content="Be With Me">
 <meta property="og:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
@@ -116,9 +116,9 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg">
-<meta property="og:updated_time" content="2017-11-15T13:24:29.967Z">
+<meta property="og:updated_time" content="2017-12-11T08:46:54.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OS-Lab3">
+<meta name="twitter:title" content="OS-各实验初讲">
 <meta name="twitter:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg">
 
@@ -156,7 +156,7 @@
 
 
 
-  <title>OS-Lab3 | Be With Me</title>
+  <title>OS-各实验初讲 | Be With Me</title>
   
 
 
@@ -387,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OS-Lab3</h1>
+          <h1 class="post-title" itemprop="name headline">OS-各实验初讲</h1>
         
 
         <div class="post-meta">
@@ -509,6 +509,20 @@
 <p>-b binary path:-b帮我搬进来。binary这是个可执行程序。<br>然后重生成一个符号表。<br>把这个文件作为一个大数组缀到最后，然后直接使用这个数组。</p>
 <p>编码的时候，这个数组还没有，链接的时候才有，怎么办？定义一个外部变量extern。<br>只需知道生成符号表的规则，然后按规则命名即可。</p>
 <p>进来之后还只是一个大数组，还需要经过链接之后映射要对应的虚拟地址才能执行。</p>
+<h1 id="Lab4-Preemptive-Multitasking"><a href="#Lab4-Preemptive-Multitasking" class="headerlink" title="Lab4-Preemptive Multitasking"></a>Lab4-Preemptive Multitasking</h1><p>lab3做完之后，当一个进程结束之后，就退出。在这个实验中，主要完成的是</p>
+<p>本次实验主要是决定：在何时利用什么原则什么地方切换进程。<br>上下文怎么切换？其中一项：一定要把页表换掉，也就是把cr3中的页目录项换掉。之后，连接tlb也会失效，处理流水线，吧上一个进程的东西全部清理掉。</p>
+<p>本实验大部分代码都已经写完了，主要是读代码。</p>
+<p>如何实现更加有效的调度？更加频繁的调用schedule_yeid。</p>
+<p>时钟中断的作用：打断正在执行的程序，调用sched_yield进行进程轮转</p>
+<p>在本次实验中有一个时钟中断，你要做的就是在这个时钟中断的响应函数之中做一些事情，决定下一个进程怎么上去谁会上去（就是我们学习过的调度算法）</p>
+<h2 id="多核处理器"><a href="#多核处理器" class="headerlink" title="多核处理器"></a>多核处理器</h2><p>一开始是因为没有在一个进程运行的时候调用另一个进程的机制，本实验中的多核只是实验的设计者希望我们体验一下在系统中有多个进程活动是一个什么样的状态，因此鼓励你去多弄几个核心。<br>只要是单核，其实每一个时刻只能有一个进程运行。</p>
+<p>为什么会有多核处理器出现呢？在后摩尔时代，为了提升处理器的处理能力。</p>
+<p>主核会在系统上电之后接管机器，他们的地位并不是平等的。</p>
+<h3 id="现代处理器的休眠唤醒机制"><a href="#现代处理器的休眠唤醒机制" class="headerlink" title="现代处理器的休眠唤醒机制"></a>现代处理器的休眠唤醒机制</h3><p>现代处理器的模式一般有三种：active,idol,sleeping</p>
+<p>CPU在关闭的时候，内存并不会关闭。休眠时，找到一个调度点，这时不调度了，存好有用的东西，然后cpu耗电量就会变得非常低。有一个cpu中的寄存器会标志自己刚刚是休眠了还是关机了。如果是休眠，那么内存里面所有的东西都还在，只需要调到该去的地方，然后进行一轮新的调度；如果不是休眠而是关机了，内存中的东西就被清空了，就是上电启动过程。</p>
+<p>有时手机会坏掉，就是在锁屏（休眠）之后也会重新起动，这也就是cpu中的那个寄存器坏掉了。</p>
+<p>那么，如果帮一个休眠的cpu准备好了它的休眠位以及内存，就可以让它认为它是一个刚刚休眠的cpu。</p>
+<p>bsp是主核，在系统上电之后是只有主核启动，直到系统启动完之后，直到需要另外一个核心运行一个进程，bsp帮ap制造一个它刚刚在休眠的假象，然后唤醒它，这样这个ap就会认为自己是刚刚休眠的，然后继续执行。运行完之后，主核就会选择把这个核心给关掉，然后省电。</p>
 
       
     </div>
@@ -529,7 +543,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2017/11/14/OS-Lab3/" title="OS-Lab3">http://yoursite.com/2017/11/14/OS-Lab3/</a>
+    <a href="http://yoursite.com/2017/11/14/OS-Lab3/" title="OS-各实验初讲">http://yoursite.com/2017/11/14/OS-Lab3/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -657,7 +671,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +682,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -747,7 +761,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab3：User-Environment"><span class="nav-number">1.</span> <span class="nav-text">Lab3：User Environment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pre：实验准备知识"><span class="nav-number">1.1.</span> <span class="nav-text">Pre：实验准备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCC内联汇编"><span class="nav-number">1.1.1.</span> <span class="nav-text">GCC内联汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特权降级"><span class="nav-number">1.1.2.</span> <span class="nav-text">特权降级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础知识准备"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">基础知识准备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正题：特权降级"><span class="nav-number">1.1.3.</span> <span class="nav-text">正题：特权降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特权级提升"><span class="nav-number">1.2.</span> <span class="nav-text">特权级提升</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">1.2.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正题：特权级提升"><span class="nav-number">1.2.2.</span> <span class="nav-text">正题：特权级提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.3.</span> <span class="nav-text">系统调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于这次实验"><span class="nav-number">1.3.</span> <span class="nav-text">关于这次实验</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab3：User-Environment"><span class="nav-number">1.</span> <span class="nav-text">Lab3：User Environment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pre：实验准备知识"><span class="nav-number">1.1.</span> <span class="nav-text">Pre：实验准备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCC内联汇编"><span class="nav-number">1.1.1.</span> <span class="nav-text">GCC内联汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特权降级"><span class="nav-number">1.1.2.</span> <span class="nav-text">特权降级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础知识准备"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">基础知识准备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正题：特权降级"><span class="nav-number">1.1.3.</span> <span class="nav-text">正题：特权降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特权级提升"><span class="nav-number">1.2.</span> <span class="nav-text">特权级提升</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">1.2.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正题：特权级提升"><span class="nav-number">1.2.2.</span> <span class="nav-text">正题：特权级提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.3.</span> <span class="nav-text">系统调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于这次实验"><span class="nav-number">1.3.</span> <span class="nav-text">关于这次实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab4-Preemptive-Multitasking"><span class="nav-number">2.</span> <span class="nav-text">Lab4-Preemptive Multitasking</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多核处理器"><span class="nav-number">2.1.</span> <span class="nav-text">多核处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#现代处理器的休眠唤醒机制"><span class="nav-number">2.1.1.</span> <span class="nav-text">现代处理器的休眠唤醒机制</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -798,7 +812,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共47.5k字</span>
+  <span class="post-count">博客全站共49.4k字</span>
 </div>
 
 
@@ -807,6 +821,15 @@
 
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 

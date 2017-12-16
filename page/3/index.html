@@ -362,6 +362,733 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/计算机网络/计算机网络运输层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/计算机网络/计算机网络运输层/" itemprop="url">计算机网络运输层</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T22:12:40+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。</p>
+</blockquote>
+<h1 id="概述与运输层服务"><a href="#概述与运输层服务" class="headerlink" title="概述与运输层服务"></a>概述与运输层服务</h1><p>运输层的协议提供的是<strong>逻辑通信</strong>，并不是直接相连的。</p>
+<p>现在我们聊的是<strong>对等层通信</strong>，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。</p>
+<p>实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为<strong>报文段</strong>。报文段交给网络层，网络层再封装成<strong>数据报</strong>再向目的地发送。到了目的地之后做一个相反的动作，送给应用层使用。需要区分清楚的是，制定目的地、决定报文段怎么产生、决定报文段如何合并都是运输层的工作，网络层相当于送信的邮差，只负责传输。但是话又说回来了，网络层更加底层，网络层提供了怎样的服务、有多大的带宽都限制了运输层的服务。</p>
+<p>现在<strong>因特网</strong>的运输层主要有两个协议：UDP、TCP。UDP是不可靠的、多目的地的、无序的传输；TCP是面向连接的可靠的传输。具体特性将在后面讲到。</p>
+<p>因特网的网络层协议是IP协议（网际协议）。IP非常不可靠，他是<strong>尽力而为交付服务</strong>，一不确保报文段的交付，二不保证报文段交付的按序，三不保证报文段交付的完整性，被称为<strong>不可靠服务</strong>。</p>
+<p>TCP与UDP的基本职责是将两个端系统之间的IP交付服务扩展为运行在两个端系统之上的两个进程之间的信息交付服务。将主机之间的交付扩展为进程之间的交付就是<strong>运输层的多路复用与多路分解</strong>。</p>
+<h1 id="运输层的多路复用与多路分解"><a href="#运输层的多路复用与多路分解" class="headerlink" title="运输层的多路复用与多路分解"></a>运输层的多路复用与多路分解</h1><p>多路复用与多路分解服务是所有计算机网络都需要的。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43018259.jpg" alt="复用与分解机制"></p>
+<p>我们知道，实现运输层的服务需要借助于socket，一个进程可以对应一个或几个socket（？）。在send端，运输层在报文段中加了首部信息之后，把各进程产生的数据无差别的交给网络层；在rev端，运输层从网络层那里拿出数据，解析报文段的首部信息从而==定位socket==，把<strong>分解后的</strong>报文段信息给对应的socket。</p>
+<p>为了实现这种服务，在首部信息里面一定封装有<strong>端口号</strong>。<br>端口号是一个16bit的数，在0-65535之间，其中0-1023的端口号是周知端口号，他们被保留给周知应用层协议来使用。一般来说，服务器端都是一个固定的端口号，而客户端则是随机分配。<br>关于端口号的更多信息，可以访问<a href="http://www.iana.org" target="_blank" rel="external">RFC 3232</a>获得。</p>
+<h2 id="1-无连接的"><a href="#1-无连接的" class="headerlink" title="1. 无连接的"></a>1. 无连接的</h2><p>首先了解UDP的套接字标志方法：UDP的socket以一个二元组(dstaddr,dstport)来标识，与源信息无关。也就是说，虽与一个机器无论是从什么地方发送过来的数据，只要给的是同一个port，都将被同一个socket处理。这样，容易理解，在UDP中，每一个port会对应一个自己的缓冲区。</p>
+<p>关于这个缓冲区，<del>UDP不可靠也会体现在这里</del>，在发送UDP包的时候不能过大，也是出于对缓冲区大小的考虑。如果新到来的包太大了、不能塞进缓冲区了，这个包会被直接抛弃。app层不会知道，只有通过发送端的超时重传机制对包进行重传。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/79842537.jpg" alt="UDP复用与分解机制"></p>
+<h2 id="2-面向连接的"><a href="#2-面向连接的" class="headerlink" title="2. 面向连接的"></a>2. 面向连接的</h2><p>TCP的套接字标志方法与UDP不同，TCO使用(srcaddr,srcport,dstaddr,dstport)，这样，只有四个值都相同才会被定向到同一个socket，放到同一个缓冲区。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/6848958.jpg" alt="TCP复用与分解机制"></p>
+<blockquote>
+<p>这里只是简单一提：关于安全性的问题。攻击者可以利用在某个端口监听的有缺陷的应用程序攻陷目的主机。我不了解安全，这里只是复述了《自顶向下方法》中的解释。</p>
+<p>使用<a href="http://nmap.org" target="_blank" rel="external">nmap</a>既可以扫描到<strong>因特网</strong>中任一台主机，顺序的扫描主机的各个端口，对TCP/UDP，寻找能接收TCP连接/能对UDP报文段进行处理的端口号，并返回打开的、关闭的、不可达的端口号列表。</p>
+</blockquote>
+<h2 id="3-Web-Server与TCP"><a href="#3-Web-Server与TCP" class="headerlink" title="3. Web Server与TCP"></a>3. Web Server与TCP</h2><p>其实没什么新东西，列举：</p>
+<ol>
+<li><p>连接套接字与进程之间并非一一对应的关系。先进的高性能Web server只有一个进程，但是为每一个连接的<strong>新客户</strong>（不是客户机喔）创建一个新的线程。</p>
+</li>
+<li><p>非持续HTTP会严重影响web server的性能。（在应用层中涉及），有些OS技巧可以减轻这个问题的影响。（参见[Nielsen 1997,Nahum 2002]）</p>
+</li>
+</ol>
+<p>他的复用与分解是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/41975538.jpg" alt="Web"></p>
+<h1 id="UDP概述"><a href="#UDP概述" class="headerlink" title="UDP概述"></a>UDP概述</h1><p>UDP很弱，除了上一节提到的复用分解机制以及少量的差错检验之外，基本没有功能了，如果程序员选择了UDP，那基本上就是在与IP打交道了。</p>
+<blockquote>
+<p>以一个DNS查询为例：应用层给出了一个查询报文交给运输层，UDP加了首部段，交给网络层，网络层将他封装进一个IP数据报，发送给一个名字服务器。DNS如果没有收到对方的回应，要么向另一个服务器发送请求，要么告知调用它的应用程序没有响应。</p>
+</blockquote>
+<h2 id="1-UDP特点"><a href="#1-UDP特点" class="headerlink" title="1. UDP特点"></a>1. UDP特点</h2><ul>
+<li><p>无连接：</p>
+<ol>
+<li>两个UDP之间没有握手；</li>
+<li>UDP报文段彼此独立</li>
+</ol>
+</li>
+<li><p>不可靠：</p>
+<ol>
+<li>没有确认接收；</li>
+<li>没有重传；</li>
+<li>没有检查包丢失与包失序</li>
+<li>检验和只覆盖部分信息</li>
+<li>没有拥塞控制</li>
+</ol>
+</li>
+</ul>
+<p>UDP很弱，为什么不使用更加可靠的TCP呢？</p>
+<ol>
+<li><p>关于何时发送什么样的数据的控制更为精细。UDP是只要应用层交付，UDP就立即给网络层，而TCP有一个拥塞控制机制，可能会遏制发送方，是数据传输变得缓慢。</p>
+</li>
+<li><p>无需建立连接，减少时延。</p>
+</li>
+<li><p>无连接状态，不需要维护连接状态。连接状态包括接收和发送数据缓存、拥塞控制参数、序号以及确认号的参数等。某些应用程序运行在UDP之上可以支持更多的活跃用户。</p>
+</li>
+<li><p>分组首部开销小</p>
+</li>
+</ol>
+<p>UDP的这些特点使得：</p>
+<ol>
+<li>DNS简单查询；</li>
+<li>流媒体应用；</li>
+<li>P2P应用</li>
+<li>网络管理应用：通产工作在高压状态之下；</li>
+<li>路由转换协议</li>
+</ol>
+<p>等将有更佳的适用度。</p>
+<blockquote>
+<p>现今，由于出于安全考虑，某些机构阻塞UDP流量，而且当丢包率低时，TCP将更多的用于流媒体应用。</p>
+<p>然而，由于UDP没有拥塞控制机制，当网络繁忙时，路由器会有大量的分组溢出，几乎没有UDP分组能够成功通过路由器到达目的地。而且，具有拥塞控制机制的TCP发送方会减慢自己的速率。UDP没有拥塞控制机制不仅造成了UDP会话之间的高丢包率，也挤垮了TCP会话。很多研究人员已经提出了新的机制，使所有数据源执行自适应的拥塞控制。</p>
+<p>希望使用UDP实现可靠传输的话需要在应用层协议上加上可靠性保证。这种方法既可以保证可靠传输，又可以拒绝拥塞控制的影响。</p>
+</blockquote>
+<p>表1：流行的因特网应用及其下协议</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>应用层协议</th>
+<th>下层运输协议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电子邮件</td>
+<td>SMTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程终端访问</td>
+<td>Talnet</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>HTTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>文件传输</td>
+<td>FTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程文件服务器</td>
+<td>NFS</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>流式多媒体</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>因特网电话</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>网络管理</td>
+<td>SNMP</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>路由选择协议</td>
+<td>RIP</td>
+<td>通常UDP</td>
+</tr>
+<tr>
+<td>名字转换</td>
+<td>DNS</td>
+<td>通常UDP</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-UDP报文"><a href="#2-UDP报文" class="headerlink" title="2. UDP报文"></a>2. UDP报文</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/9685377.jpg" alt="UDP头信息"></p>
+<p>长度：指明了包括首部信息在内的UDP报文段长度（单位：字节：Byte）；</p>
+<p>下面重点说<strong>检验和</strong>：</p>
+<p>在计组里面就学了几个检错方法，对于一个检错机制：数据=冗余位  实际数据。决定检错能力的是冗余位数与算法。对于UDP，他提供的是一个很简单的检错机制，而且只能检错，不能修改错误。</p>
+<h3 id="Persudo-Header"><a href="#Persudo-Header" class="headerlink" title="Persudo Header"></a>Persudo Header</h3><p>persudo header结构是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/92376358.jpg" alt=""></p>
+<p>在发送端，首先会将报文段中的checksum清零，然后把报文段与persudo header的数据当作16bit的很多数据，对他们进行求和运算，将得出的16bit结果求反给checksum字段。</p>
+<p>在接收端，产生新的伪首部，然后只需要将这些数据全部求和，最终如果是16个1，说明<strong>可能</strong>是没错的，但是也可能<strong>发生的错误已经超出了检错能力</strong>，如果不是16个1，那说明一定是错了。</p>
+<p>checksum有什么用呢？对于明确错误的信息，UDP会要么丢弃；要么把数据给应用层，但是给应用层警告说数据是错的。</p>
+<blockquote>
+<p>其实伪首部破坏了分层结构，在运输层产生了网络层的信息。</p>
+<p>UDP校验和覆盖的范围超出了UDP数据报本身，使用伪首部的目的是检验UDP数据报是否真正到达目的地，正确的目的地包括了特定的主机和该主机上特定的端口</p>
+<p>checksum机制在ipv4下是可选的，但是在ipv6下是必须的。</p>
+</blockquote>
+<p>在checksum中看到了<strong>端对端原则</strong>。端对端原则是一个被受赞扬的原则，该原则表述为某种功能必须基于端对端实现：”与在较高级别提供这些功能的代价相比，在较低级别上设置的功能可能是冗余或几乎没有价值的。“<br>在这里，由于不能保证从网络到物理到链路都有有效的检错机制，甚至在某些路由器的内存中也可能引入比特差错，实现端对端的错误检测机制是有必要的。</p>
+<h1 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h1><p>在这一节里，将所有的底层数据传输视为不可靠的，可能会发生数据的丢失、差错、失序等。</p>
+<p>这里讨论的是普遍的计算机网络使用的理论，将以<strong>分组</strong>代替<strong>报文段</strong>被使用。同时，只考虑<strong>单向数据传输</strong>，其实<strong>双向数据传输</strong>并不会更难。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/10707246.jpg" alt=""></p>
+<h2 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h2><h3 id="rdt1-0：信道完全可靠"><a href="#rdt1-0：信道完全可靠" class="headerlink" title="rdt1.0：信道完全可靠"></a>rdt1.0：信道完全可靠</h3><p>假如信道完全可靠，UDP完全可靠。发送方只要接收到rdt_send就做处理并调用udp_send，接收方只要接收到rdt_rcv就处理。有限状态机（FSM）图如下：</p>
+<p>发送端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/67644025.jpg" alt=""></p>
+<p>接收端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/29594625.jpg" alt=""></p>
+<h3 id="rdt2-0：信道具有比特差错"><a href="#rdt2-0：信道具有比特差错" class="headerlink" title="rdt2.0：信道具有比特差错"></a>rdt2.0：信道具有比特差错</h3><p><strong>自动重传请求</strong>（Automatic Repeat reQuest）：在接收方确认接收到正确的报文之后给出<strong>肯定确认</strong>，接受到不正确的报文之后给出<strong>否定确认</strong>。</p>
+<p>实际上，这种机制需要其他的支持：</p>
+<ol>
+<li>差错检测</li>
+<li>接收方反馈：如果正确，返回ACK，不正确返回NAK。</li>
+<li>重传：发送方在接收到NAK时重传。</li>
+</ol>
+<p>FSM：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/62528979.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/18789362.jpg" alt=""></p>
+<p>但是，如果ACK或者NCK的包错误了怎么办呢？<br>一般有三种解决方法：</p>
+<ol>
+<li>发送请求，询问上一个差错包的内容。这样很容易陷入询问的死循环。</li>
+<li>增加足够的检错纠错能力。导致冗余数据过多。</li>
+<li>直接重传。可能会引入冗余分组，使得接收方不知道这个包是新包还是重传包。</li>
+</ol>
+<p>对于第三种方法，可以引入<strong>序列号</strong>的概念来解决问题。对于我们现在讨论的停等协议，只需要两个序号即1bit即可。</p>
+<p>这个版本是<strong>rdt2.1</strong>，新的FSM是这样的：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/35627137.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/21016547.jpg" alt=""></p>
+<p>其实，如果不使用NAK，而是对上次的接收再发送一个ACK，也能起到同样的效果，这样，有了<strong>rdt2.2</strong>版本：</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/79622017.jpg" alt=""></p>
+<p>接收方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43136886.jpg" alt=""></p>
+<h3 id="比特交替协议——rdt3-0：信道可能丢包、产生比特差错"><a href="#比特交替协议——rdt3-0：信道可能丢包、产生比特差错" class="headerlink" title="比特交替协议——rdt3.0：信道可能丢包、产生比特差错"></a>比特交替协议——rdt3.0：信道可能丢包、产生比特差错</h3><p>如果产生了丢包，接收端是不会知道的，只能在发送端处理这个问题。一个是发送端主动发送的数据丢失，和接收端没有关系，一个是接收端已经收到了包，但是发送的确认信息丢失。</p>
+<p>发送方需要<strong>重传</strong>，应该做到：</p>
+<ol>
+<li>每次发送数据之后启动一个定时器</li>
+<li>响应定时器中断</li>
+<li>停止定时器</li>
+</ol>
+<p>在重传中，延时时间的设置是很重要的。过长的延迟时间将影响应用层的体验，果断的延迟时间将会引入<strong>冗余数据分组</strong>。rdt2.2已经有能力处理冗余数据分组：当在等待1的时候又传来了0，接收端会直接丢弃这些数据。而对于停等协议，不会有在等1的时候正好发送了1的冗余包的情况。</p>
+<p>发送方：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/29153183.jpg" alt=""></p>
+<h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><p>rdt3.0对于错误处理已经比较完善了，但是他的问题在于他是一个停等协议。停等协议对链路的利用率低到令人发指！</p>
+<blockquote>
+<p>对于一个速度是1Gbps的链路，发送一个大小1000Byte的包：</p>
+<p>进入所需时间：$$t=\frac{L}{R}=\frac{8000bit/pkt}{10^9bit/s}=8us/pkt$$</p>
+<p>假设传输所需时间是15ms，那么信道的利用率是：</p>
+<p>$$U_sender=\frac{\frac{L}{R}}{RTT+\frac{L}{R}}=\frac{0.008}{30.008}=0.00027$$</p>
+</blockquote>
+<p>为了提高传输效率，停等协议需要被摒弃。现在使用的技术被称为<strong>流水线</strong>。<br>使用流水线技术，1个bit的序号是不够用的，在后面我们将讲到对于n个同时发出的包，需要2*n个序列号。而且，在发送端和接收端都需要有缓存机制来暂时存储：发送端需要存储已经发送但是没有确认接收的数据，接收端需要存储已经正确接收的数据。</p>
+<p>这一节并没有完整的讨论流水线机制下的协议，从下一小节开始，对缓存的处理、序列号的处理进行讨论。</p>
+<h2 id="回退N步：GBN"><a href="#回退N步：GBN" class="headerlink" title="回退N步：GBN"></a>回退N步：GBN</h2><p>允许发送方连续发送N个数据包，接收方按序接收数据包，失序的包会被丢弃。（这时由于没有考虑双向传输，而且接收端的机制，在接收端的结构暂且不提）</p>
+<p>在发送方将会有一个缓冲区，把结构抽象成这样：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/82326531.jpg" alt=""></p>
+<p>在这次传输的过程中只能使用[send_base,sendbase+N-1]之间的序号。扩展FSM如图：</p>
+<p>发送端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/56361901.jpg" alt=""></p>
+<p>接收端：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/32672336.jpg" alt=""></p>
+<p>在这个FSM中存在变量，初始化是需要的。<br>在发送端，当上层请求发送数据时，有一个判断：如果还可以继续发送（nextseqnum&lt; base+N），就继续发送，如果在发送这个之前所有的包都已经被确认过了，就需要开一个定时器，<strong>从这里可以看出：计时器以最左边界启动</strong>。如果不能再发送了，拒绝发送数据。这时可能有三种处理方式：将该数据返回给上层，隐含地表示已经不能再传了；缓存这些数据；使用同步机制只允许上层在窗口不满的时候才能调用rdt_send。<br>数据发送出去之后，如果按时接收到了一个ACK，比如说是ACK(i)，那么说明从base到i都已经被确认了。假如这时已经没有未确认包了，计时器停止，否则，重新为新的最左包启动一个定时器。<br>如果ACK损坏了，什么也不做。因为有定时装置，只需等待重传。这与rdt3.0的机制是相同的。<br>好了，timeout了，将现在所有的未确认全部重传，然后重启定时器。</p>
+<p>在接收端，同样初始化。<br>接收端只会等待需要等待的按序的包，如果不是按序的，不予接收，并将上一个确认信息给发送方。类似于rdt2.0的处理方式。发送方收到的这个包并不会对发送方有什么影响，只是由于timer不能被停止或重启，一定时间之后便会触发重传。但是对于那些ACK丢失的包有重大意义：推动sendbase向前。<br>如果接受端收到了一个按序的、在检错能力之内没有错误的包，才对他进行处理，更新自己的期望包序号，并向发送方发出自己的确认信息。</p>
+<p>这种方式的弊端在于失序数据的丢弃。</p>
+<p>假如发送方一口气发送了N个包，恰巧第一个包坏了，其他都好的，由于接收端拒绝接受第一个坏的包，其他包也被丢弃了，只能重传所有的N个包。<br><del>或者，其实这N个包都好好的到了接收端，接收端返回了N个确认包。</del> emmm其实这里做的比较好，因为反回了N就代表N以及以前的都已经收到了。</p>
+<p><a href="https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html" target="_blank" rel="external">Go-Back-N动画</a></p>
+<h2 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h2><p>对上一小节最后提出的回退N步的弊端，在选择重传之中得到了解决。但是应该知道，功能的增强需要结构的复杂作为代价。</p>
+<p>允许失序，接收方会对一些失序的包进行缓存。这样，确认接收的机制也需要进行修改、接收方也需要拥有一个缓存区来实现。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/94806677.jpg" alt=""></p>
+<p>在这种方式中，其实在上一节最后说的那点优点是不可能存在了，因为需要选择重传，必然是选择确认。而且，每个分组都必须有自己的定时器，而不能像上面一样按最左来做定时器。</p>
+<p>在发送端，base只能移动到没有已发送但未确认的最右。对于上图，发送端的绿色必定对应接收端的粉色或者无色，接收端的灰色必定对应发送端的黄色，在sendbase右边不可能有对应接收端灰色的色块。</p>
+<p>发送方的动作与前面类似，只是需要将确认机制修改成单独确认，接收方的动作如下：</p>
+<ol>
+<li>如果收到了[recvbase,recvbase+N-1]内的包，是正常的，把收到的包的对应序号ACK，如果在这之内的某个包出了问题不用管，丢掉。如果等于recvbase了，就更新recvbase。（这也使得2.是必要的）</li>
+<li>收到了[recvbase-N,recvbase-1]之内的包，可能是这之内的包已经被接收端ACK了，但是没有被发送端ACK，一定需要传一个ACK包给发送端，否则会使得sendbase无法前进。</li>
+<li>其他情况忽略即可。</li>
+</ol>
+<p>情况2.也说明了为什么需要2*N个序号：</p>
+<p>尴尬的情况：究竟是重复包还是新包？<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/59249922.jpg" alt=""></p>
+<blockquote>
+<p>在书中提到了<strong>分组重排</strong>，我不是十分理解：</p>
+<p>分组重拍的一个表现是具有确认号x的旧副本可能会在网络中出现，即使现在发送端与接收端的窗口中可能都包含x。对于分组重排，信道可被基本看成是在缓存分组，并在将来的任意时刻自然地释放这些分组。因为序列号要被重用，所以这种情况要十分小心。<br>实际采用的一个方法是直到发送方确认网络中不会在存在x分组。这通过设置一个分组在网络中的最大存活时间来限定。<br>在高速网络的TCP扩展中，一般是3min。<br>[sunshine 1978]描述了一种使用序号的方法，可以使重新排序问题完全被避免。</p>
+</blockquote>
+<p><a href="https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/selective-repeat-protocol/index.html" target="_blank" rel="external">Selective Repeat动画</a></p>
+<p>这些都搞清楚了之后，<strong>TCP</strong>隆重登场~</p>
+<h1 id="TCP：Transport-Control-Protocol"><a href="#TCP：Transport-Control-Protocol" class="headerlink" title="TCP：Transport Control Protocol"></a>TCP：Transport Control Protocol</h1><p>TCP是面向连接的协议，这是因为TCP在传输数据之前需要进行三次“握手”，它传输的是<strong>字节流</strong>，也就是收TCP并不管传输内容的有意义的分割，只是够了可以出发的字节数（或者不够，这是其他的机制）就会将这个报文段发出，这就要求了接受的数据必须能够按序排列好。</p>
+<p>TCP的传输有以下特点：</p>
+<ol>
+<li>流量控制</li>
+<li>拥塞控制</li>
+<li>点对点</li>
+<li>全双工服务</li>
+<li>流水线机制</li>
+</ol>
+<p>TCP称得上是最复杂的协议之一，由于TCP的底层是IP协议，而上面已经提到IP协议是“尽力而为”服务，几乎没有可靠性的保证，我们只能假设底层是完全不可靠的服务，由此构建出了TCP协议。</p>
+<h2 id="基本概念介绍"><a href="#基本概念介绍" class="headerlink" title="基本概念介绍"></a>基本概念介绍</h2><p>TCP连接并不是一条实际的连接或是一条虚电路，所谓的TCP连接只是存储在端到端系统中的连接状态，而路由器、链路层交换机对TCP连接完全视而不见，他们看到的只是数据报。</p>
+<p><strong>全双工服务</strong>（full-dumplex service）：指的是只能AB之间互相传输，是<strong>点对点</strong>，不可能有第三者加入的情况出现。与<strong>多播</strong>有明显不同。</p>
+<p><strong>客户进程</strong>：发起连接的进程；<strong>服务器进程</strong>：接收连接的进程</p>
+<p><strong>三次握手</strong>：客户首先发一条特殊报文，服务器用另一个特殊报文来响应，最后客户用第三个特殊报文响应。$\color{red}{前两个报文不承载有效载荷，而最后一个可以有}$</p>
+<p>当app层给运输层TCP一些数据，会被放入<strong>发送缓存</strong>里，<strong>在TCP方便的时候</strong>，就会从缓存中拿出一些数据发送。</p>
+<p><strong>最大报文段长度MSS</strong>（Max Segment Size）常根据<strong>最大传输单元</strong>设置，典型值是1460<strong>字节</strong>。注意不包括各种首部，只包括应用层数据大小。TCP/IP首部一般是40bytes。</p>
+<p><strong>最大传输单元MTU</strong>（Max Transmission Unit）：本地主机发送的最大链路层帧长度</p>
+<p><strong>TCP报文段</strong>：TCP将这次要发送的数据用一个TCP首部进行封装。</p>
+<p>就像前面说到的，MSS限制了TCP报文段的最大长度。当一个大文件被发送的时候，它将被分为许多长度为MSS的报文段发出。<br>另一方面，对于那些不需要传递大量数据的交互应用，也可以发送较小的数据段。<br>那么什么叫<strong>TCP方便的时候</strong>呢？一般来说，TCP会在三种情况下发送数据：</p>
+<ol>
+<li>segment full</li>
+<li>超时</li>
+<li>app层的push</li>
+</ol>
+<p><a href="https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/flow-control/index.html" target="_blank" rel="external">发送与接收动画</a></p>
+<p>个人觉得（未经过资料查证，只是陈述想法），TCP连接就只是一种连接状态：recv与send都知道对方时刻准备着接受自己的数据，自己发出的数据可以说送到正确的地方，这就够了。<br>TCP连接组成包括：这对主机各自的：缓存、变量、进程连接的套接字。</p>
+<h2 id="TCP报文段"><a href="#TCP报文段" class="headerlink" title="TCP报文段"></a>TCP报文段</h2><p>与UDP的报文段对比起来，TCP报文段可以说是非常复杂了。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-20/76751662.jpg" alt=""></p>
+<p><strong>源端口号、目的端口号</strong>：TCP使用四元组确定一个连接，该信息用于复用分解。<br><strong>序号、确认号</strong>：像前面讨论到的保证可靠性的机制一样，TCP使用序号来确定每一个<strong>字节</strong>，注意TCP为每一个字节分配一个序列号，而不是像rdt一样为每一个包分配一个序号。这个机制将在后面提到。确认号：TCP确认已按序收到的下一个字节。<br><strong>接收窗口</strong>：用于流量控制，接收方告知发送方醉倒还能给我发送多少字节。<br><strong>首部长度</strong>：一般是20字节，比UDP多12字节（Byte）。<strong>选项</strong>可令TCP首部长度发生改变，首部长度按照32bit的字为单位。<br><strong>因特网检验和</strong>：同UDP。checksum<br><strong>紧急数据指针</strong>：指向app层标识的紧急数据的尾字节。当紧急数据存在并存在紧急数据指针的时候，TCP必须通知上层。该字段一般不用。<br><strong>选项</strong>：用于双方协商MSS的大小、时间戳等。可参考RFC 854与RFC 1323了解细节。<br><strong>URG</strong>：urgent，紧急。指示存在紧急数据。<br><strong>ACK</strong>：指示该报文段包括一个对已经被成功接收的报文段的确认。<br><strong>PSH</strong>：要求将数据立即给APP层。<br><strong>RST</strong>：在连接出现问题时重置。<br><strong>SYN</strong>：连接建立请求。<br><strong>FIN</strong>：终止连接请求。</p>
+<p>需要注意的是：TCP的确认是<strong>累积确认</strong>，也就是只会确认到有序的字节流的下一个。对于那些失序的包，选择权交给了实现TCP的编程人员：</p>
+<ol>
+<li>立即丢弃</li>
+<li>缓存：这是实际中做的。</li>
+</ol>
+<p>$\color{green}{关于究竟缓存是怎么实现的，需要再查阅资料。}$</p>
+<p><strong>稍带确认</strong>：一方向另一方发送信息时顺带确认另一方向自己发送的信息。每一次发送的TCP报文段都必须有SEQ与ACK字段。当没有新数据到达时，SEQ就为下一个期待的字节的序号。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/13245774.jpg" alt=""></p>
+<h2 id="往返时间估计与超时"><a href="#往返时间估计与超时" class="headerlink" title="往返时间估计与超时"></a>往返时间估计与超时</h2><p><strong>往返时间</strong>（RTT）的估计是为了能够设置一个良好的超时重传的时间，以避免时间太短带来的不必要的重传以及时间太长而影响应用层的体验。</p>
+<p><strong>SampleRTT</strong>指的是某TCP报文段从被发出到收到确认之间的时间间隔。</p>
+<p>TCP在任意一个时刻，只为当前已经发送但仍未确认的一个TCP报文段计算SampleRTT，得到一个新的SampleRTT值。<br>TCP不会为重传的报文段计算RTT，它只会对第一次上传输的报文段计算，这是为什么？</p>
+<p><strong>由于路由器的阻塞以及系统负载的变化，SampleRTT将会随之波动</strong>，因此采取了一种对SRTT取平均的方法，委会一个EstimatedRTT。<br>$$ERTT=(1-\alpha)*ERTT+\alpha*SRTT$$</p>
+<p>$\alpha$通常取0.125，故：<br>$$ERTT=0.875*ERTT+0.125*SRTT$$</p>
+<p>这种<strong>指数加权平均移动</strong>将使得之前的SRTT的权值快速减小。</p>
+<p><strong>DevRTT</strong>是RTT的偏差，用于估算SRTT偏离ERTT的程度：</p>
+<p>$$DRTT=(1-\beta)*DRTT+\beta* | SRTT-ERTT|$$</p>
+<p>$\beta$通常取值0.25，故：</p>
+<p>$$DRTT=0.75*DRTT+0.25*|SRTT-ERTT|$$</p>
+<p>$$\color{red}{千万不要忘记给公式里面的markdown符号加转义谢谢}$$</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/72463943.jpg" alt=""></p>
+<p>最终的超时时延应该设置为：$$TimeoutInterval=ERTT+4*DRTT$$</p>
+<p>推荐的初始TI是1s。</p>
+<blockquote>
+<p>快速重传：当发送方连续三次收到对同一个字节的确认消息，默认为是对下一个字节的NAK，将会忽略定时器，立即对下一个报文段进行重传。<br>对于有问题的报文段，TCP并不管是丢失、数据错误、ACK损坏，都以重传报文段来解决问题。<br>TCP使用流水线，可以显著的增加吞吐量。<br>一个发送方可以具有的未被确认的报文段数量由流量控制与拥塞控制机制决定。</p>
+</blockquote>
+<h2 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h2><p>TCP的可靠数据传输服务保证另一个进程从其接收缓冲中读出的数据无损坏无间隔非冗余的按序字节流。</p>
+<p>提出问题：对于那些被接收方缓存但是由于无序不能确认的包，有什么机制呢？（这个不同于回退N步，亦不同于选择重传（选择重传N个定时器））</p>
+<h3 id="简化的TCP发送方动作"><a href="#简化的TCP发送方动作" class="headerlink" title="简化的TCP发送方动作"></a>简化的TCP发送方动作</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">sendbase = initial_sequence number </div><div class="line">nextseqnum = initial_sequence number </div><div class="line"></div><div class="line">loop (forever) &#123; </div><div class="line">    <span class="keyword">switch</span>(event) </div><div class="line">   <span class="comment">/* event: data received from application above </span></div><div class="line"><span class="comment">    create TCP segment with sequence number nextseqnum </span></div><div class="line"><span class="comment">    compute timeout interval for segment nextseqnum</span></div><div class="line"><span class="comment">    start timer for segment nextseqnum </span></div><div class="line"><span class="comment">    TCP只会为第一个设置一个定时器</span></div><div class="line"><span class="comment">    pass segment to IP */</span></div><div class="line">     ;</div><div class="line">    nextseqnum = nextseqnum + length(data) ;</div><div class="line">    <span class="comment">/*event: timer timeout for segment with sequence number y </span></div><div class="line"><span class="comment">    retransmit segment with sequence number y </span></div><div class="line"><span class="comment">    compute new timeout interval for segment y </span></div><div class="line"><span class="comment">    restart timer for sequence number y */</span> </div><div class="line">    <span class="comment">//event: ACK received, with ACK field value of y ;</span></div><div class="line">    <span class="keyword">if</span> (y &gt; sendbase) &#123; <span class="comment">/* cumulative ACK of all data up to y */</span> </div><div class="line">        cancel all timers <span class="keyword">for</span> segments with sequence numbers &lt; y ;</div><div class="line">        sendbase = y ;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> &#123; <span class="comment">/* a duplicate ACK for already ACKed segment 快速重传机制*/</span> </div><div class="line">        increment number of duplicate ACKs received <span class="keyword">for</span> y ;</div><div class="line">        <span class="keyword">if</span> (number of duplicate ACKS received <span class="keyword">for</span> y == <span class="number">3</span>) &#123; </div><div class="line">        <span class="comment">/* TCP fast retransmit */</span> </div><div class="line">            resend segment with sequence number y ;</div><div class="line">            restart timer <span class="keyword">for</span> segment y ;</div><div class="line">        &#125; </div><div class="line">    &#125;  <span class="comment">/* end of loop forever */</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="超时间隔加倍"><a href="#超时间隔加倍" class="headerlink" title="超时间隔加倍"></a>超时间隔加倍</h3><p>前面讲到TimeoutInterval根据ERTT与DRTT推导出，其实这只是在首次发出报文段的时间间隔。之后每超时一次，这个时间间隔都会被设置为原来的2倍。这也算是拥塞控制的一部分，因为当数据报丢失时，很可能是因为网络的拥堵。在后面将会更加详细的介绍TCP拥塞控制机制。</p>
+<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><p>就像前面已经提到的，3个对同一数据的冗余ACK激发快速重传。</p>
+<h3 id="GoBackN-or-Selective-Repeat？"><a href="#GoBackN-or-Selective-Repeat？" class="headerlink" title="GoBackN or Selective Repeat？"></a>GoBackN or Selective Repeat？</h3><p>TCP看起来更像是Go Back N，因为只有一个定时器，但是TCP又会在接收方提供缓存机制，而且<strong>每次重传都只会重传一个报文段</strong>。</p>
+<p>对TCP提出的一种修改意见是<strong>选择确认</strong>，也就是允许TCP对失序报文段有选择的确认。这种机制我们不讨论。</p>
+<p><strong>云巽</strong>：yunxun，意外发现了一个很好听的词！</p>
+<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><p>emmm这里是想直接嵌入js的，没想到失败了。就先这么放着，在文章最后可以看到。</p>
+
+<div id="map-wrap" style="height: 500px;width:800px;"></div>
+ <script type="text/javascript" src="/js/echarts.min.js"></script>
+    <script src="/js/flow-control.js"></script>
+
+<p>需要注意的一点是，流量控制与拥塞控制并不是同一个概念。流量控制是为了使接收方的缓存区不会溢出，拥塞控制则是为了降低网络的负担。</p>
+<p>TCP的发送端维护<strong>接收窗口</strong>rwnd，接收窗口将指示给发送方接收方还能最多收到多少字节的数据。<br>定义：<br><strong>LastByteRead</strong>：接收方的应用进程从缓存中读出的最后一个字节的编号。<br><strong>LastByteRcvd</strong>：从网络到达接收方并放入接收缓存的最后一个字节的编号。<br><strong>接收缓存RecvBuffer</strong>。<br>由于TCP不允许溢出：LastByteRcvd-LastByteRead&lt;=RecvBuffer<br>接收窗口的大小：rwnd=RecvBuffer-(LastByteRcvd-LastByteRead)</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/83120235.jpg" alt=""></p>
+<p><strong>LastByteSent</strong>：发送方维护的已经发送的最后一个字节的编号。<br><strong>LastByteACKed</strong>：被确认的最后一个字节的编号。</p>
+<p>根据接收方的动作，由于被Read的一定是已经接收方被ACKed的（但是发送方可能会因为其他问题还没有被ACK），因此，只需要保证LastByteSent-LastByteACKed&lt;=rwnd，这样就可以保证接收方的缓冲区不会溢出。</p>
+<p>动作：接收方每次ACK，都告诉发送方自己的rwnd，发送方将最多发送rwnd字节的数据。</p>
+<blockquote>
+<p>仔细想一想，其实这个真的是有用的吗？如果一个包ACK了N字节，但是ACK损坏掉了，这时可以看到rwnd指示有额外的空间，但是在发送方却没有额外的空间了（sent-acked=rwnd），这时应不应该继续发送呢？</p>
+</blockquote>
+<p>这种方法其实有一个问题：接收方ACK的时候，告诉发送方自己的rwnd=0，过了一会儿，APP层拿走了一些数据，这时rwnd有空间了，但是发送方却不知道有空间了，不会发送数据。这就会形成死锁。<br>有两种可能的解决方法，但是TCP要求接收方尽可能简单，于是这个任务落在了发送方。<br>发送放在被告知对方的rwnd=0之后一段过时间将开始向接收方发送只含有一个字节的<strong>探测报文</strong>，这些报文段将会被接收方确认，直到发送方接收到了一个rwnd!=0的报文段ACK。</p>
+<p>UDP不提供流量控制。</p>
+<h2 id="TCP连接管理"><a href="#TCP连接管理" class="headerlink" title="TCP连接管理"></a>TCP连接管理</h2><h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/34029198.jpg" alt=""></p>
+<p>三次握手如上：</p>
+<ol>
+<li>客户端发送一个<strong>不承载数据</strong>的SYN被置为1的报文段<strong>SYN报文段</strong>。client_isn是随机生成，为了消除分组重传带来的错误（取决于网络时延）。有一些在如何选取client_isn方面的有趣研究。</li>
+<li>服务器端发送<strong>SYNACK</strong>报文段：一旦服务器端接收到了上一个报文，就开始准备为这条连接分配缓存与变量，并发送一个允许连接的报文段：SYN被置为1表示请求连接。（TCP连接互不干扰，实际上存在两条连接，在关闭连接时更能体现出），seq指明了自己的初始序号，ACK是对前面一个请求连接报文段的确认。此后，客户端就可以向服务器端发送信息了。</li>
+<li>客户机为这条连接分配变量与缓存，并发送确认报文：是客户端确认服务器端连接的普通报文段，这个报文段可以承载数据（因为client-&gt;server的连接已经建立）。此后，服务器端就可以向客户端发送信息了。</li>
+</ol>
+<p>client_isn以及server_isn一般有自己对应的counter产生，从而确保相近时间创立的连接的seq不同。</p>
+<blockquote>
+<p>可以想象，如果在A到B的使用到了seq=N的连接刚刚关闭，新开的A到B的相同端口号的连接又使用了序号N，而由于网络时延的关系，上一个连接的N还存在于网络之中，就有可能出现上一个N被误当作这次的N被接收ACK，导致应用层获取数据错误的情况发生。</p>
+</blockquote>
+<p>上面的是一个标准的打开过程，实际上，打开过程可能会出现各种幺蛾子，比如：</p>
+<p>Simultaneous Open ：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/40260134.jpg" alt=""><br>实际上，这种打开是成功的。两端都有各自的连接，实际上所起的效果是一样的。这里的第二个报文之所以没有seq，是因为seq是给对方ACK使用的，由于这里的每一条连接是单向的，就不需要给出一个新的seq。</p>
+<p>半打开：<br>半打开是失败的打开，是因为一方的连接建立起来之后另一方没有再回消息，也就是第三条报文不见了。比如机器非正常关机等都可能会导致半打开。数量较大的版打开将会影响效率与空间。怎么消除半打开的连接呢？<br>可以定时检查，向对方发送报文，如果不如回应，就把己方的连接关闭。</p>
+<h3 id="连接关闭"><a href="#连接关闭" class="headerlink" title="连接关闭"></a>连接关闭</h3><p>参与TCP连接的任意一方都能随时终止连接，连接结束之后，为连接维护而存储的变量与缓存都将被释放。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/38371351.jpg" alt=""><br>红色部分之后，client不再发送报文段，但是还可以接收；绿色之后，server不再发送报文段，连接正式关闭。</p>
+<p>半关闭：<br>半关闭是正常现象，指的就是A-&gt;B的连接关闭之后，A不会再发送但是还能接收，B到A的也关闭了之后才都消停下来。</p>
+<h3 id="TCP连接状态序列"><a href="#TCP连接状态序列" class="headerlink" title="TCP连接状态序列"></a>TCP连接状态序列</h3><p>客户机的TCP状态序列：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/8044207.jpg" alt=""></p>
+<p>为什么直到等待一个IP数据报在Internet上可能存活的最大时间长的两倍（即120秒）后，一个连接才能从TIME_WAIT状态转移到CLOSED状态？<br>当连接的本地一方已经发出一个ACK数据段响应对方的FIN数据段时，它并不知道这个ACK数据段是否成功地被传递。结果是，另一方可能有重传一个FIN数据段，而这个第2个FIN数据段可能在网中被延迟。如果允许连接直接转移到CLOSED状态那么可以会有另一对应用进程会打开同一个连接（即使用同一对端口号），而前面连接实例中被延迟的FIN数据段这时会立即使后来的连接实例终止。同时也避免了分组重传带来的错误信息。</p>
+<p>服务器的TCP状态序列：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/25538433.jpg" alt=""></p>
+<h3 id="TCP定时器总结"><a href="#TCP定时器总结" class="headerlink" title="TCP定时器总结"></a>TCP定时器总结</h3><p><strong>Connection Establishment Timer</strong>：<br>当SYN包发出时，连接建立定时器就开始计时，如果在75秒内未收到响应，则连接建立失败。<br><strong>The Retransmission Timer</strong>：<br>重发定时器是TCP发送数据时设置的，如果数据在重发定时器超时时还没有返回确认，TCP就重发数据。定时器的设置是动态的，它基于TCP对往返时间（round-trip time）的测试，重发时间设在1到64秒<br><strong>Delayed ACK Timer</strong>：<br>当TCP实体收到数据时它必须返回确认，但并不需要立即回复，它可以在500ms内发送ACK报文，如果在这段时间内它恰好有数据要发送，它就可以在数据内包含确认信息，因此需要ACK延时定时器。<br><strong>The Persistence Timer</strong>：<br>管理一种较为少见的事件，即死锁情况。为了让发送方暂停发送数据，接收方发送一个接收窗口为0的确认。后来，接收方又发送了一个更新了窗口大小的分组，但该分组丢失，于是，双方都处于等待<br>为了防止上述事情发生，发送方在收到接收方发来一个窗口为0的数据时，就启动持续定时器，等该定时器超时还没有收到对方修改窗口大小的数据的话，发送方就发一个探测数据，对该探测数据的响应应包含了窗口大小，若仍为0，则定时器清0，重复以上步骤，否则则可以发送数据。<br><strong>The Keep-Alive Timer</strong>：<br>当一个连接长时间闲置时，保持存活定时器会超时而使一方去检测另一方是否仍然存在，如果它未得到响应，便终止该连接<br><strong>The Quiet Timer</strong>：<br>当TCP连接断开后，为防止该连接上的数据还在网络上，并被后续打开的相同的连接接收，要设置闲置定时器以防止刚刚断开连接的端口号被立即重新使用</p>
+<blockquote>
+<p>SYN洪泛攻击<br>在上面提到了：半Open。其实这种情况大都在一分钟之后被服务器端发现并断开连接，回收资源了。但是这一分多钟的时间的资源浪费将为经典的Dos攻击即SYN洪泛攻击创造了环境。<br>在这种攻击模式中，攻击者发送大量的SYN报文段而不发送最终的ACK，导致大量的半连接占用服务器的资源。<br>现在有一种有效的解决方式：SYN cookie<br>SYN cookie的工作方式是：当server接收到一个SYN，他并不立即为这个连接分配缓存与变量，而是使用这个TCP报文段携带的源ip与源port信息，运行一个仅有server知道的一个散列函数得到一个初始序列号，这种精心制作的初始序列号被称为cookie。server仅仅是发送一个具有该序号的SYNACK。该序号也不会被保存。<br>如果一段时间之后接收到了同一个源ip与源port的ACK报文段，server发现二者并没有连接，于是再次运行散列函数，得到的序号如果加一就是本ACK携带的序号，server就认为这是一个正常的client，为之分配资源，建立连接，否则，server不会分配资源，之前的攻击没有任何影响。<br>（哎呀其实也稍稍影响了处理效率了吧）</p>
+</blockquote>
+<h3 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a>其他情况</h3><p>前面考虑的都是特别理想的情况，如果client向server一个并不接受TCP连接的port发送了一条报文将会怎样？</p>
+<p>server将发送一个<strong>特殊重置报文段</strong>给client，这个报文段将RST标志位置为1，告诉client自己没有那个port接收TCP，请他不要再发送了。</p>
+<p>如果发送的是一个UDP报文段，如果不匹配，server发送一个ICMP数据报。这在<strong>网络层</strong>进行讨论。</p>
+<blockquote>
+<p>nmap工作原理：<br>nmap向某一台主机的一个port发送一个SYN，接下来有三种情况：收到一个SYNACK，则会标明那个端口上有一个已经打开的TCP应用程序，返回“打开”，如果收到RST，说明这个端口没有一个TCP应用程序，如果什么都没有收到，说很可能是被防火墙给墙了。<br><a href="http://www.nmap.org" target="_blank" rel="external">nmap下载</a></p>
+</blockquote>
+<h3 id="TCP-option"><a href="#TCP-option" class="headerlink" title="TCP option"></a>TCP option</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/50610071.jpg" alt=""></p>
+<p>先只放一个图。</p>
+<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><p>在讨论TCP的拥塞控制之前，首先来讨论更加普遍的拥塞控制原理。</p>
+<p>我们把<strong>分组重传</strong>作为网络拥塞的信号。实际上，分组重传不全是因为网络拥塞。</p>
+<p><strong>ATM</strong>：异步传输网络<br><strong>ABR</strong>：可用比特率</p>
+<h3 id="1-两个发送方与一个无限缓存的路由器"><a href="#1-两个发送方与一个无限缓存的路由器" class="headerlink" title="1. 两个发送方与一个无限缓存的路由器"></a>1. 两个发送方与一个无限缓存的路由器</h3><p>不考虑分组重传、流量控制、拥塞控制，忽略首部信息的额外开销。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/15483986.jpg" alt=""></p>
+<p>这种情况下，发送方完全不节制，每连接的吞吐量如下：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/89389045.jpg" alt=""><br>吞吐量不可能有超过R/2的稳定状态，这是因为二者共享一个吞吐量R的链路。当发送速率在[0,R/2]时，接收方的吞吐率等于发送方的发送速率，也就是<strong>发送方的所有数据经过有限时间传输之后到达接收方</strong>。</p>
+<p>但是，再看速度与平均时延的关系：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/46450452.jpg" alt=""><br>看起来吞吐量接近R/2是件好事，但是从时延的角度来看，接近R/2的时候，平均时延就会越来越大。</p>
+<p><strong>代价1</strong>：巨大的时延。</p>
+<p><strong>（为什么？？？到R/2的时候不是正好利用完所有链路吗？又没有重传，时延为什么会这么大？？？</strong></p>
+<h3 id="2-两个发送方以及一个具有有限缓存的路由器"><a href="#2-两个发送方以及一个具有有限缓存的路由器" class="headerlink" title="2. 两个发送方以及一个具有有限缓存的路由器"></a>2. 两个发送方以及一个具有有限缓存的路由器</h3><p>假设：路由器缓存已经满了的话，新来的数据包就会被丢弃。</p>
+<p><strong>供给载荷</strong>：运输层向网络中发送报文段的速率。</p>
+<p>仍然使用上面的图。</p>
+<ol>
+<li>如果控制得非常好，yin=yout</li>
+<li>如果只对丢失的包进行重传，yin`&gt;yout</li>
+<li>对迟到的包重传，yin`远大于yout</li>
+</ol>
+<p>以上三种情况下的吞吐量随着供给载荷变化：（所谓吞吐量，就是☞yout吧）<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/98233117.jpg" alt=""></p>
+<p>第二图的R/3-R/2是部分重传丢失占用的带宽，第三图的R/4-R/2是部分重传丢失+延时重传带来的丢失。</p>
+<p><strong>代价2</strong>：不必要的重传占用带宽</p>
+<h3 id="3-四个发送方以及有有限缓存的多台路由器及多跳路径"><a href="#3-四个发送方以及有有限缓存的多台路由器及多跳路径" class="headerlink" title="3. 四个发送方以及有有限缓存的多台路由器及多跳路径"></a>3. 四个发送方以及有有限缓存的多台路由器及多跳路径</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-21/85465498.jpg" alt=""></p>
+<p>从虚线开始，吞吐量就开始下降，一直到最后几乎为0.这时路由器几乎一直在丢失重传丢失重传。</p>
+<h3 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h3><ol>
+<li>端到端的拥塞控制：IP协议并不提供对拥塞控制的支持，如果要在运输层做拥塞控制，也只能通过行为来判断。例如3次同一数据的ACK，被认为是丢失报文段，进而以为网络有些繁忙。</li>
+<li>网络辅助的拥塞控制：路由器向发送方提供显式的拥塞信息。这个信息只需要一个比特。有两种方式：一种是直接反馈，路由器直接告诉发送方拥塞；另一种是间接反馈，路由器标记数据，当接收方收到被标记的数据之后在ACK的时候告诉发送方。</li>
+</ol>
+<h3 id="网络辅助的拥塞控制：ATM-ABR"><a href="#网络辅助的拥塞控制：ATM-ABR" class="headerlink" title="网络辅助的拥塞控制：ATM ABR"></a>网络辅助的拥塞控制：ATM ABR</h3><h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><p>TCP的拥塞控制的基础是认为所有数据包的丢失都是路由器因为阻塞给我丢掉了。<br>实际上，有线网络传丢的可能性很小，所以这个基础是没什么问题的。但是在无线网络中，TCP的拥塞控制则需要有一定的改进。</p>
+<h3 id="TCP拥塞控制概述"><a href="#TCP拥塞控制概述" class="headerlink" title="TCP拥塞控制概述"></a>TCP拥塞控制概述</h3><p><strong>拥塞窗口cwnd</strong>：发送方维护一个变量，他对一个TCP发送方能对网络中发送数据的速率进行了限制。特别的：$$LastByteRcved-LastByteACKed&lt;=min{rwnd,cwnd}$$</p>
+<p>cwnd限制了发送方每次向接收方发送的字节数量，考虑一个丢包与发送时延皆忽略不计的连接，粗略的讲，发送方发送的速率大概是（cwnd/RTT)字节/秒。因此，调整cwnd可以调整发送速率。</p>
+<p>那么发送方要怎么知道有了拥塞？第一就是像前面所说的丢包或是连续三个ACK。<br>有没有可能丢包不是因为网络拥塞呢？当然是可能的！</p>
+<p>对于不丢包的理想情况下，TCP的发送方将会收到对以前未确认报文的确认，它们使用这些确认来增加cwnd。到达的速率将会影响cwnd增长的速率，因为TCP使用触发（或计时）来增大它的拥塞窗口长度，TCP是<strong>自计时</strong>的。</p>
+<p>TCP有一些处理方法：</p>
+<ol>
+<li>一个丢失的报文段意味着阻塞</li>
+<li>一个确认报文段指示网络正在向接收方交付发送方的报文段，因此当对先前未确认的报文段到达时，增加发送速率</li>
+<li>宽带探测。</li>
+</ol>
+<h3 id="TCP拥塞控制算法"><a href="#TCP拥塞控制算法" class="headerlink" title="TCP拥塞控制算法"></a>TCP拥塞控制算法</h3><p><strong>慢启动</strong>：</p>
+<p>一条TCP连接开始时，首先cwnd会被设置为1个MSS。1个MSS真的很小，因此TCP此后每当一个报文段首次被确认（注意不是收到ACK哦，是被确认哦）就把MSS增加1.这样1变2，2变4，4变8…<strong>指数增长</strong>。</p>
+<p>什么时候停止这种爆炸增长？</p>
+<ol>
+<li>存在丢包事件，将ssthresh置为cwnd/2，将cwnd重新置1，重新慢启动，。</li>
+<li>存在丢包事件，将cwnd的值置为ssthresh，结束慢启动，进入拥塞避免阶段。</li>
+<li>检测到3个冗余ACK，执行快速重传，进入快速恢复。</li>
+</ol>
+<p><strong>拥塞避免</strong>：</p>
+<p>进入拥塞避免之后，离拥塞可能并不遥远。每个RTT将增加一个MSS。例如一个RTT发了10个包，那么这十个包只将cwnd增加1个MSS。</p>
+<p>什么时候结束这种线性增长？</p>
+<ol>
+<li>丢包，将cwnd设置为1个MSS，sstresh设置为cwnd/2。</li>
+<li>三个冗余ACK，将cwnd减半（三个已经收到的ACK要加上3个MSS），将ssthresh更新为cwnd/2，进入快速恢复</li>
+</ol>
+<p><strong>快速恢复</strong>：</p>
+<p>对于引起TCP进入快速恢复的报文段，对每收到的一个冗余ACK都加一个MSS。这个阶段时说明网络其实并不是特别堵，只是传丢了一个，不用太过限制。直到最终丢失的报文段ACK到达，TCP在降低cwnd之后进入拥塞避免阶段。<br>如果出现超时事件，将将cwnd设置为1个MSS，sstresh设置为cwnd/2，进入慢启动。<br>如果出现冗余丢包事件，将cwnd设置为1个MSS，sstresh设置为cwnd/2。</p>
+<h3 id="TCP-Tahoe与TCP-Reno"><a href="#TCP-Tahoe与TCP-Reno" class="headerlink" title="TCP Tahoe与TCP Reno"></a>TCP Tahoe与TCP Reno</h3><p>Tahoe不管发生什么事件，都会无条件的将cwnd变为1，然后重新慢启动。<br>Reno综合了快速恢复。</p>
+<p>Tahoe的过程：在4时达到初始阈值，在8时有三个冗余ACK，在10.5时达到阈值。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/38232100.jpg" alt=""><br>Tahoe不能容忍丢包，一旦丢包，就会进入慢启动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slowstart is over        */</span> </div><div class="line"><span class="comment">/* cwnd &gt; threshold */</span></div><div class="line">Until (loss event) &#123;</div><div class="line">  every w segments ACKed:</div><div class="line">        cwnd ++;</div><div class="line">  &#125;<span class="comment">//拥塞控制阶段;</span></div><div class="line">threshold = cwnd /<span class="number">2</span>;</div><div class="line">cwnd = <span class="number">1</span>;</div><div class="line">perform slowstart<span class="comment">//重新慢启动;</span></div></pre></td></tr></table></figure>
+<p>Reno过程：在4时达到初始阈值，在8时有三个冗余ACK，之后减小cwnd，进入快速恢复。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/74575292.jpg" alt=""><br>Reno分超时丢包与冗余丢包，冗余丢包进入快速恢复，超时慢启动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slowstart is over        */</span> </div><div class="line"><span class="comment">/* cwnd &gt; threshold */</span></div><div class="line">Until (loss event) &#123;</div><div class="line">  every w segments ACKed:</div><div class="line">      cwnd ++</div><div class="line">  &#125;<span class="comment">//拥塞控制;</span></div><div class="line">threshold = cwnd /<span class="number">2</span></div><div class="line">If (loss detected by timeout) &#123;<span class="comment">//进入慢启动;</span></div><div class="line">    cwnd = <span class="number">1</span></div><div class="line">    perform slowstart &#125;</div><div class="line">If (loss detected by triple duplicate ACK)<span class="comment">//进入快速恢复</span></div><div class="line">    cwnd = cwnd /<span class="number">2</span></div></pre></td></tr></table></figure>
+<p>于是发现：什么对超时都是没有容忍度的，直接会慢启动。但是对于3个冗余ACK的表现个不一样，一般进入快速恢复。</p>
+<h2 id="公平性：TCP与UDP"><a href="#公平性：TCP与UDP" class="headerlink" title="公平性：TCP与UDP"></a>公平性：TCP与UDP</h2><p>TCP是自律的，如果UDP不自律，可能会挤跨TCP。因此在使用UDP的APP层应该做类似的”平滑、缓慢变化“的拥塞机制，保证公平。</p>
+<h1 id="端口与进程"><a href="#端口与进程" class="headerlink" title="端口与进程"></a>端口与进程</h1><p>最后，我需要补充一下端口号与进程之间的关系：</p>
+<p>首先：缓冲区对应的是谁？在上一篇中就应该明确，是socket。</p>
+<p><strong>端口号是什么？</strong></p>
+<p>在网络技术中，端口大致有两种意思：一是物理意义上的端口，比如，ADSL Modem、集线器、交换机、路由器用 于连接其他网络设备的接口，如RJ-45端口、SC端口等等。二是逻辑意义上的端口，一般是指TCP/IP协议中的端口，端口号的范围从0到65535，比如用于浏览网页服务的80端口，用于FTP服务的21端口等等。我们这里将要介绍的就是逻辑意义上的端口。</p>
+<p>服务器一般通过知名端口号来识别。例如，对于每个TCP/IP实现来说，FTP服务器的TCP端口号都是21，每个Telnet服务器的TCP端口号都是23，每个TFTP(简单文件传送协议)服务器的UDP端口号都是69。任何TCP/IP实现所提供的服务都用知名的1～1023之间的端口号。这些知名端口号由Internet号分配机构（InternetAssignedNumbersAuthority,IANA）来管理。</p>
+<p>端口号的作用正是为了区分不同的网络服务。</p>
+<p>上面的比较官方，下面将由我自己写的程序来——</p>
+<p>TCP里面，一个端口号可以被多个socket绑定。而UDP不行，我的理解是数据不知道要给谁。</p>
+<p>已经被绑定之后，再次要求绑定：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-4/88853868.jpg" alt=""></p>
+<p>这是再次运行，也就是说，其实这个并不是一个进程不能绑定同一个端口号，而是两个UDP的socket不能绑定同一个端口。跟进程没有什么关系。fork子线程的时候，也可以使用其他的socket绑定其他的端口号。</p>
+<p>端口这个概念就是计算机网络领域的概念，有网友直言说进程与端口号没有什么关系，其实是对的。</p>
+<p>thanks for ur help!</p>
+<p>[1] <a href="http://www.cnblogs.com/BoyXiao/archive/2012/02/20/2359273.html" target="_blank" rel="external">进程与端口映射</a></p>
+<p>[2] <a href="https://baike.1688.com/doc/view-d2361261.html" target="_blank" rel="external">端口号是什么？</a></p>
+<p>[3]<a href="https://www.ibm.com/support/knowledgecenter/zh/SSGMGV_3.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl2d.html" target="_blank" rel="external">IBM Knowledge Center</a>  这个有很多东西，不止端口号</p>
+<p>[4]<a href="http://wiki.xiaohansong.com/network/tcp.html" target="_blank" rel="external">TCP</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/计算机网络/计算机网络网络层/" itemprop="url">计算机网络网络层</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T22:12:40+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p># </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/the One使用记录1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -893,132 +1620,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/背包问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/背包问题/" itemprop="url">背包问题初涉</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>算法上机考试，怎么说，虽然没做出来但是收获很多？好吧也只能这么安慰自己了</p>
-<hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//硬币。存储硬币的价值及其对应个数</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coins</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//更小值函数。若值为0，代表不可能，返回另一个值，否则返回更小值</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mini</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a == <span class="number">0</span>)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">if</span> (b == <span class="number">0</span>)<span class="keyword">return</span> a;</div><div class="line">	<span class="keyword">if</span> (a &gt; b)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"><span class="comment">//int max(int a,int b)&#123;</span></div><div class="line"><span class="comment">//	if(a&gt;b)return a;</span></div><div class="line"><span class="comment">//	else return b;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//int comp(const void *a,const void *b)&#123;</span></div><div class="line"><span class="comment">//	Coins* A=(Coins*)a,*B=(Coins*)b;</span></div><div class="line"><span class="comment">//	if(A-&gt;value&gt;B-&gt;value)return -1;</span></div><div class="line"><span class="comment">//	else if (A-&gt;value&lt;B-&gt;value)return 1;</span></div><div class="line"><span class="comment">//	else return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//找零钱的函数，coins存储了各种硬币的面值与个数，n是硬币种数（coins的长度），m是找零的钱数。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetCoin</span><span class="params">(Coins*coins, <span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//新建一个二维数组用于存储在每一个要找的钱数下用i种硬币最少用几个硬币</span></div><div class="line"></div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>]; </div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line"></div><div class="line">	<span class="comment">//初始时，用0个硬币找除0以外的钱数，不可能。</span></div><div class="line">	<span class="comment">//且用0作为初始值便于后续计算。</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = <span class="number">0</span>; M[<span class="number">1</span>][i] = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;	<span class="comment">//对前i种硬币</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++) &#123;	<span class="comment">//要找j的零钱</span></div><div class="line">			<span class="keyword">int</span> dola = M[<span class="number">0</span>][j];	<span class="comment">//保存未更新之前的值</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= coins[i].num; k++) &#123;	<span class="comment">//对这种硬币的每个数量</span></div><div class="line">				<span class="keyword">if</span> ((j - k*(coins[i].value) &lt; <span class="number">0</span>)) &#123;	<span class="comment">//若k个硬币总钱数大于j，不可能。break</span></div><div class="line">					M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j]; M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j]; <span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				<span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] != <span class="number">0</span>))</div><div class="line"></div><div class="line">				<span class="comment">//否则。若满足条件，说明在M[0][j-k*(coins[i].value)]处有满足条件的解，与M[0][j]计算更好的值。此时这里一定有非0解</span></div><div class="line"></div><div class="line">					M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k + M[<span class="number">0</span>][j - k*(coins[i].value)]);</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] == <span class="number">0</span>)) &#123;<span class="comment">//否则，不一定存在非0解</span></div><div class="line">					<span class="keyword">if</span> (k*(coins[i].value) == j) &#123;<span class="comment">//若存在k个硬币正好找j元，更新解</span></div><div class="line">						M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k);</div><div class="line">						<span class="comment">//M[1][j] = M[0][j];</span></div><div class="line">						<span class="comment">//M[0][j] = dola;</span></div><div class="line">						<span class="comment">//break;不行！</span></div><div class="line">					&#125;</div><div class="line">					<span class="keyword">else</span> M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j];<span class="comment">//否则，不更新解</span></div><div class="line">				&#125;</div><div class="line">				</div><div class="line">		&#125;</div><div class="line">			<span class="comment">//将M[0]转移到M[1]，M[0]恢复原值继续下一轮计算。这样可以防止对硬币i使用的数目多于现有数目的情况</span></div><div class="line"></div><div class="line">			M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j];</div><div class="line">			M[<span class="number">0</span>][j] = dola;</div><div class="line"><span class="comment">//			cout &lt;&lt; M[1][j] &lt;&lt; " ,";</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++)M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];<span class="comment">//把新值给M[0]，进行对下一种硬币的分析。</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; endl;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> M[<span class="number">0</span>][m];<span class="comment">//返回最优解</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//int Getcoin(int*coins,int m,int n,int**M,int**N)&#123;</span></div><div class="line"><span class="comment">//	int*resu = new int[n], *resunum = new int[n];</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;=m;i++)&#123;N[0][i]=0;</span></div><div class="line"><span class="comment">//	M[0][i]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;2;i++)&#123;N[i][0]=0;</span></div><div class="line"><span class="comment">//	M[i][0]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=1;i&lt;=n;i++)&#123;</span></div><div class="line"><span class="comment">//		for(int j=1;j&lt;=m;j++)&#123;</span></div><div class="line"><span class="comment">//			//cout &lt;&lt; "the j" &lt;&lt; j &lt;&lt; endl;</span></div><div class="line"><span class="comment">//			if (coins[i - 1] &gt; j) &#123; M[1][j] = M[0][j]; N[1][j] = N[0][j];  &#125;</span></div><div class="line"><span class="comment">//			else&#123;</span></div><div class="line"><span class="comment">//				M[1][j]=max(M[0][j],coins[i-1]+M[0][j-coins[i-1]]);</span></div><div class="line"><span class="comment">//				if(M[1][j]==M[0][j])N[1][j]=N[0][j];</span></div><div class="line"><span class="comment">//				else if(M[1][j]==coins[i-1]+M[0][j-coins[i-1]]) N[1][j]=1+N[0][j-coins[i-1]];</span></div><div class="line"><span class="comment">//				else N[1][j] = N[0][j] &lt; N[0][j - coins[i - 1]] ? N[0][j] : 1+N[0][j - coins[i - 1]];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//		for (int j = 0; j &lt;= m; j++) &#123;</span></div><div class="line"><span class="comment">//			M[0][j] = M[1][j];</span></div><div class="line"><span class="comment">//			N[0][j] = N[1][j];</span></div><div class="line"><span class="comment">//			cout &lt;&lt; "(" &lt;&lt; M[0][j] &lt;&lt; "," &lt;&lt; N[0][j] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//		cout &lt;&lt;i&lt;&lt;" , "&lt;&lt;coins[i-1]&lt;&lt; endl;</span></div><div class="line"><span class="comment">//		resu[i - 1] = M[0][m];</span></div><div class="line"><span class="comment">//		resunum[i - 1] = N[0][m];</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	int min=-1;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	for (int i = 0; i &lt; n; i++) &#123;</span></div><div class="line"><span class="comment">////		cout &lt;&lt; "(" &lt;&lt; resu[i] &lt;&lt; "," &lt;&lt; resunum[i] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		if (resu[i] == m) &#123;</span></div><div class="line"><span class="comment">//			if (min == -1)min = resunum[i];</span></div><div class="line"><span class="comment">//			if (resunum[i] &lt; min)min = resunum[i];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	return min;</span></div><div class="line"><span class="comment">//	</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> n;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">		Coins*coins = <span class="keyword">new</span> Coins[n];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; coins[i].value &gt;&gt; coins[i].num;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line"></div><div class="line">		<span class="comment">//如果要找的钱数是0，最少需要0个硬币</span></div><div class="line">		<span class="keyword">if</span> (m == <span class="number">0</span>) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>; <span class="keyword">return</span> <span class="number">0</span>; &#125;</div><div class="line">		<span class="comment">//	qsort(coins,n,sizeof(coins[0]),comp);</span></div><div class="line">		<span class="comment">//	int sum=0;</span></div><div class="line">		<span class="comment">//	for(int i=0;i&lt;n;i++)</span></div><div class="line">		<span class="comment">//		sum+=coins[i].num;</span></div><div class="line">		<span class="comment">//	int*Mycoin=new int[sum];</span></div><div class="line">		<span class="comment">//	int soum=sum;</span></div><div class="line">		<span class="comment">//	sum=coins[0].num;</span></div><div class="line">		<span class="comment">///*	for(int i=0,j=0;i&lt;soum;i++)&#123;</span></div><div class="line">		<span class="comment">//		if(i==sum)&#123;sum+=coins[j+1].num;j++;&#125;</span></div><div class="line">		<span class="comment">//		Mycoin[i]=coins[j].value;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; Mycoin[i] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//	&#125;*/</span></div><div class="line">		<span class="comment">//		int k = 0;</span></div><div class="line">		<span class="comment">//		for (int i = 0; i&lt;n; i++) &#123;</span></div><div class="line">		<span class="comment">//			for (int j = 0; j &lt; coins[i].num;j++) &#123;</span></div><div class="line">		<span class="comment">//				Mycoin[k] = coins[i].value;</span></div><div class="line">		<span class="comment">//				cout &lt;&lt; Mycoin[k] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//				k++;</span></div><div class="line">		<span class="comment">//			&#125;</span></div><div class="line">		<span class="comment">//		&#125;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; "totally" &lt;&lt; soum &lt;&lt; endl;</span></div><div class="line">		<span class="comment">//		int**M=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)M[i]=new int[m+1];</span></div><div class="line">		<span class="comment">//		int**N=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)N[i]=new int[m+1];</span></div><div class="line">		</div><div class="line">			<span class="comment">// pp=Getcoin(Mycoin,m,soum,M,N);</span></div><div class="line">			<span class="comment">//cout &lt;&lt; pp &lt;&lt; endl;</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> pp;</div><div class="line">		pp = GetCoin(coins, n, m);</div><div class="line">		<span class="comment">//若最终返回0即为不可能，输出-1。</span></div><div class="line">		<span class="keyword">if</span> (pp != <span class="number">0</span>)<span class="built_in">cout</span> &lt;&lt; pp;</div><div class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/序列比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1092,267 +1693,6 @@
           
             <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">		a = x; b = y;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = beta*i;</div><div class="line">	&#125;	</div><div class="line">	M[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">	<span class="keyword">delete</span>[]M;</div><div class="line">	<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">			M[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">			M[i][<span class="number">0</span>] = beta*i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">			M[<span class="number">0</span>][i] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">				M[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">		<span class="keyword">int</span> j = y - r;</div><div class="line">			<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">				<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					j -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="built_in">string</span> a2;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">	<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> min;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">		a2 = a.substr(i, x-o);</div><div class="line">		q[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">		q[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">				min = q[<span class="number">0</span>];</div><div class="line">				q[<span class="number">1</span>] = i;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	min = q[<span class="number">1</span>]+o;</div><div class="line">	Pixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">	P-&gt;push(*p);</div><div class="line">	</div><div class="line">	DACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	a2 = a.substr(min-o , x-o);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">	DACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">string</span> A, B;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">		<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		DACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">				Pixel p = (P-&gt;top());</div><div class="line">				P-&gt;pop();</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="keyword">delete</span> P;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/在MFC中创建控制台/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/在MFC中创建控制台/" itemprop="url">在MFC中创建控制台</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
-<hr>
-<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
-<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _DEBUG</span></div><div class="line">   AllocConsole()</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></div></pre></td></tr></table></figure>
-<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
-<p>使用步骤如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=<span class="string">""</span>;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
-<p>这段代码完成了将CString类型的str输出的任务。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" itemprop="url">树莓派解析域名失败导致apt-get update不可用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1510,6 +1850,132 @@
 <li>按下Esc或者Backspace可以回到命令模式。</li>
 </ol>
 <h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/背包问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/背包问题/" itemprop="url">背包问题初涉</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>算法上机考试，怎么说，虽然没做出来但是收获很多？好吧也只能这么安慰自己了</p>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//硬币。存储硬币的价值及其对应个数</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coins</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//更小值函数。若值为0，代表不可能，返回另一个值，否则返回更小值</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mini</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a == <span class="number">0</span>)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">if</span> (b == <span class="number">0</span>)<span class="keyword">return</span> a;</div><div class="line">	<span class="keyword">if</span> (a &gt; b)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"><span class="comment">//int max(int a,int b)&#123;</span></div><div class="line"><span class="comment">//	if(a&gt;b)return a;</span></div><div class="line"><span class="comment">//	else return b;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//int comp(const void *a,const void *b)&#123;</span></div><div class="line"><span class="comment">//	Coins* A=(Coins*)a,*B=(Coins*)b;</span></div><div class="line"><span class="comment">//	if(A-&gt;value&gt;B-&gt;value)return -1;</span></div><div class="line"><span class="comment">//	else if (A-&gt;value&lt;B-&gt;value)return 1;</span></div><div class="line"><span class="comment">//	else return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//找零钱的函数，coins存储了各种硬币的面值与个数，n是硬币种数（coins的长度），m是找零的钱数。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetCoin</span><span class="params">(Coins*coins, <span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//新建一个二维数组用于存储在每一个要找的钱数下用i种硬币最少用几个硬币</span></div><div class="line"></div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>]; </div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line"></div><div class="line">	<span class="comment">//初始时，用0个硬币找除0以外的钱数，不可能。</span></div><div class="line">	<span class="comment">//且用0作为初始值便于后续计算。</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = <span class="number">0</span>; M[<span class="number">1</span>][i] = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;	<span class="comment">//对前i种硬币</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++) &#123;	<span class="comment">//要找j的零钱</span></div><div class="line">			<span class="keyword">int</span> dola = M[<span class="number">0</span>][j];	<span class="comment">//保存未更新之前的值</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= coins[i].num; k++) &#123;	<span class="comment">//对这种硬币的每个数量</span></div><div class="line">				<span class="keyword">if</span> ((j - k*(coins[i].value) &lt; <span class="number">0</span>)) &#123;	<span class="comment">//若k个硬币总钱数大于j，不可能。break</span></div><div class="line">					M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j]; M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j]; <span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				<span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] != <span class="number">0</span>))</div><div class="line"></div><div class="line">				<span class="comment">//否则。若满足条件，说明在M[0][j-k*(coins[i].value)]处有满足条件的解，与M[0][j]计算更好的值。此时这里一定有非0解</span></div><div class="line"></div><div class="line">					M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k + M[<span class="number">0</span>][j - k*(coins[i].value)]);</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] == <span class="number">0</span>)) &#123;<span class="comment">//否则，不一定存在非0解</span></div><div class="line">					<span class="keyword">if</span> (k*(coins[i].value) == j) &#123;<span class="comment">//若存在k个硬币正好找j元，更新解</span></div><div class="line">						M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k);</div><div class="line">						<span class="comment">//M[1][j] = M[0][j];</span></div><div class="line">						<span class="comment">//M[0][j] = dola;</span></div><div class="line">						<span class="comment">//break;不行！</span></div><div class="line">					&#125;</div><div class="line">					<span class="keyword">else</span> M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j];<span class="comment">//否则，不更新解</span></div><div class="line">				&#125;</div><div class="line">				</div><div class="line">		&#125;</div><div class="line">			<span class="comment">//将M[0]转移到M[1]，M[0]恢复原值继续下一轮计算。这样可以防止对硬币i使用的数目多于现有数目的情况</span></div><div class="line"></div><div class="line">			M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j];</div><div class="line">			M[<span class="number">0</span>][j] = dola;</div><div class="line"><span class="comment">//			cout &lt;&lt; M[1][j] &lt;&lt; " ,";</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++)M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];<span class="comment">//把新值给M[0]，进行对下一种硬币的分析。</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; endl;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> M[<span class="number">0</span>][m];<span class="comment">//返回最优解</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//int Getcoin(int*coins,int m,int n,int**M,int**N)&#123;</span></div><div class="line"><span class="comment">//	int*resu = new int[n], *resunum = new int[n];</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;=m;i++)&#123;N[0][i]=0;</span></div><div class="line"><span class="comment">//	M[0][i]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;2;i++)&#123;N[i][0]=0;</span></div><div class="line"><span class="comment">//	M[i][0]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=1;i&lt;=n;i++)&#123;</span></div><div class="line"><span class="comment">//		for(int j=1;j&lt;=m;j++)&#123;</span></div><div class="line"><span class="comment">//			//cout &lt;&lt; "the j" &lt;&lt; j &lt;&lt; endl;</span></div><div class="line"><span class="comment">//			if (coins[i - 1] &gt; j) &#123; M[1][j] = M[0][j]; N[1][j] = N[0][j];  &#125;</span></div><div class="line"><span class="comment">//			else&#123;</span></div><div class="line"><span class="comment">//				M[1][j]=max(M[0][j],coins[i-1]+M[0][j-coins[i-1]]);</span></div><div class="line"><span class="comment">//				if(M[1][j]==M[0][j])N[1][j]=N[0][j];</span></div><div class="line"><span class="comment">//				else if(M[1][j]==coins[i-1]+M[0][j-coins[i-1]]) N[1][j]=1+N[0][j-coins[i-1]];</span></div><div class="line"><span class="comment">//				else N[1][j] = N[0][j] &lt; N[0][j - coins[i - 1]] ? N[0][j] : 1+N[0][j - coins[i - 1]];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//		for (int j = 0; j &lt;= m; j++) &#123;</span></div><div class="line"><span class="comment">//			M[0][j] = M[1][j];</span></div><div class="line"><span class="comment">//			N[0][j] = N[1][j];</span></div><div class="line"><span class="comment">//			cout &lt;&lt; "(" &lt;&lt; M[0][j] &lt;&lt; "," &lt;&lt; N[0][j] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//		cout &lt;&lt;i&lt;&lt;" , "&lt;&lt;coins[i-1]&lt;&lt; endl;</span></div><div class="line"><span class="comment">//		resu[i - 1] = M[0][m];</span></div><div class="line"><span class="comment">//		resunum[i - 1] = N[0][m];</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	int min=-1;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	for (int i = 0; i &lt; n; i++) &#123;</span></div><div class="line"><span class="comment">////		cout &lt;&lt; "(" &lt;&lt; resu[i] &lt;&lt; "," &lt;&lt; resunum[i] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		if (resu[i] == m) &#123;</span></div><div class="line"><span class="comment">//			if (min == -1)min = resunum[i];</span></div><div class="line"><span class="comment">//			if (resunum[i] &lt; min)min = resunum[i];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	return min;</span></div><div class="line"><span class="comment">//	</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> n;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">		Coins*coins = <span class="keyword">new</span> Coins[n];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; coins[i].value &gt;&gt; coins[i].num;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line"></div><div class="line">		<span class="comment">//如果要找的钱数是0，最少需要0个硬币</span></div><div class="line">		<span class="keyword">if</span> (m == <span class="number">0</span>) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>; <span class="keyword">return</span> <span class="number">0</span>; &#125;</div><div class="line">		<span class="comment">//	qsort(coins,n,sizeof(coins[0]),comp);</span></div><div class="line">		<span class="comment">//	int sum=0;</span></div><div class="line">		<span class="comment">//	for(int i=0;i&lt;n;i++)</span></div><div class="line">		<span class="comment">//		sum+=coins[i].num;</span></div><div class="line">		<span class="comment">//	int*Mycoin=new int[sum];</span></div><div class="line">		<span class="comment">//	int soum=sum;</span></div><div class="line">		<span class="comment">//	sum=coins[0].num;</span></div><div class="line">		<span class="comment">///*	for(int i=0,j=0;i&lt;soum;i++)&#123;</span></div><div class="line">		<span class="comment">//		if(i==sum)&#123;sum+=coins[j+1].num;j++;&#125;</span></div><div class="line">		<span class="comment">//		Mycoin[i]=coins[j].value;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; Mycoin[i] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//	&#125;*/</span></div><div class="line">		<span class="comment">//		int k = 0;</span></div><div class="line">		<span class="comment">//		for (int i = 0; i&lt;n; i++) &#123;</span></div><div class="line">		<span class="comment">//			for (int j = 0; j &lt; coins[i].num;j++) &#123;</span></div><div class="line">		<span class="comment">//				Mycoin[k] = coins[i].value;</span></div><div class="line">		<span class="comment">//				cout &lt;&lt; Mycoin[k] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//				k++;</span></div><div class="line">		<span class="comment">//			&#125;</span></div><div class="line">		<span class="comment">//		&#125;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; "totally" &lt;&lt; soum &lt;&lt; endl;</span></div><div class="line">		<span class="comment">//		int**M=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)M[i]=new int[m+1];</span></div><div class="line">		<span class="comment">//		int**N=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)N[i]=new int[m+1];</span></div><div class="line">		</div><div class="line">			<span class="comment">// pp=Getcoin(Mycoin,m,soum,M,N);</span></div><div class="line">			<span class="comment">//cout &lt;&lt; pp &lt;&lt; endl;</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> pp;</div><div class="line">		pp = GetCoin(coins, n, m);</div><div class="line">		<span class="comment">//若最终返回0即为不可能，输出-1。</span></div><div class="line">		<span class="keyword">if</span> (pp != <span class="number">0</span>)<span class="built_in">cout</span> &lt;&lt; pp;</div><div class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1741,7 +2207,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS-Lab12/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/树莓派解析域名失败导致apt-get update不可用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -1760,7 +2226,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/31/OS-Lab12/" itemprop="url">OS Lab1</a></h1>
+                <a class="post-title-link" href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/" itemprop="url">树莓派解析域名失败导致apt-get update不可用</a></h1>
         
 
         <div class="post-meta">
@@ -1772,7 +2238,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T17:57:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
                 2017-10-31
               </time>
             
@@ -1811,10 +2277,14 @@
 
       
         
-          
-            <h1 id="OSLab1：MIT的Lab1"><a href="#OSLab1：MIT的Lab1" class="headerlink" title="OSLab1：MIT的Lab1"></a>OSLab1：MIT的Lab1</h1><p>这个作业真的非常令人心烦，现在到了检查作业的紧要关头啦！</p>
-
-          
+          <p>捣鼓了一下午，查了n多网站。从删除文件到修改源，终于发现一直提示解析域名失败的原因是树莓派没有连上网orz…<br>没有HDMI，我是通过树莓派的WiFi和电脑连上，电脑插了网线。<br>后来把网线给了树莓派，电脑连树莓派的WiFi，电脑直接跳出了学校网络的登录界面，在电脑上面登录之后，这次开始更新软件源。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/31/树莓派解析域名失败导致apt-get update不可用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1905,7 +2375,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1916,7 +2386,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2030,7 +2500,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共47.5k字</span>
+  <span class="post-count">博客全站共49.4k字</span>
 </div>
 
 
@@ -2039,6 +2509,15 @@
 
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
