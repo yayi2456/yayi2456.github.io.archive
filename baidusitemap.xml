@@ -4,11 +4,57 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2018-01-14T19:16:38.823Z</lastmod>
+    <loc>http://yoursite.com/2017/12/12/OS/Lab4_Document/</loc>
+    <lastmod>2018-01-14T19:25:12.789Z</lastmod>
     <data>
         <display>
-        <title>进程与线程</title>
+        <title>Lab4_Document</title>
+        <pubTime>2017-12-12T13:08:40.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="MIT Lab" url="http://yoursite.com/categories/OS/MIT-Lab/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/27/OS/OS4+Memory%20and%20Process/</loc>
+    <lastmod>2018-01-14T19:23:51.107Z</lastmod>
+    <data>
+        <display>
+        <title>串讲复习</title>
+        <pubTime>2017-11-27T11:00:00.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="MIT Lab" url="http://yoursite.com/categories/OS/MIT-Lab/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2018-01-14T19:23:16.965Z</lastmod>
+    <data>
+        <display>
+        <title>chap2-进程与线程</title>
         <pubTime>2017-11-06T06:13:37.000Z</pubTime>
         
         <tag>OS</tag>
@@ -22,29 +68,6 @@
           
              
               <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/27/OS/OS4+Memory%20and%20Process/</loc>
-    <lastmod>2018-01-14T19:13:50.558Z</lastmod>
-    <data>
-        <display>
-        <title>Lab3_Document</title>
-        <pubTime>2017-11-27T11:00:00.000Z</pubTime>
-        
-        <tag>OS</tag>
-         
-         
-           
-             
-              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
-          
-             
-              <breadCrumb title="MIT Lab" url="http://yoursite.com/categories/OS/MIT-Lab/"/>
           
         </display>
     </data>

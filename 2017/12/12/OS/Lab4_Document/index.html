@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta name="keywords" content="OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lab4_Document">
+<meta property="og:url" content="http://yoursite.com/2017/12/12/OS/Lab4_Document/index.html">
+<meta property="og:site_name" content="Be With Me">
+<meta property="og:description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96651596.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96728212.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/39840649.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29015296.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/70313494.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29300920.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/92996124.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/58108225.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/75077349.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/63950397.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/24870973.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/38167577.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/44217150.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/35810116.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/8461936.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/59214383.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/79530109.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/86607615.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/74947768.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/70937828.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/20728662.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/47728587.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/41333018.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/27465683.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/2663658.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/95241296.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/77522130.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/27738708.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/86236764.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/14374721.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/57100150.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/99153651.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/36579327.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/42000412.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/19942562.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/85310004.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/89863916.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/87756184.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/20379443.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/74580574.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/80248583.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/16842939.jpg">
+<meta property="og:updated_time" content="2018-01-14T19:25:12.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lab4_Document">
+<meta name="twitter:description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/12/OS/Lab4_Document/"/>
+
+
+
+
+
+  <title>Lab4_Document | Be With Me</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Be With Me</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最喜欢你啦！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/OS/Lab4_Document/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lab4_Document</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T21:08:40+08:00">
+                2017-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT Lab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1><p>1511266 杨颖</p>
+<h2 id="Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="Part A: Multiprocessor Support and Cooperative Multitasking"></a>Part A: Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统的初始化，随后，出于某种需要，BSP将会唤醒AP，AP也可以作为独立的CPU执行指令。</p>
+<p>在这种系统之中，每个CPU都有一个模块是<strong>LAPIC</strong>，它负责系统的中断传递，为每个CPU提供一个独特的编号。</p>
+<p>LAPIC是Local Advanced Programmable Interrupt Controller，local高级可编程中断控制器。LAPIC一般由中断信号、PRT、一组寄存器与其他一些部件组成，可以处理硬件的中断请求信息，并通知CPU进行处理。</p>
+<p>在本次实验中，我们将会用到LAPIC模块的如下功能函数：</p>
+<ol>
+<li>cpunum()：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg" alt=""></p>
+<p>该函数中，通过访问lapic[ID]对应字段获得当前的cpu编号。</p>
+<ol>
+<li>lapic_startap():</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96651596.jpg" alt=""></p>
+<p>这个函数中，BSP负责对尚未工作的AP进行初始化与唤醒操作。首先设置向量，然后发送INIT中断来重置其他CPU，最终发送STRARTUP信号与开始执行的位置，使一个CPU正式开始工作。</p>
+<ol>
+<li>lapic_init():</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">lapic_init(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (!lapicaddr) <span class="keyword">return</span>;</div><div class="line">	<span class="comment">// lapicaddr is the physical address of the LAPIC's 4K MMIO</span></div><div class="line">	<span class="comment">// region.  Map it in to virtual memory so we can access it.</span></div><div class="line">	<span class="comment">//lapiaddr是LAPIC的4K的MIMO区域的物理地址</span></div><div class="line">	<span class="comment">//把他映射到虚拟地址空间，就可以访问了</span></div><div class="line">	lapic = mmio_map_region(lapicaddr, <span class="number">4096</span>);</div><div class="line">	<span class="comment">//enable LAPIC；设置伪中断向量</span></div><div class="line">	<span class="comment">// Enable local APIC; set spurious interrupt vector.</span></div><div class="line">	<span class="comment">//#define SVR     (0x00F0/4)   // Spurious Interrupt Vector</span></div><div class="line">	<span class="comment">//#define ENABLE     0x00000100   // Unit Enable</span></div><div class="line"></div><div class="line">	<span class="comment">//in inc/trap.c</span></div><div class="line">	<span class="comment">//#define IRQ_OFFSET	32	// IRQ 0 corresponds to int IRQ_OFFSET</span></div><div class="line">	<span class="comment">//// Hardware IRQ numbers. We receive these as (IRQ_OFFSET+IRQ_WHATEVER)</span></div><div class="line">	<span class="comment">//#define IRQ_SPURIOUS     7</span></div><div class="line">	lapicw(SVR, ENABLE | (IRQ_OFFSET + IRQ_SPURIOUS));</div><div class="line"></div><div class="line">	<span class="comment">// The timer repeatedly counts down at bus frequency</span></div><div class="line">	<span class="comment">// from lapic[TICR] and then issues an interrupt.  </span></div><div class="line">	<span class="comment">//定时器重复从lapic [TICR]的总线频率倒计数，然后发出中断。</span></div><div class="line">	<span class="comment">// If we cared more about precise timekeeping,</span></div><div class="line">	<span class="comment">// TICR would be calibrated using an external time source.</span></div><div class="line">	<span class="comment">//如果我们更关心精确的计时，TICR将使用外部时间源进行校准。</span></div><div class="line">	lapicw(TDCR, X1);<span class="comment">//in this:向lapic数组写入东西lapic[TDCR]=X1;</span></div><div class="line">	lapicw(TIMER, PERIODIC | (IRQ_OFFSET + IRQ_TIMER));</div><div class="line">	lapicw(TICR, <span class="number">10000000</span>); </div><div class="line"></div><div class="line">	<span class="comment">// Leave LINT0 of the BSP enabled so that it can get</span></div><div class="line">	<span class="comment">// interrupts from the 8259A chip.</span></div><div class="line">	<span class="comment">//吧BSP的LINT0（向量表0）enable，这样就可以从8259A芯片得到中断</span></div><div class="line">	<span class="comment">// According to Intel MP Specification, the BIOS should initialize</span></div><div class="line">	<span class="comment">// BSP's local APIC in Virtual Wire Mode, in which 8259A's</span></div><div class="line">	<span class="comment">// INTR is virtually connected to BSP's LINTIN0. In this mode,</span></div><div class="line">	<span class="comment">// we do not need to program the IOAPIC.</span></div><div class="line">	<span class="comment">//根据英特尔MP规范，BIOS应在虚拟线路模式下初始化BSP的本地APIC，</span></div><div class="line">	<span class="comment">//其中8259A的INTR虚拟连接到BSP的LINTIN0。 </span></div><div class="line">	<span class="comment">//在这种模式下，我们不需要编程IOAPIC。</span></div><div class="line">	<span class="comment">//如果当前cpu不是启动cpu，它的中断表0 被mask</span></div><div class="line">	<span class="keyword">if</span> (thiscpu != bootcpu)</div><div class="line">		lapicw(LINT0, MASKED);</div><div class="line">	<span class="comment">// Disable NMI (LINT1) on all CPUs</span></div><div class="line">	<span class="comment">//中断表1都被mask</span></div><div class="line">	lapicw(LINT1, MASKED);</div><div class="line">	<span class="comment">// Disable performance counter overflow interrupts</span></div><div class="line">	<span class="comment">// on machines that provide that interrupt entry.</span></div><div class="line">	<span class="comment">//在一些特定的版本（提供了中断入口）的机器上，</span></div><div class="line">	<span class="comment">//disable PCINT（性能计数器溢出？？？）</span></div><div class="line">	<span class="keyword">if</span> (((lapic[VER]&gt;&gt;<span class="number">16</span>) &amp; <span class="number">0xFF</span>) &gt;= <span class="number">4</span>)</div><div class="line">		lapicw(PCINT, MASKED);</div><div class="line">	<span class="comment">// Map error interrupt to IRQ_ERROR.</span></div><div class="line">	lapicw(ERROR, IRQ_OFFSET + IRQ_ERROR);</div><div class="line"></div><div class="line">	<span class="comment">// Clear error status register (requires back-to-back writes).</span></div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Ack any outstanding interrupts.</span></div><div class="line">	lapicw(EOI, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Send an Init Level De-Assert to synchronize arbitration ID's.</span></div><div class="line">	<span class="comment">//#define ICRHI   (0x0310/4)   // Interrupt Command [63:32]</span></div><div class="line">	<span class="comment">//#define INIT       0x00000500   // INIT/RESET</span></div><div class="line">	<span class="comment">//#define DELIVS     0x00001000   // Delivery status</span></div><div class="line">	<span class="comment">//#define LEVEL      0x00008000   // Level triggered</span></div><div class="line">	<span class="comment">//#define BCAST      0x00080000   // Send to all APICs, including self.</span></div><div class="line">	lapicw(ICRHI, <span class="number">0</span>);</div><div class="line">	lapicw(ICRLO, BCAST | INIT | LEVEL);</div><div class="line">	<span class="keyword">while</span>(lapic[ICRLO] &amp; DELIVS) ;</div><div class="line">	<span class="comment">// Enable interrupts on the APIC (but not on the processor).</span></div><div class="line">	<span class="comment">//TPR 任务优先级</span></div><div class="line">	lapicw(TPR, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该函数初始化LAPIC。像其他结构一样，lapic被映射到固定的物理地址，随后进行各种中断向量的设置以及向量表的mask操作，设置错误状态寄存器的值，最后设置任务优先级。</p>
+<p>像VGA设备一样，物理地址空间上也为LAPIC设备留了一个洞，它将会被map到虚拟地址的MMIOBASE。这种访问方式使得CPU可以像访问内存一样访问设备。</p>
+<blockquote>
+<p><strong>Exercise 1</strong></p>
+<p>完成mmio_map_region函数，它将会完成把LAPIC设备所占据的物理地址map到预留的虚拟地址部分。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> *</div><div class="line">mmio_map_region(physaddr_t pa, size_t size)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// Where to start the next region.  Initially, this is the</span></div><div class="line">	<span class="comment">// beginning of the MMIO region.  Because this is static, its</span></div><div class="line">	<span class="comment">// value will be preserved between calls to mmio_map_region</span></div><div class="line">	<span class="comment">// (just like nextfree in boot_alloc).</span></div><div class="line">	<span class="comment">//这是mmio开始的地方</span></div><div class="line">	<span class="keyword">static</span> uintptr_t base = MMIOBASE;</div><div class="line">	<span class="comment">// Reserve size bytes of virtual memory starting at base and</span></div><div class="line">	<span class="comment">// map physical pages [pa,pa+size) to virtual addresses</span></div><div class="line">	<span class="comment">// [base,base+size).  Since this is device memory and not</span></div><div class="line">	<span class="comment">// regular DRAM, you'll have to tell the CPU that it isn't</span></div><div class="line">	<span class="comment">// safe to cache access to this memory.  Luckily, the page</span></div><div class="line">	<span class="comment">// tables provide bits for this purpose; simply create the</span></div><div class="line">	<span class="comment">// mapping with PTE_PCD|PTE_PWT (cache-disable and</span></div><div class="line">	<span class="comment">// write-through) in addition to PTE_W.  (If you're interested</span></div><div class="line">	<span class="comment">// in more details on this, see section 10.5 of IA32 volume</span></div><div class="line">	<span class="comment">// 3A.)</span></div><div class="line">	<span class="comment">//保留虚拟内存的的size字节，并把物理地址pa，pa+size给map到base,base+size，</span></div><div class="line">	<span class="comment">//由于这是设备的内存，并不是dram，需要告诉cpu缓存到这里的access是不安全的，</span></div><div class="line">	<span class="comment">//幸运的是，页表提供了这样的位</span></div><div class="line">	<span class="comment">//只需要使用PTE_PCD|PTE_PWT|PTE_W即可</span></div><div class="line">	<span class="comment">//如果你对这个很有兴趣，可以去看10.5节，IA32 卷3A</span></div><div class="line">	<span class="comment">// Be sure to round size up to a multiple of PGSIZE and to</span></div><div class="line">	<span class="comment">// handle if this reservation would overflow MMIOLIM (it's</span></div><div class="line">	<span class="comment">// okay to simply panic if this happens).</span></div><div class="line">	<span class="comment">//确保你roundsizeup</span></div><div class="line">	<span class="comment">//确保你检测是不是会超过MMIOLIM，如果超过了，panic</span></div><div class="line">	<span class="comment">// Hint: The staff solution uses boot_map_region.</span></div><div class="line">	<span class="comment">//使用boot_map_region</span></div><div class="line">	<span class="comment">// Your code here:</span></div><div class="line">	<span class="comment">//Note:pa=5 size=7 pgsize=10</span></div><div class="line">	<span class="comment">//actually endsp shall be 20</span></div><div class="line">	uint32_t endsp=ROUNDUP(size+pa,PGSIZE);</div><div class="line">	pa=ROUNDDOWN(pa,PGSIZE);</div><div class="line">	size=endsp-pa;</div><div class="line">	<span class="keyword">if</span>(base+size&gt;MMIOLIM)panic(<span class="string">"the reservation would overflow MMIOLIM"</span>);</div><div class="line">	boot_map_region(kern_pgdir,base,size,pa,PTE_PCD|PTE_PWT|PTE_W);</div><div class="line">	<span class="comment">//panic("mmio_map_region not implemented");</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	base+=size;</div><div class="line">	<span class="keyword">return</span> (<span class="keyword">void</span>*)(base-size);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>这里需要注意的是size与paddr的关系。由于最终覆盖到的地址应该在size+paddr，因此不能使用ROUNDDOWN(paddr)与ROUNDUP(size)直接做运算，否则可能会产生缺页的情况。</p>
+</blockquote>
+<h3 id="Application-Processor-Bootstrap"><a href="#Application-Processor-Bootstrap" class="headerlink" title="Application Processor Bootstrap"></a>Application Processor Bootstrap</h3><p>在<strong>i386_init</strong>函数中，本实验又增加了新的初始化过程：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96728212.jpg" alt=""></p>
+<p>在启动AP之前，BSP将会首先去获知多处理器的信息，比如CPU总数，他们各自的APIC编号以及LAPIC的MMIO地址。<strong>kern/mpconfig.c</strong>中的<strong>mp_init</strong>函数通过访问MP配置表来获知这些信息。随后，<strong>lapic_init</strong>初始化LAPIC设备，<strong>pic_init</strong>在更底层的部分初始化8259A的中断控制器。最后<strong>boot_aps</strong>函数(kern/init.c)将会启动各个AP，使他们从<strong>MPENTRY_PADDR</strong>开始运行。</p>
+<p><strong>boot_aps</strong>函数如下：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/39840649.jpg" alt=""></p>
+<p>可以看到，BSP首先将AP启动后执行的代码搬到AP的启动位置code，随后逐个唤醒AP。对每一个AP，将会告诉它它的内核栈的位置，随后调用<strong>lapic_statrap</strong>(kern/lapic.c)。lapic_startap的代码在上方已经贴出，它为CPU设置各种中断信息并最终给出STRATUP信号表明AP已经设置完成，随后AP开始从给定地址开始运行。进入<strong>mpentry.S</strong>的运行，设置initial页表并转入自己的内核栈，随后调用<strong>mp_main</strong>函数，设置页表，初始化LAPIC、GDT以及trap，随后告诉<strong>boot_aps</strong>这个CPU设置完毕，<strong>boot_aps</strong>接收到AP的信息之后，进入下一个AP的初始化。</p>
+<p>随后就像在Lab3中的那样，调用用户程序。</p>
+<blockquote>
+<p><strong>Exercise 2</strong></p>
+<p>修改<strong>page_init</strong>函数，不再将从MPENTRY_PADDR开始的虚拟地址添加到可用页上，给出更新后的函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29015296.jpg" alt=""></p>
+<p><strong>Question</strong></p>
+<ol>
+<li>Compare kern/mpentry.S side by side with boot/boot.S. Bearing in mind that kern/mpentry.S is compiled and linked to run above KERNBASE just like everything else in the kernel, what is the purpose of macro MPBOOTPHYS? Why is it necessary in kern/mpentry.S but not in boot/boot.S? In other words, what could go wrong if it were omitted in kern/mpentry.S? Hint: recall the differences between the link address and the load address that we have discussed in Lab 1. </li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/70313494.jpg" alt=""><br>MPBOOTYPHYS的目的是计算应该访问的地址。<br>与boot.S不同，在mpentry.S中启动的AP，其load进的地址并不是像boot一样与假设自己被加载进来的地址相同，而是被BSP加载到MPENTRY_PADDR。为了访问到正确的物理地址，应该换算成希望加载进来的地址再进行对地址的操作。</p>
+</blockquote>
+<h3 id="Per-CPU-State-and-Initialization"><a href="#Per-CPU-State-and-Initialization" class="headerlink" title="Per-CPU State and Initialization"></a>Per-CPU State and Initialization</h3><p>在多CPU的系统中，需要明确每个CPU私有的状态以及共有的资源划分。在<strong>kern/cpu.h</strong>中定义的CpuInfo结构存储有大部分的私有信息。thiscpu指向当前cpu的CpuInfo结构。</p>
+<blockquote>
+<p><strong>Exercise 3</strong><br>修改<strong>mem_init_mp</strong>函数，为每个CPU map一个内核栈。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29300920.jpg" alt=""></p>
+<p>像在memlayout.h中定义的那样，补充后的代码是：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/92996124.jpg" alt=""></p>
+<p><strong>Exercise 4</strong></p>
+<p>修改<strong>trap_init_percpu</strong>使得在多CPU环境下可以运行</p>
+<p>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/58108225.jpg" alt=""></p>
+<p>这段代码中一共有四个需要修改的地方，一是所有的ts应该修改为thiscpu-&gt;ts，而是栈顶应该由KSTACKTOP-(KSTKSIZE + KSTKGAP)变为KSTACKTOP-i*(KSTKSIZE + KSTKGAP)，三是gdt中tss表项位置应该由[(GD_TSS0 &gt;&gt; 3)变为[(GD_TSS0 &gt;&gt; 3)+i，四是load选择子的时候应该修改为对应cpu的选择子ltr(GD_TSS0+i*8);。</p>
+</blockquote>
+<p>这样就完成了不同CPU的trap初始化。</p>
+<p>完成这里的操作之后，make qemu CPUS=4，可以看到所有函数检查通过，CPU信息输出。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/75077349.jpg" alt=""></p>
+<h3 id="Locking"><a href="#Locking" class="headerlink" title="Locking"></a>Locking</h3><p>上述完成之后，代码将会停在原地。为了使得AP能够进一步运行，需要首先解决多个CPU同时运行内核代码的竞争状况。为了解决这个问题，采用内核锁机制。当有进程在内核空间时，内核将会上一个锁，回到用户空间后，锁被释放。</p>
+<p>在<strong>kern/spinlock.h</strong>中定义了一个kernel_lock，提供了<strong>lock_kernel</strong>与<strong>unlock_kernel</strong>函数。需要我们自己来决定加锁解锁的位置。</p>
+<blockquote>
+<p><strong>Exercise 5</strong><br>加锁与解锁</p>
+<ol>
+<li><p>在i386_init中，在BSP唤醒其他CPU之前加锁：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/63950397.jpg" alt=""></p>
+</li>
+<li><p>在mp_main中，在AP初始化之后加锁，然后调用sched_yield来开始调度。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/24870973.jpg" alt=""></p>
+</li>
+<li><p>在trap中，如果是从用户模式来的trap，就获得锁。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/38167577.jpg" alt=""></p>
+</li>
+<li><p>在env_run中，在进入用户模式的时候释放锁<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/44217150.jpg" alt=""></p>
+</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>Question</p>
+<ol>
+<li>It seems that using the big kernel lock guarantees that only one CPU can run the kernel code at a time. Why do we still need separate kernel stacks for each CPU? Describe a scenario in which using a shared kernel stack will go wrong, even with the protection of the big kernel lock. </li>
+</ol>
+<p>这是因为在lab3中已经写过，当用户进程发生中断的时候，执行的代码中有：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/35810116.jpg" alt=""><br>这段代码是产生中断之后硬件自己就会执行的，在这个时候仍未调用trap，自然还没有为内核加锁。也就是说，如果使用同一个栈，当两个cpu同时发生中断的时候，这段代码很可能会被打断执行顺序，从而导致内核栈的混乱。</p>
+</blockquote>
+<h3 id="Round-Robin-Scheduling"><a href="#Round-Robin-Scheduling" class="headerlink" title="Round-Robin Scheduling"></a>Round-Robin Scheduling</h3><p>接下来，将会修改调度过程的代码，来为jos添加调度的功能。</p>
+<p>在这里，这个功能会被描述为：</p>
+<p>函数<strong>shced_yield</strong>负责选择一个新进程运行，它从当前运行进程的编号开始寻找，找第一个有着ENV_RUNNABLE的进程把运行权交付给它。如果没有其他进程是ENV_RUNNABLE状态而且现在的进程还可以运行，那就还让现在的进程运行。</p>
+<blockquote>
+<p><strong>Exercise 6</strong></p>
+<p>修改该sched_yield函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/8461936.jpg" alt=""></p>
+</blockquote>
+<p>需要注意的是，这时syscall函数仍未被完成，需要在此后陆续添加更多的SYS_*来允许用户空间的系统调用。</p>
+<p>随后可以测试，修改i386_init函数，创建3个进程：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/59214383.jpg" alt=""></p>
+<p>使用make qemu CPUS=2，可以得到结果：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/79530109.jpg" alt=""></p>
+<blockquote>
+<p>Question</p>
+<ol>
+<li>In your implementation of env_run() you should have called lcr3(). Before and after the call to lcr3(), your code makes references (at least it should) to the variable e, the argument to env_run. Upon loading the %cr3 register, the addressing context used by the MMU is instantly changed. But a virtual address (namely e) has meaning relative to a given address context–the address context specifies the physical address to which the virtual address maps. Why can the pointer e be dereferenced both before and after the addressing switch? </li>
+</ol>
+<p>e所指示的空间是在mem_init中被申请的物理空间，它并不会存在于每个进程的可用页表里供进程自己决定map的虚拟地址，而是对每个进程而言都是一样的。</p>
+<ol>
+<li>Whenever the kernel switches from one environment to another, it must ensure the old environment’s registers are saved so they can be restored properly later. Why? Where does this happen?</li>
+</ol>
+<p>只有这样做，才能保存上一个进程的运行状态信息，恢复进程运行时才不会出错。<br>这个操作发生在trap函数中，代码是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/86607615.jpg" alt=""><br>它保存了发生trap的进程的tf。<br>然而，进程之间切换由kernel决定。每次发生进程调度，都会发生trap（这里将syscall主动放弃cpu也通过trap完成）</p>
+</blockquote>
+<h3 id="System-Calls-for-Environment-Creation"><a href="#System-Calls-for-Environment-Creation" class="headerlink" title="System Calls for Environment Creation"></a>System Calls for Environment Creation</h3><p>下面将允许用户进程创建子进程并执行。</p>
+<p>在Unix中，fork函数可以用来创建子进程。这个子进程完全copy了父进程的地址空间，二者唯一不同的是在父进程中fork返回子进程的编号而在子进程中返回的是0。</p>
+<p>我们将实现一个更加原始的fork，首先需要完成一些系统调用函数。<br>在这些个函数之中，需要频繁用到函数envid2env来检查进程操作是否合法，首先来分析这个envid2env函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/74947768.jpg" alt=""></p>
+<p>如果envid是0，说明是当前进程希望获得自己的env结构，直接允许获得，返回curenv，函数成功。<br>如果给的envid不合法或者指定进程是free进程，无法得到进程结构，返回bad environment。<br>否则如果指定需要检查权限，那么给定的envid必须是当前进程的子进程，如果满足要求返回成功，否则返回失败：bad environment。</p>
+<blockquote>
+<p><strong>Exercise 7</strong>：</p>
+<p>只需要按照要求完成代码：</p>
+<p><strong>sys_exofork</strong>：创建一个新进程，其中，用户地址空间没有任何map，不可以运行。子进程将会拥有和父进程一样的寄存器状态值，该函数在子进程中返回0，在父进程中返回子进程的id。（由于子进程刚刚被创建的时候是没有执行能力的，因此实际上，在子进程中是无法返回的，直到其父进程用下面的函数将子进程标记为可运行）<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/70937828.jpg" alt=""></p>
+<p><strong>sys_env_set_status</strong>：设置一个进程的状态为ENV_RUNNABLE或者是ENV_NOT_RUNNABLE。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/20728662.jpg" alt=""></p>
+<p><strong>sys_page_alloc</strong>：申请一个物理页并把它map在给定进程的给定地址。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/47728587.jpg" alt=""></p>
+<p><strong>sys_page_map</strong>：把给定进程的某一个页的映射同样映射到另一个进程的给定地址，这样，这两个进程享有了共享的一个物理页。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/41333018.jpg" alt=""></p>
+<p><strong>sys_page_unmap</strong>：把某一个页从某一个进程的对应地址上unmap。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/27465683.jpg" alt=""></p>
+</blockquote>
+<p>完成这些之后，partA的dumbfork测试就可以通过了。</p>
+<h2 id="Part-B-Copy-on-Write-Fork"><a href="#Part-B-Copy-on-Write-Fork" class="headerlink" title="Part B: Copy-on-Write Fork"></a>Part B: Copy-on-Write Fork</h2><p>像在前面提到的一样，Unix提供了fork函数，这个函数将会复制整个父进程的地址空间。xv6 Unix的fork将会复制父进程的所有页到新的页，这也是在dumbfork里面做的。但是，这样的操作耗时而且通常都是无用功：创建出的子进程可能很快就会被父进程委派去做其他的工作，子进程的地址空间很快会被新的数据取代。</p>
+<p>出于这种考虑，现在来实现一种新的特性，子进程与父进程将享有同一套地址空间，直到有进程真的要去修改这块空间。这样的技术叫做<strong>copy-on-write</strong>。</p>
+<p>在这种特性之下，当创建子进程的时候，父进程仅仅将自己的映射关系给子进程，同时把自己共享出去的页都标记为只读。当有一方想要修改该虚拟地址空间时触发一个page fault，这时，内核才真正意识到需要一个新的页，这时才会去为发生错误的进程申请一个自己的页。这样的设计使得子进程在执行之前花费的代价很少，一般只会有一个栈的页。</p>
+<h3 id="User-level-page-fault-handling"><a href="#User-level-page-fault-handling" class="headerlink" title="User-level page fault handling"></a>User-level page fault handling</h3><p>用户层面的缺页异常有很多种引起的可能，cow只是其中的一种。内核必须能够决定为不同程序空间引起的缺页异常提供不一样的解决方式，比如，在栈中发生的缺页异常需要申请并map一个物理页，在bss区域引起的缺页中断会申请一个全0的物理页然后映射。</p>
+<p>对内核来说，有很多信息都可以作为判断依据，接下来，将完成我们的pgfault处理函数。</p>
+<h3 id="Setting-the-Page-Fault-Handler"><a href="#Setting-the-Page-Fault-Handler" class="headerlink" title="Setting the Page Fault Handler"></a>Setting the Page Fault Handler</h3><p>为了处理缺页中断，用户进程需要向内核注册并存储自己的缺页中断处理函数的入口点。为了实现这个功能，在Env结构中新加了成员<code>env_pgfault_upcall</code>。</p>
+<blockquote>
+<p><strong>Exercise 8</strong>：<br>完成函数<code>sys_env_set_pgfault_upcall</code>，确保进行了权限检查。</p>
+<p>根据提示，该函数为特定进程设置一个缺页中断处理函数。这个进程必须是自己或者是自己的子进程。<br>写出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/2663658.jpg" alt=""></p>
+</blockquote>
+<h3 id="Normal-and-Exception-Stacks-in-User-Environments"><a href="#Normal-and-Exception-Stacks-in-User-Environments" class="headerlink" title="Normal and Exception Stacks in User Environments"></a>Normal and Exception Stacks in User Environments</h3><p>在正常的执行中，用户进程将会在用户栈中执行，esp指向栈顶，当一个缺页中断发生的时候，内核将会使用户进程重新在另一个栈中运行缺页中断的处理函数。也就是，我们需要使内核能够自动换栈。</p>
+<p>异常栈有一个page大小，最顶端是UXSTACKTOP。因此，第一个中断发生后将会空间UXSTACKTOP-PGSIZE到UXSTACKTOP之间作为异常栈。在处理函数中可以通过各种调用恢复原进程的正确执行，随后该函数返回，回到上次发生中断的地方，重新执行出错代码。<br>每一个希望有用户层次的缺页中断处理函数的进程都必须支持申请新页来作为他自己的异常栈。</p>
+<h3 id="Invoking-the-User-Page-Fault-Handler"><a href="#Invoking-the-User-Page-Fault-Handler" class="headerlink" title="Invoking the User Page Fault Handler"></a>Invoking the User Page Fault Handler</h3><p>接下来我们要修改trap中的代码，使它有以下的功能。</p>
+<p>如果这个用户进程并没有自己的缺页中断处理函数，当他有缺页中断发生的时候，就销毁这个进程然后退出，否则。</p>
+<p>异常栈中的情况是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/95241296.jpg" alt=""></p>
+<p>UXSTTACKTOP是栈底，依次push进了许多变量，他们与结构<strong>UTrapframe</strong>吻合。函数执行结束后，需要从异常栈返回原本的用户栈。</p>
+<p>实际情况中可能更加复杂：缺页中断额处理函数本身还可能会发生中断，这时，继续往栈顶push数据，但是需要注意，由于一些原因，需要先push一个32bit的空位。这个将会在后面进行解释。如果tf-&gt;tf_esp在上述区域之中，那么就是在异常栈中发生的缺页中断，否则就是在原本的用户进程中发生的中断。</p>
+<blockquote>
+<p><strong>Exercise 9</strong></p>
+<p>完成函数<code>page_fault_handler</code>。他需要将用户空间的缺页中断给用户的处理函数。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/77522130.jpg" alt=""></p>
+<p>首先，只有有处理函数才能进行下一步的操作，否则将会free掉这个进程。<br>随后确定将要push的结构的首地址。如果当前进程可以访问这个地址，那么就把对应的地址写为对应的值，保存好之前执行状态的信息。保存完之后，将程序的下一个执行地址设置为函数的入口地址，将该进程的栈顶设置为异常栈的栈顶，运行。</p>
+</blockquote>
+<h3 id="User-mode-Page-Fault-Entrypoint"><a href="#User-mode-Page-Fault-Entrypoint" class="headerlink" title="User-mode Page Fault Entrypoint"></a>User-mode Page Fault Entrypoint</h3><p>接下来，需要我们完成执行C程序并且返回到原执行状态的汇编指令，该汇编指令是<code>sys_env_set_pgfault_upcall</code>的处理过程。</p>
+<blockquote>
+<p><strong>Exercise 10</strong>：<br>完成lib/pfentry.S中的<code>_pgfault_upcall</code>过程。</p>
+<p>只需要根据提示，结合上述的异常栈动作：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/27738708.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/86236764.jpg" alt=""></p>
+</blockquote>
+<p>最后，完成C程序库部分的缺页异常处理机制：</p>
+<blockquote>
+<p><strong>Exercise 11</strong>：<br>完成lib/pgfault.c中的<code>set_pgfault_handler</code>函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/14374721.jpg" alt=""></p>
+</blockquote>
+<h3 id="Implementing-Copy-on-Write-Fork"><a href="#Implementing-Copy-on-Write-Fork" class="headerlink" title="Implementing Copy-on-Write Fork"></a>Implementing Copy-on-Write Fork</h3><p>fork函数是一个cow的子进程创建函数，它的控制流程是这样的：</p>
+<ol>
+<li><p>使用<code>set_pgfault_handler</code>来确定中断处理函数C程序层面的入口</p>
+</li>
+<li><p>调用<code>sys_exofork</code>创建一个新进程</p>
+</li>
+<li><p>对每一个可写的或是cow的在UTOP之下的页，父进程为之调用<strong>duppage</strong>函数，这个函数将会把cow的页map到子进程地址空间，然后重新在自己的地址空间map这些页。</p>
+</li>
+<li><p>父进程为子进程设置缺页中断处理函数入口点</p>
+</li>
+<li><p>子进程可以运行了，父进程将其标志为RUNNABLE</p>
+</li>
+</ol>
+<p>之后，每次想要修改cow页面都会触发缺页中断，触发之后过程如下：</p>
+<ol>
+<li><p>kernel把pagefault告诉_pgfault_upcall，执行入口调用pgfault函数</p>
+</li>
+<li><p>pgfault检查错误是写错误而且页面是cow，否则panic</p>
+</li>
+<li><p>pgfault申请新的页，map到一个临时地址，把出错的页面信息copy到新的页面，随后把新页map到一个合适的地址。</p>
+</li>
+</ol>
+<p>kernle会把进程的页表都map到UVPT页目录map到UVPD，方便根据虚拟地址获取对应页的权限信息。首先我们先来看一看这个小技巧。</p>
+<p>在内核中可以使用函数<code>pgdir_walk</code>获得权限信息，但是在用户空间，虚拟地址的翻译决定了自身的页表与页目录是不可见的。为了方便的获取权限信息，我们向用户进程的页目录中插入一个特殊的entry。这个entry指向页目录的首部。</p>
+<p>这样，当我们访问一个PDX与PTX均是特定数值V的虚拟地址时，我们访问到了页目录。<br>这个地址作为指针数组的开头，使用某虚拟地址的PDX作为索引，使我们可以访问到页目录的各项。</p>
+<p>当我们访问一个PDX是V但是PTX不是V的虚拟地址时，我们访问到了页表。同样地我们可以访问到各个页表项。</p>
+<p>上述提到的两个虚拟地址分别是UVPD与UVPT。在memlayout.h中定义。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/57100150.jpg" alt=""></p>
+<blockquote>
+<p><strong>Exercise 12</strong>：<br>完成frok，duppage以及pgfault。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/99153651.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/36579327.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/42000412.jpg" alt=""></p>
+</blockquote>
+<p>partB到这里就结束了，在进入partC之前，首先来梳理一下从fork开始的整个运行过程。</p>
+<p>当一个用户进程调用fork函数创建子进程，在fork中将申请一个新的进程，复制父进程的地址空间映射给子进程并把二者空间中的对应页都标记为cow，随后父进程为子进程申请用户栈，设置缺页处理过程入口点，最终将子进程的状态标记为可运行。fork退出后将得到两个可运行的进程，在子进程中fork函数返回的是0，在父进程中返回的是子进程的进程id，随后二者可以区分开开始运行。</p>
+<p>子进程开始运行其他东西或是父进程需要写数据的时候，其中一个必然会触发一个cow的缺页中断。这个进程的缺页中断经过内核dispatch，将会执行我们在trap中完成的处理函数，假设它已经设置了自己的处理函数，那么就会创建一个异常栈，开始执行在pfentry.S中的汇编代码，执行完毕之后返回原来发生错误的执行位置，继续执行。</p>
+<h2 id="Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC"><a href="#Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC" class="headerlink" title="Part C: Preemptive Multitasking and Inter-Process communication (IPC)"></a>Part C: Preemptive Multitasking and Inter-Process communication (IPC)</h2><h3 id="Clock-Interrupts-and-Preemption"><a href="#Clock-Interrupts-and-Preemption" class="headerlink" title="Clock Interrupts and Preemption"></a>Clock Interrupts and Preemption</h3><p>在此之前，我们不同进程之间的调度都是自愿的。下面将通过引入时钟中断来强制进行调度。</p>
+<h3 id="Interrupt-discipline"><a href="#Interrupt-discipline" class="headerlink" title="Interrupt discipline"></a>Interrupt discipline</h3><p>外部中断在本实验中一共有16个，标号是32-47。在本实验中，内核中的外部中断被忽略，在用户空间中通过设置FL_IF来设置允许外部中断。</p>
+<blockquote>
+<p><strong>Exercise 13</strong>：<br>修改trapentry.S以及trap.c来初始化上述的中断，然后修改该env_alloc允许用户空间的外部中断</p>
+<p>像上一个实验一样即可：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/19942562.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/85310004.jpg" alt=""></p>
+<p>只需在指定的位置将新建的env的tf_eflags修改为FL_IF允许即可。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/89863916.jpg" alt=""></p>
+</blockquote>
+<h3 id="Handling-Clock-Interrupts"><a href="#Handling-Clock-Interrupts" class="headerlink" title="Handling Clock Interrupts"></a>Handling Clock Interrupts</h3><p>在lapic_init以及pic_init中，已经设置好了产生时钟中断，下面需要处理时钟中断。</p>
+<blockquote>
+<p><strong>Exercise 14</strong>：<br>修改trap_dispatch，它调用sched_yield。<br>直接给出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/87756184.jpg" alt=""></p>
+</blockquote>
+<h3 id="Inter-Process-communication-IPC"><a href="#Inter-Process-communication-IPC" class="headerlink" title="Inter-Process communication (IPC)"></a>Inter-Process communication (IPC)</h3><p>进程间的通信有很多种模型，这里只实现简单的一种。</p>
+<h3 id="IPC-in-JOS"><a href="#IPC-in-JOS" class="headerlink" title="IPC in JOS"></a>IPC in JOS</h3><p>这里进程可以相互发送或接收的信息有：一个32bit的数据或是一整个页。整个页的发送是通过共享内存来实现的，这在下面将具体说明。</p>
+<h3 id="Sending-and-Receiving-Messages"><a href="#Sending-and-Receiving-Messages" class="headerlink" title="Sending and Receiving Messages"></a>Sending and Receiving Messages</h3><p>为了接收数据，进程将调用sys_ipc_recv。这个系统调用使这个进程不可运行，直到收到数据。当进程等待接收消息时，任何其他进程都可以向其发送消息不会检查权限。</p>
+<p>为了尝试发送一个值，一个环境调用sys_ipc_try_send与接收者的环境ID和要发送的值。如果指定的环境实际上正在接收（它已经调用sys_ipc_recv并且还没有获得值），则发送递送消息并返回0.否则发送返回-E_IPC_NOT_RECV以指示目标环境当前不期望接收值。</p>
+<h3 id="Transferring-Pages"><a href="#Transferring-Pages" class="headerlink" title="Transferring Pages"></a>Transferring Pages</h3><p>当进程使用小于UTOP的dstva调用sys_ipc_recv时，表明它愿意接收页面映射。如果发送者发送一个页面，那么该页面应该被映射到接收者地址空间中的dstva。如果接收者已经有了一个映射到dstva的页面，那么这个页面被unmap。</p>
+<p>当环境使用小于UTOP的srcva调用sys_ipc_try_send时，说明发送者想要发送当前映射到srcva（发送者）的页面到接收者，具有权限perm。在一个成功的IPC之后，发送者在srcva的地址空间保留其原始的映射，但是接收者也在接收者的地址空间中获得了原来由接收者指定的dstva的同一物理页面的映射。结果这个页面在发送者和接收者之间被共享。</p>
+<p>如果发送者或接收者不指示应该传送页面，则不传送页面。在任何IPC之后，内核将接收方的Env结构中的新字段env_ipc_perm设置为所接收页面的权限，如果没有收到页面，则为零。</p>
+<h3 id="Implementing-IPC"><a href="#Implementing-IPC" class="headerlink" title="Implementing IPC"></a>Implementing IPC</h3><blockquote>
+<p><strong>Exercise 15</strong>：<br>根据说明补充syscall与ipc中的函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/20379443.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/74580574.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/80248583.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/16842939.jpg" alt=""></p>
+</blockquote>
+<p>本实验结束。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YaYi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/12/12/OS/Lab4_Document/" title="Lab4_Document">http://yoursite.com/2017/12/12/OS/Lab4_Document/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
+  
+</div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/OS/串讲/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/16/流光/" rel="prev" title="流光">
+                流光 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="YaYi" />
+            
+              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab4-Document"><span class="nav-number">1.</span> <span class="nav-text">Lab4-Document</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><span class="nav-number">1.1.</span> <span class="nav-text">Part A: Multiprocessor Support and Cooperative Multitasking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiprocessor-Support"><span class="nav-number">1.1.1.</span> <span class="nav-text">Multiprocessor Support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-Processor-Bootstrap"><span class="nav-number">1.1.2.</span> <span class="nav-text">Application Processor Bootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Per-CPU-State-and-Initialization"><span class="nav-number">1.1.3.</span> <span class="nav-text">Per-CPU State and Initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locking"><span class="nav-number">1.1.4.</span> <span class="nav-text">Locking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Round-Robin-Scheduling"><span class="nav-number">1.1.5.</span> <span class="nav-text">Round-Robin Scheduling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-Calls-for-Environment-Creation"><span class="nav-number">1.1.6.</span> <span class="nav-text">System Calls for Environment Creation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-B-Copy-on-Write-Fork"><span class="nav-number">1.2.</span> <span class="nav-text">Part B: Copy-on-Write Fork</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#User-level-page-fault-handling"><span class="nav-number">1.2.1.</span> <span class="nav-text">User-level page fault handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-the-Page-Fault-Handler"><span class="nav-number">1.2.2.</span> <span class="nav-text">Setting the Page Fault Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-and-Exception-Stacks-in-User-Environments"><span class="nav-number">1.2.3.</span> <span class="nav-text">Normal and Exception Stacks in User Environments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Invoking-the-User-Page-Fault-Handler"><span class="nav-number">1.2.4.</span> <span class="nav-text">Invoking the User Page Fault Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-mode-Page-Fault-Entrypoint"><span class="nav-number">1.2.5.</span> <span class="nav-text">User-mode Page Fault Entrypoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-Copy-on-Write-Fork"><span class="nav-number">1.2.6.</span> <span class="nav-text">Implementing Copy-on-Write Fork</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC"><span class="nav-number">1.3.</span> <span class="nav-text">Part C: Preemptive Multitasking and Inter-Process communication (IPC)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clock-Interrupts-and-Preemption"><span class="nav-number">1.3.1.</span> <span class="nav-text">Clock Interrupts and Preemption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt-discipline"><span class="nav-number">1.3.2.</span> <span class="nav-text">Interrupt discipline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-Clock-Interrupts"><span class="nav-number">1.3.3.</span> <span class="nav-text">Handling Clock Interrupts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inter-Process-communication-IPC"><span class="nav-number">1.3.4.</span> <span class="nav-text">Inter-Process communication (IPC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPC-in-JOS"><span class="nav-number">1.3.5.</span> <span class="nav-text">IPC in JOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sending-and-Receiving-Messages"><span class="nav-number">1.3.6.</span> <span class="nav-text">Sending and Receiving Messages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transferring-Pages"><span class="nav-number">1.3.7.</span> <span class="nav-text">Transferring Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-IPC"><span class="nav-number">1.3.8.</span> <span class="nav-text">Implementing IPC</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YaYi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共65.5k字</span>
+</div>
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>

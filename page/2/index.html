@@ -362,6 +362,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/简单udp通信实现-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/15/简单udp通信实现-java/" itemprop="url">网络编程一：UDP,CMD,TCP,WebServer</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:12:40+08:00">
+                2017-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="UDP-CMD"><a href="#UDP-CMD" class="headerlink" title="UDP CMD"></a>UDP CMD</h1><p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
+<p>woaibianyi,bianyibangwojiejueledaiamdewenti.xieixeni.</p>
+<p>感觉像是…识别不出\n…行吧，myplace myrule，//必须以;结尾！</p>
+<h2 id="UDP介绍"><a href="#UDP介绍" class="headerlink" title="UDP介绍"></a>UDP介绍</h2><p>UDP通信使用两个类：<strong>DatagramPacket</strong>与<strong>DatagramSocket</strong>。前者是对UDP包的一个封装，后者是完成两端之间的交流。<br>在UDP里面Server与Client地位同等，彼此没有区分。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length,addr,port);<span class="comment">//发送包;</span></div><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length);<span class="comment">//接收包;</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(port);<span class="comment">//指定端口号的socket;</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();<span class="comment">//自动分配一个可用端口号;</span></div></pre></td></tr></table></figure>
+<p>不得不说端口号与进程、socket之间的关系：端口号与进程毛关系没有。一个udp socket只能绑一个端口，一个port只能被一个socket绑。这个原因是在多路复用与多路分解讲到的。否则不知道pck究竟该给谁。</p>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><h3 id="Server的ip获取；获取client的ip与port"><a href="#Server的ip获取；获取client的ip与port" class="headerlink" title="Server的ip获取；获取client的ip与port"></a>Server的ip获取；获取client的ip与port</h3><p><strong>Server端获取Server的ip与port</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InetAddress.getLocalHost();<span class="comment">//ip获取;</span></div><div class="line">socket.getLocalPort();<span class="comment">//socket绑定的port获取;</span></div></pre></td></tr></table></figure>
+<p><strong>Server端获取Client的ip与port</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//pck是从client接收到的包;</span></div><div class="line">pck.getAddress();<span class="comment">//;</span></div><div class="line">pck.getPort();<span class="comment">//;</span></div></pre></td></tr></table></figure>
+<h3 id="时间获取"><a href="#时间获取" class="headerlink" title="时间获取"></a>时间获取</h3><ol>
+<li>定义：<code>Calendar cal;</code></li>
+<li>每次获取时间前都应执行：<code>cal= Calendar.getInstance();</code></li>
+<li>获取常用的数据：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> year = cal.get(Calendar.YEAR);</div><div class="line"><span class="keyword">int</span> month=cal.get(Calendar.MONTH)+<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> day=cal.get(Calendar.DATE);</div><div class="line"><span class="keyword">int</span> week = cal.get(Calendar.DAY_OF_WEEK)-<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> hour=cal.get(Calendar.HOUR_OF_DAY);</div><div class="line"><span class="keyword">int</span> minute=cal.get(Calendar.MINUTE);</div><div class="line"><span class="keyword">int</span> second=cal.get(Calendar.SECOND);</div></pre></td></tr></table></figure>
+<h3 id="使用其他类访问同一可视化界面"><a href="#使用其他类访问同一可视化界面" class="headerlink" title="使用其他类访问同一可视化界面"></a>使用其他类访问同一可视化界面</h3><p>以本程序为例，在主类中创建了一个可视化界面，希望在Time类访问可视化界面的一个label：</p>
+<p><strong>在Time类创建一个label，使用主类的label初始化这个label</strong>。</p>
+<h3 id="主方法：监听client请求"><a href="#主方法：监听client请求" class="headerlink" title="主方法：监听client请求"></a>主方法：监听client请求</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(<span class="number">4444</span>);<span class="comment">//固定的一个socket，绑定固定的port;</span></div><div class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">    <span class="keyword">byte</span>[]buff=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">256</span>];<span class="comment">//输入缓冲区;</span></div><div class="line">    DatagramPacket pck=<span class="keyword">new</span> DatagramPacket(buff,buff.length);<span class="comment">//每次都新建一个包，否则会产生缓冲区不干净发送数据错误的问题;</span></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        server.log.setText(server.log.getText()+<span class="string">"\ni'm at "</span>+InetAddress.getLocalHost()+<span class="string">" "</span>+socket.getLocalPort()+<span class="string">" and listenning~\n"</span>);</div><div class="line">        server.log.setCaretPosition(server.log.getText().length());<span class="comment">//设置目前的光标位置，在可视化界面具体讲;</span></div><div class="line">        socket.receive(pck);<span class="comment">//接收数据包：阻塞方法;</span></div><div class="line">        server.log.setText(server.log.getText()+<span class="string">"i've get a request from "</span>+pck.getAddress()+<span class="string">" "</span>+pck.getPort()+<span class="string">" "</span>+<span class="keyword">new</span> String(pck.getData())+<span class="string">"\n"</span>);<span class="comment">//;</span></div><div class="line">        server.log.setCaretPosition(server.log.getText().length());</div><div class="line">        Server newserver=<span class="keyword">new</span> Server(<span class="keyword">new</span> String(pck.getData()),pck,server);<span class="comment">//新开一个线程，专门负责与这个client的通信;</span></div><div class="line">        <span class="keyword">new</span> Thread(newserver).start();<span class="comment">//新线程开始运行;</span></div><div class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            <span class="comment">// TODO Auto-generated catch block;</span></div><div class="line">         e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>pck.getData();</code>:获取pck包的data信息;<br><code>pck.getAddress();</code>获取包的源地址<br><code>pck.getPort();</code>获取包的源端口</p>
+<p><code>InetAddress.getLocalHost();</code>:获取本地ip，可能抛出异常，需要处理<br><code>socket.getLocalPort();</code>获取socket绑定的端口号</p>
+<p><code>socket.receive(pck);</code>:等待接收一个包<br><code>socket.send(pck);</code>:发送一个包</p>
+<h3 id="String与Unix时间戳之间的转换"><a href="#String与Unix时间戳之间的转换" class="headerlink" title="String与Unix时间戳之间的转换"></a>String与Unix时间戳之间的转换</h3><p>format函数之中是一个Date对象，这个Date对象由一个long构造：list[i]是File类型。也许会说“过时”，没关系，这一整句代码打上去就不会提示了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String dates=<span class="keyword">new</span> java.text.SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>).format(<span class="keyword">new</span> java.util.Date(list[i].lastModified()));</div></pre></td></tr></table></figure>
+<p>多说一句SimpleDateFormat：</p>
+<p> G 年代标志符<br>  y 年<br>  M 月<br>  d 日<br>  h 时 在上午或下午 (1~12)<br>  H 时 在一天中 (0~23)<br>  m 分<br>  s 秒<br>  S 毫秒<br>  E 星期<br>  D 一年中的第几天<br>  F 一月中第几个星期几<br>  w 一年中第几个星期<br>  W 一月中第几个星期<br>  a 上午 / 下午 标记符<br>  k 时 在一天中 (1~24)<br>  K 时 在上午或下午 (0~11)<br>  z 时区</p>
+<p>可以说是十分实用了。</p>
+<p>具体信息可以访问<a href="http://blog.csdn.net/gubaohua/article/details/575488" target="_blank" rel="external">这里：SimpleDateFormat使用详解</a></p>
+<h3 id="获取本地文件信息"><a href="#获取本地文件信息" class="headerlink" title="获取本地文件信息"></a>获取本地文件信息</h3><p><strong>注意</strong>：没有解决的一个问题：包最后一定会用ASCII为0的char填充满255个，注意！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">File f=<span class="keyword">new</span> File(dirpath);</div><div class="line">File[] list=<span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span>(f.isDirectory())&#123;</div><div class="line">    list=f.listFiles();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>获取文件名信息：<code>list[0].getName();</code><br>是否文件？是否目录？:<code>list[0].isFile();list[0].isDirectory();</code><br>还有一系列方法：自己发现吧！</p>
+<p>Server的java代码<a href="http://note.youdao.com/noteshare?id=de6b0e25562da7949d1b1b8a51ae865c&amp;sub=E0E99B97DC7A4AAEB00CC82204E767BC" target="_blank" rel="external">看这里</a></p>
+<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><h3 id="client的ip获取"><a href="#client的ip获取" class="headerlink" title="client的ip获取"></a>client的ip获取</h3><p><code>InetAddress.getLocalHost();</code>与Server差不多</p>
+<h3 id="设置最大时延"><a href="#设置最大时延" class="headerlink" title="设置最大时延"></a>设置最大时延</h3><p>送出一个包：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();</div><div class="line">socket.setSoTimeout(<span class="number">10000</span>);</div><div class="line">socket.send(pck);</div></pre></td></tr></table></figure>
+<p>新开一个线程中：等待接收一旦超时触发异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    socket.receive(pck);</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(SocketTimeoutException e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">    ori=ori+<span class="string">"timeout!:"</span>+socket.getInetAddress()+<span class="string">" for "</span>+pck.getData().toString()+<span class="string">" has no response . try again!\n"</span>;</div><div class="line">    clientthis.tf.setText(ori);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用String设置指定IP"><a href="#使用String设置指定IP" class="headerlink" title="使用String设置指定IP"></a>使用String设置指定IP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    <span class="keyword">int</span>[]ipaddr=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</div><div class="line">    String[] ipsplit=<span class="keyword">new</span> String[<span class="number">4</span>];</div><div class="line">    data=data.replace(<span class="string">'.'</span>, <span class="string">'-'</span>);</div><div class="line">    ipsplit=data.split(<span class="string">"-"</span>);<span class="comment">//这两步是当时不懂正则，使的一个小手段;</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</div><div class="line">        <span class="keyword">if</span>(ipsplit[i]!=<span class="keyword">null</span> &amp;&amp; ipsplit[i].isEmpty())&#123;</div><div class="line">        cmd.setText(cmd.getText()+<span class="string">"format of ip addr wrong!split by .\n&gt;"</span>);</div><div class="line">        rows++;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    ipaddr[i]=Integer.parseInt(ipsplit[i]);</div><div class="line">    &#125;<span class="comment">//前面是为了验证给定的string是符合要求的int.int.int.int形式;</span></div><div class="line">    <span class="comment">//得到正确的ip;</span></div><div class="line">   <span class="comment">//转化为byte流;</span></div><div class="line">    <span class="keyword">byte</span>[]byteaddr=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</div><div class="line">    byteaddr[<span class="number">0</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">0</span>];</div><div class="line">    byteaddr[<span class="number">1</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">1</span>];</div><div class="line">    byteaddr[<span class="number">2</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">2</span>];</div><div class="line">    byteaddr[<span class="number">3</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">3</span>];</div><div class="line">    <span class="comment">//设置新ip;</span></div><div class="line">    addr=InetAddress.getByAddress(byteaddr);</div><div class="line">    System.out.println(data);</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">"&gt;"</span>);<span class="comment">//先忽略就好;</span></div><div class="line">&#125;<span class="keyword">catch</span>(NumberFormatException e)&#123;<span class="comment">//根本不符合格式;</span></div><div class="line">    e.printStackTrace();</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">" wrong:"</span>+command.substring(<span class="number">7</span>)+<span class="string">"wrong format of ip addr! split by . and only numbers are accept\n&gt;"</span>);</div><div class="line">    rows++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(UnknownHostException he)&#123;<span class="comment">//;</span></div><div class="line">    he.printStackTrace();</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">"unknown host\n&gt;"</span>);</div><div class="line">    rows++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>client代码<a href="http://note.youdao.com/noteshare?id=45d994163c92b945960698ea27100a1b&amp;sub=3AE87C2D6AF44F2BA331DB9C7904A210" target="_blank" rel="external">看这里</a></p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>可视化部分也在上面的client代码里面。</p>
+<h1 id="TCP-WebServer"><a href="#TCP-WebServer" class="headerlink" title="TCP WebServer"></a>TCP WebServer</h1><p>这是第二次作业，使用TCP，利用http1.1，实现一个可以与浏览器进行交互的小型的WebServer。</p>
+<p>附加：tcp部分编码设置</p>
+<p>String code=”utf-8”;<br>        try {<br>            InputStream instream= new java.io.FileInputStream(file);<br>            byte[] b = new byte[3];<br>            instream.read(b);<br>            instream.close();<br>            if (b[0] == -17 &amp;&amp; b[1] == -69 &amp;&amp; b[2] == -65)code=”utf-8”;<br>            else code=”GBK”;<br>        } catch (IOException e) {<br>            // TODO Auto-generated catch block<br>            e.printStackTrace();<br>        }<br>        return code;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/OS/实验串讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1163,151 +1372,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/OS-内存管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/06/OS/OS-内存管理/" itemprop="url">OS:内存管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
-                2017-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1327,7 +1391,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/06/OS/chap2-进程与线程/" itemprop="url">进程与线程</a></h1>
+                <a class="post-title-link" href="/2017/11/06/OS/chap2-进程与线程/" itemprop="url">chap2-进程与线程</a></h1>
         
 
         <div class="post-meta">
@@ -1788,6 +1852,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/OS-内存管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/OS/OS-内存管理/" itemprop="url">OS:内存管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/JUnit之一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1902,191 +2111,6 @@
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/14409795.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/45619270.jpg" alt=""></p>
 <p>看！</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
-                2017-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
-<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
-<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*8Mb/2Mbps=12s$</p>
-<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
-<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
-<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
-<ol>
-<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
-<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
-<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
-<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
-<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
-<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
-<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
           
         
       
@@ -2342,7 +2366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/覆千秋1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -2361,7 +2385,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/03/覆千秋1/" itemprop="url">覆千秋1</a></h1>
+                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
         
 
         <div class="post-meta">
@@ -2373,8 +2397,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T21:46:15+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
+                2017-11-04
               </time>
             
 
@@ -2396,8 +2420,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/" itemprop="url" rel="index">
-                    <span itemprop="name">我的故事</span>
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
                   </a>
                 </span>
 
@@ -2407,8 +2431,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/" itemprop="url" rel="index">
-                    <span itemprop="name">枯骨流沙</span>
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
                   </a>
                 </span>
 
@@ -2418,8 +2442,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/覆千秋/" itemprop="url" rel="index">
-                    <span itemprop="name">覆千秋</span>
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
                   </a>
                 </span>
 
@@ -2456,16 +2480,28 @@
 
       
         
-          <h1 id="夜色凉"><a href="#夜色凉" class="headerlink" title="夜色凉"></a>夜色凉</h1><p>将军府的海棠开了。</p>
-<p>粉粉嫩嫩，一簇一簇的，细风吹来，花朵轻轻落在地上，把这个小园衬出几分诗意。</p>
-<p>只是府上光景却不如这海棠繁盛。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/03/覆千秋1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
+<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
+<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*8Mb/2Mbps=12s$</p>
+<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
+<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
+<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
+<ol>
+<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
+<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
+<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
+<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
+<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
+<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
+<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
+          
         
       
     </div>
@@ -2556,7 +2592,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2681,7 +2717,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共58.9k字</span>
+  <span class="post-count">博客全站共65.5k字</span>
 </div>
 
 
