@@ -362,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/OS4+Memory and Process/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/OS/实验串讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -381,7 +381,211 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/13/OS4+Memory and Process/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2017/11/14/OS/实验串讲/" itemprop="url">OS-各实验初讲</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T22:05:33+08:00">
+                2017-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT Lab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
+<p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
+<p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
+<hr>
+<p><strong>iret</strong>：系统指令，从中断中返回。<br><strong>ret</strong>：从函数中返回<br><strong>retf</strong>：与ret基本一样，从函数中返回。（弹出栈，拿出返回地址（就是下一条语句）返回值，丢掉压栈参数）</p>
+<p>中断是一个硬件的事件，中断返回与函数返回不同。当一个中断来了，不管你当时在干嘛，就乖乖地保存一下现场去响应中断。这个<strong>保存现场</strong>，包括了硬件将会自动帮你保存的一些现场，比如CS、SS、Flag等等，这些是自动存下的，iret的作用就是自动地将这些东西都弹出。但是这些现场保存并不够，通用寄存器是不会帮你保存的。</p>
+<p>ret、iret等等在汇编之中可以随意调用，并不需要其他约束。如果当你在汇编中不是函数（中断）的里面调用了这些，它会干些什么呢？<br>他会把自己认为的自己保存进去的那些东西弹出来，一个是返回地址给PC，一个是返回值给保存返回值的东西。即使没有调用函数，ret的行为也是固定的：<strong>从栈顶弹出两个值，一个给PC，一个给存储返回值的东西</strong>，iret的行为也是固定的，就是从栈顶弹出东西给那些变量。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg" alt=""><br>这就是保护现场之后的栈。<br>ret是弹出到eip，retf弹出到CS，iret弹出到CS（代码段）、EFLAGS，根据是否改变特权等级，iret会连下面的SS以及esp一起弹出来。</p>
+<p>这样，如果一个程序在栈中事先在栈中存了一些数据，然后调用了iret，iret不管栈中究竟是什么，就会弹出5（3）个元素，给对应的寄存器。ret和retf也类似。因此，在汇编中ret们与高级语言的return们的作用不同，汇编中的ret们只是<strong>提供了一个批量修改寄存器的方法</strong>。</p>
+<p>系统中有两种中断。中断可能在任意时间发生。在用户模式下与在特权模式下中断发生后系统的动作是不相同的。</p>
+<p>在用户模式下，系统会保存这些东西：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg" alt=""><br>还记得在“内存管理”的lab里面讲过的<strong>段选择子</strong>，其中有两个bit标识自己处在什么特权模式下的特权位。这里面有两个段选择子，一个是栈的，一个是代码段的，由于在用户模式下，可以看到CS代码段选择子与SS栈选择子的特权位RPL都是3。</p>
+<p>在特权模式下，一旦发生中断：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/84089468.jpg" alt=""><br>这时保存的东西比较少。</p>
+<p>无论在哪种模式下一旦调用iret，就把这些东西（其实不一定是这些东西，只是对应栈顶的几个数据）弹出去给对应的寄存器。</p>
+<h3 id="正题：特权降级"><a href="#正题：特权降级" class="headerlink" title="正题：特权降级"></a>正题：特权降级</h3><p>考虑做完lab2，系统在特权级是0的模式下，这是需要现将自己降级成为特权3的模式，再去运行用户程序。怎么降？</p>
+<p>要伪造一个场景：刚刚一个用户程序产生了一个中断所以我升级了，现在我要中断返回。于是我去伪造了一个栈，在栈里头存上了iret希望的那5个数据，每一个是32位。然后调用iret，这些就会从栈中弹出来到达对应的寄存器，然后我就回到了用户模式，那两个段选择子的特权级值就被改为了3。<br>这里需要注意的是，系统原来使用的特权级是0的栈，iret之后这个栈空掉了，但是系统不再使用这个栈，而是重新为用户态开避了一个新的栈，这个栈不再是以前的那个栈了，这个栈放在用户空间的数据段里，它的权限也是3。</p>
+<blockquote>
+<p>为什么要这样设计呢？在特权模式下，系统并不想和特权级更低的用户态共用一个特权级更高的栈。另一个方面从安全考虑，为了防止用户态随意弹出数据随意插入数据破坏内核运行。</p>
+</blockquote>
+<p>从特权模式到达用户模式，新创建了一个栈给用户程序使用，这是在刚上电的时候，还没有用户程序运行。用户程序运行过程中可能会有系统调用回到特权模式下，这是将会使用前面提到的系统用的那个栈，系统调用完成之后，不会再为用户程序创建新的栈了，一是占空间，一是以前的运行态不能就这样丢掉。就还让它回到自己原来的栈。</p>
+<h2 id="特权级提升"><a href="#特权级提升" class="headerlink" title="特权级提升"></a>特权级提升</h2><p>中断、异常、系统调用：我需要更高特权的东西帮帮我。</p>
+<p>在80386中，系统调用就是一个中断。异常是需要紧急处理的中断。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>在32位机器上的中断是一个很复杂的机制，因为那时保护模式已经建立了起来，整个运行在虚拟地址空间上。所以当中段发生的时候，系统使用<strong>中断描述符表</strong>，写着自己所有的中断号。<br>中断描述符寄存器（IDTR）中存的就是中断描述符表（IDT）在内存中的位置以及大小。表按照中断号排序，每一个中断描述符在80386中被叫做一个门，<strong>中断门</strong>（中断），<strong>陷阱门</strong>（异常）。会根z中断发生的编号从表中取出对应的描述符（门），<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg" alt=""><br>取回的描述符是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg" alt=""><br>segment selector与offset用来描述在段机制下自己的中断响应函数的位置。segment selector负责在GDT里面找到对应的段，offset负责找对应的偏移量。找到函数之后，保存现场并执行响应函数。</p>
+<p>在终端发生的时候，系统将会看一下产生中断的程序的特权级，决定应该怎样保护现场。如果在特权状态，不用换栈，只需要保存更少的东西，而处于用户状态下的程序在执行完中断响应函数之后还要从（？）退回到自己的用户栈，保存了更多的东西。</p>
+<h3 id="正题：特权级提升"><a href="#正题：特权级提升" class="headerlink" title="正题：特权级提升"></a>正题：特权级提升</h3><p>从特权模式3切换到特权模式0，实际上就是响应一个中断，这就是上面图中的trap。</p>
+<p>对于用户程序，os并不信任。当trap发生时，当前用户程序的运行状态会被存入到<strong>内核栈</strong>中，而用户栈并没有变化。这也是中断与普通函数调用的不同。<br>现在已经进入了特权模式，如果不作任何操作，只是调用一个iret，前面讲到的CS，SS特权级3又会被写入到寄存器里面，就又回到了用户态。为了能留在特权模式下，对栈进行伪造，假装在进入终端之前就是一个特权模式：也就是把上面提到的用户态发生中断的栈信息修改成特权模式发生中断的栈信息。这时iret，就可以留在特权模式下。</p>
+<p>但是：在伪造的时候，SS被扔掉了。怎么回去呢？80386提供了一个<strong>TSS任务状态段</strong>，它几乎可以存下CPU上所有的寄存器的不止一份拷贝。TSS每个进程一个，会存下一个进程在切换特权状态的时候原特权状态下的SS的值。系统将会自己对TSS进行维护，以确保切换模式时栈的跳转。</p>
+<p>TSS存在于哪里呢？在GDT里面有一个TSS的描述符：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg" alt=""></p>
+<p>80386中有4个特权模式，目前在虚拟化技术下只是用了3个。</p>
+<p>有一个叫做TSR的寄存器，存着selector、base addr以及segment limit。便于直接找到TSS。</p>
+<p>如果想要回到用户模式，进入trap，伪造一个从用户态过来的栈，iret即可。</p>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>用户程序可以通过系统调用访问内核服务，这个过程需要指定中断号，使用tarp或者特殊指令（SYSENTER/SYSEXIT）实现。</p>
+<h2 id="关于这次实验"><a href="#关于这次实验" class="headerlink" title="关于这次实验"></a>关于这次实验</h2><p>这里的env就是课上讲的pcb。<br>父子进程的一个作用是父进程要为子进程收尸。</p>
+<p>elf格式：linux下的可执行。<br>创建进程并执行elf：没有文件系统怎么办？<br>把指定的文件链接进目标文件，骗bootloader把程序也搬进内存。</p>
+<p>-b binary path:-b帮我搬进来。binary这是个可执行程序。<br>然后重生成一个符号表。<br>把这个文件作为一个大数组缀到最后，然后直接使用这个数组。</p>
+<p>编码的时候，这个数组还没有，链接的时候才有，怎么办？定义一个外部变量extern。<br>只需知道生成符号表的规则，然后按规则命名即可。</p>
+<p>进来之后还只是一个大数组，还需要经过链接之后映射要对应的虚拟地址才能执行。</p>
+<h1 id="Lab4-Preemptive-Multitasking"><a href="#Lab4-Preemptive-Multitasking" class="headerlink" title="Lab4-Preemptive Multitasking"></a>Lab4-Preemptive Multitasking</h1><p>lab3做完之后，当一个进程结束之后，就退出。在这个实验中，主要完成的是</p>
+<p>本次实验主要是决定：在何时利用什么原则什么地方切换进程。<br>上下文怎么切换？其中一项：一定要把页表换掉，也就是把cr3中的页目录项换掉。之后，连接tlb也会失效，处理流水线，吧上一个进程的东西全部清理掉。</p>
+<p>本实验大部分代码都已经写完了，主要是读代码。</p>
+<p>如何实现更加有效的调度？更加频繁的调用schedule_yeid。</p>
+<p>时钟中断的作用：打断正在执行的程序，调用sched_yield进行进程轮转</p>
+<p>在本次实验中有一个时钟中断，你要做的就是在这个时钟中断的响应函数之中做一些事情，决定下一个进程怎么上去谁会上去（就是我们学习过的调度算法）</p>
+<h2 id="多核处理器"><a href="#多核处理器" class="headerlink" title="多核处理器"></a>多核处理器</h2><p>一开始是因为没有在一个进程运行的时候调用另一个进程的机制，本实验中的多核只是实验的设计者希望我们体验一下在系统中有多个进程活动是一个什么样的状态，因此鼓励你去多弄几个核心。<br>只要是单核，其实每一个时刻只能有一个进程运行。</p>
+<p>为什么会有多核处理器出现呢？在后摩尔时代，为了提升处理器的处理能力。</p>
+<p>主核会在系统上电之后接管机器，他们的地位并不是平等的。</p>
+<h3 id="现代处理器的休眠唤醒机制"><a href="#现代处理器的休眠唤醒机制" class="headerlink" title="现代处理器的休眠唤醒机制"></a>现代处理器的休眠唤醒机制</h3><p>现代处理器的模式一般有三种：active,idol,sleeping</p>
+<p>CPU在关闭的时候，内存并不会关闭。休眠时，找到一个调度点，这时不调度了，存好有用的东西，然后cpu耗电量就会变得非常低。有一个cpu中的寄存器会标志自己刚刚是休眠了还是关机了。如果是休眠，那么内存里面所有的东西都还在，只需要调到该去的地方，然后进行一轮新的调度；如果不是休眠而是关机了，内存中的东西就被清空了，就是上电启动过程。</p>
+<p>有时手机会坏掉，就是在锁屏（休眠）之后也会重新起动，这也就是cpu中的那个寄存器坏掉了。</p>
+<p>那么，如果帮一个休眠的cpu准备好了它的休眠位以及内存，就可以让它认为它是一个刚刚休眠的cpu。</p>
+<p>bsp是主核，在系统上电之后是只有主核启动，直到系统启动完之后，直到需要另外一个核心运行一个进程，bsp帮ap制造一个它刚刚在休眠的假象，然后唤醒它，这样这个ap就会认为自己是刚刚休眠的，然后继续执行。运行完之后，主核就会选择把这个核心给关掉，然后省电。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/OS/OS4+Memory and Process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/13/OS/OS4+Memory and Process/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -1340,7 +1544,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS-内存管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/OS-内存管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -1359,7 +1563,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/06/OS-内存管理/" itemprop="url">OS:内存管理</a></h1>
+                <a class="post-title-link" href="/2017/11/06/OS/OS-内存管理/" itemprop="url">OS:内存管理</a></h1>
         
 
         <div class="post-meta">
@@ -1649,191 +1853,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
-                2017-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
-<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
-<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*8Mb/2Mbps=12s$</p>
-<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
-<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
-<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
-<ol>
-<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
-<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
-<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
-<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
-<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
-<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
-<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络应用层番外二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2039,7 +2058,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/覆千秋1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -2058,7 +2077,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/03/覆千秋1/" itemprop="url">覆千秋1</a></h1>
+                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
         
 
         <div class="post-meta">
@@ -2070,8 +2089,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T21:46:15+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
+                2017-11-04
               </time>
             
 
@@ -2093,8 +2112,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/" itemprop="url" rel="index">
-                    <span itemprop="name">我的故事</span>
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
                   </a>
                 </span>
 
@@ -2104,8 +2123,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/" itemprop="url" rel="index">
-                    <span itemprop="name">枯骨流沙</span>
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
                   </a>
                 </span>
 
@@ -2115,8 +2134,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/覆千秋/" itemprop="url" rel="index">
-                    <span itemprop="name">覆千秋</span>
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
                   </a>
                 </span>
 
@@ -2153,16 +2172,28 @@
 
       
         
-          <h1 id="夜色凉"><a href="#夜色凉" class="headerlink" title="夜色凉"></a>夜色凉</h1><p>将军府的海棠开了。</p>
-<p>粉粉嫩嫩，一簇一簇的，细风吹来，花朵轻轻落在地上，把这个小园衬出几分诗意。</p>
-<p>只是府上光景却不如这海棠繁盛。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/03/覆千秋1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
+<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
+<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*8Mb/2Mbps=12s$</p>
+<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
+<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
+<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
+<ol>
+<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
+<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
+<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
+<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
+<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
+<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
+<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
+          
         
       
     </div>
@@ -2253,7 +2284,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2347,7 +2378,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2378,7 +2409,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共49.4k字</span>
+  <span class="post-count">博客全站共55.7k字</span>
 </div>
 
 

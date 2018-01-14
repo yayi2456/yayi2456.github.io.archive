@@ -496,7 +496,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS-Lab12/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS/linux、vim、git常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -515,7 +515,166 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/31/OS-Lab12/" itemprop="url">OS Lab1</a></h1>
+                <a class="post-title-link" href="/2017/10/31/OS/linux、vim、git常用命令/" itemprop="url">Linux、Vim、Git常用命令——简明扼要版</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>第一次操作系统实验课记录：</p>
+<h2 id="一。linux下常用命令"><a href="#一。linux下常用命令" class="headerlink" title="一。linux下常用命令"></a>一。linux下常用命令</h2><h2 id="二。vim编辑器用法命令"><a href="#二。vim编辑器用法命令" class="headerlink" title="二。vim编辑器用法命令"></a>二。vim编辑器用法命令</h2><ol>
+<li>首先确保linux下安装有vim。可以使用上述命令sudo apt-get install vim来确定。如果已经安装了vim，会显示没有变化，否则会帮你安装vim。</li>
+<li>然后就可以开始使用vim啦！</li>
+</ol>
+<blockquote>
+<p>你使用 vim 或vim filename.suffix 进入了vim的命令模式。</p>
+</blockquote>
+<p>在命令模式下，不能进行文本编辑操作，需要按下A/a/I/i进入插入模式，在这个模式下可以像notepad一样进行文本编辑。</p>
+<p><strong>如果使用第二种命令进入vim，vim将会自动帮你确定文件类型</strong>。这样说吧，比如你创建了一个yayicpp.cpp文件进入编辑，vim将会使代码高亮、进行括号匹配等操作。</p>
+<blockquote>
+<p>好的！进入文本编辑模式之后，你迫不及待地写了一段helloworld。代码完成之后，你觉得只打印一行helloworld不太够，你想知道有没有类似于VS环境中那种Ctrl+C和Ctrl+V的操作。</p>
+</blockquote>
+<p>其实是有的。这个时候需要按下Esc重新进入命令模式。在命令模式下有很多功能组合，上述的复制粘贴就是其中一种，但是这里并不想以复制粘贴作为第一个被介绍的命令，让我们先从光标的移动开始。</p>
+<ol>
+<li>按下h键，光标左移；j光标下移；k光标上移；l光标右移。</li>
+<li>按下d键进入删除模式，这时按下h可删除光标左侧的一个字符，按下j可删除光标所在行以及下面一行；按下k可删除光标所在行与其上面一行；按下l可删除光标所在的字符。双击d键删除光标所在行。</li>
+<li>按下u键可以撤销前一步所做的改变。</li>
+<li>按下V（Shift+v）或是v可以进入到一个选择的可视化界面，同样可以使用hjkl控制选择范围，v按照字符选择，V按照行数选择。选择完成之后按下y就可以复制选定内容。按下p就可以将复制内容粘贴到选定的位置。</li>
+<li>按两下y可以复制光标所在行。</li>
+</ol>
+<blockquote>
+<p>写到这里，你觉得可以了，可以从vim里面退出来了。</p>
+</blockquote>
+<ol>
+<li>在命令模式下输入冒号，进入最后行模式。在最低端出现了光标。</li>
+<li>在光标位置输入w，保存文件。</li>
+<li>输入q，退出。</li>
+<li>这些命令可以进行组合wq。wq可以用x替代。</li>
+</ol>
+<blockquote>
+<p>你进入了最后行模式，又不想退出了，想继续编辑。</p>
+</blockquote>
+<ol>
+<li>按下Esc或者Backspace可以回到命令模式。</li>
+</ol>
+<h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS/OS-Lab12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/OS/OS-Lab12/" itemprop="url">OS Lab1</a></h1>
         
 
         <div class="post-meta">
@@ -914,7 +1073,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1008,7 +1167,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1039,7 +1198,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共49.4k字</span>
+  <span class="post-count">博客全站共55.7k字</span>
 </div>
 
 
