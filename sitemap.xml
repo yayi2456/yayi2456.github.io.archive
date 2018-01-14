@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/01/14/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
+    <loc>http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
     
-    <lastmod>2018-01-14T19:11:26.143Z</lastmod>
+    <lastmod>2018-01-14T19:16:38.823Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/11/27/OS/OS4+Memory%20and%20Process/</loc>
+    
+    <lastmod>2018-01-14T19:13:50.558Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/01/05/OS/Lab5_Document/</loc>
+    
+    <lastmod>2018-01-14T19:13:43.338Z</lastmod>
     
   </url>
   
@@ -37,7 +51,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/12/04/%E4%B8%B2%E8%AE%B2/</loc>
+    <loc>http://yoursite.com/2017/12/04/OS/%E4%B8%B2%E8%AE%B2/</loc>
     
     <lastmod>2017-12-04T13:27:25.278Z</lastmod>
     
@@ -100,13 +114,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/11/06/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
-    
-    <lastmod>2017-11-23T15:05:35.342Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2017/11/06/OS/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2017-11-23T11:36:23.576Z</lastmod>
@@ -159,13 +166,6 @@
     <loc>http://yoursite.com/2017/11/12/%E5%93%88%E5%B8%8C/</loc>
     
     <lastmod>2017-11-14T15:57:20.654Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/11/13/OS/OS4+Memory%20and%20Process/</loc>
-    
-    <lastmod>2017-11-13T11:51:06.799Z</lastmod>
     
   </url>
   

@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="OS,Linux," />
 
 
 
@@ -102,12 +102,13 @@
 
 
 
-<meta name="description" content="进程whats os?    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and provi">
+<meta name="description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
+<meta name="keywords" content="OS,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Be With Me">
-<meta property="og:url" content="http://yoursite.com/2018/01/14/OS/chap2-进程与线程/index.html">
+<meta property="og:title" content="进程与线程">
+<meta property="og:url" content="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/index.html">
 <meta property="og:site_name" content="Be With Me">
-<meta property="og:description" content="进程whats os?    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and provi">
+<meta property="og:description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/87376882.jpg">
@@ -126,10 +127,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51773333.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/87331439.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/47608393.jpg">
-<meta property="og:updated_time" content="2018-01-14T19:11:26.143Z">
+<meta property="og:updated_time" content="2018-01-14T19:16:38.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be With Me">
-<meta name="twitter:description" content="进程whats os?    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and provi">
+<meta name="twitter:title" content="进程与线程">
+<meta name="twitter:description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg">
 
 
@@ -160,13 +161,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/14/OS/chap2-进程与线程/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/"/>
 
 
 
 
 
-  <title> | Be With Me</title>
+  <title>进程与线程 | Be With Me</title>
   
 
 
@@ -380,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/OS/chap2-进程与线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -397,7 +398,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">进程与线程</h1>
         
 
         <div class="post-meta">
@@ -409,8 +410,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T15:02:54+08:00">
-                2018-01-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
               </time>
             
 
@@ -419,6 +420,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -451,7 +485,19 @@
       
 
       
-        <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p><strong>whats os?</strong><br>    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and providing useful services. It is a convenient platform for people to use computer</p>
+        <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="导"><a href="#导" class="headerlink" title="导"></a>导</h2><p>进程模型的进化：</p>
+<ol>
+<li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
+<li>第二代：批处理系统：一个程序完成所有工作。</li>
+<li>带三代：mutiprogramming and timesharing。CPU可以切换运行。</li>
+<li>第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。</li>
+</ol>
+<p><strong>进程</strong>：计算机上所有可以运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程。它包括输入输出程序与状态。</p>
+<p>需要区分进程与程序。</p>
+<p>进程创建：系统初始化、运行进程的创建进程系统调用被执行、用户请求、批处理作业初始化。</p>
+<p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
+<p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
+<h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><p><strong>whats os?</strong><br>    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and providing useful services. It is a convenient platform for people to use computer</p>
 <h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><ol>
 <li>使用cpu的基本数据结构<ol>
 <li>逻辑程序：被用户设计实现（envs）</li>
@@ -784,7 +830,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/01/14/OS/chap2-进程与线程/" title="">http://yoursite.com/2018/01/14/OS/chap2-进程与线程/</a>
+    <a href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/" title="进程与线程">http://yoursite.com/2017/11/06/OS/chap2-进程与线程/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -796,6 +842,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
       
 <div>
   
@@ -815,8 +869,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/16/流光/" rel="next" title="流光">
-                <i class="fa fa-chevron-left"></i> 流光
+              <a href="/2017/11/05/JUnit之一/" rel="next" title="JUnit之一">
+                <i class="fa fa-chevron-left"></i> JUnit之一
               </a>
             
           </div>
@@ -824,6 +878,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/06/OS/OS-内存管理/" rel="prev" title="OS:内存管理">
+                OS:内存管理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -913,7 +971,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -992,7 +1050,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程概念"><span class="nav-number">1.1.</span> <span class="nav-text">进程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态"><span class="nav-number">1.2.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">进程数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程切换"><span class="nav-number">1.4.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行镜像（process-image）"><span class="nav-number">1.5.</span> <span class="nav-text">运行镜像（process image）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度算法"><span class="nav-number">1.6.</span> <span class="nav-text">进程调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#when-and-why"><span class="nav-number">1.6.1.</span> <span class="nav-text">when and why</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goal"><span class="nav-number">1.6.2.</span> <span class="nav-text">goal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理系统中的调度算法"><span class="nav-number">1.6.3.</span> <span class="nav-text">批处理系统中的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来先服务（FCFS）"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">先来先服务（FCFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短时间优先算法（SPN）"><span class="nav-number">1.6.3.2.</span> <span class="nav-text">最短时间优先算法（SPN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短剩余时间优先算法（SRT）"><span class="nav-number">1.6.3.3.</span> <span class="nav-text">最短剩余时间优先算法（SRT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高响应比优先算法（HRRN）"><span class="nav-number">1.6.3.4.</span> <span class="nav-text">最高响应比优先算法（HRRN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三层调度"><span class="nav-number">1.6.3.5.</span> <span class="nav-text">三层调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式系统中的调度"><span class="nav-number">1.6.4.</span> <span class="nav-text">交互式系统中的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片轮转-（RR）"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">时间片轮转 （RR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级队列调度算法（MQ）"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">多级队列调度算法（MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列算法（MLFQ）"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">多级反馈队列算法（MLFQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级算法（PS）"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">优先级算法（PS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短进程优先"><span class="nav-number">1.6.4.5.</span> <span class="nav-text">最短进程优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保证调度"><span class="nav-number">1.6.4.6.</span> <span class="nav-text">保证调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#彩票调度"><span class="nav-number">1.6.4.7.</span> <span class="nav-text">彩票调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度实现"><span class="nav-number">1.6.5.</span> <span class="nav-text">调度实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度机制设定"><span class="nav-number">1.6.6.</span> <span class="nav-text">调度机制设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">1.7.</span> <span class="nav-text">进程之间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.8.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程库"><span class="nav-number">1.8.1.</span> <span class="nav-text">线程库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的概念"><span class="nav-number">1.9.</span> <span class="nav-text">线程的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.9.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻权进程"><span class="nav-number">1.9.2.</span> <span class="nav-text">轻权进程</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导"><span class="nav-number">1.1.</span> <span class="nav-text">导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要并发（Cocurrency）？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要并发（Cocurrency）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程概念"><span class="nav-number">1.3.</span> <span class="nav-text">进程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态"><span class="nav-number">1.4.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程数据结构"><span class="nav-number">1.5.</span> <span class="nav-text">进程数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程切换"><span class="nav-number">1.6.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行镜像（process-image）"><span class="nav-number">1.7.</span> <span class="nav-text">运行镜像（process image）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度算法"><span class="nav-number">1.8.</span> <span class="nav-text">进程调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#when-and-why"><span class="nav-number">1.8.1.</span> <span class="nav-text">when and why</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goal"><span class="nav-number">1.8.2.</span> <span class="nav-text">goal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理系统中的调度算法"><span class="nav-number">1.8.3.</span> <span class="nav-text">批处理系统中的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来先服务（FCFS）"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">先来先服务（FCFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短时间优先算法（SPN）"><span class="nav-number">1.8.3.2.</span> <span class="nav-text">最短时间优先算法（SPN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短剩余时间优先算法（SRT）"><span class="nav-number">1.8.3.3.</span> <span class="nav-text">最短剩余时间优先算法（SRT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高响应比优先算法（HRRN）"><span class="nav-number">1.8.3.4.</span> <span class="nav-text">最高响应比优先算法（HRRN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三层调度"><span class="nav-number">1.8.3.5.</span> <span class="nav-text">三层调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式系统中的调度"><span class="nav-number">1.8.4.</span> <span class="nav-text">交互式系统中的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片轮转-（RR）"><span class="nav-number">1.8.4.1.</span> <span class="nav-text">时间片轮转 （RR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级队列调度算法（MQ）"><span class="nav-number">1.8.4.2.</span> <span class="nav-text">多级队列调度算法（MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列算法（MLFQ）"><span class="nav-number">1.8.4.3.</span> <span class="nav-text">多级反馈队列算法（MLFQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级算法（PS）"><span class="nav-number">1.8.4.4.</span> <span class="nav-text">优先级算法（PS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短进程优先"><span class="nav-number">1.8.4.5.</span> <span class="nav-text">最短进程优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保证调度"><span class="nav-number">1.8.4.6.</span> <span class="nav-text">保证调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#彩票调度"><span class="nav-number">1.8.4.7.</span> <span class="nav-text">彩票调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度实现"><span class="nav-number">1.8.5.</span> <span class="nav-text">调度实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度机制设定"><span class="nav-number">1.8.6.</span> <span class="nav-text">调度机制设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">1.9.</span> <span class="nav-text">进程之间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.10.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程库"><span class="nav-number">1.10.1.</span> <span class="nav-text">线程库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的概念"><span class="nav-number">1.11.</span> <span class="nav-text">线程的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.11.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻权进程"><span class="nav-number">1.11.2.</span> <span class="nav-text">轻权进程</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1043,7 +1101,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共55.7k字</span>
+  <span class="post-count">博客全站共58.9k字</span>
 </div>
 
 

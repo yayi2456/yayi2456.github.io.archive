@@ -89,7 +89,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="OS," />
 
 
 
@@ -102,16 +102,80 @@
 
 
 
-<meta name="description" content="来如春梦不多时 去似朝云无觅处">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Be With Me">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta name="description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
+<meta name="keywords" content="OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lab5_Document">
+<meta property="og:url" content="http://yoursite.com/2017/01/05/OS/Lab5_Document/index.html">
 <meta property="og:site_name" content="Be With Me">
-<meta property="og:description" content="来如春梦不多时 去似朝云无觅处">
+<meta property="og:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/52660650.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/36171430.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/11329249.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/46584041.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/46809633.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/44896039.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/5646299.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/40046107.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/6929946.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/86035925.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/52911484.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/63543357.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/79325971.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/57921588.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/66863600.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/71021418.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/35828038.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/60207215.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/69666480.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/56472823.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/28669591.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/16784140.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/52206581.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/41382565.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/20812261.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/10858808.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-29/57400463.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/2953715.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/460405.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/27431119.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/24773168.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/31974794.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-4/59890624.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/25078071.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/37810274.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/35338392.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/50945403.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/44489755.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/15017248.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/23667793.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/86232535.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/88298637.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/68942962.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/49910736.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/27203900.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/9954337.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/88536177.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/97129281.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/74350629.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/54441009.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/3740941.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/83206506.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/33872725.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/61363948.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/39616597.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/85970380.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/68914710.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-4/68092874.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/44717482.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/31362968.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/10360665.jpg">
+<meta property="og:updated_time" content="2018-01-14T19:13:43.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be With Me">
-<meta name="twitter:description" content="来如春梦不多时 去似朝云无觅处">
+<meta name="twitter:title" content="Lab5_Document">
+<meta name="twitter:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/52660650.jpg">
 
 
 
@@ -141,13 +205,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/01/05/OS/Lab5_Document/"/>
 
 
 
 
 
-  <title>Be With Me</title>
+  <title>Lab5_Document | Be With Me</title>
   
 
 
@@ -176,8 +240,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -347,545 +410,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS/linux、vim、git常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/OS/linux、vim、git常用命令/" itemprop="url">Linux、Vim、Git常用命令——简明扼要版</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>第一次操作系统实验课记录：</p>
-<h2 id="一。linux下常用命令"><a href="#一。linux下常用命令" class="headerlink" title="一。linux下常用命令"></a>一。linux下常用命令</h2><h2 id="二。vim编辑器用法命令"><a href="#二。vim编辑器用法命令" class="headerlink" title="二。vim编辑器用法命令"></a>二。vim编辑器用法命令</h2><ol>
-<li>首先确保linux下安装有vim。可以使用上述命令sudo apt-get install vim来确定。如果已经安装了vim，会显示没有变化，否则会帮你安装vim。</li>
-<li>然后就可以开始使用vim啦！</li>
-</ol>
-<blockquote>
-<p>你使用 vim 或vim filename.suffix 进入了vim的命令模式。</p>
-</blockquote>
-<p>在命令模式下，不能进行文本编辑操作，需要按下A/a/I/i进入插入模式，在这个模式下可以像notepad一样进行文本编辑。</p>
-<p><strong>如果使用第二种命令进入vim，vim将会自动帮你确定文件类型</strong>。这样说吧，比如你创建了一个yayicpp.cpp文件进入编辑，vim将会使代码高亮、进行括号匹配等操作。</p>
-<blockquote>
-<p>好的！进入文本编辑模式之后，你迫不及待地写了一段helloworld。代码完成之后，你觉得只打印一行helloworld不太够，你想知道有没有类似于VS环境中那种Ctrl+C和Ctrl+V的操作。</p>
-</blockquote>
-<p>其实是有的。这个时候需要按下Esc重新进入命令模式。在命令模式下有很多功能组合，上述的复制粘贴就是其中一种，但是这里并不想以复制粘贴作为第一个被介绍的命令，让我们先从光标的移动开始。</p>
-<ol>
-<li>按下h键，光标左移；j光标下移；k光标上移；l光标右移。</li>
-<li>按下d键进入删除模式，这时按下h可删除光标左侧的一个字符，按下j可删除光标所在行以及下面一行；按下k可删除光标所在行与其上面一行；按下l可删除光标所在的字符。双击d键删除光标所在行。</li>
-<li>按下u键可以撤销前一步所做的改变。</li>
-<li>按下V（Shift+v）或是v可以进入到一个选择的可视化界面，同样可以使用hjkl控制选择范围，v按照字符选择，V按照行数选择。选择完成之后按下y就可以复制选定内容。按下p就可以将复制内容粘贴到选定的位置。</li>
-<li>按两下y可以复制光标所在行。</li>
-</ol>
-<blockquote>
-<p>写到这里，你觉得可以了，可以从vim里面退出来了。</p>
-</blockquote>
-<ol>
-<li>在命令模式下输入冒号，进入最后行模式。在最低端出现了光标。</li>
-<li>在光标位置输入w，保存文件。</li>
-<li>输入q，退出。</li>
-<li>这些命令可以进行组合wq。wq可以用x替代。</li>
-</ol>
-<blockquote>
-<p>你进入了最后行模式，又不想退出了，想继续编辑。</p>
-</blockquote>
-<ol>
-<li>按下Esc或者Backspace可以回到命令模式。</li>
-</ol>
-<h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS/OS-Lab12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/OS/OS-Lab12/" itemprop="url">OS Lab1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T17:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="OSLab1：MIT的Lab1"><a href="#OSLab1：MIT的Lab1" class="headerlink" title="OSLab1：MIT的Lab1"></a>OSLab1：MIT的Lab1</h1><p>这个作业真的非常令人心烦，现在到了检查作业的紧要关头啦！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/first-try/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/29/first-try/" itemprop="url">first try</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T17:56:10+08:00">
-                2017-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="yayi’s-new-blog"><a href="#yayi’s-new-blog" class="headerlink" title="yayi’s new blog"></a>yayi’s new blog</h1><p>what !你为什么这么多事啊！？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/29/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T17:08:32+08:00">
-                2017-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -915,9 +442,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/05/OS/Lab5_Document/" itemprop="url">Lab5_Document</a></h1>
+          <h1 class="post-title" itemprop="name headline">Lab5_Document</h1>
         
 
         <div class="post-meta">
@@ -978,6 +503,10 @@
             
           
 
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
           
           
 
@@ -1000,9 +529,7 @@
       
 
       
-        
-          
-            <h1 id="Lab5-Document"><a href="#Lab5-Document" class="headerlink" title="Lab5-Document"></a>Lab5-Document</h1><h2 id="File-system-preliminaries"><a href="#File-system-preliminaries" class="headerlink" title="File system preliminaries"></a>File system preliminaries</h2><h3 id="Sectors-and-Blocks"><a href="#Sectors-and-Blocks" class="headerlink" title="Sectors and Blocks"></a>Sectors and Blocks</h3><p>大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以<strong>块</strong>为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。</p>
+        <h1 id="Lab5-Document"><a href="#Lab5-Document" class="headerlink" title="Lab5-Document"></a>Lab5-Document</h1><h2 id="File-system-preliminaries"><a href="#File-system-preliminaries" class="headerlink" title="File system preliminaries"></a>File system preliminaries</h2><h3 id="Sectors-and-Blocks"><a href="#Sectors-and-Blocks" class="headerlink" title="Sectors and Blocks"></a>Sectors and Blocks</h3><p>大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以<strong>块</strong>为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。</p>
 <p>在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对存储空间大粒度的操作的高效性，多数os都是用了更大的块。jos使用4k的块，正好和页大小一样。</p>
 <h3 id="Superblocks"><a href="#Superblocks" class="headerlink" title="Superblocks"></a>Superblocks</h3><p>文件系统一般会把文件的meta-data保存在一个便于访问的地方，这些data包括块大小、磁盘大小等数据，保存这些meta-data的地方被称为<strong>超级块</strong>。</p>
 <p>这里的文件系统只有一个超级块，他将会在block1。真正的文件系统一般会有很多个超级块，这样当某一个超级块崩溃的时候，其他的超级块还能正常使用。</p>
@@ -1139,8 +666,6 @@
 <p>完成之后：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-30/31362968.jpg" alt=""></p>
 <p>本实验结束。最后make grade：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-30/10360665.jpg" alt=""></p>
 
-          
-        
       
     </div>
     
@@ -1152,20 +677,66 @@
     
 
     
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YaYi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/01/05/OS/Lab5_Document/" title="Lab5_Document">http://yoursite.com/2017/01/05/OS/Lab5_Document/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+        </div>
+      
 <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
   
 </div>
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/29/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1175,14 +746,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -1190,6 +758,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -1210,8 +780,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1310,6 +889,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab5-Document"><span class="nav-number">1.</span> <span class="nav-text">Lab5-Document</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File-system-preliminaries"><span class="nav-number">1.1.</span> <span class="nav-text">File system preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sectors-and-Blocks"><span class="nav-number">1.1.1.</span> <span class="nav-text">Sectors and Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Superblocks"><span class="nav-number">1.1.2.</span> <span class="nav-text">Superblocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-Meta-data"><span class="nav-number">1.1.3.</span> <span class="nav-text">File Meta-data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Directories-versus-Regular-Files"><span class="nav-number">1.1.4.</span> <span class="nav-text">Directories versus Regular Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-File-System"><span class="nav-number">1.2.</span> <span class="nav-text">The File System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disk-Access"><span class="nav-number">1.2.1.</span> <span class="nav-text">Disk Access</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Block-Cache"><span class="nav-number">1.3.</span> <span class="nav-text">The Block Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Block-Bitmap"><span class="nav-number">1.3.1.</span> <span class="nav-text">The Block Bitmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-Operations"><span class="nav-number">1.3.2.</span> <span class="nav-text">File Operations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-file-system-interface"><span class="nav-number">1.3.3.</span> <span class="nav-text">The file system interface</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spawning-Processes"><span class="nav-number">1.4.</span> <span class="nav-text">Spawning Processes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sharing-library-state-across-fork-and-spawn"><span class="nav-number">1.4.1.</span> <span class="nav-text">Sharing library state across fork and spawn</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-keyboard-interface"><span class="nav-number">1.5.</span> <span class="nav-text">The keyboard interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Shell"><span class="nav-number">1.6.</span> <span class="nav-text">The Shell</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1458,6 +1053,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

@@ -566,147 +566,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/OS/OS4+Memory and Process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/13/OS/OS4+Memory and Process/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T18:48:27+08:00">
-                2017-11-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<hr>
-<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
-<ol>
-<li>在每一个像素有一种颜色</li>
-<li>文本模式</li>
-</ol>
-<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
-<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
-<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
-<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
-<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
-<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
-<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
-<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
-<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
-<p>由一个“可否使用cache”的位</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/哈希/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1304,246 +1163,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/进程与线程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/06/进程与线程/" itemprop="url">进程与线程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
-                2017-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h1><p>进程模型的进化：</p>
-<ol>
-<li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
-<li>第二代：批处理系统：一个程序完成所有工作。</li>
-<li>带三代：mutiprogramming and timesharing。CPU可以切换运行。</li>
-<li>第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。</li>
-</ol>
-<p><strong>进程</strong>：计算机上所有可以运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程。它包括输入输出程序与状态。</p>
-<p>需要区分进程与程序。</p>
-<p>进程创建：系统初始化、运行进程的创建进程系统调用被执行、用户请求、批处理作业初始化。</p>
-<p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
-<p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
-<h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><p>进程的基本状态有<strong>运行态（Running）</strong>、<strong>就绪态（Ready）</strong>、<strong>阻塞态（Blocked）</strong>。<br>其他运行态还有<strong>创建（New）</strong>、<strong>挂起（Suspended）</strong>、<strong>退出（Exit）</strong>。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">状态</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">运行</td>
-<td style="text-align:center">目前获得了CPU使用权</td>
-</tr>
-<tr>
-<td style="text-align:center">准备</td>
-<td style="text-align:center">可运行，但由于CPU被其他占用而暂时停止</td>
-</tr>
-<tr>
-<td style="text-align:center">阻塞</td>
-<td style="text-align:center">除非某种外部事件发生，否则不可运行</td>
-</tr>
-<tr>
-<td style="text-align:center">–</td>
-<td style="text-align:center">–</td>
-</tr>
-<tr>
-<td style="text-align:center">创建</td>
-<td style="text-align:center">进程的数据结构已经准备好，但是running image还没准备好</td>
-</tr>
-<tr>
-<td style="text-align:center">退出</td>
-<td style="text-align:center">进程已经完成了自己的工作，但是数据结构还没有删除</td>
-</tr>
-<tr>
-<td style="text-align:center">挂起</td>
-<td style="text-align:center">running image被交换到了硬盘</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>阻塞是由于他自己的原因需要等待输入输出等的操作，逻辑上不能继续运行；<br>而准备是系统把他调度下来了，即使它本身还可以继续运行。</p>
-</blockquote>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/96592015.jpg" alt=""></p>
-<p>观察上面的状态迁移图发现：阻塞态是不能直接进入运行态的，必须经过准备状态。同样，在准备状态的进程根本没有得到CPU资源，也不存在执行到需要外部事件的程度，因此也不可能有向阻塞的转变。</p>
-<p>如果加上另外两个状态：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/91158063.jpg" alt=""></p>
-<p>对于挂起状态：<br>有时需要对进程做分级处理，引入优先级会使某进程等待时间过长而被换至外存，这被称为进程挂起，目的是：提高处理机效率：就绪进程表为空时，要提交新进程，以提高处理机效率；为运行进程提供足够内存：资源紧张时，暂停某些进程，如CPU繁忙（或实时任务执行）时内存会比较紧张；便于调试：在调试时，挂起被调试进程对其地址空间进行读写。</p>
-<p>双挂起：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-23/56244337.jpg" alt=""></p>
-<p>在这个图中，挂起状态下对应进程的数据都在外存中，而其他状态下对应的数据应该在内存中。从进程一旦被调入外存，必须在所有都准备好之后才可能被从外存调入。等待外部事件发生的进程在外存中等待完之后才可能有机会进入就绪状态准备运行。</p>
-<p>相对于内存，外存的速度很慢，什么导致了进程数据被移到外存？一是就绪进程需要更多的内存资源，只能把那些现在还不可能就绪运行的进程移出去，这是进入阻塞挂起状态，二是更高优先级的阻塞（阻塞挂起）进程终于等到了自己的外部事件，要求先运行，所以较低优先级的进程就被移入了外存，这是进入就绪挂起状态。对抢先式分时系统，当有高优先级等待挂起进程因事件出现而进入就绪挂起（运行-&gt;就绪挂起）</p>
-<p>什么时候把外存的数据转移到内存呢？一是没有就绪进程或挂起就绪进程优先级高于就绪进程，这时进入就绪状态；二是一个进程释放足够内存，并有高优先级等待挂起进程，这是进入阻塞状态。</p>
-<p>在不同的OS中，进程状态差异较大！！</p>
-<h3 id="Linux中的进程状态"><a href="#Linux中的进程状态" class="headerlink" title="Linux中的进程状态"></a>Linux中的进程状态</h3><p>windows中的进程状态（XP）与上述双挂起状态迁移类似，下面讨论Linux中的进程状态。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">状态</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">TASK_RUNNING</td>
-<td style="text-align:center">进程正占用CPU或是等待被执行</td>
-</tr>
-<tr>
-<td style="text-align:center">TASK_INTERRUPTIBLE</td>
-<td style="text-align:center">进程被阻塞，直到外部事件发生。发起中断系统资源释放或某种信号都能唤醒进程为RUNNING</td>
-</tr>
-<tr>
-<td style="text-align:center">TASK_UNITERRUPTIBLE</td>
-<td style="text-align:center">除了传递一个信号给睡眠进程保持其状态不变</td>
-</tr>
-<tr>
-<td style="text-align:center">TASK_STOPPED</td>
-<td style="text-align:center">进程停止运行，在接收到SIGSTOP、SIGTSTP、SIGTTIN、SIGTTOU后</td>
-</tr>
-<tr>
-<td style="text-align:center">TASK_TRACED</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>所谓running image</p>
-</blockquote>
-<h1 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/OS-内存管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1638,6 +1257,486 @@
         
           
             <p>#</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/OS/chap2-进程与线程/" itemprop="url">进程与线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="导"><a href="#导" class="headerlink" title="导"></a>导</h2><p>进程模型的进化：</p>
+<ol>
+<li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
+<li>第二代：批处理系统：一个程序完成所有工作。</li>
+<li>带三代：mutiprogramming and timesharing。CPU可以切换运行。</li>
+<li>第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。</li>
+</ol>
+<p><strong>进程</strong>：计算机上所有可以运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程。它包括输入输出程序与状态。</p>
+<p>需要区分进程与程序。</p>
+<p>进程创建：系统初始化、运行进程的创建进程系统调用被执行、用户请求、批处理作业初始化。</p>
+<p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
+<p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
+<h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><p><strong>whats os?</strong><br>    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and providing useful services. It is a convenient platform for people to use computer</p>
+<h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><ol>
+<li>使用cpu的基本数据结构<ol>
+<li>逻辑程序：被用户设计实现（envs）</li>
+<li>cpu指令序列：</li>
+<li>进程：程序与指令之间的数据结构</li>
+</ol>
+</li>
+</ol>
+<p><strong>进程</strong>：进程是某一个特定程序的运行实例，包括输入输出程序与状态。在分时操作系统（time-sharing os）中，CPU被多个进程分享，复杂的算法将被用于进程之间的调度。</p>
+<h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><p>基本状态：</p>
+<ol>
+<li>running：真正占用CPU</li>
+<li>ready：可以运行，等待CPU的使用权</li>
+<li>blocked：不能继续运行，等待外部事件（输入输出等）</li>
+</ol>
+<p>其他状态：</p>
+<ol>
+<li>new：进程的数据结构已经准备好，但是程序镜像尚未完成装载（env_create到icode_load之前，此时还不可以调用env_run）</li>
+<li>exit：程序已经完成了所有工作，但是还没有回收进程的数据结构（exit gracefully之后，free之前）</li>
+<li>suspend：运行镜像已经被换到硬盘里面了</li>
+</ol>
+<blockquote>
+<p>为什么block不能直接过渡到running：你都阻塞了，想回来啊？等吧。<br>为什么ready不能直接block？你都没有运行，怎么直到自己要等待一个外部事件去block？</p>
+</blockquote>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg" alt=""></p>
+<p>那么为什么会<strong>挂起</strong>呢？</p>
+<p>挂起是由于：1.等待时间过长 2. 物理地址空间不足。导致该进程所需运行资源被切换到外存。</p>
+<p>页面置换是一件很麻烦的事情，需要进行一系列的硬盘操作，硬盘是一个极其慢的设备，那么为什么还要有挂起状态？（废话如果内存也能有120G那么多空间谁会给他换到硬盘啊）</p>
+<ol>
+<li>提高处理机效率：就绪进程表示空的时候，提交新进程，以提高处理机效率（<em>哈？</em>）</li>
+<li>为运行进程提供足够多的内存</li>
+<li>便于调试：在调试时，挂起被调试进程对其地址空间进行读写。</li>
+</ol>
+<p>什么时候会挂起呢？在进程等待外部事件（阻塞）的时候，有可能被挂起。</p>
+<p>除此之外的双挂起模型：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/87376882.jpg" alt=""></p>
+<p><strong>等待-&gt;等待挂起</strong>：没有进程处于就绪状态或者是就绪进程需要更多的内存资源。<br><strong>就绪-&gt;就绪挂起</strong>：有高优先级的等待进程和低优先级的就绪进程（这是就绪进程被换到外存）<br><strong>运行-&gt;就绪挂起</strong>：对于抢先式分时系统，有高优先级的等待挂起进程因事件出现而进入就绪挂起。<br><strong>等待挂起-&gt;就绪挂起</strong>：等待的事件到了<br><strong>就绪挂起-&gt;就绪</strong>：没有就绪进程或者是就绪挂起进程的优先级比所有就绪进程的优先级都高<br><strong>等待挂起-&gt;等待</strong>：有一个进程释放了内存，一个等待挂起进程的优先级很高</p>
+<p>值得一提的是，winxp用的就是上面的双挂起模型。</p>
+<p><a href="http://blog.csdn.net/freeelinux/article/details/53562592" target="_blank" rel="external">对挂起的详细分析</a></p>
+<blockquote>
+<p>为什么要双挂起呢，os真的那么缺内存吗？<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/11990991.jpg" alt=""><br><a href="https://github.com/GcsSloop/Note/tree/master/OperatingSystem" target="_blank" rel="external">from:gcssloop/note</a></p>
+</blockquote>
+<p>linux下使用的进程模型是：</p>
+<ol>
+<li>TASK_RUNNING</li>
+<li>TASK_INTERRUPTIBLE：进程被挂起，直到某些条件变成真。（产生一个中断，在中断中释放一些该进程等待的系统资源，传递唤醒该进程的信号）<br>$$\color{red}{shenme玩意}$$</li>
+<li>TASK_UNINTERRUPTIBLE：除了信号不能使它的状态发生变化之外与前一个相同</li>
+<li>TASK_STOPED</li>
+<li>TASK_TRACED：进程运行被debugger打断</li>
+<li>EXIT_ZOMBIE：程序运行已经结束了，但是他的父进程还没有调用一个wait4()或是waitpid()系统调用来返回死掉进程的信息。</li>
+<li>EXIT_DEAD</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/55177783.jpg" alt=""></p>
+<p>$$\color{red}{so why… kill之后为什么不死}$$</p>
+<p>不同的os，其状态设置的差异很大。</p>
+<h2 id="进程数据结构"><a href="#进程数据结构" class="headerlink" title="进程数据结构"></a>进程数据结构</h2><p><strong>PCB：进程控制块</strong>：<br>这就是在jos里面的envs那个大数组了，它由操作系统内核维护，也叫进程描述符。（经过了jos的洗礼，其实不用说太多）</p>
+<p>所有pcb都在一个特定的内存空间之中。pcb表的size决定了os的并发度。不同状态的进程数据被存在不同的pcb表中。</p>
+<p>在一个正经系统中的pcb比env中的项更多，列为：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/88783439.jpg" alt=""></p>
+<p>为了将不同运行状态的pcb区分开，可以有两种方法，一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/92773297.jpg" alt=""><br>另一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/64758197.jpg" alt=""></p>
+<p>其中第一种是在jos中使用的方式。</p>
+<h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>进程切换就是我们的sched函数了。<br>切换之前，需要保存在cpu运行程序的山下文（tf内容、pgdir等），切换之后，把新上来的进程的上下文恢复。</p>
+<iframe height="498" width="510" src="http://oysmkdi7t.bkt.clouddn.com/%E5%AA%92%E4%BD%932.mp4" frameborder="0" allowfullscreen></iframe>
+
+<p>比如说sleep的实现：一个进程运行到了sleep，os去处理这个sleep，此时cpu的掌管权在kernel手里，随后设置一个硬件的时钟中断，然后保护现场，最后os就schedule，把运行权交给了另一个进程，另一个进程运行了一段时间之后硬件的时钟中断raise，打断了另一个进程的运行，于是os处理这个时钟中断保护现场，剥夺了另一个进程的运行权，再一次schedule，进程1开始运行。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/62249836.jpg" alt=""></p>
+<h2 id="运行镜像（process-image）"><a href="#运行镜像（process-image）" class="headerlink" title="运行镜像（process image）"></a>运行镜像（process image）</h2><p>运行镜像就是☞进程的整个生存周期的描述。</p>
+<p><strong>process image的内容</strong>：</p>
+<ol>
+<li>用户层面：该进程的用户地址空间，比如说程序、堆栈、数据段</li>
+<li>寄存器层面：pc、pcw、ir，栈指针其他寄存器</li>
+<li>系统层面：pcb等、动态内核指针</li>
+</ol>
+<p>（emm个人觉得，其实就是pcb里面保存的那些东西，以及那些指针指向的那些空间）</p>
+<h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h2><p>p82</p>
+<p>简述：</p>
+<p><strong>Q</strong>：什么时候调度？<br>    进程被创建、进程退出<br>    进程阻塞<br>    出现io中断</p>
+<p><strong>Q</strong>：为什么要调度？<br>    做更好的选择：优先级、运行时长<br>    保证CPU的效率</p>
+<p><strong>Q</strong>：怎么做调度？<br>    使用特定的方式选择一个进程占用CPU<br>    在切换的时候切换上下文</p>
+<p><strong>A</strong>：注意：</p>
+<ol>
+<li>调度的频率是非常重要的</li>
+<li>有抢占式调度与非抢占式调度</li>
+<li>CPU-bound（计算密集型）与i/o-bound（io密集型）进程</li>
+</ol>
+<p>CPU资源的时分复用 ：</p>
+<ol>
+<li>进程切换：CPU资源占用者切换</li>
+<li>处理机调度：从就绪队列中挑选进程、从CPU中挑选可使用的CPU</li>
+<li>调度程序：调度策略、调度时机</li>
+</ol>
+<h3 id="when-and-why"><a href="#when-and-why" class="headerlink" title="when and why"></a>when and why</h3><p>上述的调度时间是一个笼统的说法：</p>
+<ol>
+<li>内核运行调度程序的条件<br> 进程退出<br> 进程从运行态切换到等待</li>
+<li>非抢占系统中<br> 当前进程主动放弃CPU</li>
+<li>可抢占系统<br> 当前进程时间片用完<br> 中断请求被服务例程响应完成时</li>
+</ol>
+<p>其实在写完jos的sched函数之后，对何时调度应该有一个认识：无论是何时调度，都是os编写人员决定的（或是用户程序主动放弃）。os为了避免用户程序不自觉，提供了时间中断（timer interrupt），在每一个时间终端的处理中指定schedule。<br>再比如上面提到的io中断，这部分也是os决定的sched，因为trap(jos)是属于kernel部分。</p>
+<p>调度的目标：不同的系统中目标是不同的</p>
+<ol>
+<li><p>在所有系统中：</p>
+<ol>
+<li>公平性：给每一个进程一个公平使用CPU的机会</li>
+<li>策略强制执行:seeing thatstated policy is carried out</li>
+<li>平衡：保持整个系统都是有事可干</li>
+</ol>
+</li>
+<li><p>批处理系统：</p>
+<ol>
+<li>吞吐量：使单位时间的工作量达到最大</li>
+<li>周转时间（turnaround time）：在任务提交与任务完成之间时间尽可能小</li>
+<li>CPU利用率：让CPU一直有事可干</li>
+</ol>
+</li>
+<li><p>交互系统：</p>
+<ol>
+<li>响应时间</li>
+<li>Proportionality：达到用户期望值</li>
+</ol>
+</li>
+<li><p>实时系统：</p>
+<ol>
+<li>meet deadline：别丢数据</li>
+<li>可预测：在多媒体系统中别有质量上的降低</li>
+</ol>
+</li>
+</ol>
+<h3 id="goal"><a href="#goal" class="headerlink" title="goal"></a>goal</h3><p>那么给定一个调度算法，怎么比较他们之间的优劣呢？</p>
+<ol>
+<li>CPU使用率</li>
+<li>吞吐量：单位时间内完成进程的数量</li>
+<li>周转时间：进程从初始化到结束绝对时间</li>
+<li>等待时间：进程在<strong>就绪</strong>中的时间（不算等待状态的时间，因为这个时间其实是必须花费的）</li>
+<li>响应时间：从提交请求到请求响应时间</li>
+</ol>
+<p><strong>吞吐量与响应时间之间的区别</strong></p>
+<p>吞吐量是什么呢？其实就是希望通过合理的调度使规定时间内完成更多的进程，比如说文件传输的时候希望<strong>高带宽</strong>（10M/s与10k/s你想要哪个？）。<br>响应时间是什么呢？就是希望进程对某一个动作尽可能快的作出反应，比如点击按钮搜索之后多久才响应。</p>
+<p>吞吐量与响应时间其实是很不同的两个概念，两者我认为在某种情况下是此消彼长的。吞吐量描述的是整体，响应时间描述的特定。</p>
+<p><strong>响应时间目标</strong>：</p>
+<ol>
+<li>减少响应时间 </li>
+<li>减少平均响应时间的波动<br>在交互是系统中，减少平均响应时间波动其实更加重要。</li>
+</ol>
+<p>响应时间是os的计算延时。</p>
+<p><strong>吞吐量目标</strong>：</p>
+<ol>
+<li>增加吞吐量：减少os开销（减少上下文切换）、系统资源的高效利用（CPU、io）</li>
+<li>减少等待时间：减少每个进程在就绪呆的时间<br>os需要保证吞吐量的提高不会影响交互体验（os必须不时地进行调度，即使存在许多交互式任务）</li>
+</ol>
+<p>吞吐量是os的计算带宽</p>
+<h3 id="批处理系统中的调度算法"><a href="#批处理系统中的调度算法" class="headerlink" title="批处理系统中的调度算法"></a>批处理系统中的调度算法</h3><p>吞吐量、周转时间、CPU利用率</p>
+<ol>
+<li>先来先服务：非抢占式<br> 笨蛋算法、简单，某些情况下也合理、io密集型系统中对CPU利用率低到令人发指</li>
+<li>最短任务优先：非抢占式<br> 周转时间短、在现实的os中并不会是最优的</li>
+<li>最短剩余时间优先：抢占式<br> 将新任务的时间与当前任务的剩余运行时间做对比，如果新任务时间短就让新任务占据CPU、不现实啊</li>
+<li>三层调度<br> admission scheduler<br> memory scheduler<br> CPU scheduler</li>
+</ol>
+<h4 id="先来先服务（FCFS）"><a href="#先来先服务（FCFS）" class="headerlink" title="先来先服务（FCFS）"></a>先来先服务（FCFS）</h4><p>就是先来先运行，也没有抢占，运行到结束就行了。</p>
+<p>优点是非常简单，但是缺点更加明显。</p>
+<ol>
+<li>平均等待时间波动很大，短进程可能会在长进程后面</li>
+<li>资源利用率低（一直运行一个你说利用率能高吗），CPU密集型导致io闲置，io密集型导致CPU闲置。</li>
+</ol>
+<blockquote>
+<p>说到这里就想起来一个题外话。上编译课的时候编译老师说他上学那会儿用的编译器是非常老的编译器，性能也不好。一般都是晚上离开实验室的时候把写的东西运行上，第二天回来实验室的时候能出结果都已经很不错了。<br>os课的时候老师说，假如你买了一个服务要去运行自己的程序，本来你就是一个hello world，前面那个人的程序可能特别庞大需要一天来运行，你倒霉催的正好排在那人后面，你可能几秒就完事了，但是那个服务器好巧不巧用的FCFS，那你可就等吧。</p>
+</blockquote>
+<h4 id="最短时间优先算法（SPN）"><a href="#最短时间优先算法（SPN）" class="headerlink" title="最短时间优先算法（SPN）"></a>最短时间优先算法（SPN）</h4><p>每次选择就绪队列中的运行时间最短的进程来执行，就绪队列按照预期的执行时间来排序。</p>
+<p>非常容易就可以想到的是，SPN必定具有<strong>最短平均周转时间</strong>。（如果学过贪心算法，应该很清楚这一点）（吞吐量可不会，SPN是非抢占，只能串行运行的）</p>
+<p>缺点也非常明显，你一直运行hello world，人家正儿八经的要运行一天的大程序什么时候才能开始运行啊？<br>可能会导致<strong>饥饿</strong>。</p>
+<p>还有一个需要解决的问题是<strong>如何预测程序运行</strong>，不太可能准确预测一个程序需要的执行时间，尤其是当ifelse while等语句十分的情况下，这种运行时间一般都需要在运行时才能确定。<br>不能预测这个算法还有什么好实现的？<br>还有一种方法是问用户，你不能保证用户都是诚实的，但是你可以最多分配用户指定的时间，超出时间就杀死。但是这种方法真的太不友好太不专业了，程序运行中的状况很多，用户也不一定知道运行时间。</p>
+<p>所以这种方法其实是不太可行的。</p>
+<h4 id="最短剩余时间优先算法（SRT）"><a href="#最短剩余时间优先算法（SRT）" class="headerlink" title="最短剩余时间优先算法（SRT）"></a>最短剩余时间优先算法（SRT）</h4><p>是SPN的可抢占改进版，允许当新进程进入时新进程如果运行时间很短可以代替老进程运行。</p>
+<p>其实这才改是真正的最短平均周转时间。（即使是可抢占，也与吞吐量高无缘，又不会在等待的时候调度）。</p>
+<p>缺点也差不多与SPN差不多。</p>
+<h4 id="最高响应比优先算法（HRRN）"><a href="#最高响应比优先算法（HRRN）" class="headerlink" title="最高响应比优先算法（HRRN）"></a>最高响应比优先算法（HRRN）</h4><p>选择就绪队列中响应比R值最高的进程。不支持抢占。</p>
+<p><strong>响应比</strong>：R=(等待时间+执行时间)/执行时间</p>
+<p>那也就是等待的时间越长越容易被选中。是在短进程优先算法基础之上的改进，防止无止境地等待。</p>
+<h4 id="三层调度"><a href="#三层调度" class="headerlink" title="三层调度"></a>三层调度</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/65249341.jpg" alt=""></p>
+<h3 id="交互式系统中的调度"><a href="#交互式系统中的调度" class="headerlink" title="交互式系统中的调度"></a>交互式系统中的调度</h3><ol>
+<li>时间片轮转：抢占式<br> 时间片耗尽时触发调度、进程等待（阻塞）时触发调度</li>
+<li>多级队列：<br> 有多种优先级class，美哟中class存在同一个队列、根据优先级选择进程、高优先级低时间片保证公平</li>
+<li>优先级调度：抢占式<br> 每个进程有自己的优先级、CPU选择最高优先级、动态优先级来避免饥饿</li>
+</ol>
+<p><strong>处理机资源的使用模式</strong>：</p>
+<p>进程在CPU计算与io之间进行交替：每次调度决定在下一个CPU计算时将那个工作交给CPU，在时间片机制下，进程可能在结束当前CPU计算之前放弃CPU。</p>
+<h4 id="时间片轮转-（RR）"><a href="#时间片轮转-（RR）" class="headerlink" title="时间片轮转 （RR）"></a>时间片轮转 （RR）</h4><p>每当时间片结束，就会引发一个调度，每当进程自己要等待，引发一个调度。每当下去，自觉排在队尾。</p>
+<p>时间片轮转的问题是：</p>
+<ol>
+<li>额外的上下文切换开销</li>
+<li>时间片选择问题</li>
+</ol>
+<p>其实归根结底是时间片选择问题，额外的上下文切换是一定必须的。<br>如果时间片选择太大，就失去了调度的灵活性，等待时间变长，这在交互式系统中可能是不可忍受的。甚至在极限情况下，就退化成了上述的FCFS。<br>如果时间片选择太短，将会浪费大量的时间在上下文切换。比如在linux，上下文切换一次可能需要1ms，如果4ms是时间片长度，那么整个系统中有20%的时间都在做上下文切换。这是没有意义的浪费。<br>经验上，一般将浪费控制在1%，实践篇一般设置在20-50ms。<br>当n（就绪队列长度）比较大的时候，可以把某一些就绪状态的进程给传到就绪挂起。</p>
+<h4 id="多级队列调度算法（MQ）"><a href="#多级队列调度算法（MQ）" class="headerlink" title="多级队列调度算法（MQ）"></a>多级队列调度算法（MQ）</h4><p>就绪队列被划分为多个独立的子队列（终端、io、前台交互、后台批处理）<br>每个队列可以有自己的调度策略（前台RR，后台FCFS等）<br>队列之间的调度：</p>
+<ol>
+<li>固定优先级：可能导致饥饿</li>
+<li>时间片轮转：每个队列得到一个确定的能偶用于调度其进程的CPU总时间（比如前台80%后台20%）</li>
+</ol>
+<h4 id="多级反馈队列算法（MLFQ）"><a href="#多级反馈队列算法（MLFQ）" class="headerlink" title="多级反馈队列算法（MLFQ）"></a>多级反馈队列算法（MLFQ）</h4><p>进程可以在不同队列之间移动的多队列算法。时间片大小可以随着优先级级别增加而减小，如果进程在当前的时间片没有完成，降到下一个优先级。</p>
+<p>其特点是：CPU密集型的进程优先级下降很快，而io密集型进程停留在高优先级。</p>
+<h4 id="优先级算法（PS）"><a href="#优先级算法（PS）" class="headerlink" title="优先级算法（PS）"></a>优先级算法（PS）</h4><p>是多级队列算法的改进，平衡各进程对响应时间的要求。<br>分为抢占式与非抢占式。<br>通常可以控制其时间片长度。<br>如果io完成，提高优先级，如果时间片用完，将低优先级。</p>
+<p><strong>静态优先级</strong>：<br>在创建进程的时候，他的优先级就被确定，直到进程终止之前都不会改变。<br>（系统进程优先级高、io密集型优先级高）</p>
+<p><strong>动态优先级</strong>：<br>优先级在创建的时候被赋予，但是在进程运行的过程中可以被改变：</p>
+<ol>
+<li>在就绪队列中，等待时间延长优先级高。</li>
+<li>进程每执行一个时间片就降低这个进程的优先级。</li>
+</ol>
+<p>对于不同类型的进程：<br><strong>io密集型进程</strong>：他是最高级优先。<br>为什么io密集的优先级比较高呢？这是因为io密集型一般只会占用一小会儿CPU，随后就会等待io外部操作去了。最好的做法是，io一旦就绪就赶紧用一下CPU，然后就可以去等io事件了。如果io密集型进程的优先级比较低，将会浪费很多时间在就绪的等待上。<br>CPU密集型时常需要CPU资源，由于优先级低，可以使用更大的时间片，减少上下文切换的浪费。</p>
+<p>动态处理：<br>对于io密集型，尽量别减小优先级。（如果是MLFQ，这是几乎可以保证的，因为io密集，可能在给定的时间片中没有用完时间片就自己进入阻塞状态了）（me）<br>对于cpu密集型，在它的io完成之后，放回io请求时离开的队列，以免每次都回到最高优先级再逐次下降。</p>
+<h4 id="最短进程优先"><a href="#最短进程优先" class="headerlink" title="最短进程优先"></a>最短进程优先</h4><h4 id="保证调度"><a href="#保证调度" class="headerlink" title="保证调度"></a>保证调度</h4><p>向用户做出明确的性能保证，然后去实现它。</p>
+<p>初始：每个进程同等的share CPU。<br>随后：计算每个进程理应获得的时间与实际获得的时间之比。<br>结果：倾向于运行比率更低的进程，直到它的radio超过他的接近竞争者。</p>
+<h4 id="彩票调度"><a href="#彩票调度" class="headerlink" title="彩票调度"></a>彩票调度</h4><p>就是os卖彩票，给每个进程一个彼此不同的彩票，一旦需要调度，就抽彩票，看看谁中奖，中奖的哪个进程获得资源。<br>”所有进程是平等的，但是有一些进程更平等一些“<br>给某些重要的进程额外的彩票，增加他们中奖的几率。</p>
+<p>允许进程之间交换彩票，比如客户机进程获得了运行权，然后阻塞等待服务器的响应，这时客户机可以把自己的彩票给服务器机进程，以增加服务器及进程被选中的机会。（实际上，如果没有客户机进程，服务器及进程的存在就是一个错误）</p>
+<h3 id="调度实现"><a href="#调度实现" class="headerlink" title="调度实现"></a>调度实现</h3><p>unix：动态优先级算法<br>5.3BSD：MQ<br>Windows：优先级算法<br>Linux：抢占式调度（preemptive scheduling）</p>
+<h3 id="调度机制设定"><a href="#调度机制设定" class="headerlink" title="调度机制设定"></a>调度机制设定</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/81651596.jpg" alt=""><br>$$\color{red}{什么鬼这是}$$</p>
+<p>在oskernel设计调度算法，就像我们的schedule函数在kernel中完成，并封装用户接口供用户调用。</p>
+<p>除了时间片，允许用户也做出调度的决定，完成调度策略设置。</p>
+<p><strong>可以参考lab4的文档</strong></p>
+<h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><p>消息、管道、消息队列、共享内存</p>
+<p>可以参考lab4文档，里面有ipc以及lab5中有共享内存。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p><strong>线程</strong>是进程中一个相对独立的、具有可调度特性的<strong>执行单元</strong>。</p>
+<p>线程一定不是陌生的，早在大二上学期，就在Java中接触了线程。线程作为实现进程中的并发而存在。</p>
+<p>系统提供了线程库Pthread：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/74457502.jpg" alt=""></p>
+<h3 id="线程库"><a href="#线程库" class="headerlink" title="线程库"></a>线程库</h3><p>线程库是针对那些不提供多线程支持的os而设计的在用户态下的库，线程库的处理对这些os是透明的。</p>
+<p>即使提供了核心线程支持的os，也有必要提供线程库，可以简化或有利于线程机制的使用。</p>
+<p>线程库提供：</p>
+<ol>
+<li>合适的多线程编程的接口</li>
+<li>记录线程状态和调度各个线程的运行机制</li>
+</ol>
+<p>在系统内部可以使用多种方式实现线程机制：</p>
+<ol>
+<li>ULT纯用户级线程：线程管理全部由用户程序完成，kernel只管理进程，增加”线程库“概念。</li>
+<li>KLT核心级线程：线程有kernel管理，kernel为用户提供系统调用。</li>
+</ol>
+<p><strong>ULT</strong>：<br>进程表在kernel，线程表在用户空间，使用线程库。线程表由运行时系统管理。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/40601574.jpg" alt=""></p>
+<p>ult的优点是：</p>
+<ol>
+<li>线程切换不需要陷入内核：比陷入内核快一个数量级</li>
+<li>允许进程制定自己的调度算法而不会影响os的调度算法程序</li>
+<li>ult管理模式可以在任何os下运行，不需要修改内核，只需要线程库。</li>
+</ol>
+<p>ult的不足是：</p>
+<ol>
+<li>系统调用会引起进程阻塞</li>
+<li>不利于多处理器并行（<strong>why？？？</strong>）</li>
+</ol>
+<blockquote>
+<p>关于系统阻塞的问题：<br>os并不知道进程里还有线程，当一个线程在尚未发生键盘操作的时候读键盘，将会引发阻塞。这时可能整个进程都会被os的调度算法调度下来，整个进程都会阻塞。而要使用线程，应该允许每个线程都能够阻塞调用，而不影响其他线程的运行。现在显然是不行。<br>有两种解决方法，一是修改read在没有外部事件时返回0，但是对read语义的改变休要大量代码的修改。<br>另一种是允许进行阻塞检查，仅在外部事件发生时才进行系统调用，否则先让出使用权给其他线程运行。这种方式一点都不好看，但是也没有其他的方法了。</p>
+<p>还有一个问题是进程的无休止运行。没有时间片操作。<br>对ult最大的争论是程序员一般只会在经常发生线程阻塞的程序中才会大量使用线程。</p>
+</blockquote>
+<p><strong>klt</strong>：<br>线程与进程都在用户空间完成（what？）<br>进程表与线程表都在kernel</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/46110689.jpg" alt=""></p>
+<p>优点：<br>线程在kernel中有信息，系统调用基于线程（不存在上述的阻塞）<br>可以克服ult的阻塞与并行度差的缺点，并且kernel也可以使用多线程。</p>
+<p>缺点：<br>每次进行线程调度都需要陷入内核</p>
+<h2 id="线程的概念"><a href="#线程的概念" class="headerlink" title="线程的概念"></a>线程的概念</h2><p><strong>线程</strong>使劲蹭的一部分，描述指令流执行状态，是进程中的指令执行最小单元，是CPU调度的基本单位。</p>
+<p>在进程与线程机制中，进程作为<strong>资源分配</strong>角色，包括地址空间、打开文件等；线程作为<strong>处理机调度</strong>角色，描述进程资源环境中的指令执行序列状态。</p>
+<p>进程的表叫做<strong>TCB</strong>。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/26479287.jpg" alt=""></p>
+<p>为什么进程有自己独立的栈？<br>进程描述了指令执行状态，而栈中数据与之前执行的指令有关，因此每一个线程都应该有自己的栈。保证执行指令的独立性。</p>
+<ol>
+<li>调用函数返回</li>
+<li>errorno</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程中内容</th>
+<th style="text-align:center">线程中内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">地址空间</td>
+<td style="text-align:center">程序计数器</td>
+</tr>
+<tr>
+<td style="text-align:center">全局变量</td>
+<td style="text-align:center">寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">打开文件</td>
+<td style="text-align:center">堆栈</td>
+</tr>
+<tr>
+<td style="text-align:center">子进程</td>
+<td style="text-align:center">状态</td>
+</tr>
+<tr>
+<td style="text-align:center">即将发生的报警</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">信号与信号处理程序</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">账户信息</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51773333.jpg" alt=""></p>
+<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p>|进程|线程|<br>|资源分配单位|CPU调度单位|<br>|有完整的资源平台|只独享指令执行的必要资源|<br>|基本状态与其他状态与转换|就绪等待运行状态与转换|</p>
+<p>线程：减少并发执行的时间与空间开销</p>
+<ol>
+<li>创建时间比进程短（why）</li>
+<li>终止时间比进程短</li>
+<li>同一进层内的线程切换时间更短</li>
+<li>同一进程之间的线程共享内存与文件，不需要通过内核进行通信。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/87331439.jpg" alt=""></p>
+<p><strong>what is 多对多</strong></p>
+<h3 id="轻权进程"><a href="#轻权进程" class="headerlink" title="轻权进程"></a>轻权进程</h3><p>内核支持的用户线程。</p>
+<p>一个进程可以有一个或者多个轻量级进程，每个轻权进程由一个单独的内核线程支持。<br>太过复杂，最后被抛弃。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/47608393.jpg" alt=""></p>
 
           
         
@@ -1803,6 +1902,191 @@
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/14409795.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/45619270.jpg" alt=""></p>
 <p>看！</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
+<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
+<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*8Mb/2Mbps=12s$</p>
+<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
+<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
+<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
+<ol>
+<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
+<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
+<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
+<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
+<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
+<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
+<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
           
         
       
@@ -2058,7 +2342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/覆千秋1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -2077,7 +2361,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
+                <a class="post-title-link" href="/2017/11/03/覆千秋1/" itemprop="url">覆千秋1</a></h1>
         
 
         <div class="post-meta">
@@ -2089,8 +2373,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
-                2017-11-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T21:46:15+08:00">
+                2017-11-03
               </time>
             
 
@@ -2112,8 +2396,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/我的故事/" itemprop="url" rel="index">
+                    <span itemprop="name">我的故事</span>
                   </a>
                 </span>
 
@@ -2123,8 +2407,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
+                  <a href="/categories/我的故事/枯骨流沙/" itemprop="url" rel="index">
+                    <span itemprop="name">枯骨流沙</span>
                   </a>
                 </span>
 
@@ -2134,8 +2418,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
+                  <a href="/categories/我的故事/枯骨流沙/覆千秋/" itemprop="url" rel="index">
+                    <span itemprop="name">覆千秋</span>
                   </a>
                 </span>
 
@@ -2172,28 +2456,16 @@
 
       
         
-          
-            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
-<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
-<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*8Mb/2Mbps=12s$</p>
-<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
-<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
-<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
-<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
-<ol>
-<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
-<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
-<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
-<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
-<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
-<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
-<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
-          
+          <h1 id="夜色凉"><a href="#夜色凉" class="headerlink" title="夜色凉"></a>夜色凉</h1><p>将军府的海棠开了。</p>
+<p>粉粉嫩嫩，一簇一簇的，细风吹来，花朵轻轻落在地上，把这个小园衬出几分诗意。</p>
+<p>只是府上光景却不如这海棠繁盛。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/03/覆千秋1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2295,7 +2567,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2409,7 +2681,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共55.7k字</span>
+  <span class="post-count">博客全站共58.9k字</span>
 </div>
 
 

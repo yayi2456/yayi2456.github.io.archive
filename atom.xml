@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-14T19:11:26.143Z</updated>
+  <updated>2017-12-16T06:38:29.332Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/01/14/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/01/14/OS/chap2-进程与线程/</id>
-    <published>2018-01-14T07:02:54.731Z</published>
-    <updated>2018-01-14T19:11:26.143Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;进程&quot;&gt;&lt;a href=&quot;#进程&quot; class=&quot;headerlink&quot; title=&quot;进程&quot;&gt;&lt;/a&gt;进程&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;whats os?&lt;/strong&gt;&lt;br&gt;    A special kind of system software
-        
-      
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>流光</title>
@@ -64,8 +42,8 @@
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2017/12/04/%E4%B8%B2%E8%AE%B2/"/>
-    <id>http://yoursite.com/2017/12/04/串讲/</id>
+    <link href="http://yoursite.com/2017/12/04/OS/%E4%B8%B2%E8%AE%B2/"/>
+    <id>http://yoursite.com/2017/12/04/OS/串讲/</id>
     <published>2017-12-04T11:41:56.599Z</published>
     <updated>2017-12-04T13:27:25.278Z</updated>
     
@@ -174,6 +152,34 @@
     
     
       <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lab3_Document</title>
+    <link href="http://yoursite.com/2017/11/27/OS/OS4+Memory%20and%20Process/"/>
+    <id>http://yoursite.com/2017/11/27/OS/OS4+Memory and Process/</id>
+    <published>2017-11-27T11:00:00.000Z</published>
+    <updated>2018-01-14T19:13:50.558Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;系统调用&quot;&gt;&lt;a href=&quot;#系统调用&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
@@ -296,30 +302,6 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/11/13/OS/OS4+Memory%20and%20Process/"/>
-    <id>http://yoursite.com/2017/11/13/OS/OS4+Memory and Process/</id>
-    <published>2017-11-13T10:48:27.905Z</published>
-    <updated>2017-11-13T11:51:06.799Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;hr&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;系统调用&quot;&gt;&lt;a href=&quot;#系统调用&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>哈希</title>
     <link href="http://yoursite.com/2017/11/12/%E5%93%88%E5%B8%8C/"/>
     <id>http://yoursite.com/2017/11/12/哈希/</id>
@@ -402,36 +384,6 @@
   </entry>
   
   <entry>
-    <title>进程与线程</title>
-    <link href="http://yoursite.com/2017/11/06/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2017/11/06/进程与线程/</id>
-    <published>2017-11-06T06:13:37.000Z</published>
-    <updated>2017-11-23T15:05:35.342Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;进程与线程&quot;&gt;&lt;a href=&quot;#进程与线程&quot; class=&quot;headerlink&quot; title=&quot;进程与线程&quot;&gt;&lt;/a&gt;进程与线程&lt;/h1&gt;&lt;p&gt;进程模型的进化：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;第一代：relay , vacuum tubes and
-        
-      
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>OS:内存管理</title>
     <link href="http://yoursite.com/2017/11/06/OS/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     <id>http://yoursite.com/2017/11/06/OS/OS-内存管理/</id>
@@ -452,6 +404,36 @@
     </summary>
     
       <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>进程与线程</title>
+    <link href="http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2017/11/06/OS/chap2-进程与线程/</id>
+    <published>2017-11-06T06:13:37.000Z</published>
+    <updated>2018-01-14T19:16:38.823Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;进程&quot;&gt;&lt;a href=&quot;#进程&quot; class=&quot;headerlink&quot; title=&quot;进程&quot;&gt;&lt;/a&gt;进程&lt;/h1&gt;&lt;h2 id=&quot;导&quot;&gt;&lt;a href=&quot;#导&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
     
     
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
@@ -493,6 +475,36 @@
   </entry>
   
   <entry>
+    <title>计算机网络番外三</title>
+    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%95%AA%E5%A4%963/"/>
+    <id>http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/</id>
+    <published>2017-11-04T13:12:40.000Z</published>
+    <updated>2017-11-22T12:54:32.119Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第二次书面作业&quot;&gt;&lt;a href=&quot;#第二次书面作业&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+    
+      <category term="作业" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>计算机网络应用层之番外二</title>
     <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82%E7%95%AA%E5%A4%96%E4%BA%8C/"/>
     <id>http://yoursite.com/2017/11/04/计算机网络应用层番外二/</id>
@@ -523,32 +535,28 @@
   </entry>
   
   <entry>
-    <title>计算机网络番外三</title>
-    <link href="http://yoursite.com/2017/11/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%95%AA%E5%A4%963/"/>
-    <id>http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/</id>
-    <published>2017-11-04T13:12:40.000Z</published>
-    <updated>2017-11-22T12:54:32.119Z</updated>
+    <title>覆千秋1</title>
+    <link href="http://yoursite.com/2017/11/03/%E8%A6%86%E5%8D%83%E7%A7%8B1/"/>
+    <id>http://yoursite.com/2017/11/03/覆千秋1/</id>
+    <published>2017-11-03T13:46:15.000Z</published>
+    <updated>2017-11-05T13:45:25.735Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;第二次书面作业&quot;&gt;&lt;a href=&quot;#第二次书面作业&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h1 id=&quot;夜色凉&quot;&gt;&lt;a href=&quot;#夜色凉&quot; class=&quot;headerlink&quot; title=&quot;夜色凉&quot;&gt;&lt;/a&gt;夜色凉&lt;/h1&gt;&lt;p&gt;将军府的海棠开了。&lt;/p&gt;
+&lt;p&gt;粉粉嫩嫩，一簇一簇的，细风吹来，花朵轻轻落在地上，把这个小园衬出几分诗意。&lt;/p&gt;
+&lt;p&gt;只是府上光景却不如这海棠繁盛。&lt;/p&gt;
     
     </summary>
     
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="我的故事" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/"/>
     
-      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+      <category term="枯骨流沙" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/%E6%9E%AF%E9%AA%A8%E6%B5%81%E6%B2%99/"/>
     
-      <category term="作业" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/%E4%BD%9C%E4%B8%9A/"/>
+      <category term="覆千秋" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/%E6%9E%AF%E9%AA%A8%E6%B5%81%E6%B2%99/%E8%A6%86%E5%8D%83%E7%A7%8B/"/>
     
     
-      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+      <category term="千霜" scheme="http://yoursite.com/tags/%E5%8D%83%E9%9C%9C/"/>
     
   </entry>
   
