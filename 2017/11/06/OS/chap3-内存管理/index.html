@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS,Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="内存中的概念地址空间：一个进程可用于寻址内存的一套地址集合。内存管理：逻辑地址与物理地址之间的映射内存管理的特性：  高效：使得更多的地址可以被使用（其实都是骗–人–进程的） 合理：alloc、free、locate、protect 便利：？内存管理class 简单机制：静态固定 复杂机制：交换、paging   为什么会有这种欺骗的行为存在呢？程序员希望拥有一个又大又快又永久的存储器，希望他们的">
+<meta name="keywords" content="OS,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chap3-内存管理">
+<meta property="og:url" content="http://yoursite.com/2017/11/06/OS/chap3-内存管理/index.html">
+<meta property="og:site_name" content="Be With Me">
+<meta property="og:description" content="内存中的概念地址空间：一个进程可用于寻址内存的一套地址集合。内存管理：逻辑地址与物理地址之间的映射内存管理的特性：  高效：使得更多的地址可以被使用（其实都是骗–人–进程的） 合理：alloc、free、locate、protect 便利：？内存管理class 简单机制：静态固定 复杂机制：交换、paging   为什么会有这种欺骗的行为存在呢？程序员希望拥有一个又大又快又永久的存储器，希望他们的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/19805712.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6075684.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6791125.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/52513606.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/10468357.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/42494861.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/82455336.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/96462944.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/314073.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/30845425.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/89846367.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/9967853.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/7051850.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/45924471.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/94487722.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/3276497.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/41368943.jpg">
+<meta property="og:updated_time" content="2018-01-16T13:37:52.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chap3-内存管理">
+<meta name="twitter:description" content="内存中的概念地址空间：一个进程可用于寻址内存的一套地址集合。内存管理：逻辑地址与物理地址之间的映射内存管理的特性：  高效：使得更多的地址可以被使用（其实都是骗–人–进程的） 合理：alloc、free、locate、protect 便利：？内存管理class 简单机制：静态固定 复杂机制：交换、paging   为什么会有这种欺骗的行为存在呢？程序员希望拥有一个又大又快又永久的存储器，希望他们的">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/19805712.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/06/OS/chap3-内存管理/"/>
+
+
+
+
+
+  <title>chap3-内存管理 | Be With Me</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Be With Me</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最喜欢你啦！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap3-内存管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">chap3-内存管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="内存中的概念"><a href="#内存中的概念" class="headerlink" title="内存中的概念"></a>内存中的概念</h1><p><strong>地址空间</strong>：一个进程可用于寻址内存的一套地址集合。<br><strong>内存管理</strong>：逻辑地址与物理地址之间的映射<br><strong>内存管理的特性</strong>：</p>
+<ol>
+<li>高效：使得更多的地址可以被使用（其实都是骗–人–进程的）</li>
+<li>合理：alloc、free、locate、protect</li>
+<li>便利：？<br><strong>内存管理class</strong></li>
+<li>简单机制：静态固定</li>
+<li>复杂机制：交换、paging</li>
+</ol>
+<blockquote>
+<p>为什么会有这种欺骗的行为存在呢？<br>程序员希望拥有一个又大又快又永久的存储器，希望他们的寻址方式是统一的；但是实际上，又快又大又永久的存储器目前还是不现实的。<br>现在我们有的是：</p>
+<ul>
+<li>cache：非常快，昂贵</li>
+<li>内存：速度适中，价格适中</li>
+<li>硬盘：慢，廉价</li>
+</ul>
+</blockquote>
+<p>在计组课里面应该就学过一个各种存储器的速度金字塔。最快的寄存器甚至是按照字节来计算的存储设备。</p>
+<p>于是提出问题：如何使用有限的高速存储设备以及较多的低速存储设备来提高的响应速度呢？</p>
+<h2 id="内存管理的任务"><a href="#内存管理的任务" class="headerlink" title="内存管理的任务"></a>内存管理的任务</h2><ol>
+<li>申请与撤回：资源管理</li>
+<li>地址转换：映射管理</li>
+<li>分享与保护</li>
+<li>空间扩张：你本来不可能占4G的，你非说你占了4个G</li>
+</ol>
+<h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3><blockquote>
+<p>从接口中知道，CPU希望访问一个地址的时候，会给出对应的地址（上总线）以及对应的读写信号etc。</p>
+<p>对程序员来说，每一个程序就是一方天地，并不想在程序里面去思考你os应该解决的存储问题，程序认为自己的地址都是从m开始，想访问哪里就访问哪里，但是os并不可以这样做。<br>就像在实验中提到的那样，程序的elf（exe）文件中会有自己的链接地址，这个地址表示程序假设自己被加载到内存的位置，os加载运行的时候需要进行<strong>重定位</strong>，对程序中相关的地址都经过变换。</p>
+</blockquote>
+<p>对于上述问题，使用两个寄存器来解决，一个是<strong>基址寄存器</strong>，一个是<strong>界限寄存器</strong>，它们在每一个CPU中都存在。基址寄存器存储当前进程的开始物理地址，界限寄存器中存储该程序长度。</p>
+<p>当使用一个地址a的时候，首先判断a是否大于界限寄存器中存储的值，如果不是，再将a加上基址寄存器中的值，然后送到地址总线。这些动作都是CPU硬件完成的。</p>
+<h2 id="monoprograming：单道程序处理"><a href="#monoprograming：单道程序处理" class="headerlink" title="monoprograming：单道程序处理"></a>monoprograming：单道程序处理</h2><h2 id="multiprogramming"><a href="#multiprogramming" class="headerlink" title="multiprogramming"></a>multiprogramming</h2><p>支持多个进程的os内存管理都需要做什么？</p>
+<ol>
+<li>申请空间、释放空间</li>
+<li>地址转换、内存保护（several method）</li>
+<li>CPU利用：MTF的表现</li>
+<li>内存扩张：更加柔韧的内存管理</li>
+</ol>
+<p>使用partition来为每一个进程分配空间</p>
+<hr>
+<p><strong>动态分区分配</strong>：当程序被加载执行时，分配一个进程制定大小可变的分区，在此分区内地址连续<br>os需要维护所有进程的已分配数据结构以及空闲分区。<br>$$\color{red}{whats this}$$</p>
+<h3 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h3><p>通常情况下内存是不够用的。仅仅Windows后台应用都会占据一些内存，更不用说开浏览器，开vs等等。为了处理这样的情况，需要，把某一些进程放到外存，为当前运行进程提供内存空间。</p>
+<p><strong>交换</strong>：把一个完整的进程调入内存，使该进程运行一段时间，然后存回磁盘。<br>这里提到的交换还不是后面说到的页面置换。</p>
+<p><strong>交换中的内存管理</strong>：</p>
+<ol>
+<li>数据结构与算法：如何描述内存的使用 ； 如何申请、free内存</li>
+<li>函数执行：如何消除内存碎片</li>
+<li>核心问题的方法？灵活性、稳定性、扩展性</li>
+</ol>
+<p>关于内存碎片：<br>每次移入内存都是固定的大小，但是有时会移出去，有时会移进来，最终可能会产生许多内存空洞。为了消除内存空洞，需要进行<strong>碎片整理（内存紧缩）</strong>，这个操作很花时间。</p>
+<p><strong>碎片整理：紧缩</strong>：<br>什么时候移动？</p>
+<p><strong>碎片整理：分区对换</strong>：<br>通过抢占并回收处于等待状态进程的分区，增大可用空间。</p>
+<p>核心问题：<br>写程序肯定会经常new吧，这个new是动态分配的内存，只有在运行到这里的时候才会去帮你分配，这种空间是不可预知的，无法准确计算需要空间的最大值。于是在为没一个进程分配空间的时候都可以多分一点。<br>这种分法带来新的问题：<br>将进程换回外存的时候其实并不需要换那些没有有效数据的地址，这是一种浪费。</p>
+<h3 id="交换的空闲内存管理"><a href="#交换的空闲内存管理" class="headerlink" title="交换的空闲内存管理"></a>交换的空闲内存管理</h3><h4 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h4><p>就像lab5中的bitmap一样，0代表没有占用，1代表占用。不同的是，这里一个bit代表可能是内存中的一个<strong>分配单元</strong>，可能是4byte，可能是其他。</p>
+<p>但是使用位图的话，不利于分配连续的空间，因为需要查找连续的固定字节空间的时间可能比查找一个分配单元空闲多花更多时间。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>这并不是lab2中使用的方法。</p>
+<p>维护一个空闲内存段链表与已用内存段链表。在每一个节点标志其状态以及开始地址以及连续地址。</p>
+<p>这种方式对上述问题友好。新的问题是如何进行节点的更新与回收，这需要节点的合并与删除、增加等操作<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/19805712.jpg" alt=""></p>
+<p><strong>分区管理分配算法</strong>：</p>
+<p>当进行内存申请的时候，希望能尽量避免做内存紧缩，这就需要更好的申请方式，而不是每次遇到剩余空间比自己更多的就决定要这个块。</p>
+<ol>
+<li>首次适配：时间性能好、但会容易导致内存碎片</li>
+<li>下次适配：从上次分配的分区开始查找。时间性能好、空闲去分布均匀，较大的空闲分区不易保留</li>
+<li>最佳适配：较大空间保留，碎片小而多</li>
+<li>最坏适配：着更大的分配：较大分区不会被保留<blockquote>
+<p>最佳适配与最坏适配都可以通过维护二级索引来实现更快的查找</p>
+</blockquote>
+</li>
+<li>快速适配：链表的改变十分费劲。为常用大小的块提供专门的索引</li>
+</ol>
+<h3 id="总结：mono-multi-swap"><a href="#总结：mono-multi-swap" class="headerlink" title="总结：mono\multi\swap"></a>总结：mono\multi\swap</h3><ol>
+<li>位图连续空闲空间寻找</li>
+<li>链表的空洞</li>
+<li>交换的缺点：<ol>
+<li>内存碎片</li>
+<li>内存的动态增长</li>
+<li>如何利用小空间运行大进程？</li>
+</ol>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Mono</th>
+<th style="text-align:center">MFP</th>
+<th>Swapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Size of proc</td>
+<td style="text-align:center">total mem</td>
+<td style="text-align:center">partion size</td>
+<td>total size of free mem</td>
+</tr>
+<tr>
+<td style="text-align:center">Alloction</td>
+<td style="text-align:center">static</td>
+<td style="text-align:center">static</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td style="text-align:center">multi-programming</td>
+<td style="text-align:center">unsupported</td>
+<td style="text-align:center">supported</td>
+<td>supported</td>
+</tr>
+<tr>
+<td style="text-align:center">mem space</td>
+<td style="text-align:center">continuous</td>
+<td style="text-align:center">continuous</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td style="text-align:center">mem growth</td>
+<td style="text-align:center">unsupported</td>
+<td style="text-align:center">un</td>
+<td>supported</td>
+</tr>
+</tbody>
+</table>
+<p>除了上述的碎片整理，还有<strong>覆盖</strong>技术：（程序员控制</p>
+<ol>
+<li>划分功能区（ifelse）</li>
+<li>确定模块之间的覆盖关系</li>
+<li>执行之前预先加载并交换</li>
+</ol>
+<p>其实是很不好完成的，基础就不好完成，不好判断功能模块，要求的编程技巧太高。</p>
+<p>但是，从覆盖技术引出了一个：虚拟内存</p>
+<h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><ol>
+<li>进程的程序段、数据段、堆栈段的总和可以大于物理存储空间</li>
+<li>进程不必完全装入内存</li>
+<li>os定时将暂且不用的信息换出内存</li>
+<li>os负责将换出去的换回来</li>
+</ol>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><ol>
+<li>页：描述进程逻辑空间的单元</li>
+<li>页框：描述物理内存中对应的单元</li>
+<li>页表：页与页框之间的映射</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6075684.jpg" alt=""></p>
+<p>在标准的4KB页面中，位数分别是10-10-12</p>
+<p>页转换在mmu中完成，CPU访问到的，在程序之中执行的都是虚拟地址。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6791125.jpg" alt=""></p>
+<p>还记得在计组实验中还被问到了1/0是干吗的，至今难忘。</p>
+<p>可能会有是否越界的比较（在标准中不存在，这是因为数据都是正好的）</p>
+<hr>
+<p>为了考试…</p>
+<p>虚拟地址（英语：Virtual address space）在電腦的专用术语中是指标识一个虚拟（非物理地址）的实体地址。虚拟地址这个术语常用在虚拟内存和虚拟网络地址当中。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
+<p>在计算机科学中，物理地址（英语：physical address），也叫实地址（real address）、二进制地址（binary address），它是在地址总线上，以电子形式存在的，使得数据总线可以访问主存的某个特定存储单元的内存地址。from <a href="https://zh.wikipedia.org/wiki/%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
+<p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98" target="_blank" rel="external">wiki</a></p>
+<hr>
+<h3 id="页表项结构"><a href="#页表项结构" class="headerlink" title="页表项结构"></a>页表项结构</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><strong>page number</strong>：逻辑空间中的页id，<br><strong>frame num</strong>：物理空间中页框的id<br><strong>p/a</strong>：页是不是在内存里面<br><strong>protected</strong>：r/w/e，记录页允许的访问<br><strong>modified</strong>：是不是被修改（脏位<br><strong>referenced</strong>：这个页有没有被使用<br><strong>disable caching</strong>：页面禁用高速缓存</p>
+<blockquote>
+<p>why 禁用高速缓存？<br>对于那些映射到<strong>设备寄存器</strong>而不是普通物理内存的页面来说，不希望在自己等待设备对自己刚发出去的指令做反应的时候自己的导向地址竟然是cache而不是外部接口。</p>
+</blockquote>
+<p>in ppt:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">page num</th>
+<th>p/a</th>
+<th>frame num</th>
+<th>protected</th>
+<th>disable caching</th>
+<th>referenced</th>
+<th>modified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="Design-issue"><a href="#Design-issue" class="headerlink" title="Design issue"></a>Design issue</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/52513606.jpg" alt=""></p>
+<h3 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h3><p>10-10-12</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/10468357.jpg" alt=""></p>
+<p>除了修改位，每集页表项都是一样的。在非底层页表中，取值为0</p>
+<p>其实还可以更多级。</p>
+<h3 id="加速分页过程：TLB"><a href="#加速分页过程：TLB" class="headerlink" title="加速分页过程：TLB"></a>加速分页过程：TLB</h3><p>快表：一个将虚拟地址直接映射到物理地址的小型硬件设备，通常在MMU中，其中的项基本不超过64个。</p>
+<p>将虚拟地址放在MMU中进行转换时，首先查快表：将该页面号与TLB中所有项同时（并行）进行匹配，如果命中，而且不违反保护位，页框号可以直接从TLB拿出，不必再进行内存访问（访问存储有页表项的内存），如果保护位不允许，就会发生一个页面访问错误。</p>
+<p>如果不命中MMU就从内存中找页表项，并将最终找到的页号与页框号等拿出，淘汰tlb中某一个项并添加新来的项。</p>
+<p>当从tlb中淘汰值的时候，记得将tlb中存储的修改位换到页面。</p>
+<p>tlb表项（示例）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">有效位</th>
+<th style="text-align:center">虚拟页面号</th>
+<th style="text-align:center">修改位</th>
+<th style="text-align:center">保护位</th>
+<th style="text-align:center">页框号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">123</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">RW</td>
+<td style="text-align:center">31</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">87</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">RX</td>
+<td style="text-align:center">87</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
+<p>既然TLB这么厉害，为什么不搞一个很大很大的TLB呢。<br>TLB属于高速设备，功耗非常大。</p>
+<h3 id="加速分页过程：软件TLB"><a href="#加速分页过程：软件TLB" class="headerlink" title="加速分页过程：软件TLB"></a>加速分页过程：软件TLB</h3><p>当tlb失效的时候，mmu将会告诉os，让os找到要找的页面，从tlb删除一个页面，把这个页加上去。<br>必须在有限的指令内完成，因为tlb失效更加频繁。</p>
+<p>但是，当tlb更大一些，这种机制就会变得很有效。这样做的好处是得到一个简单的mmu，从而为CPU其他性能改善提供了空间。</p>
+<p>os可以“直觉”那些页面要被使用，然后预先加载到tlb。</p>
+<p>《？》<br>在内存固定位置维护大的tlb表项的软件高速缓存。首先检查这个缓存，os可以实质性地减少失效。</p>
+<p><strong>软失效</strong>：页面在内存中但是映射不在tlb。<br><strong>硬失效</strong>：页面本身不再内存（当然也不在tlb<strong>so为什么是这样</strong>）</p>
+<h3 id="针对大内存：反置页表"><a href="#针对大内存：反置页表" class="headerlink" title="针对大内存：反置页表"></a>针对大内存：反置页表</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/42494861.jpg" alt=""></p>
+<p>为什么会出现反置页表？<br><a href="http://kejiao.cntv.cn/20110905/100155.shtml" target="_blank" rel="external">在64位系统下内存</a><br>64位系统，如果仍然保持一个页是4K，那么一共需要有$2^52$个页，只是存储这些页就花费几百G的空间，显然是不合理的。</p>
+<p>而目前面临的状态是实际的内存很小，于是可以为每一个页框记录一个页表项。这样对于4K的页以及1G的ram只需要$2^18$个页表项即可。<br>页表项中记录哪一个(进程,虚拟页面)对应于该页框。<br>虽然节省空间，但是不足也是很明显的：<br>将虚拟地址转换为物理地址变得困难</p>
+<p>可以使用tlb。但是当tlb失效的时候就很难。<br><strong>基于hash</strong>：把虚拟页号与进程号作为输入，得到的散列值来寻找。</p>
+<p><strong>hahs冲突</strong></p>
+<p><strong>虚拟存储的基本特征</strong>：</p>
+<ol>
+<li>不连续（$\color{red}{啥叫虚拟地址空间使用非连续？是说各个区分开吗}）</li>
+<li>大用户空间：提供给用户的虚拟地址空间可以大于实际的物理内存</li>
+<li>部分交换：虚拟存储只对部分虚拟地址进行调入调出。（不会像交换一样一下一个进程）</li>
+</ol>
+<p><strong>虚拟页式存储的外存管理</strong>：</p>
+<ol>
+<li>在哪里保存没有被映射的页？<ol>
+<li>需要可以方便的找到在外存中的页面内容</li>
+<li>交换空间（磁盘或文件）：采用特殊格式保存没有被映射的页面</li>
+</ol>
+</li>
+<li>虚拟页式存储中的外存选择<ol>
+<li>代码段：可执行二进制文件</li>
+<li>动态加载的共享式程序段</li>
+<li>其他段：交换空间</li>
+</ol>
+</li>
+</ol>
+<p><strong>虚拟页式存储的性能</strong>：有效存储访问时间</p>
+<p>EAT=访存时间*(1-p)+缺页异常处理时间*缺页率p</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/82455336.jpg" alt=""></p>
+<h2 id="pagingsys的工作流程"><a href="#pagingsys的工作流程" class="headerlink" title="pagingsys的工作流程"></a>pagingsys的工作流程</h2><ol>
+<li>全局pgtable初始化</li>
+<li>创建进程</li>
+<li>获取首指令<ol>
+<li>pgfault</li>
+<li>加载页</li>
+<li>更新pgtable</li>
+<li>更新tlb</li>
+</ol>
+</li>
+<li>页替换<ol>
+<li>pgfault</li>
+<li>选择一个页，写回磁盘</li>
+<li>把新页换到这里</li>
+<li>更新tlb</li>
+</ol>
+</li>
+</ol>
+<h2 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h2><ol>
+<li>如果内存还有剩余页，分配；把希望访问的页从disk装到这个物理空间，把这个页对应页表的a/p置为1，物理地址映射到新分配的物理地址，重新执行引起缺页中断的指令</li>
+<li>如果内存没有剩余的页面，依据页面置换算法选择一个将会被替换的物理页，如果这个物理页的值被修改过，把内存中的值写回外存，把对应逻辑页的a/p置为0，把希望访问的物理页装到这个空间，修改物理页对应的逻辑页面的指示物理页地址以及存在位，重新执行却页指令。</li>
+</ol>
+<blockquote>
+<p>我现在认为，前面提到的挂起状态与现在说的“为了腾内存空间而将一些进程存储的东西先存到外存”是不一样的。<br>挂起的意思应该是pcb都被移动到了外存，根本无法找到这个进程的运行情况，地址空间等；但是这里仅仅是为了节省内存空间，将某些页换到了外存，该进程还是可以继续运行的。只是在需要用这些页的时候可能会引发缺页中断。<br>挂起存在的理由不仅仅是为了节省内存，还有一点是为了更有效的调度，因为所有调度算法考虑的都是就绪队列的进程。</p>
+</blockquote>
+<h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><ol>
+<li>缺页中断：需要的页不存在内存之中</li>
+<li>页替换：当所有的物理页都被占用；选择一个页被换出去</li>
+<li>表现：<ol>
+<li>抖动：耗时，低效率</li>
+<li>预测：在需要之前就把页面加载进来</li>
+<li>最优方案：最远将来（不现实）</li>
+</ol>
+</li>
+</ol>
+<p>页面置换算法的功能与目标：</p>
+<ol>
+<li>功能：当出现缺页异常并且物理内存已经被占满，调出一个物理页给新需要的页使用</li>
+<li>设计目标：极可能减少页面的调入调出次数</li>
+</ol>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><h3 id="最优页面置换算法"><a href="#最优页面置换算法" class="headerlink" title="最优页面置换算法"></a>最优页面置换算法</h3><p>通常是衡量置换算法的标准</p>
+<p>置换在未来最长时间内不访问的页面</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/96462944.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/314073.jpg" alt=""></p>
+<h3 id="最近未使用：NRU"><a href="#最近未使用：NRU" class="headerlink" title="最近未使用：NRU"></a>最近未使用：NRU</h3><p>发生pgfault的时候，检查所有页面，将页面分为四类：</p>
+<ol>
+<li>没有访问 没有修改</li>
+<li>没有访问 已经修改该</li>
+<li>已经访问 没有修改</li>
+<li>已经访问 已经修改</li>
+</ol>
+<p>需要替换的时候按照首先替换0的规则进行替换。</p>
+<p>这是因为每次访问页面都会引发中断：写R/W位，于是os可以利用这个时间做一些事。定时把R位清零来区别最近没有被访问的和已经访问的。</p>
+<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>替换最先被换进来的。</p>
+<p>通过维护一个记录所有位于内存的逻辑页面链表，将该链表按驻留时间排序，联手最长，连伟最短。缺页的时候进行置换，新页面加到链尾</p>
+<p>实现简单，可以用硬件实现，但是性能很差，基本不会单独使用这个算法。</p>
+<p><strong>Belady</strong>现象：</p>
+<p>分配的物理也数增加，但是却也次数也会增加的现象。</p>
+<p>原因：FIFO的置换特征与进程访问内存的动态特征矛盾<br>被他置换出去的不一定是近期不会访问的。</p>
+<h3 id="LRU：最近最少使用页面算法"><a href="#LRU：最近最少使用页面算法" class="headerlink" title="LRU：最近最少使用页面算法"></a>LRU：最近最少使用页面算法</h3><p>最近经常访问的页面可能在以后也会经常访问，最近不经常访问的页面可能以后也不会访问。于是选择最长时间没有被访问过的页面替换出去。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/30845425.jpg" alt=""></p>
+<blockquote>
+<p>这是最优置换算法的一种近似</p>
+</blockquote>
+<p>虽然可以实现，但是代价很高<br>——需要一个全面的链表，最少使用的在前，最多使用的在后。<br>——需要一个栈，访问页面的时候将这个页号压入栈，并把栈内相同的页号抽出，缺页时拿栈底</p>
+<p>使用一个n*n矩阵表示所有页框的信息，当k被访问的时候，把k行设置为1，k列设置为0，一段时间后，每一行的二进制值最小的就是最近最少使用的。</p>
+<p><strong>Simple Implementation</strong>：页表项上的计数器<br><strong>硬件实现</strong>：为n<em>n矩阵，使用了特殊的寄存器<br><em>*软件实现</em></em>：NFU</p>
+<h3 id="最不常用算法：LFU-NFU"><a href="#最不常用算法：LFU-NFU" class="headerlink" title="最不常用算法：LFU/NFU"></a>最不常用算法：LFU/NFU</h3><p>是对LRU的软件实现。</p>
+<p>将每个页面与一个计数器关联，取计数值最小的页面替换</p>
+<p>LFU的缺点是他从来不会忘记。以前频繁使用的页面很大可能不会被调出去。：<strong>通过计数器定时右移来改正</strong>-&gt;老化算法<br>LRU关注的是多久未访问而LFU关注的是访问次数，是不一样的。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/89846367.jpg" alt=""></p>
+<h3 id="时钟算法"><a href="#时钟算法" class="headerlink" title="时钟算法"></a>时钟算法</h3><p>环状结构，当一个缺页中断到来的时候，首先检查指针所在位置页面的访问位，如果是0就淘汰这个页面，否则置为0，转圈，转到的，如果是0就淘汰，如果是1就变成0，知道找到第一个0。</p>
+<p>是LRU与FIFO的折中。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/9967853.jpg" alt=""></p>
+<h3 id="改进的时钟算法"><a href="#改进的时钟算法" class="headerlink" title="改进的时钟算法"></a>改进的时钟算法</h3><p>在页面添加修改位，并在访问时进行相应修改：<br>新改的：RW。<br>每次扫过都将：如果R是1，把R置为0；如果R是0，如果W是1，写这页，写完之后W=0，接着找，如果R=0W=0，就是这个了。</p>
+<p>缺页时修改页面标志位，以跳过有修改的页面。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/7051850.jpg" alt=""></p>
+<hr>
+<p>上述的都是<strong>局部页面置换算法</strong>。<br>局部页面置换算法选择范围仅仅限于当前进程占用的空间，不考虑进程访存差异。<br><strong>全局页面置换算法</strong>可以逼出其他进程的物理页面：工作集算法、缺页率算法<br>需要动态确定好给每一个进程的物理页面数。</p>
+<hr>
+<p>CPU利用率达到极致以后，再增加并发进程数iu会出现内存抖动。<br>进程数少时，提高并发进程数，可提高CPU利用率<br>并发进程导致内存访问增加<br>并发进程的内存访问会降低了访存的局部性特征<br>局部性特征的下降会导致缺页率上升和CPU利用率下降</p>
+<h3 id="工作集"><a href="#工作集" class="headerlink" title="工作集"></a>工作集</h3><h3 id="缺页率置换算法"><a href="#缺页率置换算法" class="headerlink" title="缺页率置换算法"></a>缺页率置换算法</h3><p>缺页次数 / 内存访问次数 或 缺页平均时间间隔的倒数</p>
+<p><strong>影响缺页率</strong>：</p>
+<ol>
+<li>页面置换算法</li>
+<li>分配给进程的物理页数目</li>
+<li>页面大小</li>
+<li>程序的编写方法</li>
+</ol>
+<p>可以通过调整常驻集的大小，使每一个进程的缺页率保持在一个合适的值。<br>若进程缺页率过高，则增加常驻集以分配更多的物理页面<br>若进程缺页率过低，则减少常驻集以减少它的物理页面数</p>
+<blockquote>
+<p>为每一个页面计数，达到-m的时候，回收，你要页面就给页面。</p>
+</blockquote>
+<p>普通访问不做任何事情，缺页的时候，算一下多久没有缺页了，如果数值比较大，看一看是不是有的页面已经没用了，在这期间没有访问的页面被释放。如果小一些，看看是不是需要补一些页面。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/45924471.jpg" alt=""></p>
+<p><strong>页替换过程</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/94487722.jpg" alt=""></p>
+<h1 id="段机制"><a href="#段机制" class="headerlink" title="段机制"></a>段机制</h1><p><strong>段</strong>：一个程序的逻辑分区<br><strong>页机制缺点</strong>：复杂，消耗资源</p>
+<p>地址映射：段中的addr +段中的偏移<br>内存分配：全局段表+本地段表<br>调度：需要时加载段<br>段+分页：用段技术组织节目内容，用分页技术组织物理内存</p>
+<h2 id="段地址空间"><a href="#段地址空间" class="headerlink" title="段地址空间"></a>段地址空间</h2><p>进程的段地址空间由多个段组成 ：<br>主代码段 子模块代码段 公用库代码段 堆栈段 堆数据(heap) 初始化数据段 符号表等</p>
+<p>段式存储管理的目的：<strong>更细粒度和灵活的分离与共享</strong>一般用于权限控制</p>
+<p>段一般是一种段是连续的。有起始地址以及段内偏移量。</p>
+<p><strong>段</strong>：表示访问方式和存储数据等属性相同的一段地址空间</p>
+<h2 id="段页结合"><a href="#段页结合" class="headerlink" title="段页结合"></a>段页结合</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/3276497.jpg" alt=""></p>
+<p>内存共享：通过指向相同的页表基址，实现进程之间的段共享。</p>
+<h2 id="link-of-segments"><a href="#link-of-segments" class="headerlink" title="link of segments"></a>link of segments</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/41368943.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YaYi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/11/06/OS/chap3-内存管理/" title="chap3-内存管理">http://yoursite.com/2017/11/06/OS/chap3-内存管理/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
+  
+</div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/06/OS/chap2-进程与线程/" rel="next" title="chap2-进程与线程">
+                <i class="fa fa-chevron-left"></i> chap2-进程与线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/09/编译原理——词法分析/" rel="prev" title="编译原理——词法分析">
+                编译原理——词法分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="YaYi" />
+            
+              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存中的概念"><span class="nav-number">1.</span> <span class="nav-text">内存中的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的任务"><span class="nav-number">1.1.</span> <span class="nav-text">内存管理的任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态重定位"><span class="nav-number">1.1.1.</span> <span class="nav-text">动态重定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#monoprograming：单道程序处理"><span class="nav-number">1.2.</span> <span class="nav-text">monoprograming：单道程序处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiprogramming"><span class="nav-number">1.3.</span> <span class="nav-text">multiprogramming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交换技术"><span class="nav-number">1.3.1.</span> <span class="nav-text">交换技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换的空闲内存管理"><span class="nav-number">1.3.2.</span> <span class="nav-text">交换的空闲内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#位图"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">位图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">链表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结：mono-multi-swap"><span class="nav-number">1.3.3.</span> <span class="nav-text">总结：mono\multi\swap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟内存"><span class="nav-number">2.</span> <span class="nav-text">虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">2.1.</span> <span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页表项结构"><span class="nav-number">2.1.1.</span> <span class="nav-text">页表项结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Design-issue"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Design issue</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多级页表"><span class="nav-number">2.1.2.</span> <span class="nav-text">多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加速分页过程：TLB"><span class="nav-number">2.1.3.</span> <span class="nav-text">加速分页过程：TLB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加速分页过程：软件TLB"><span class="nav-number">2.1.4.</span> <span class="nav-text">加速分页过程：软件TLB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对大内存：反置页表"><span class="nav-number">2.1.5.</span> <span class="nav-text">针对大内存：反置页表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pagingsys的工作流程"><span class="nav-number">2.2.</span> <span class="nav-text">pagingsys的工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺页中断"><span class="nav-number">2.3.</span> <span class="nav-text">缺页中断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面置换算法"><span class="nav-number">2.4.</span> <span class="nav-text">页面置换算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最优页面置换算法"><span class="nav-number">2.4.1.</span> <span class="nav-text">最优页面置换算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最近未使用：NRU"><span class="nav-number">2.4.2.</span> <span class="nav-text">最近未使用：NRU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FIFO"><span class="nav-number">2.4.3.</span> <span class="nav-text">FIFO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LRU：最近最少使用页面算法"><span class="nav-number">2.4.4.</span> <span class="nav-text">LRU：最近最少使用页面算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最不常用算法：LFU-NFU"><span class="nav-number">2.4.5.</span> <span class="nav-text">最不常用算法：LFU/NFU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时钟算法"><span class="nav-number">2.4.6.</span> <span class="nav-text">时钟算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进的时钟算法"><span class="nav-number">2.4.7.</span> <span class="nav-text">改进的时钟算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作集"><span class="nav-number">2.4.8.</span> <span class="nav-text">工作集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺页率置换算法"><span class="nav-number">2.4.9.</span> <span class="nav-text">缺页率置换算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段机制"><span class="nav-number">3.</span> <span class="nav-text">段机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#段地址空间"><span class="nav-number">3.1.</span> <span class="nav-text">段地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段页结合"><span class="nav-number">3.2.</span> <span class="nav-text">段页结合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#link-of-segments"><span class="nav-number">3.3.</span> <span class="nav-text">link of segments</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YaYi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共80.1k字</span>
+</div>
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>

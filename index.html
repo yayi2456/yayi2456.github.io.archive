@@ -362,6 +362,573 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap5-设备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/16/OS/chap5-设备/" itemprop="url">chap5-设备</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T23:25:37+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="设备基础"><a href="#设备基础" class="headerlink" title="设备基础"></a>设备基础</h1><p><strong>设备类型</strong></p>
+<p>按功能分类</p>
+<ol>
+<li>存储设备：暂时或永久</li>
+<li>I / O设备：人机交互</li>
+<li>通信设备：数据交换和传输<br>按数据管理方式分类</li>
+<li>块流：使用不同大小的块作为数据管理的基本单位</li>
+<li>字节流：使用字节作为DM的基本单位</li>
+</ol>
+<p>按设备分配进行分类</p>
+<ol>
+<li>独占设备：低速I / O设备</li>
+<li>共享设备：高速I / O设备</li>
+<li>虚拟设备：通过软件模拟硬件</li>
+</ol>
+<p>按工作模式分类</p>
+<ol>
+<li>逻辑设备：由OS维护的数据结构</li>
+<li>物理设备：不同种类的硬件</li>
+</ol>
+<p><strong>设备管理讨论</strong></p>
+<p>设备的复杂性：<br>不同的设备有不同的工作模式<br>不同设备使用不同的数据格式<br>不同的设备支持不同的接口</p>
+<p>有关设备的重要问题：<br>速度：电脑的瓶颈<br>HCI：用户造成的操作错误<br>兼容性：独立于设备，独立于操作系统</p>
+<p>设备管理的关键策略：<br>高效合理：协调CPU，RAM和设备之间的速度差异。 以更高效的方式控制和管理设备。<br>方便：兼容，安全，稳定<br>标准化：IT行业的基础</p>
+<p><strong>设备管理目的</strong></p>
+<p>独立于设备的编程接口：</p>
+<ol>
+<li>隐藏硬件组件之间的差异</li>
+<li>为用户提供简单而通用的控制方法</li>
+<li>保持用户进程的安全性和稳定性</li>
+</ol>
+<p>高效的管理策略</p>
+<ol>
+<li>分配和释放：像进程调度一样</li>
+<li>性能增强：提高数据传输速度，使设备更适应CPU和RAM</li>
+<li>保护：内部和外部保护，死锁</li>
+</ol>
+<p>设备管理的困难</p>
+<ol>
+<li>端口地址管理</li>
+<li>控制模式设计</li>
+<li>死锁：不合理的设备请求或分配</li>
+</ol>
+<h2 id="硬件介绍"><a href="#硬件介绍" class="headerlink" title="硬件介绍"></a>硬件介绍</h2><p>建构：</p>
+<ol>
+<li>物理组件：由模拟信号驱动的设备</li>
+<li>电子部件：可以响应和执行数字指令的控制器或适配器</li>
+</ol>
+<p>控制器/适配器</p>
+<ol>
+<li>主板扩展插槽</li>
+<li>适配器中的寄存器和数据缓冲区</li>
+</ol>
+<p>适配器的责任</p>
+<ol>
+<li>地址转换：将逻辑地址映射到设备端口</li>
+<li>数据传输：接收或发送所需的数据</li>
+<li>命令执行：将数字指令转换为模拟信号来驱动物理组件</li>
+<li>性能增强：应用缓存和其他方法来提高设备的性能</li>
+</ol>
+<p><strong>电阻式触摸屏工作原理</strong>：p7</p>
+<h3 id="设备的工作流程"><a href="#设备的工作流程" class="headerlink" title="设备的工作流程"></a>设备的工作流程</h3><p>硬件工作周期的步骤：启动，自检，运行，结果检查和错误处理</p>
+<p>设备端口</p>
+<ol>
+<li>状态寄存器：存储设备的当前状态</li>
+<li>指令寄存器：存储收到的指令</li>
+<li>数据缓冲区：存储所需的数据</li>
+</ol>
+<p>CPU和设备之间的通信机制</p>
+<ol>
+<li>设置状态和指令寄存器的内容</li>
+<li>设备执行指令，或完成数据通信</li>
+<li>工作完成后，设备通过中断通知CPU</li>
+</ol>
+<p>示例：IBM软盘驱动器</p>
+<ol>
+<li>指令集：读取，写入，查找，格式化等</li>
+<li>参数：由CPU设置，存储在设备寄存器中</li>
+<li>位流：CPU逐位发送数据，软驱将数据缓冲区中的位排列成字节，并进行必要的检查</li>
+</ol>
+<p><strong>CPU与设备之间的通信</strong>：参见接口</p>
+<h3 id="如何访问设备？"><a href="#如何访问设备？" class="headerlink" title="如何访问设备？"></a>如何访问设备？</h3><ol>
+<li>I / O端口<ol>
+<li>设备的寄存器的ID</li>
+<li>计算机维护I / O通信的I / O端口列表</li>
+<li>缺点：分离内存空间和设备的寄存器<br>其实还有，用于端口的指令不如用于内存访问的指令多</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>内存映射I / O<ol>
+<li>所有器件的寄存器都映射到内存空间</li>
+<li>每个寄存器都分配一个唯一的内存地址</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>内存IO映射<br>优点</p>
+<ul>
+<li>将I / O地址视为内存地址的一部分，会生成全局地址空间</li>
+<li>I / O和内存的区别是隐藏的，程序员可以设计复杂的I / O程序</li>
+<li>I / O地址可以被有效地保护(?)<br>坏处<br>硬件很难区分内存和I / O设备的地址<br>管理成本较高，在双公交或多母线架构下更为复杂</li>
+</ul>
+</blockquote>
+<p>实际上存在混合编址方案：设备的数据缓存被map到内存，寄存器由io端口指定。</p>
+<ol>
+<li>总线：与前面的并不是并列关系</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/15945208.jpg" alt=""></p>
+<h3 id="设备工作模式"><a href="#设备工作模式" class="headerlink" title="设备工作模式"></a>设备工作模式</h3><h4 id="忙等待"><a href="#忙等待" class="headerlink" title="忙等待"></a>忙等待</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/31066338.jpg" alt=""></p>
+<p>特殊内核进程将数据发送到设备端口;<br>进程重复检查端口，直到端口可用并发送其余数据;<br>内核进程完成后，用户进程继续运行;<br>缺点：CPU浪费太多——接口中的查询方式</p>
+<h4 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/93569841.jpg" alt=""></p>
+<p>特殊内核进程将数据发送到设备端口;<br>进程进入休眠状态，CPU将运行其他进程;<br>数据缓冲区为空后，设备向CPU发送中断;<br>内核进程被唤醒并发送其余的数据<br>缺点：频繁的中断是耗时的——接口中的中断输出方式</p>
+<h4 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/96816977.jpg" alt=""></p>
+<p>用户进程导致CPU陷阱，特殊内核进程设置设备中的寄存器并退出trap;<br>设备直接从内存中读取数据;<br>工作完成后，设备向CPU发送中断;<br>用户进程被唤醒并继续运行<br>——只需一次中断就可以</p>
+<p><strong>DMA实现细节</strong>：请参考书上p187</p>
+<p>DMA的内部结构：</p>
+<ol>
+<li>单路径：只有一套寄存器，只能控制一个I / O设备</li>
+<li>多路径：多套寄存器，可同时控制多个I / O设备</li>
+<li>DMA调度：在多个通道之间切换</li>
+</ol>
+<p>DMA的工作模式：</p>
+<pre><code>1. 数据传输模式：一次一个字VS块模式
+</code></pre><ol>
+<li>周期窃取：DMA请求一个字的总线并得到它</li>
+<li>突发模式：DMA获取总线并启动一系列的数据传输</li>
+<li>Fly-by模式：DMA告诉设备控制器直接将数据发送到内存</li>
+<li>设备到设备和存储器到存储器：DMA从设备/存储器获取字并将其发送到目标地址</li>
+</ol>
+<p>DMA中使用的地址：</p>
+<ol>
+<li>物理地址：MMU位于CPU中，CPU将对应内存的虚拟地址转换以后给DMA地址寄存器</li>
+<li>虚拟地址：MMU位于内存中，这种情况很少</li>
+<li>缓冲：消除设备之间的速度差异</li>
+</ol>
+<p>为了避免DMA过于复杂，磁盘读入数据之后将数据存在自己的缓冲区，一是为了检验校验和，二是为了减少总线使用减少DMA复杂度。</p>
+<blockquote>
+<p>DMA请求<br>CPU对DMA控制器初始化，并向I/O接口发出操作命令，I/O接口提出DMA请求。<br>DMA响应<br>DMA控制器对DMA请求判别优先级及屏蔽，向总线裁决逻辑提出总线请求。当CPU执行完当前总线周期即可释放总线控制权。此时，总线裁决逻辑输出总线应答，表示DMA已经响应，通过DMA控制器通知I/O接口开始DMA传输。<br>DMA传输<br>DMA控制器获得总线控制权后，CPU即刻挂起或只执行内部操作，由DMA控制器输出读写命令，直接控制RAM与I/O接口进行DMA传输。<br>在DMA控制器的控制下，在存储器和外部设备之间直接进行数据传送，在传送过程中不需要中央处理器的参与。开始时需提供要传送的数据的起始位置和数据长度。<br>DMA结束<br>当完成规定的成批数据传送后，DMA控制器即释放总线控制权，并向I/O接口发出结束信号。当I/O接口收到结束信号后，一方面停 止I/O设备的工作，另一方面向CPU提出中断请求，使CPU从不介入的状态解脱，并执行一段检查本次DMA传输操作正确性的代码。最后，带着本次操作结果及状态继续执行原来的程序。</p>
+</blockquote>
+<p>DMA是必需的吗？</p>
+<h3 id="IO通道"><a href="#IO通道" class="headerlink" title="IO通道"></a>IO通道</h3><p>DMA的缺点<br>    缓慢而简单，不能支持复杂的I / O编程<br>I / O通道简介<br>    特殊芯片（PU）用于管理I / O设备<br>    字符复用信道，选择复用信道，组复用信道<br>    I / O通道与CPU共享内存，并与CPU分别工作<br>I / O通道的结构<br>    CAW：地址寄存器，将I / O通道程序的地址存储在内存中<br>    CCW：命令寄存器，存储当前的I / O命令<br>    CSW：状态寄存器，用于存储I / O操作结果的状态<br>    CDW：数据寄存器，数据缓冲区</p>
+<pre><code>![](http://oysmkdi7t.bkt.clouddn.com/18-1-17/67957883.jpg)
+</code></pre><h2 id="IO软件"><a href="#IO软件" class="headerlink" title="IO软件"></a>IO软件</h2><p>同步阻塞VS异步传输<br>    阻塞：用户程序将暂停（挂起），直到I / O操作完成<br>    数据传输：中断到来之前，CPU正在异步工作（对程序来说是阻塞）<br>错误处理<br>    硬件级错误处理：由设备执行（尽量在底层执行）<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理<br>统一命名：一个文件或一个设备的名字应该是一个简单的字符串或是一个整数，不应依赖于设备：<br>    设备独立的概念：<strong>访问任意IO设备而无须事先制定设备</strong><br>    使用I / O设备地址映射名称<br>缓冲<br>    如何根据缓冲区维护数据缓冲区和控制数据传输：数据离开设备通常不会直接到达目的地。（实时约束）<br>设备的分配和释放<br>    如何实现I / O设备共享？<br>    如何避免死锁？</p>
+<h3 id="IO软件层次"><a href="#IO软件层次" class="headerlink" title="IO软件层次"></a>IO软件层次</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/68828231.jpg" alt=""></p>
+<h4 id="中断-1"><a href="#中断-1" class="headerlink" title="中断"></a>中断</h4><p>如何由用户控制I / O设备？<br>    用户进程请求I / O并被阻止<br>    设备驱动程序启动I / O操作并被阻止<br>    I / O设备完成操作并发送中断<br>    设备驱动程序完成并且用户进程被唤醒<br>中断的工作流程<br>    硬件级错误处理：由设备执行<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理</p>
+<p><strong>在终端形成之后，在软中断中</strong>：<br>保存没被硬件保存的所有寄存器<br>为中断服务程序设置上下文（运行环境）<br>为中断服务程序设置栈<br>应答中断控制器, 再次开放中断<br>寄存器从被保存的地方复制到进程表中<br>运行中断服务程序<br>为下次要运行进程设置ＭＭＵ上下文<br>装载新的进程寄存器<br>开始运行新进程</p>
+<h4 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/8186980.jpg" alt=""></p>
+<p>对设备执行操作进行控制的代码是设备驱动程序</p>
+<p>设备驱动程序的逻辑位置被指明<br>驱动程序与设备控制器之间通过总线完成通信</p>
+<p>设备驱动程序介绍<br>    控制设备控制器的说明：更上层，忽视了设备之间的区别<br>    设备驱动程序始终视为内核进程：这样才能访问设备控制的寄存器（可以作为用户进程，需要系统调用，消除系统崩溃的一个源头）<br>    OS为抽象驱动程序提供统一的接口：如上图<br>    设备驱动程序：静态库或动态库（目前主流是动态）<br>设备驱动程序的工作流程<br>    接收并检查高级进程发送的参数<br>    检查设备并启动设备（当前是不是在使用？初始化设备，电源需求，日志等）<br>    配置设备的寄存器（将向设备发送的指令存进设备控制器的控制寄存器，检查控制器是不是已经接收命令并准备接受下一个命令，直到所有命令都送出）<br>    接收I / O操作的状态<br>设备驱动程序的重要问题<br>    同步阻塞VS无延迟运行（需要长时间处理，设备驱动程序进程阻塞自己，直到中断到来唤醒；不需要长时间，完成后应检查错误。随后可能会将数据发给某个设备无关软件，返回一个信息。如果还有命令就执行，没有的话就阻塞自己）<br>    可重入：驱动程序的复杂性（第一次调用完成之前第二次到来<br>    可热插拔的系统和内存请求：传送必须被终止，请求应该被抹去。有时候新设备的到来可能夺走旧设备的资源</p>
+<pre><code>设备驱动程序以阿布年不允许系统调用，但是可以调用内核的某些过程。比如DMA、定时器、分配释放硬接线的内存页面等。
+</code></pre><h3 id="与设备无关的io软件"><a href="#与设备无关的io软件" class="headerlink" title="与设备无关的io软件"></a>与设备无关的io软件</h3><ol>
+<li><p>设备驱动程序的统一接口</p>
+</li>
+<li><p>引入缓冲的方式</p>
+</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/71738832.jpg" alt=""></p>
+<p>(a) 无缓冲输入<br>(b) 缓冲区放在用户空间<br>(c) 缓冲区在核心空间，然后被复制到用户空间<br>(d) 在内核空间有双缓冲区</p>
+<ol>
+<li>适当的使用缓冲</li>
+</ol>
+<p>缓冲技术在io中很普遍，但是数据传递中太多的缓冲会影响系统性能</p>
+<ol>
+<li><p>IO中错误报告：</p>
+<ol>
+<li>建立io的错误处理机制，尽量在底层处理错误</li>
+<li>分别处理不同错误：如编程/io</li>
+</ol>
+</li>
+<li><p>分配与释放专用设备</p>
+<p>根据设备使用特性建立分配与释放原则（独享设备／共享设备），直接释放或队列管理．</p>
+</li>
+<li><p>建立与设备无关的数据传递格式</p>
+<p>不同设备数据传递格式不同，但须用软件隔离此特性，使上层软件不必考虑设备访问中的这一特性，如访问块大小的转换。</p>
+</li>
+</ol>
+<h3 id="用户空间的IO"><a href="#用户空间的IO" class="headerlink" title="用户空间的IO"></a>用户空间的IO</h3><p> SDK / DDK或编程库<br>    隐藏设备驱动程序的细节，使用户访问I / O设备变得简单<br>    如“cout”，“print”……<br>后台程序和守护进程<br>    用户的虚拟设备<br>    设备共享的缓冲和调度</p>
+<h3 id="spooling"><a href="#spooling" class="headerlink" title="spooling"></a>spooling</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg" alt=""></p>
+<p>预输入模块：将作业输入到输入井中；<br>缓输出模块：将作业结果缓冲式输出到独享设备上；<br>作业调度模块：控制作业从输入井中取数，向输出井中送数；<br>输入、输出井：在磁盘上开辟的两个 “井”区域。 </p>
+<h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><p>磁盘是一种外设，CPU和内存访问速度比磁盘快若干个数量级，磁盘系统的性能对整个系统性能有重要影响，磁盘设备管理的目标就是提高磁盘的访问速度和安全性。从以下几方面讲：</p>
+<pre><code>1. 磁盘硬件及访问性能
+2.RAID
+3.CD-ROM
+4.可刻录／可重写ＣＤ
+5.ＤＶＤ
+6. 磁盘格式化问题
+7.磁盘访问调度策略
+</code></pre><p>柱面定位时间：磁头移动到指定柱面的机械运动时间；<br>旋转延迟时间：磁盘旋转到指定扇区的机械运动时间；它与磁盘转速相关，如：软盘转速可为600r/m(每分钟转速)，硬盘可为10000r/m。<br>数据传送时间：从指定扇区读写数据的时间。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg" alt=""></p>
+<pre><code>柱面定位（寻道）时间在访问时间中是主项，合理组织磁盘数据的存储位置可提高磁盘I/O性能。
+</code></pre><p>例：读一个128KB大小的文件：<br>(1)文件若由8个连续磁道(每磁道32个扇区)上的256个扇区构成：<br>        20ms+(8.3ms+16.7ms)<em>8=220ms;<br>其中，柱面定位时间为20ms，旋转延迟时间为8.3ms，32扇区数据传送时间为16.7ms；<br>(2)文件若由256个随机分布的扇区构成：<br>        (20ms+8.3ms+0.5ms)</em>256=7373ms;<br>其中，1扇区数据传送时间为0.5ms；<br>随机分布时的访问时间为连续分布时的33.5倍。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>短查找时间优先算法（SSTF）：按磁头臂移动最小距离优先分配磁盘。磁盘使用率高，分配快。</p>
+<p>扫描(SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，然后反方向移动再进行分配。保证队列中不出现饿死情况。（或称电梯法）</p>
+<p>循环扫描(C-SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，到头后返回重新移动。可减少等待时间。</p>
+<p> N步扫描(N-step-SCAN)算法：把磁盘I/O请求队列分成长度为N的段，每次使用扫描算法处理这N个请求。当N=1时，该算法退化为FIFO算法。</p>
+<p> 双队列扫描(FSCAN)算法：请求队列分成两个，一个用做处理，一个用做存放新到请求。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap6-死锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/16/OS/chap6-死锁/" itemprop="url">chap6-死锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T21:39:37+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>死锁</strong>：如果一个进程集合中的每个进程都在等待只能由该进程集合中的其他进程才能引发的事件，该进程集合是死锁的。</p>
+<p>大多数情况下，都是在等另外的进程放弃所占的资源，但是由于所有的进程都不能运行，他们永远也等不到自己需要的资源</p>
+<p><strong>死锁产生条件</strong>：</p>
+<ol>
+<li>互斥条件：每个资源要么已经分配了一个进程，要么就是可用的</li>
+<li>占有和等待条件：已经得到了某个资源的进程可以请求新的资源</li>
+<li>不可抢占条件：已经分配给一个进程的资源不能强制性被抢占，只能被占有它的进程显式释放</li>
+<li>环路等待条件：死锁发生时，系统中一定有两个或者两个以上的进程组成的一条环路，该换路中的每一个进程都在等待下一个进程占有的资源。</li>
+</ol>
+<p><strong>死锁的危害</strong>：死锁进程永远不能活动，被持有的资源永远不可以访问<br>-&gt;不合理的资源获取可能会产生死锁（闭环，像数据库一样）</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<li><p>破坏4个条件，阻碍死锁发生</p>
+</li>
+<li><p>避免死锁发生</p>
+</li>
+<li><p>死锁检测与恢复</p>
+</li>
+<li><p>鸵鸟</p>
+</li>
+</ol>
+<h3 id="prevention"><a href="#prevention" class="headerlink" title="prevention"></a>prevention</h3><p>破坏四个条件</p>
+<ol>
+<li>互斥条件：虚拟共享资源<br> 避免分配那些不是绝对必须的资源，尽量做到尽可能少的进程可以真正请求资源<br> eg：使用打印机守护进程以及假脱打印机技术</li>
+<li>占有和等待条件：禁止已持有资源的进程等待其他资源<br> 在一次分配中满足一个进程的所有资源需求，否则进程将被阻塞，直到所有需要的资源都可用</li>
+<li>不可抢占条件：夺取死锁进程的资源并给其他进程<br> 避免引发混乱，使用虚拟化技术</li>
+<li>环路等待条件：为每种资源分配类型标识，进程必须按照升序/降序来请求资源。<br> 一种变体是不需要一定升序，但是需要不允许进程请求比当前所占有资源编号低的资源。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg" alt=""></p>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>preventation不合理。</p>
+<p>系统必须判断这次请求资源是不是安全的，并且只能在安全的情况下得到资源。</p>
+<p><strong>安全状态</strong>：存在一个合理的资源分配序列<br><strong>不安全状态</strong>：不存在可以避免死锁的资源分配序列</p>
+<p>避免死锁的机制：os只在安全的情况下分配资源。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/33686334.jpg" alt=""></p>
+<p>阴影部分不能进。</p>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><h4 id="单资源"><a href="#单资源" class="headerlink" title="单资源"></a>单资源</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/66291438.jpg" alt=""></p>
+<p>查看是否有进程还需要的资源数小于系统剩余的资源数，如果有，就分给他，如果没有，会产生死锁。</p>
+<p>也可以这样说：如果一个进程请求资源，检查是不是可以给他。</p>
+<h4 id="多资源"><a href="#多资源" class="headerlink" title="多资源"></a>多资源</h4><p>与单资源差不多，但是需要每一个还需要的资源数都是小于剩余的资源数，如果存在，就给，然后收回这个已经完成的资源，如果没有，就不可能成功了。</p>
+<h3 id="安全状态与死锁"><a href="#安全状态与死锁" class="headerlink" title="安全状态与死锁"></a>安全状态与死锁</h3><p>系统安全-&gt;没有死锁<br>没有死锁不一定是系统安全。但是只要确保系统是安全的，就一定不会死锁。</p>
+<h3 id="死锁检测与恢复"><a href="#死锁检测与恢复" class="headerlink" title="死锁检测与恢复"></a>死锁检测与恢复</h3><p>守护进程判断运行状态，长时间不运行则认为进入思索。</p>
+<p>可以使用图、集合、向量、矩阵等记录资源分配状态，试图找到环路。</p>
+<p>请求矩阵中的向量定义成qij，表示进程i请求类型j的资源量，代表当前进程产生的资源请求<br>初始态所有进程无标记，通过算法标记进程<br>最后查看：若有无标记的进程，则说明有死锁现 象存在</p>
+<p><strong>算法</strong>：<br>1）在分配矩阵中标记一行全为0的进程<br>2）向量W初始化成可用向量Available<br>3）按下标i查找，进程i未标记并且该进程的请求向量小于等于W，就进行标记；若找不到这样的行，算法终止。<br>4）若找到这样的行，标记进程i后，再把分配矩阵中的相应行加到W中，返回步骤3。</p>
+<p>其实就是银行家算法</p>
+<p><strong>恢复</strong>：</p>
+<ol>
+<li>抢占</li>
+<li>Backdating：设置检查点在进程中，当检测到死锁时，进程将返回到检查点。</li>
+<li>进程查杀：直接杀死进程。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/76831176.jpg" alt=""></p>
+<h2 id="非资源死锁"><a href="#非资源死锁" class="headerlink" title="非资源死锁"></a>非资源死锁</h2><ol>
+<li><p>两阶段加锁<br>对需要修改的数据：先请求加锁，再修改数据；若有一个数据已加锁，进程则释放所有加锁的记录。（像csmaca一样</p>
+</li>
+<li><p>通信死锁<br>通信中多个进程发送信息，但需要阻塞当前进程等待对方回复。若发送信息丢失，则死锁。<br>解决办法：超时中断；</p>
+</li>
+<li><p>活锁<br>所谓活锁既是：进程没有死锁，但却无法运行下去，只是在不断的重复尝试，如冲突检测。</p>
+</li>
+<li><p>进程饿死<br>由于条件限制使有些进程请求永远无法得到服务，进程被饿死。从饿死进程角度看，像是发生了死锁。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/16/流光/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1353,6 +1920,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/编译原理/语法制导翻译/" itemprop="url">编译原理——语法分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:05:47+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编译原理/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Tiny C中的语法树：节点分为两类 语句 表达式<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/编译原理/语法制导翻译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1499,155 +2215,6 @@
 <p>$$不合要求的问题<br>\begin{cases}<br>二义性 \<br>\epsilon-moves \<br>回路 \<br>左递归 \<br>提取左公因子<br>\end{cases}<br>$$</p>
 <h4 id="消除二义性"><a href="#消除二义性" class="headerlink" title="消除二义性"></a>消除二义性</h4>
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/29/编译原理/语法制导翻译/" itemprop="url">编译原理——语法分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:05:47+08:00">
-                2017-11-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编译原理/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tiny C中的语法树：节点分为两类 语句 表达式<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/29/编译原理/语法制导翻译/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -2077,344 +2644,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/OS/OS4+Memory and Process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/OS/OS4+Memory and Process/" itemprop="url">串讲复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T19:00:00+08:00">
-                2017-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT Lab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
-<ol>
-<li>在每一个像素有一种颜色</li>
-<li>文本模式</li>
-</ol>
-<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
-<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
-<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
-<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
-<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
-<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
-<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
-<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
-<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
-<p>由一个“可否使用cache”的位</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/21/计算机网络/计算机网络概述/" itemprop="url">计算机网络概述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T21:51:40+08:00">
-                2017-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这是第一次课！时隔许久，也算是复习啦~</p>
-<p>#</p>
-<h1 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h1><h1 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h1><h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><p>在各种网络之中，端对端之间互相传送<strong>报文</strong>。为了从源系统项目地端系统发送报文，源端系统将报文分成若干的小数据块，成为<strong>分组</strong>。每个分组都通过源端系统与目的端系统之间的<strong>分组交换机</strong>（主要是<strong>路由器</strong>以及<strong>链路交换机</strong>）传送。分组以等于链路最大传输速率的速度通过通信链路，因此如果传输速度是R比特/s，那么传输L比特分组的时间是L/R比特/s。</p>
-<h3 id="存储转发传输"><a href="#存储转发传输" class="headerlink" title="存储转发传输"></a>存储转发传输</h3><p>多数分组交换机在链路的输入端使用<strong>存储转发传输</strong>机制，它是指在交换机开始发送第一个比特之前，必须接收到整个分组。</p>
-<p>我们看一个例子：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/26732713.jpg" alt=""></p>
-<p>如果发送方要传送长是L的报文，两条链路传输速率都是Rbit/s，那么到达路由器之前不能转发，首先浪费了L/R s，这时全部到达了，然后转发出去，一共花费了2L/R。（没有考虑线路长度）</p>
-<p>而如果数据一旦到达路由器就转发而不用等到全部到达，只需要L/R的时间。</p>
-<p>现在计算发送三个分组，从源发送第一个分组到达目的地接收到全部三个分组的时间：<br>在L/R，第一个分组被转发出去，这时源也开始发出第二个分组，2L/R，第一个已经被路由器转发完毕，目的端收到，路由器开始接收第三个分组，源开始发送第三个分组，3L/R，路由器接收第三个分组完成，第二个分组已经送出去被目的接收到，源端发送完毕，4L/R第三个分组完全传送出去，目的端接收到第三个分组。一共4L/R时间。</p>
-<p>考虑N条速率均为R的链路（所以一共有N-1个路由器），发送一个分组所需时间是$t=N*\frac{L}{R}$。</p>
-<p>如果像上面一样分组发送：</p>
-<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=(c+N-1)*\frac{L}{c*R}$！！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2469,7 +2698,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2594,7 +2823,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共65.5k字</span>
+  <span class="post-count">博客全站共80.1k字</span>
 </div>
 
 

@@ -4,6 +4,129 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/01/16/OS/chap5-%E8%AE%BE%E5%A4%87/</loc>
+    <lastmod>2018-01-16T18:35:52.265Z</lastmod>
+    <data>
+        <display>
+        <title>chap5-设备</title>
+        <pubTime>2018-01-16T15:25:37.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/16/OS/chap6-%E6%AD%BB%E9%94%81/</loc>
+    <lastmod>2018-01-16T15:04:39.687Z</lastmod>
+    <data>
+        <display>
+        <title>chap6-死锁</title>
+        <pubTime>2018-01-16T13:39:37.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/06/OS/chap3-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2018-01-16T13:37:52.995Z</lastmod>
+    <data>
+        <display>
+        <title>chap3-内存管理</title>
+        <pubTime>2017-11-06T06:13:37.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/</loc>
+    <lastmod>2018-01-15T12:42:20.443Z</lastmod>
+    <data>
+        <display>
+        <title>计算机网络运输层</title>
+        <pubTime>2017-11-02T14:12:40.000Z</pubTime>
+        
+        <tag>网络课</tag>
+         
+         
+           
+             
+              <breadCrumb title="计算机网络" url="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+          
+             
+              <breadCrumb title="大三的课" url="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2018-01-15T10:53:53.961Z</lastmod>
+    <data>
+        <display>
+        <title>chap2-进程与线程</title>
+        <pubTime>2017-11-06T06:13:37.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
+          
+             
+              <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/12/12/OS/Lab4_Document/</loc>
     <lastmod>2018-01-14T19:25:12.789Z</lastmod>
     <data>
@@ -43,31 +166,6 @@
           
              
               <breadCrumb title="MIT Lab" url="http://yoursite.com/categories/OS/MIT-Lab/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2018-01-14T19:23:16.965Z</lastmod>
-    <data>
-        <display>
-        <title>chap2-进程与线程</title>
-        <pubTime>2017-11-06T06:13:37.000Z</pubTime>
-        
-        <tag>OS</tag>
-         
-        <tag>Linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
-          
-             
-              <breadCrumb title="课" url="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
           
         </display>
     </data>
@@ -281,28 +379,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/11/06/OS/OS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2017-11-23T11:36:23.576Z</lastmod>
-    <data>
-        <display>
-        <title>OS:内存管理</title>
-        <pubTime>2017-11-06T06:13:37.000Z</pubTime>
-        
-        <tag>OS</tag>
-         
-        <tag>Linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="OS" url="http://yoursite.com/categories/OS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82/</loc>
     <lastmod>2017-11-23T11:35:21.441Z</lastmod>
     <data>
@@ -345,29 +421,6 @@
           
              
               <breadCrumb title="作业" url="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/%E4%BD%9C%E4%B8%9A/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%90%E8%BE%93%E5%B1%82/</loc>
-    <lastmod>2017-11-22T12:10:24.853Z</lastmod>
-    <data>
-        <display>
-        <title>计算机网络运输层</title>
-        <pubTime>2017-11-02T14:12:40.000Z</pubTime>
-        
-        <tag>网络课</tag>
-         
-         
-           
-             
-              <breadCrumb title="计算机网络" url="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-          
-             
-              <breadCrumb title="大三的课" url="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
           
         </display>
     </data>

@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
+<meta name="description" content="导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包括操">
 <meta name="keywords" content="OS,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chap2-进程与线程">
 <meta property="og:url" content="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/index.html">
 <meta property="og:site_name" content="Be With Me">
-<meta property="og:description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
+<meta property="og:description" content="导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包括操">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/87376882.jpg">
@@ -127,10 +127,21 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51773333.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/87331439.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/47608393.jpg">
-<meta property="og:updated_time" content="2018-01-14T19:23:16.965Z">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/64321100.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/88550095.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/67570267.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/8720151.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/11688740.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/97276693.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/49329583.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/21915703.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51508560.jpg">
+<meta property="og:updated_time" content="2018-01-15T10:53:53.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chap2-进程与线程">
-<meta name="twitter:description" content="进程导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包">
+<meta name="twitter:description" content="导进程模型的进化：  第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念 第二代：批处理系统：一个程序完成所有工作。 带三代：mutiprogramming and timesharing。CPU可以切换运行。 第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。  进程：计算机上所有可以运行的软件，通常也包括操">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg">
 
 
@@ -485,7 +496,7 @@
       
 
       
-        <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="导"><a href="#导" class="headerlink" title="导"></a>导</h2><p>进程模型的进化：</p>
+        <h1 id="导"><a href="#导" class="headerlink" title="导"></a>导</h1><p>进程模型的进化：</p>
 <ol>
 <li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
 <li>第二代：批处理系统：一个程序完成所有工作。</li>
@@ -498,7 +509,7 @@
 <p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
 <p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
 <h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><p><strong>whats os?</strong><br>    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and providing useful services. It is a convenient platform for people to use computer</p>
-<h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><ol>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><ol>
 <li>使用cpu的基本数据结构<ol>
 <li>逻辑程序：被用户设计实现（envs）</li>
 <li>cpu指令序列：</li>
@@ -533,7 +544,7 @@
 </ol>
 <p>什么时候会挂起呢？在进程等待外部事件（阻塞）的时候，有可能被挂起。</p>
 <p>除此之外的双挂起模型：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/87376882.jpg" alt=""></p>
-<p><strong>等待-&gt;等待挂起</strong>：没有进程处于就绪状态或者是就绪进程需要更多的内存资源。<br><strong>就绪-&gt;就绪挂起</strong>：有高优先级的等待进程和低优先级的就绪进程（这是就绪进程被换到外存）<br><strong>运行-&gt;就绪挂起</strong>：对于抢先式分时系统，有高优先级的等待挂起进程因事件出现而进入就绪挂起。<br><strong>等待挂起-&gt;就绪挂起</strong>：等待的事件到了<br><strong>就绪挂起-&gt;就绪</strong>：没有就绪进程或者是就绪挂起进程的优先级比所有就绪进程的优先级都高<br><strong>等待挂起-&gt;等待</strong>：有一个进程释放了内存，一个等待挂起进程的优先级很高</p>
+<p><strong>等待-&gt;等待挂起</strong>：没有进程处于就绪状态或者是就绪进程需要更多的内存资源。(???)<br><strong>就绪-&gt;就绪挂起</strong>：有高优先级的等待进程和低优先级的就绪进程（这是就绪进程被换到外存）<br><strong>运行-&gt;就绪挂起</strong>：对于抢先式分时系统，有高优先级的等待挂起进程因事件出现而进入就绪挂起。<br><strong>等待挂起-&gt;就绪挂起</strong>：等待的事件到了<br><strong>就绪挂起-&gt;就绪</strong>：没有就绪进程或者是就绪挂起进程的优先级比所有就绪进程的优先级都高<br><strong>等待挂起-&gt;等待</strong>：有一个进程释放了内存，一个等待挂起进程的优先级很高</p>
 <p>值得一提的是，winxp用的就是上面的双挂起模型。</p>
 <p><a href="http://blog.csdn.net/freeelinux/article/details/53562592" target="_blank" rel="external">对挂起的详细分析</a></p>
 <blockquote>
@@ -558,7 +569,11 @@
 <p>为了将不同运行状态的pcb区分开，可以有两种方法，一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/92773297.jpg" alt=""><br>另一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/64758197.jpg" alt=""></p>
 <p>其中第一种是在jos中使用的方式。</p>
 <h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>进程切换就是我们的sched函数了。<br>切换之前，需要保存在cpu运行程序的山下文（tf内容、pgdir等），切换之后，把新上来的进程的上下文恢复。</p>
-<iframe height="498" width="510" src="http://oysmkdi7t.bkt.clouddn.com/%E5%AA%92%E4%BD%932.mp4" frameborder="0" allowfullscreen></iframe>
+
+
+<iframe height="363" width="565" src="http://oysmkdi7t.bkt.clouddn.com/%E5%AA%92%E4%BD%932.mp4" frameborder="0" allowfullscreen>
+</iframe>
+
 
 <p>比如说sleep的实现：一个进程运行到了sleep，os去处理这个sleep，此时cpu的掌管权在kernel手里，随后设置一个硬件的时钟中断，然后保护现场，最后os就schedule，把运行权交给了另一个进程，另一个进程运行了一段时间之后硬件的时钟中断raise，打断了另一个进程的运行，于是os处理这个时钟中断保护现场，剥夺了另一个进程的运行权，再一次schedule，进程1开始运行。</p>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/62249836.jpg" alt=""></p>
@@ -715,10 +730,10 @@
 <p><strong>可以参考lab4的文档</strong></p>
 <h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><p>消息、管道、消息队列、共享内存</p>
 <p>可以参考lab4文档，里面有ipc以及lab5中有共享内存。</p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p><strong>线程</strong>是进程中一个相对独立的、具有可调度特性的<strong>执行单元</strong>。</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p><strong>线程</strong>是进程中一个相对独立的、具有可调度特性的<strong>执行单元</strong>。</p>
 <p>线程一定不是陌生的，早在大二上学期，就在Java中接触了线程。线程作为实现进程中的并发而存在。</p>
 <p>系统提供了线程库Pthread：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/74457502.jpg" alt=""></p>
-<h3 id="线程库"><a href="#线程库" class="headerlink" title="线程库"></a>线程库</h3><p>线程库是针对那些不提供多线程支持的os而设计的在用户态下的库，线程库的处理对这些os是透明的。</p>
+<h2 id="线程库"><a href="#线程库" class="headerlink" title="线程库"></a>线程库</h2><p>线程库是针对那些不提供多线程支持的os而设计的在用户态下的库，线程库的处理对这些os是透明的。</p>
 <p>即使提供了核心线程支持的os，也有必要提供线程库，可以简化或有利于线程机制的使用。</p>
 <p>线程库提供：</p>
 <ol>
@@ -798,7 +813,7 @@
 </tbody>
 </table>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51773333.jpg" alt=""></p>
-<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p>|进程|线程|<br>|资源分配单位|CPU调度单位|<br>|有完整的资源平台|只独享指令执行的必要资源|<br>|基本状态与其他状态与转换|就绪等待运行状态与转换|</p>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>|进程|线程|<br>|资源分配单位|CPU调度单位|<br>|有完整的资源平台|只独享指令执行的必要资源|<br>|基本状态与其他状态与转换|就绪等待运行状态与转换|</p>
 <p>线程：减少并发执行的时间与空间开销</p>
 <ol>
 <li>创建时间比进程短（why）</li>
@@ -808,9 +823,211 @@
 </ol>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/87331439.jpg" alt=""></p>
 <p><strong>what is 多对多</strong></p>
-<h3 id="轻权进程"><a href="#轻权进程" class="headerlink" title="轻权进程"></a>轻权进程</h3><p>内核支持的用户线程。</p>
+<h2 id="轻权进程"><a href="#轻权进程" class="headerlink" title="轻权进程"></a>轻权进程</h2><p>内核支持的用户线程。</p>
 <p>一个进程可以有一个或者多个轻量级进程，每个轻权进程由一个单独的内核线程支持。<br>太过复杂，最后被抛弃。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/47608393.jpg" alt=""></p>
-
+<h1 id="经典IPC问题"><a href="#经典IPC问题" class="headerlink" title="经典IPC问题"></a>经典IPC问题</h1><p>进程之间的通信，可以参见lab4ipc。</p>
+<h2 id="进程之间通信"><a href="#进程之间通信" class="headerlink" title="进程之间通信"></a>进程之间通信</h2><ol>
+<li><p>进程之间通信将产生什么问题？</p>
+<ol>
+<li>异步：从一个进程传递信息到另一个</li>
+<li>排外：与其他进程争夺资源</li>
+<li>同步：维护适当的运行序列</li>
+</ol>
+</li>
+<li><p>进程之间通信的难处：</p>
+<ol>
+<li>信息的格式：signal、switch、message</li>
+<li>排外与同步：合作问题</li>
+</ol>
+</li>
+<li><p>金字塔规则</p>
+</li>
+</ol>
+<p><strong>竞争条件</strong>：两个或多个进程读写某些共享数据，而最后的果取决于进程运行的精确时序。</p>
+<p>书上有一个打印机的例子， 就是说A与B都需要使用打印机，打印机维护in与out指针，供所有进程去访问。假设某一时刻A想打印东西，于是去查找out指针的值，存在临时变量next_free里面，这时时间片来了B上来了，B也要打印东西，于是正常的完成了将东西放在out的位置，out++。这时A回来了，他发现自己next_free是原out值，于是覆盖了B的文件数据，然后把next_free加一，存到out里面。</p>
+<h2 id="生产者与消费者问题"><a href="#生产者与消费者问题" class="headerlink" title="生产者与消费者问题"></a>生产者与消费者问题</h2><p>固定大小buffer，生产者加数据，消费者拿数据，更新count，当count是0的时候，消费者休眠，是N的时候生产者休眠。每个进程检查唤醒。</p>
+<p>——在数据更新的过程中访问了数据！</p>
+<p>概念：<br><strong>race condition</strong>：两个或更多进程竞争同一项资源，在一个进程占用资源的时候其他进程不应该访问。<br><strong>critical region</strong>：对共享内存进行访问的程序片段<br><strong>优秀结果标准</strong>：</p>
+<ol>
+<li>不可以有两个进程同时处于临界区</li>
+<li>不应对CPU的数量与速度有要求</li>
+<li>临界区外运行的进程不能阻塞其他进程</li>
+<li>进入临界区时不能无限等待</li>
+</ol>
+<p>《甘特图：临界区》</p>
+<p>实际程序中，可以将所有代码根据是否访问共享区域分为四个部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">entry section</div><div class="line">    critical section</div><div class="line">exit section</div><div class="line">    remainder section</div></pre></td></tr></table></figure>
+<h3 id="家庭采购协调问题"><a href="#家庭采购协调问题" class="headerlink" title="家庭采购协调问题"></a>家庭采购协调问题</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3:00</td>
+<td style="text-align:center">看冰箱 没面包</td>
+<td style="text-align:center">–</td>
+</tr>
+<tr>
+<td style="text-align:center">3:05</td>
+<td style="text-align:center">离开家去商店</td>
+<td style="text-align:center">–</td>
+</tr>
+<tr>
+<td style="text-align:center">3:10</td>
+<td style="text-align:center">到达商店买面包</td>
+<td style="text-align:center">看冰箱 没面包</td>
+</tr>
+<tr>
+<td style="text-align:center">3:20</td>
+<td style="text-align:center">到家，放面包</td>
+<td style="text-align:center">去商店</td>
+</tr>
+<tr>
+<td style="text-align:center">3:25</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">到商店买面包</td>
+</tr>
+<tr>
+<td style="text-align:center">3:30</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">到家，放面包</td>
+</tr>
+</tbody>
+</table>
+<p>我们分析这个问题：</p>
+<ol>
+<li>如何保证买面包动作的成功与高效：有且仅有一个人去买</li>
+<li>可能的解决：加锁 导致的问题：无法取到冰箱中其他东西<br>（具体查看PPT，时间有限）</li>
+</ol>
+<p>关于临界与外部事件发生：可以将等待临界空闲的进程转到阻塞态。</p>
+<h3 id="忙等待"><a href="#忙等待" class="headerlink" title="忙等待"></a>忙等待</h3><p>设计思路：通过全局变量保存临界区状态供进程参考</p>
+<h4 id="屏蔽中断（disabling-interrupts）"><a href="#屏蔽中断（disabling-interrupts）" class="headerlink" title="屏蔽中断（disabling interrupts）"></a>屏蔽中断（disabling interrupts）</h4><p>基本思想是在进入临界区之前关中断，这就导致时钟中断也会被关闭，从而没有进程可以打断它。</p>
+<p>问题：</p>
+<ol>
+<li>不支持多CPU</li>
+<li>把关中断权限交给用户是不明智的选择</li>
+</ol>
+<p>但是对于内核来说，关中断是一种很好的方法，可以用来维护多线程（如果支持）或者多CPU之间对就绪队列等的访问<br>（别都选到一个进程就尴尬了，在jos里这会发生错误）（话说，在jos里面实现多CPU的时候可有内核锁机制，下面来看一看锁都加在了哪里）</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/64321100.jpg" alt=""></p>
+<h4 id="锁变量（Lock-variable）"><a href="#锁变量（Lock-variable）" class="headerlink" title="锁变量（Lock variable）"></a>锁变量（Lock variable）</h4><p>保存一个名为lock之类的全局变量供各个进程进行检查，实际上无济于事——这不也是临界区吗</p>
+<h4 id="严格轮换法（Strict-alertnation）"><a href="#严格轮换法（Strict-alertnation）" class="headerlink" title="严格轮换法（Strict alertnation）"></a>严格轮换法（Strict alertnation）</h4><p>要求进程轮流进入临界区。看了代码就会明白：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">    <span class="keyword">while</span>(trun!=<span class="number">0</span>);<span class="comment">//A进程必须等待turn是0的时候才能进去</span></div><div class="line">    critical_region();</div><div class="line">    turn=<span class="number">1</span>;</div><div class="line">    noncritical_region();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">    <span class="keyword">while</span>(turn!=<span class="number">1</span>);<span class="comment">//B进程必须等到turn是1</span></div><div class="line">    critical_region();</div><div class="line">    turn=<span class="number">0</span>;</div><div class="line">    nocritcal_region();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不是一个很好的方案。</p>
+<p>缺点：</p>
+<ol>
+<li>违反了“进程不应该被处于非临界区的进程阻塞”</li>
+<li>浪费CPU时间：忙等待时间</li>
+</ol>
+<p>很明显啊，他们在轮转的时候，如果A这时需要进入临界区但是B在运行非临界区的程序，A可以被放到阻塞态，这时违反了规则3<br>A可以继续循环，这时每次A上去CPU都会浪费时间空循环，还不如去阻塞态。</p>
+<p>还有，如果A需要多次进入临界区，而B主要时间在非临界区，A的效率就变得非常低，绝大多数时间都是在空转。</p>
+<p><strong>自旋锁</strong>：用于忙等待的锁。</p>
+<p>PPT另有两种，都是失败的方法。暂且不提。</p>
+<h4 id="Peterson算法"><a href="#Peterson算法" class="headerlink" title="Peterson算法"></a>Peterson算法</h4><p>1981-满足线程之间互斥的经典基于软件的解法</p>
+<p>似乎仅用于两个进程：<br><a href="https://zh.wikipedia.org/wiki/Peterson%E7%AE%97%E6%B3%95" target="_blank" rel="external">wiki</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1</span></div><div class="line"><span class="meta">#deine N 2 <span class="comment">//进程数量</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> turn;<span class="comment">//轮到进程编号</span></div><div class="line"><span class="keyword">int</span> interested[N];个各进程是不是想去临界区，是不是已经在临界区</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">enter_region</span><span class="params">(<span class="keyword">int</span> process)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> other;<span class="comment">//在临界区的</span></div><div class="line">    other=<span class="number">1</span>-process;</div><div class="line">    interested[process]=TRUE;<span class="comment">//我想进去l临界区</span></div><div class="line">    turn=other;<span class="comment">//</span></div><div class="line">    <span class="keyword">while</span>(turn==other &amp;&amp; interested[other]==TRUE);<span class="comment">//</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">leave_region</span><span class="params">(<span class="keyword">int</span> process)</span></span>&#123;</div><div class="line">    interested[process]=FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行到while处可能会挂起。</p>
+<p>怎么使用呢？在每个进程进入临界区之前调用critical_region，退出之后调用leave_region。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/88550095.jpg" alt=""></p>
+<p><strong>扩展到N个线程的互斥filter算法</strong>：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/67570267.jpg" alt=""></p>
+<h4 id="TSL"><a href="#TSL" class="headerlink" title="TSL"></a>TSL</h4><p>指令：TSL RX LOCK</p>
+<p>将lock给rx然后往lock中存一个非0值：保证原子操作，锁内存总线。</p>
+<p>代码：<br>    enter_region:<br>        TSL REGISTER , LOCK//原值在寄存器，新值在内存<br>        CMP REGISTER,#0<br>        JNE enter_region<br>        RET//原来是0，可以进去了<br>    leave_region:<br>        MOVE LOCK , #0<br>        RET</p>
+<p>一个可以代替tsl的是xchg（是不是很眼熟！）<br>xchg完成的操作是交换两个位置的内容。</p>
+<pre><code>enter_region:
+    MOVE REGISTER,#1
+    XCHG REGISTER,LOCK
+    CMP REGISTER,#0
+    JNE enter_region
+    RET
+leave_region:
+    MOVE LOCK, #0
+    RET
+</code></pre><p>锁是一个抽象的数据结构，有方法Acquire与Release。</p>
+<p>在获取所的时候，如果锁目前被别人拥有，就等待。<br>释放锁的时候，通知那些等待的进程你们等的锁到了。</p>
+<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>使用TSL实现自旋锁：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Lock::Acquire()&#123;</div><div class="line">    <span class="keyword">while</span>(test-<span class="keyword">and</span>-<span class="built_in">set</span>(value));</div><div class="line">&#125;</div><div class="line">Lock::Release()&#123;</div><div class="line">    value=<span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Acquire:不停地区获取锁的值并将锁的值赋为1，直到锁的值变为0。（说明有进程从临界区出来了）</p>
+<p>忙等待确实可以解决2个进程之间互斥运行的问题，但是缺点也很多，浪费CPU时间，编程困难，可能会造成优先级错乱。</p>
+<h4 id="无忙等待锁"><a href="#无忙等待锁" class="headerlink" title="无忙等待锁"></a>无忙等待锁</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg" alt=""></p>
+<h3 id="睡眠与唤醒"><a href="#睡眠与唤醒" class="headerlink" title="睡眠与唤醒"></a>睡眠与唤醒</h3><p>进程间通信<strong>原语</strong>，在无法进入临界区的时候进入阻塞状态而不是忙等待。</p>
+<p>当一个进程发现自己不能进入临界区的时候，就系统调用sleep，阻塞去。另一个进程要离开临界区，就调用wakeup将她唤醒。<br>sleep\wakeup(pid);</p>
+<h4 id="简单睡眠唤醒机制"><a href="#简单睡眠唤醒机制" class="headerlink" title="简单睡眠唤醒机制"></a>简单睡眠唤醒机制</h4><p>正如上述。</p>
+<p>悲惨的是，假如wakeup信号丢失了，没有被唤醒的进程还在阻塞，假如剩余一个进程进入临界区需要该进程的作用，就都阻塞。</p>
+<p>对MCPU不支持：使用进程号。</p>
+<p>终于，现在可以考虑一下生产者消费者的解决了：</p>
+<p>略。可见书或PPT</p>
+<p>这是失败的解决，可能会导致wakeup信号丢失结果二人都去阻塞。</p>
+<h3 id="信号量解决"><a href="#信号量解决" class="headerlink" title="信号量解决"></a>信号量解决</h3><p>P-&gt;down V-&gt;up</p>
+<p><strong>信号量</strong>：一种新的变量类型，表示唤醒操作剩余次数。（所有相关线程引起的总竞争条件检查次数）<br><strong>信号</strong>是一个抽象数据类型，由一个整形变量与两个原子操作组成。</p>
+<p>down：对某个信号量down是检查他的value，如果不是0，就减一，如果是0就去sleep。<br>up：对某个信号量的值加1。如果睡眠，就唤醒。</p>
+<p>信号量是被保护的，在初始化完成之后，只能通过pv修改，而pv操作是被保证的原子操作。</p>
+<p>通常嘉定信号量是公平的，也就是说不会一直被阻塞在p操作。（假设先进先出）</p>
+<p>信号量的实现与前面说到的无忙等待锁很像：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg" alt=""><br>其实block也相当于被调度了。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/8720151.jpg" alt=""></p>
+<p>区别在于前面说的无忙等待锁并不是原子性的。</p>
+<p><strong>解决方案</strong>：<br>每一个临界区设置一个信号量对象，初值是1代表初始时可以进入一个到临界区去。<br>p在进入之前，v在进入之后。必须成对出现。</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>同步可能会被调度序列打乱。（？）</p>
+<p>同步与互斥的区别：</p>
+<ol>
+<li>互斥值放值其他进程进入cr</li>
+<li>同步是指实现一个合理的逻辑序列</li>
+</ol>
+<p>whats this<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/11688740.jpg" alt=""></p>
+<h4 id="ipc问题分析——使用信号量解决生产者消费者问题"><a href="#ipc问题分析——使用信号量解决生产者消费者问题" class="headerlink" title="ipc问题分析——使用信号量解决生产者消费者问题"></a>ipc问题分析——使用信号量解决生产者消费者问题</h4><p>1.ipc问题产生 原因：</p>
+<ol>
+<li>物理序列依赖于调度</li>
+<li>逻辑序列依赖应用层需的意愿</li>
+<li>竞争条件排斥资源获取</li>
+</ol>
+<p>在内核态以及用户态都有ipc问题，在内核态是io设备的管理，在用户态是网络应用、数据库等的管理。</p>
+<p>ipc问题的关键在于：</p>
+<ol>
+<li>理解逻辑与物理序列  </li>
+<li>逻辑序列依赖于调度</li>
+<li>逻辑序列可以被用户控制</li>
+</ol>
+<p>whats that…..</p>
+<p>使用信号量可以实现条件同步。</p>
+<p><strong>生产者消费者问题</strong>：<br>一共需要三个信号量：mutex\full\empty。<br>首先，buffer是一个临界区，无论核心进入临界区出来临界区都需要一个信号量，其次，当buffer满的时候（N），生产者不可以进去buffer，需要消费者消费之后up才能进，消费者同理。<br>我认为，后两者实际上是在利用信号量的特点完成程序的逻辑部分，而不仅仅是对临界区的进入控制。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/97276693.jpg" alt=""></p>
+<h4 id="monitor-solution"><a href="#monitor-solution" class="headerlink" title="monitor solution"></a>monitor solution</h4><p>信号量的一个缺点是对编程者来说不好写出代码。</p>
+<p>monitor（管程）是一对过程、变量、数据结构的集合，（可以被看作是编译器），他们组成一个特殊的模块或软件包</p>
+<p>应用：任意时刻管程中只能有一个活跃进程（有效完成互斥）<br>wait and signal：就像pv、du一样<br>不足：只有很少的语言支持。</p>
+<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>组成：一个锁（管程代码互斥）、0或多个条件变量（管理共享数据的并发访问）</p>
+<p>进入管程时的互斥由编译器完成</p>
+<p><strong>条件变量</strong>：（像是信号量一样的东西）是管程内的的等待机制，允许在进程无法继续运行的时候被阻塞。<br><strong>wait</strong>：无法继续运行时调用，将自己阻塞并掉一个互斥访问进管程<br><strong>signal</strong>：指示一个呼哧进程开始运行，自己退出管程。</p>
+<p>wait与signal很像是在之前的sleep与wakeup。但是关键的区别是，这里管程保证了互斥，不允许在wait之前切换进程进入管程。（其实存疑）</p>
+<h4 id="条件变量实现"><a href="#条件变量实现" class="headerlink" title="条件变量实现"></a>条件变量实现</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/49329583.jpg" alt=""></p>
+<h4 id="管程解决生产者-消费者问题"><a href="#管程解决生产者-消费者问题" class="headerlink" title="管程解决生产者-消费者问题"></a>管程解决生产者-消费者问题</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/21915703.jpg" alt=""></p>
+<h4 id="hansen与hoare"><a href="#hansen与hoare" class="headerlink" title="hansen与hoare"></a>hansen与hoare</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51508560.jpg" alt=""></p>
+<p>hansen主张signal只能是管程过程最后一个语句，二hoare则认为不一定，主张signal之后就应该自己阻塞让新的进程进入管程运行。</p>
+<p>也是因为这样，，hansen的判断方式使用while而hoare判断使用if。</p>
+<p><a href="http://www.cnblogs.com/xybaby/p/6516387.html" target="_blank" rel="external">并发与同步-xybaby</a></p>
+<blockquote>
+<p>同步互斥，就是在并发的前提下保证一些操作的原子性。</p>
+</blockquote>
+<h2 id="IPC问题：哲学家就餐"><a href="#IPC问题：哲学家就餐" class="headerlink" title="IPC问题：哲学家就餐"></a>IPC问题：哲学家就餐</h2><p><strong>对互斥访问有限资源的竞争建模</strong></p>
+<blockquote>
+<p>进程同步也是进程之间直接的制约关系，是为完成某种任务而建立的两个或多个线程，这个线程需要在某些位置上协调他们的工作次序而等待、传递信息所产生的制约关系。进程间的直接制约关系来源于他们之间的合作。</p>
+<p>from：<a href="http://www.cnblogs.com/CareySon/archive/2012/04/14/Process-SynAndmutex.html" target="_blank" rel="external">浅谈进程同步与互斥的概念-宋沄剑</a></p>
+</blockquote>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>互斥：相邻哲学家只有一个人可以使用筷子</p>
+<p>同步：</p>
+<ol>
+<li>想要进餐的哲学家应该拿到两个筷子</li>
+<li>同一时刻至多有两个哲学家一同进餐</li>
+<li>死锁与饥饿避免</li>
+</ol>
+<p>ppt</p>
+<h2 id="IPC问题：读者与写者"><a href="#IPC问题：读者与写者" class="headerlink" title="IPC问题：读者与写者"></a>IPC问题：读者与写者</h2><p><strong>为数据库访问建模</strong></p>
+<p>（会不会产生问题：在不是writer想要放弃的时候强迫writer放弃）——理解错误，<br>P：可不可以得到资源？可以，OK继续执行：不可以OK我去阻塞<br>这个“我”指的是“调用P的那个过程。</p>
+<p>保证公平这个，concur是什么？是</p>
+<p>##IPC问题：睡觉的理发师</p>
+<h2 id="猴子过索桥"><a href="#猴子过索桥" class="headerlink" title="猴子过索桥"></a>猴子过索桥</h2><h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3>
       
     </div>
     
@@ -869,8 +1086,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/06/OS/OS-内存管理/" rel="next" title="OS:内存管理">
-                <i class="fa fa-chevron-left"></i> OS:内存管理
+              <a href="/2017/11/05/JUnit之一/" rel="next" title="JUnit之一">
+                <i class="fa fa-chevron-left"></i> JUnit之一
               </a>
             
           </div>
@@ -879,8 +1096,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/09/编译原理——词法分析/" rel="prev" title="编译原理——词法分析">
-                编译原理——词法分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/06/OS/chap3-内存管理/" rel="prev" title="chap3-内存管理">
+                chap3-内存管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -960,7 +1177,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1050,7 +1267,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导"><span class="nav-number">1.1.</span> <span class="nav-text">导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要并发（Cocurrency）？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要并发（Cocurrency）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程概念"><span class="nav-number">1.3.</span> <span class="nav-text">进程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态"><span class="nav-number">1.4.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程数据结构"><span class="nav-number">1.5.</span> <span class="nav-text">进程数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程切换"><span class="nav-number">1.6.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行镜像（process-image）"><span class="nav-number">1.7.</span> <span class="nav-text">运行镜像（process image）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度算法"><span class="nav-number">1.8.</span> <span class="nav-text">进程调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#when-and-why"><span class="nav-number">1.8.1.</span> <span class="nav-text">when and why</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goal"><span class="nav-number">1.8.2.</span> <span class="nav-text">goal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理系统中的调度算法"><span class="nav-number">1.8.3.</span> <span class="nav-text">批处理系统中的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来先服务（FCFS）"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">先来先服务（FCFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短时间优先算法（SPN）"><span class="nav-number">1.8.3.2.</span> <span class="nav-text">最短时间优先算法（SPN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短剩余时间优先算法（SRT）"><span class="nav-number">1.8.3.3.</span> <span class="nav-text">最短剩余时间优先算法（SRT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高响应比优先算法（HRRN）"><span class="nav-number">1.8.3.4.</span> <span class="nav-text">最高响应比优先算法（HRRN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三层调度"><span class="nav-number">1.8.3.5.</span> <span class="nav-text">三层调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式系统中的调度"><span class="nav-number">1.8.4.</span> <span class="nav-text">交互式系统中的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片轮转-（RR）"><span class="nav-number">1.8.4.1.</span> <span class="nav-text">时间片轮转 （RR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级队列调度算法（MQ）"><span class="nav-number">1.8.4.2.</span> <span class="nav-text">多级队列调度算法（MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列算法（MLFQ）"><span class="nav-number">1.8.4.3.</span> <span class="nav-text">多级反馈队列算法（MLFQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级算法（PS）"><span class="nav-number">1.8.4.4.</span> <span class="nav-text">优先级算法（PS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短进程优先"><span class="nav-number">1.8.4.5.</span> <span class="nav-text">最短进程优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保证调度"><span class="nav-number">1.8.4.6.</span> <span class="nav-text">保证调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#彩票调度"><span class="nav-number">1.8.4.7.</span> <span class="nav-text">彩票调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度实现"><span class="nav-number">1.8.5.</span> <span class="nav-text">调度实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度机制设定"><span class="nav-number">1.8.6.</span> <span class="nav-text">调度机制设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">1.9.</span> <span class="nav-text">进程之间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.10.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程库"><span class="nav-number">1.10.1.</span> <span class="nav-text">线程库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的概念"><span class="nav-number">1.11.</span> <span class="nav-text">线程的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.11.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轻权进程"><span class="nav-number">1.11.2.</span> <span class="nav-text">轻权进程</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导"><span class="nav-number">1.</span> <span class="nav-text">导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要并发（Cocurrency）？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要并发（Cocurrency）？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">2.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程概念"><span class="nav-number">2.1.</span> <span class="nav-text">进程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程状态"><span class="nav-number">2.2.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程数据结构"><span class="nav-number">2.3.</span> <span class="nav-text">进程数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程切换"><span class="nav-number">2.4.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行镜像（process-image）"><span class="nav-number">2.5.</span> <span class="nav-text">运行镜像（process image）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调度算法"><span class="nav-number">2.6.</span> <span class="nav-text">进程调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#when-and-why"><span class="nav-number">2.6.1.</span> <span class="nav-text">when and why</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goal"><span class="nav-number">2.6.2.</span> <span class="nav-text">goal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批处理系统中的调度算法"><span class="nav-number">2.6.3.</span> <span class="nav-text">批处理系统中的调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来先服务（FCFS）"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">先来先服务（FCFS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短时间优先算法（SPN）"><span class="nav-number">2.6.3.2.</span> <span class="nav-text">最短时间优先算法（SPN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短剩余时间优先算法（SRT）"><span class="nav-number">2.6.3.3.</span> <span class="nav-text">最短剩余时间优先算法（SRT）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高响应比优先算法（HRRN）"><span class="nav-number">2.6.3.4.</span> <span class="nav-text">最高响应比优先算法（HRRN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三层调度"><span class="nav-number">2.6.3.5.</span> <span class="nav-text">三层调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式系统中的调度"><span class="nav-number">2.6.4.</span> <span class="nav-text">交互式系统中的调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片轮转-（RR）"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">时间片轮转 （RR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级队列调度算法（MQ）"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">多级队列调度算法（MQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列算法（MLFQ）"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">多级反馈队列算法（MLFQ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级算法（PS）"><span class="nav-number">2.6.4.4.</span> <span class="nav-text">优先级算法（PS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短进程优先"><span class="nav-number">2.6.4.5.</span> <span class="nav-text">最短进程优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保证调度"><span class="nav-number">2.6.4.6.</span> <span class="nav-text">保证调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#彩票调度"><span class="nav-number">2.6.4.7.</span> <span class="nav-text">彩票调度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度实现"><span class="nav-number">2.6.5.</span> <span class="nav-text">调度实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度机制设定"><span class="nav-number">2.6.6.</span> <span class="nav-text">调度机制设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">2.7.</span> <span class="nav-text">进程之间的通信</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">3.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程库"><span class="nav-number">3.1.</span> <span class="nav-text">线程库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的概念"><span class="nav-number">3.2.</span> <span class="nav-text">线程的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程"><span class="nav-number">3.3.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轻权进程"><span class="nav-number">3.4.</span> <span class="nav-text">轻权进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经典IPC问题"><span class="nav-number">4.</span> <span class="nav-text">经典IPC问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程之间通信"><span class="nav-number">4.1.</span> <span class="nav-text">进程之间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者与消费者问题"><span class="nav-number">4.2.</span> <span class="nav-text">生产者与消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#家庭采购协调问题"><span class="nav-number">4.2.1.</span> <span class="nav-text">家庭采购协调问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忙等待"><span class="nav-number">4.2.2.</span> <span class="nav-text">忙等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#屏蔽中断（disabling-interrupts）"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">屏蔽中断（disabling interrupts）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁变量（Lock-variable）"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">锁变量（Lock variable）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#严格轮换法（Strict-alertnation）"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">严格轮换法（Strict alertnation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Peterson算法"><span class="nav-number">4.2.2.4.</span> <span class="nav-text">Peterson算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TSL"><span class="nav-number">4.2.2.5.</span> <span class="nav-text">TSL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自旋锁"><span class="nav-number">4.2.2.6.</span> <span class="nav-text">自旋锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无忙等待锁"><span class="nav-number">4.2.2.7.</span> <span class="nav-text">无忙等待锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#睡眠与唤醒"><span class="nav-number">4.2.3.</span> <span class="nav-text">睡眠与唤醒</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单睡眠唤醒机制"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">简单睡眠唤醒机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量解决"><span class="nav-number">4.2.4.</span> <span class="nav-text">信号量解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同步"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ipc问题分析——使用信号量解决生产者消费者问题"><span class="nav-number">4.2.4.2.</span> <span class="nav-text">ipc问题分析——使用信号量解决生产者消费者问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#monitor-solution"><span class="nav-number">4.2.4.3.</span> <span class="nav-text">monitor solution</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管程"><span class="nav-number">4.2.5.</span> <span class="nav-text">管程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#条件变量实现"><span class="nav-number">4.2.5.1.</span> <span class="nav-text">条件变量实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管程解决生产者-消费者问题"><span class="nav-number">4.2.5.2.</span> <span class="nav-text">管程解决生产者-消费者问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hansen与hoare"><span class="nav-number">4.2.5.3.</span> <span class="nav-text">hansen与hoare</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPC问题：哲学家就餐"><span class="nav-number">4.3.</span> <span class="nav-text">IPC问题：哲学家就餐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.3.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPC问题：读者与写者"><span class="nav-number">4.4.</span> <span class="nav-text">IPC问题：读者与写者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#猴子过索桥"><span class="nav-number">4.5.</span> <span class="nav-text">猴子过索桥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息传递"><span class="nav-number">4.5.1.</span> <span class="nav-text">消息传递</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1101,7 +1318,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共65.5k字</span>
+  <span class="post-count">博客全站共80.1k字</span>
 </div>
 
 

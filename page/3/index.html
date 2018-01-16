@@ -362,6 +362,396 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络番外3/" itemprop="url">计算机网络番外三</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="第二次书面作业"><a href="#第二次书面作业" class="headerlink" title="第二次书面作业"></a>第二次书面作业</h1><ol>
+<li>在目前的报文交换网络中（如Internet），主要采用存贮转发式交换。源主机通常将应用层较长的消息（例如，图像、视频等）分成小的报文段在网络中进行传输，接收端再将报文段组合成原始的消息，提交给应用层。下面我们给出了消息直接传输（不分报文段）和分成报文段传输的示意图，假设消息长度为8×106 bits，每条链路的传输速率为2Mbps，忽略传播延时、排队延时和处理时间。请回答下列问题：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/59555628.jpg" alt=""></p>
+<p>1)    如图a所示，如果消息不进行分段直接进行传输，每台交换设备均采取存储转发式交换，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*8Mb/2Mbps=12s$</p>
+<p>2)    如图b所示，如果消息被分成800个报文段进行传输（忽略各层的封装），每个报文段长10000 bits，请计算消息从源主机发出到目的主机完全接收所需的时间；</p>
+<p>答：$t=3*10000/2M+799*10000/2M=802*0.01M/2M=4.01s$</p>
+<p>3)    比较消息交换和报文交换的优缺点，除了传输延时方面的考虑，采用报文交换还有哪些其他方面的考虑？ </p>
+<p>答：<br>消息交换省去了对分片数据进行处理合并的时间、减少了首部的数据传输，但是时延长，可能会长时间占用路由器的大量缓存空间。<br>报文交换大大减少了时延，同时由于数据的减少检错也变得更加容易，错误发生率减小，可靠性提升，但是需要额外传送首部数据，并且需要注意报文的顺序合并，还会带来排队时延。<br>采用报文交换除了对时延方面的考虑，还有对发送优先级以及数据可靠性的考虑。另外，过长的消息堵塞路由器可能导致其他消息不能及时送往目的地而带来一系列问题。</p>
+<ol>
+<li>发送者A和接收者B之间使用TCP协议进行通信（A发送数据，B回送ACK）。假设TCP连接建立之后A立即开始发送数据（第一个数据段随三次握手中的最后一个ACK一同发送，初始序列号为1）。链路带宽（传输速率）为100 Mbps，往返延迟RTT为10ms，MSS为1000字节，最初的拥塞窗口设成1个MSS，假设接收端有足够大的缓存空间，拥塞控制的初始阈值设为64。试回答下列问题：<br>1)    假设A缓冲区中有7000字节数据要向B发送，发送的每个数据段均包含1000字节数据，请画出A、B之间的交互过程，并计算所需的时间（从发起连接开始计算，要求给出计算过程）。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/23395607.jpg" alt=""></p>
+<p>从图中可以看出：一共经过了4次RTT以及3段将数据报送出的时间，加上TCP/IP首部字节数认为是40，因此：<br>时间：$t=4*RTT+3*((40+1000)*8/100M)=40+0.2496ms=40.2496ms$</p>
+<p>2)    快速重传机制是对TCP性能的优化，考虑第一问中的传输情况，如果传输过程中有数据段丢失，那么第几个数据段的丢失有可能触发A的快速重传？解释原因。</p>
+<p>答：承载数据的第四（seq=3002）个：如果第一个数据包发生丢失，B不会发送ACK，将会因此超时引发慢启动；如果第二个丢失，只会发送一个冗余ACK，然后超时进入慢启动。如果第三个丢失，接下来可以连续发送2个报文段，由于第三个包无法被确认，只能回收两个冗余ACK。如果第四个丢失，5、6、7都正确到达，将会引起3个冗余ACK，会引发快速重传。五、六、七丢失都不能引发快速重传了。</p>
+<p>3)    假设发送端发送一系列数据段（1、2、3……n），但A一直未收到任何确认（ACK），正常情况下，第一个数据段的重传定时器会首先超时，A将TCP的拥塞窗口设置成1个MSS，并重传第一个数据段。如果我们现在修改TCP协议，在上述情况下不重传第一个数据段，而改为发送第n+1个数据段，请你分析在什么情况下这种做法有利，在什么情况下不利。</p>
+<p>答：如果接收方其实全部收到了包，只是发送方的定时器时间设置太短或是突然拥挤的网络导致包传输减缓，这时发送第n+1个数据段是有利的。因为这时前面数据段的ACK会相继到达，n+1包是最终一定会发送出去的包，因此所有工作都不是无用功；如果重传1包，那么在1包原本的ACK到达之后，这个被重传的包就是冗余包，将会被丢弃还会浪费资源。<br>在其他情况下，比如有部分包甚至全部包没有收到，这种机制似乎并不能有效地解决问题：比如有一个包x（0&lt;=x&lt;=n）未收到，这时无论重传多少次n+1包，最终可能收到的都是ACK=x，陷入无尽的循环。</p>
+<h1 id="第三次书面作业"><a href="#第三次书面作业" class="headerlink" title="第三次书面作业"></a>第三次书面作业</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络应用层番外二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/04/计算机网络应用层番外二/" itemprop="url">计算机网络应用层之番外二</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:12:40+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
+<p>多用户并发访问与可靠文件传输，不能有下载大小的限制。</p>
+<p>为了用UDP实现多用户并发访问，一定是需要使用多个socket。仿照FTP的协议设计：使用一个UDP的socket在master进行监听，这个socket绑定一个确定的端口号，用户客户机连接服务器发请求使用。</p>
+<p>考虑的请求比较小，可以使用一个包传送完成：</p>
+<p>Server在端口号X进行监听。</p>
+<p>将有一个N。<br>一个client要求连接，发送请求之后立即fork一个子进程，仍然使用这个socket，立即进入准备接收的状态。Server收到了，立即fork一个子线程，master继续监听，确保其他client的请求能被接收到。子线程新建一个UDP的socket，准备进行接收。由于UDP的不可靠，希望在传输数据的时候，Server应该首先，在fork出子线程之后立即对命令请求进行分析，告诉client一共要穿多少个包。（因为在n结束之后，client的子线程就会结束。如果不采用n结束子线程就结束，肯定需要有一个例如，里最后一个包recv之后多久end。这样应该是不太可靠的…对于server，需要有超时重传。emmmm</p>
+<p>其实这样也行：</p>
+<p>client子线程立即等待server传回的数据。同时启动一个定时器，如果超过了一定时间，反正也是同一个socket，就再重传，然后去等。</p>
+<p>server呢，在子线程fork出之后就去分析命令，然后开始传包。每一个包有一个序列号。采用选择重传的机制进行文件信息的传输。当发送端的所有发出的包已经发送完毕并且所有的一发送包都得到回执确认之后，向接收端发送最终的发送完毕包。这个包在发送完之后，client接受到之后必须给ACK。server收到ACK之后才能关闭。</p>
+<p>有状况：<br>如果client没接到信息或者信息错了，按照选择重传，不会有动作，server重传没毛病；如果client给的ACK丢了，server不能确定client已经收到，也会重传，所以client不可能在发送完ACK就关闭，而是影该等待server的回执，让server知道我已经知道我拿到完整的包了。一旦等到，立即关闭。<br>所以client这边对于最后一个包的动作是：recv-&gt;收到错报，不动，等重传/收到对的包，回复ACK同时启动一个超时重传机制，开始接收server的回执，不管接受到了什么，关闭。（因为这个时候server只要收到了client的东西就证明client肯定已经知道包已经传完了）<br>因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
+<p>server的动作是-&gt;发送最后一个结束包-&gt;超时重传/接收到client的信息-&gt;发送一个ACK，关闭。</p>
+<p>server也知道client这时server也已经关闭</p>
+<h1 id="最终交付"><a href="#最终交付" class="headerlink" title="最终交付"></a>最终交付</h1><h2 id="计算机网络书面作业：网络协议设计"><a href="#计算机网络书面作业：网络协议设计" class="headerlink" title="  计算机网络书面作业：网络协议设计 "></a><center>  计算机网络书面作业：网络协议设计 </center></h2><center>yayi2456</center>
+
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本协议仿照了FTP协议以允许多客户机的并行操作，使用选择重传的方法在UDP的基础上进行一定程度的可靠性的保证与效率的保证，加入其他机制保证大文件的可靠传输。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server端的主socket绑定一个端口号，进行对客户请求的监听。一旦监听到客户机的请求，立即fork一个子线程，在子线程中重新绑定一个socket，由这个socket与客户机进行通信。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client端根据程序并行度可选择是否需要在子线程发出请求，这取决于不同的应用程序的动作，不做讨论。提到client的动作时，并不指定是在哪个进程。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>将该协议描述如下：</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server监听端口A，一旦监听到client的请求，立即fork子线程。在子线程中对该请求进行分析，并决定需要发送给client的数据。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client向server发送请求，并启动一个定时器，当超过一定时间仍未收到server传回的第一个包，client重新发送请求信息。使recvbase为0，收到第一个数据包之后，<code>recv=(recv+1)%(2*N)</code>，该定时器关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>注</strong>：在server收到请求之后，并没有立即发送ACK通知client自己已经收到了请求。原因在于server最终一定会发送数据给client，只需要把第一个数据包作为server收到的确认信息即可，同时也减少了可靠性保证所花费的额外的时间。但是由于server对准备发送的数据需要做一定的处理，这个时延可能会稍长。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server开始向client发送包。采用选择重传机制，server为每一个包附上一个<strong>序号</strong>，同时利用UDP头本身具有的checksum字段进行一定程度的检错判断。server每次最多传送N个报文段，协议中具有2*N个序号。初始时，发送缓冲区中的sendbase是0，server每传送一个报文段就会启动一个对应于该报文段的定时器，当某个报文段的定时器超时之后，server对该报文段进行重传；当server收到了某个序号的报文段的ACK之后，将该序号置为“已确认”，如果该序号是sendbase，那么将<code>sendbase=(sendbase+1)%(2*N)</code>，如果sendbase是“已确认”，再将<code>sendbase=(sendbase+1)%(2*N)</code>，直到sendbase是“已发送但未确认”或是“可用”。同时，当sendbase改变时，如果包尚未发送完，则可以使用新的“可用”来发送新的报文段。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client接受到第一个数据包之后关闭第一个定时器，并向服务器发送对第一个数据包对应的序号的ACK，随后开始接收其他数据包，每接收到一个检验和没有错的数据包，返回一个对应该数据包序号的ACK包。无论是不是server端没有接收到上一个对应该序号的ACK，返回一个ACK，对于最大为2*N的空间来说，是没有问题的。对于在[recvbase,recvbase+N-1]空间中的序号对应的包加以解析送给应用层使用或者是缓存之后将对应的序号标为“接收已确认”，而另外的序号对应的数据包只返回ACK，对数据包直接丢弃。每次接收到一个被“接收已确认”的数据包，如果该数据包的序号是recvbase，<code>recv=(recv+1)%(2*N)</code>，如果这时recvbase对应序号仍是“接收已确认”，<code>recv=(recv+1)%(2*N)</code>，直到recvbase对应序号是“期待但未收到”或是“可用”。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在所有的有用数据包传送完成之后，server需要告知client，有用的数据已经传送完了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;场景分析如下：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当server的所有发出的包已经发送完毕并且所有的已发送包都得到回执ACK之后，向client发送最终的发送完毕包。这个包在发送完之后，client接收到之后必须给ACK。server收到ACK之后才能关闭，否则可能导致client不知道自己已经拿到完整的数据而陷入空转。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果client没接到最终包信息或者信息错了，按照选择重传，client不会有动作，server等待超时之后重传；如果client回复的ACK丢了，server不能确定client已经收到，必须重传来确认client已经知道自己可以关闭连接了，所以client不可能在发送完ACK就关闭，而是该等待server的回执，让server知道client已经知道client拿到完整的包了，否则可能会使server陷入无尽的重传。一旦等到server的回执，client立即关闭。若许久都未等到回执，关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面对最后的动作进行描述：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;server的动作是：发送最后一个结束包，启动定时器，若超时则进行重传；直到接收到client的信息之后，关闭定时器，server发送一个ACK，立即关闭。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;client最终的动作是：等待接收数据，如果收到错误的包，等重传；如果收到对的包，回复ACK同时启动一个定时器，启动超时重传机制，并开始接收server的回执，不管接受到了什么，关闭。若超时一定次数之后仍未接收到server的回执，因为server最终只发送一次，如果client连着很多次超时重传都没有收到回应，很大可能已经server关闭了，为了不陷入无休止的重传，client关闭。</p>
+<p>从宏观的角度来看，客户机与服务器的交互是：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/15535425.jpg" alt=""></p>
+<p><strong>扩展FSM：</strong></p>
+<p><strong>server：</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/73814791.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/41957911.jpg" alt=""></p>
+<p><strong>client：</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-5/90929804.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/覆千秋1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -486,6 +876,162 @@
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/计算机网络/计算机网络网络层/" itemprop="url">计算机网络网络层</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T22:12:40+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
+                    <span itemprop="name">大三的课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p># </p>
+
+          
         
       
     </div>
@@ -1055,162 +1601,8 @@
 <p>[2] <a href="https://baike.1688.com/doc/view-d2361261.html" target="_blank" rel="external">端口号是什么？</a></p>
 <p>[3]<a href="https://www.ibm.com/support/knowledgecenter/zh/SSGMGV_3.2.0/com.ibm.cics.ts.internet.doc/topics/dfhtl2d.html" target="_blank" rel="external">IBM Knowledge Center</a>  这个有很多东西，不止端口号</p>
 <p>[4]<a href="http://wiki.xiaohansong.com/network/tcp.html" target="_blank" rel="external">TCP</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/02/计算机网络/计算机网络网络层/" itemprop="url">计算机网络网络层</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T22:12:40+08:00">
-                2017-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p># </p>
+<p>在最后的复习时刻！</p>
+<p>UDP的源端口号：即使不用ACK，但是交互总要有个来源吧。服务器给client发东西得直到源端口号啊。</p>
 
           
         
@@ -1793,299 +2185,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/在MFC中创建控制台/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/在MFC中创建控制台/" itemprop="url">在MFC中创建控制台</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>距离上次写已经一周了。浑浑噩噩的愚人节，浑浑噩噩的一周。<br>但是依然要加油啊~要明确自己想要的是什么！开开心心地、充实地活着才最重要！<br>加油！</p>
-<hr>
-<p>我用的VS是2015版，之前找了一些在MFC中同时显示窗口与命令行的方法，我可以用的只记住了一个，先记录如下：</p>
-<p>在×.cpp的InitInstance()中的CWinAPPEx::InitInstance()前加上以下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _DEBUG</span></div><div class="line">   AllocConsole()</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>以后可以使用_cprintf()打印字符串，需要在使用该函数的文件添加头文件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;conio.h&gt;</span></span></div></pre></td></tr></table></figure>
-<p><strong>切记！这个头文件必须要在#include”stdafx.h”语句之后写，否则会报错！</strong></p>
-<p>使用步骤如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CString str=<span class="string">""</span>;</div><div class="line">USES_CONVERSION;</div><div class="line">LPSTR lp=T2A(str);</div><div class="line">_cprintf(lp);</div></pre></td></tr></table></figure>
-<p>这段代码完成了将CString类型的str输出的任务。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/OS/linux、vim、git常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/OS/linux、vim、git常用命令/" itemprop="url">Linux、Vim、Git常用命令——简明扼要版</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>第一次操作系统实验课记录：</p>
-<h2 id="一。linux下常用命令"><a href="#一。linux下常用命令" class="headerlink" title="一。linux下常用命令"></a>一。linux下常用命令</h2><h2 id="二。vim编辑器用法命令"><a href="#二。vim编辑器用法命令" class="headerlink" title="二。vim编辑器用法命令"></a>二。vim编辑器用法命令</h2><ol>
-<li>首先确保linux下安装有vim。可以使用上述命令sudo apt-get install vim来确定。如果已经安装了vim，会显示没有变化，否则会帮你安装vim。</li>
-<li>然后就可以开始使用vim啦！</li>
-</ol>
-<blockquote>
-<p>你使用 vim 或vim filename.suffix 进入了vim的命令模式。</p>
-</blockquote>
-<p>在命令模式下，不能进行文本编辑操作，需要按下A/a/I/i进入插入模式，在这个模式下可以像notepad一样进行文本编辑。</p>
-<p><strong>如果使用第二种命令进入vim，vim将会自动帮你确定文件类型</strong>。这样说吧，比如你创建了一个yayicpp.cpp文件进入编辑，vim将会使代码高亮、进行括号匹配等操作。</p>
-<blockquote>
-<p>好的！进入文本编辑模式之后，你迫不及待地写了一段helloworld。代码完成之后，你觉得只打印一行helloworld不太够，你想知道有没有类似于VS环境中那种Ctrl+C和Ctrl+V的操作。</p>
-</blockquote>
-<p>其实是有的。这个时候需要按下Esc重新进入命令模式。在命令模式下有很多功能组合，上述的复制粘贴就是其中一种，但是这里并不想以复制粘贴作为第一个被介绍的命令，让我们先从光标的移动开始。</p>
-<ol>
-<li>按下h键，光标左移；j光标下移；k光标上移；l光标右移。</li>
-<li>按下d键进入删除模式，这时按下h可删除光标左侧的一个字符，按下j可删除光标所在行以及下面一行；按下k可删除光标所在行与其上面一行；按下l可删除光标所在的字符。双击d键删除光标所在行。</li>
-<li>按下u键可以撤销前一步所做的改变。</li>
-<li>按下V（Shift+v）或是v可以进入到一个选择的可视化界面，同样可以使用hjkl控制选择范围，v按照字符选择，V按照行数选择。选择完成之后按下y就可以复制选定内容。按下p就可以将复制内容粘贴到选定的位置。</li>
-<li>按两下y可以复制光标所在行。</li>
-</ol>
-<blockquote>
-<p>写到这里，你觉得可以了，可以从vim里面退出来了。</p>
-</blockquote>
-<ol>
-<li>在命令模式下输入冒号，进入最后行模式。在最低端出现了光标。</li>
-<li>在光标位置输入w，保存文件。</li>
-<li>输入q，退出。</li>
-<li>这些命令可以进行组合wq。wq可以用x替代。</li>
-</ol>
-<blockquote>
-<p>你进入了最后行模式，又不想退出了，想继续编辑。</p>
-</blockquote>
-<ol>
-<li>按下Esc或者Backspace可以回到命令模式。</li>
-</ol>
-<h2 id="三。git初步使用"><a href="#三。git初步使用" class="headerlink" title="三。git初步使用"></a>三。git初步使用</h2><p>git是一个强大的版本管理工具，是Linus写的。这个人emmmmm…技术天才有些狂妄。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/背包问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2212,7 +2311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/归并、快排、堆排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/序列比较/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -2231,7 +2330,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/31/归并、快排、堆排序/" itemprop="url">归并、快排、堆排序</a></h1>
+                <a class="post-title-link" href="/2017/10/31/序列比较/" itemprop="url">序列比较</a></h1>
         
 
         <div class="post-meta">
@@ -2283,65 +2382,7 @@
       
         
           
-            <hr>
-<p>归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。</p>
-<hr>
-<h2 id="归并"><a href="#归并" class="headerlink" title="归并"></a>归并</h2><p>归并排序也是一种排序算法。<br>问题：将n个数由从小到大地排序。<br>归并提出的解决是：</p>
-<ol>
-<li>将这列数分成两半</li>
-<li>递归地将每一半排序</li>
-<li>将两个有序列合并成一整列</li>
-</ol>
-<p>归并排序在做串的切分时不考虑大小因素，只从中间切分。于是在合并时便需要对两个有序串做一定处理才能保证结果串的有序性。<br>为此，一个容易想到的方法是创建一个临时的数组存储有序列。如图：</p>
-<p><img src="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>每次都比较1串与2串当前位置元素大小，将较小的那一个输出到TMP数组中当前位置并加一，将输出串的当前位置加一。直到两个串都输出完毕。<br>这种方式所用的额外空间是O(n)，只需要O(n)次比较。</p>
-<p>实际上，归并排序一般是递归进行一直到每个串的长度是1，主要运算过程全部落在合并上面。下面由递归式分析归并排序算法的时间复杂度。</p>
-<p><strong>归并时间空间复杂度分析：</strong></p>
-<p>设T(n)表示该算法在规模为n的输入实例上最坏的运行时间，假设n是2的整数次幂，可以得到递推公式如下：</p>
-<p><img src="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="公式"></p>
-<p>则有递推关系：</p>
-<p><img src="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>将这些时间都加在一起即为nlog2N。即归并的时间复杂度是O(nlogn)级别。</p>
-<p>下面将严格证明这个命题：</p>
-<p>——————这个过程线省略————</p>
-<p><strong>归并的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mergeSort=function(s,e,b)&#123;  </div><div class="line">  <span class="comment">//start,end,temp</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(b==<span class="keyword">null</span>)b=<span class="keyword">new</span> Array(<span class="keyword">this</span>.length);</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   var m=(s+e)&gt;&gt;<span class="number">1</span>;  </div><div class="line">   <span class="comment">//取中间值</span></div><div class="line">   <span class="keyword">this</span>.mergeSort(s,m,b);</div><div class="line">   <span class="keyword">this</span>.mergeSort(m+<span class="number">1</span>,e,b);</div><div class="line">   <span class="keyword">for</span>(var i=s,j=s,k=m+<span class="number">1</span>;i&lt;=e;++i)</div><div class="line">      b[i]=<span class="keyword">this</span>[(k&gt;e||j&lt;=m&amp;&amp;<span class="keyword">this</span>[j]&lt;<span class="keyword">this</span>[k])?j++:k++];</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">this</span>[i]=b[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>快排提供的解决是：</p>
-<ol>
-<li>选择一个枢轴，小于枢轴的到左边，大于枢轴的到右边</li>
-<li>对两边分别递归地使用快排</li>
-<li>合并</li>
-</ol>
-<p>与归并相似的一点是，二者都采用递归方法解决问题，但是归并的排序工作都留在了合并过程中完成，而快排正与之相反，排序工作都在分割的过程中完成。</p>
-<p><img src="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KP"></p>
-<p>从图中可以明显看出，快排最终得到的串就是一个有序的串。</p>
-<p><strong>快排时间空间复杂度：</strong></p>
-<p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
-<p><strong>快排的代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Array.prototype.quikSort=function(s,e)&#123;</div><div class="line">  <span class="comment">//start,end</span></div><div class="line">   <span class="keyword">if</span>(s==<span class="keyword">null</span>)s=<span class="number">0</span>;</div><div class="line">   <span class="keyword">if</span>(e==<span class="keyword">null</span>)e=<span class="keyword">this</span>.length-<span class="number">1</span>;</div><div class="line">   <span class="keyword">if</span>(s&gt;=e)<span class="keyword">return</span>;</div><div class="line">   <span class="keyword">this</span>.swap((s+e)&gt;&gt;<span class="number">1</span>,e);</div><div class="line">   var index=s-<span class="number">1</span>;</div><div class="line">   <span class="keyword">for</span>(var i=s;i&lt;=e;++i)</div><div class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>[i]&lt;=<span class="keyword">this</span>[e])</div><div class="line">         <span class="keyword">this</span>.swap(i,++index);</div><div class="line">   <span class="keyword">this</span>.quickSort(s,index-<span class="number">1</span>);</div><div class="line">   <span class="keyword">this</span>.quickSort(index+<span class="number">1</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><hr>
-<p>堆排序数据结构结课的时候还考了呢。怕是写错了吧当时。哎陈年旧事，不提也罢。</p>
-<p>  p又查到说，堆的建立过程就是不断插入的过程，所以可能根本不是完全建好了一个堆才去改变，也许是边建边改变。（有道云笔记你的markdown真的问题还很大</p>
-<hr>
-<p>堆是一种数据结构，可以看做是一棵任一孩子结点都小于（大顶堆）或都大于（小顶堆）父亲结点的完全二叉树。这样根结点总是整个堆中最大或小的结点，每次只需将根取出来即可保证有序。但是，每添加或减少一个结点都需要对堆进行必要的维护。<br>于是，堆排序中最关键的操作就是将一个序列调整成为堆。</p>
-<p>堆排序给出的解决方法：</p>
-<ol>
-<li>将序列建成堆</li>
-<li>迭代地取根进入有序队列并调整堆直到堆为有序序列</li>
-</ol>
-<p>堆的产生过程其实就是一个调整过程，下面给出堆的调整过程（以大根堆为例）：</p>
-<p><img src="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终取出数字的顺序即为最终顺序。</p>
-<p>堆排序适合于结点数较多情况下的要求前几个结点。当记录数较少时，不推荐使用堆排序。</p>
-<p>hash表+堆排序是处理海量数据的绝佳组合。</p>
-<p><strong>堆排序时间空间复杂度</strong></p>
-<p>完全二叉树高度log(n+1)，即对每个节点进行调整的时间复杂度是O(logn)，包括建堆的时间耗费与取值和调整，整个算法时间复杂度是O(nlogn)。额外空间只有temp用来存取出的数，O(1)。</p>
-<p><strong>堆排序的代码</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Array.prototype.heapSort=function()&#123;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="number">1</span>;i&lt;<span class="keyword">this</span>.length;++i)&#123;</div><div class="line">      <span class="keyword">for</span>(var j=i,k=(j-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>;k&gt;=<span class="number">0</span>;j=k,k=(k-<span class="number">1</span>)&gt;&gt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&gt;=<span class="keyword">this</span>[j])<span class="keyword">break</span>;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">for</span>(var i=<span class="keyword">this</span>.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;--i)&#123;</div><div class="line">      <span class="keyword">this</span>.swap(<span class="number">0</span>,i);</div><div class="line">      <span class="keyword">for</span>(var j=<span class="number">0</span>;k=(j+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>;k&lt;=i;j=k,k=(k+<span class="number">1</span>)&lt;&lt;<span class="number">1</span>)&#123;</div><div class="line">         <span class="keyword">if</span>(k==i||<span class="keyword">this</span>[k]&lt;<span class="keyword">this</span>[k-<span class="number">1</span>])--k;</div><div class="line">         <span class="keyword">if</span>(<span class="keyword">this</span>[k]&lt;=<span class="keyword">this</span>[j])braek;</div><div class="line">         <span class="keyword">this</span>.swap(j,k);</div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>本篇文章中的代码部分来自于作者twobin于网址<a href="http://www.cnblogs.com/twobin的博文《排序算法性能比较》。" target="_blank" rel="external">http://www.cnblogs.com/twobin的博文《排序算法性能比较》。</a></p>
-</blockquote>
-
+            <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">		a = x; b = y;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = beta*i;</div><div class="line">	&#125;	</div><div class="line">	M[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">	<span class="keyword">delete</span>[]M;</div><div class="line">	<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">			M[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">			M[i][<span class="number">0</span>] = beta*i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">			M[<span class="number">0</span>][i] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">				M[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">		<span class="keyword">int</span> j = y - r;</div><div class="line">			<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">				<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					j -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="built_in">string</span> a2;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">	<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> min;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">		a2 = a.substr(i, x-o);</div><div class="line">		q[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">		q[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">				min = q[<span class="number">0</span>];</div><div class="line">				q[<span class="number">1</span>] = i;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	min = q[<span class="number">1</span>]+o;</div><div class="line">	Pixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">	P-&gt;push(*p);</div><div class="line">	</div><div class="line">	DACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	a2 = a.substr(min-o , x-o);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">	DACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">string</span> A, B;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">		<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		DACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">				Pixel p = (P-&gt;top());</div><div class="line">				P-&gt;pop();</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="keyword">delete</span> P;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           
         
       
@@ -2433,7 +2474,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2558,7 +2599,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共65.5k字</span>
+  <span class="post-count">博客全站共80.1k字</span>
 </div>
 
 

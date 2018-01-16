@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS,Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="设备基础设备类型 按功能分类  存储设备：暂时或永久 I / O设备：人机交互 通信设备：数据交换和传输按数据管理方式分类 块流：使用不同大小的块作为数据管理的基本单位 字节流：使用字节作为DM的基本单位  按设备分配进行分类  独占设备：低速I / O设备 共享设备：高速I / O设备 虚拟设备：通过软件模拟硬件  按工作模式分类  逻辑设备：由OS维护的数据结构 物理设备：不同种类的硬件  设">
+<meta name="keywords" content="OS,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chap5-设备">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/OS/chap5-设备/index.html">
+<meta property="og:site_name" content="Be With Me">
+<meta property="og:description" content="设备基础设备类型 按功能分类  存储设备：暂时或永久 I / O设备：人机交互 通信设备：数据交换和传输按数据管理方式分类 块流：使用不同大小的块作为数据管理的基本单位 字节流：使用字节作为DM的基本单位  按设备分配进行分类  独占设备：低速I / O设备 共享设备：高速I / O设备 虚拟设备：通过软件模拟硬件  按工作模式分类  逻辑设备：由OS维护的数据结构 物理设备：不同种类的硬件  设">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/15945208.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/31066338.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/93569841.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/96816977.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/68828231.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/8186980.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/71738832.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg">
+<meta property="og:updated_time" content="2018-01-16T18:35:52.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chap5-设备">
+<meta name="twitter:description" content="设备基础设备类型 按功能分类  存储设备：暂时或永久 I / O设备：人机交互 通信设备：数据交换和传输按数据管理方式分类 块流：使用不同大小的块作为数据管理的基本单位 字节流：使用字节作为DM的基本单位  按设备分配进行分类  独占设备：低速I / O设备 共享设备：高速I / O设备 虚拟设备：通过软件模拟硬件  按工作模式分类  逻辑设备：由OS维护的数据结构 物理设备：不同种类的硬件  设">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/OS/chap5-设备/"/>
+
+
+
+
+
+  <title>chap5-设备 | Be With Me</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Be With Me</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">最喜欢你啦！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap5-设备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">chap5-设备</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T23:25:37+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="设备基础"><a href="#设备基础" class="headerlink" title="设备基础"></a>设备基础</h1><p><strong>设备类型</strong></p>
+<p>按功能分类</p>
+<ol>
+<li>存储设备：暂时或永久</li>
+<li>I / O设备：人机交互</li>
+<li>通信设备：数据交换和传输<br>按数据管理方式分类</li>
+<li>块流：使用不同大小的块作为数据管理的基本单位</li>
+<li>字节流：使用字节作为DM的基本单位</li>
+</ol>
+<p>按设备分配进行分类</p>
+<ol>
+<li>独占设备：低速I / O设备</li>
+<li>共享设备：高速I / O设备</li>
+<li>虚拟设备：通过软件模拟硬件</li>
+</ol>
+<p>按工作模式分类</p>
+<ol>
+<li>逻辑设备：由OS维护的数据结构</li>
+<li>物理设备：不同种类的硬件</li>
+</ol>
+<p><strong>设备管理讨论</strong></p>
+<p>设备的复杂性：<br>不同的设备有不同的工作模式<br>不同设备使用不同的数据格式<br>不同的设备支持不同的接口</p>
+<p>有关设备的重要问题：<br>速度：电脑的瓶颈<br>HCI：用户造成的操作错误<br>兼容性：独立于设备，独立于操作系统</p>
+<p>设备管理的关键策略：<br>高效合理：协调CPU，RAM和设备之间的速度差异。 以更高效的方式控制和管理设备。<br>方便：兼容，安全，稳定<br>标准化：IT行业的基础</p>
+<p><strong>设备管理目的</strong></p>
+<p>独立于设备的编程接口：</p>
+<ol>
+<li>隐藏硬件组件之间的差异</li>
+<li>为用户提供简单而通用的控制方法</li>
+<li>保持用户进程的安全性和稳定性</li>
+</ol>
+<p>高效的管理策略</p>
+<ol>
+<li>分配和释放：像进程调度一样</li>
+<li>性能增强：提高数据传输速度，使设备更适应CPU和RAM</li>
+<li>保护：内部和外部保护，死锁</li>
+</ol>
+<p>设备管理的困难</p>
+<ol>
+<li>端口地址管理</li>
+<li>控制模式设计</li>
+<li>死锁：不合理的设备请求或分配</li>
+</ol>
+<h2 id="硬件介绍"><a href="#硬件介绍" class="headerlink" title="硬件介绍"></a>硬件介绍</h2><p>建构：</p>
+<ol>
+<li>物理组件：由模拟信号驱动的设备</li>
+<li>电子部件：可以响应和执行数字指令的控制器或适配器</li>
+</ol>
+<p>控制器/适配器</p>
+<ol>
+<li>主板扩展插槽</li>
+<li>适配器中的寄存器和数据缓冲区</li>
+</ol>
+<p>适配器的责任</p>
+<ol>
+<li>地址转换：将逻辑地址映射到设备端口</li>
+<li>数据传输：接收或发送所需的数据</li>
+<li>命令执行：将数字指令转换为模拟信号来驱动物理组件</li>
+<li>性能增强：应用缓存和其他方法来提高设备的性能</li>
+</ol>
+<p><strong>电阻式触摸屏工作原理</strong>：p7</p>
+<h3 id="设备的工作流程"><a href="#设备的工作流程" class="headerlink" title="设备的工作流程"></a>设备的工作流程</h3><p>硬件工作周期的步骤：启动，自检，运行，结果检查和错误处理</p>
+<p>设备端口</p>
+<ol>
+<li>状态寄存器：存储设备的当前状态</li>
+<li>指令寄存器：存储收到的指令</li>
+<li>数据缓冲区：存储所需的数据</li>
+</ol>
+<p>CPU和设备之间的通信机制</p>
+<ol>
+<li>设置状态和指令寄存器的内容</li>
+<li>设备执行指令，或完成数据通信</li>
+<li>工作完成后，设备通过中断通知CPU</li>
+</ol>
+<p>示例：IBM软盘驱动器</p>
+<ol>
+<li>指令集：读取，写入，查找，格式化等</li>
+<li>参数：由CPU设置，存储在设备寄存器中</li>
+<li>位流：CPU逐位发送数据，软驱将数据缓冲区中的位排列成字节，并进行必要的检查</li>
+</ol>
+<p><strong>CPU与设备之间的通信</strong>：参见接口</p>
+<h3 id="如何访问设备？"><a href="#如何访问设备？" class="headerlink" title="如何访问设备？"></a>如何访问设备？</h3><ol>
+<li>I / O端口<ol>
+<li>设备的寄存器的ID</li>
+<li>计算机维护I / O通信的I / O端口列表</li>
+<li>缺点：分离内存空间和设备的寄存器<br>其实还有，用于端口的指令不如用于内存访问的指令多</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>内存映射I / O<ol>
+<li>所有器件的寄存器都映射到内存空间</li>
+<li>每个寄存器都分配一个唯一的内存地址</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>内存IO映射<br>优点</p>
+<ul>
+<li>将I / O地址视为内存地址的一部分，会生成全局地址空间</li>
+<li>I / O和内存的区别是隐藏的，程序员可以设计复杂的I / O程序</li>
+<li>I / O地址可以被有效地保护(?)<br>坏处<br>硬件很难区分内存和I / O设备的地址<br>管理成本较高，在双公交或多母线架构下更为复杂</li>
+</ul>
+</blockquote>
+<p>实际上存在混合编址方案：设备的数据缓存被map到内存，寄存器由io端口指定。</p>
+<ol>
+<li>总线：与前面的并不是并列关系</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/15945208.jpg" alt=""></p>
+<h3 id="设备工作模式"><a href="#设备工作模式" class="headerlink" title="设备工作模式"></a>设备工作模式</h3><h4 id="忙等待"><a href="#忙等待" class="headerlink" title="忙等待"></a>忙等待</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/31066338.jpg" alt=""></p>
+<p>特殊内核进程将数据发送到设备端口;<br>进程重复检查端口，直到端口可用并发送其余数据;<br>内核进程完成后，用户进程继续运行;<br>缺点：CPU浪费太多——接口中的查询方式</p>
+<h4 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/93569841.jpg" alt=""></p>
+<p>特殊内核进程将数据发送到设备端口;<br>进程进入休眠状态，CPU将运行其他进程;<br>数据缓冲区为空后，设备向CPU发送中断;<br>内核进程被唤醒并发送其余的数据<br>缺点：频繁的中断是耗时的——接口中的中断输出方式</p>
+<h4 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/96816977.jpg" alt=""></p>
+<p>用户进程导致CPU陷阱，特殊内核进程设置设备中的寄存器并退出trap;<br>设备直接从内存中读取数据;<br>工作完成后，设备向CPU发送中断;<br>用户进程被唤醒并继续运行<br>——只需一次中断就可以</p>
+<p><strong>DMA实现细节</strong>：请参考书上p187</p>
+<p>DMA的内部结构：</p>
+<ol>
+<li>单路径：只有一套寄存器，只能控制一个I / O设备</li>
+<li>多路径：多套寄存器，可同时控制多个I / O设备</li>
+<li>DMA调度：在多个通道之间切换</li>
+</ol>
+<p>DMA的工作模式：</p>
+<pre><code>1. 数据传输模式：一次一个字VS块模式
+</code></pre><ol>
+<li>周期窃取：DMA请求一个字的总线并得到它</li>
+<li>突发模式：DMA获取总线并启动一系列的数据传输</li>
+<li>Fly-by模式：DMA告诉设备控制器直接将数据发送到内存</li>
+<li>设备到设备和存储器到存储器：DMA从设备/存储器获取字并将其发送到目标地址</li>
+</ol>
+<p>DMA中使用的地址：</p>
+<ol>
+<li>物理地址：MMU位于CPU中，CPU将对应内存的虚拟地址转换以后给DMA地址寄存器</li>
+<li>虚拟地址：MMU位于内存中，这种情况很少</li>
+<li>缓冲：消除设备之间的速度差异</li>
+</ol>
+<p>为了避免DMA过于复杂，磁盘读入数据之后将数据存在自己的缓冲区，一是为了检验校验和，二是为了减少总线使用减少DMA复杂度。</p>
+<blockquote>
+<p>DMA请求<br>CPU对DMA控制器初始化，并向I/O接口发出操作命令，I/O接口提出DMA请求。<br>DMA响应<br>DMA控制器对DMA请求判别优先级及屏蔽，向总线裁决逻辑提出总线请求。当CPU执行完当前总线周期即可释放总线控制权。此时，总线裁决逻辑输出总线应答，表示DMA已经响应，通过DMA控制器通知I/O接口开始DMA传输。<br>DMA传输<br>DMA控制器获得总线控制权后，CPU即刻挂起或只执行内部操作，由DMA控制器输出读写命令，直接控制RAM与I/O接口进行DMA传输。<br>在DMA控制器的控制下，在存储器和外部设备之间直接进行数据传送，在传送过程中不需要中央处理器的参与。开始时需提供要传送的数据的起始位置和数据长度。<br>DMA结束<br>当完成规定的成批数据传送后，DMA控制器即释放总线控制权，并向I/O接口发出结束信号。当I/O接口收到结束信号后，一方面停 止I/O设备的工作，另一方面向CPU提出中断请求，使CPU从不介入的状态解脱，并执行一段检查本次DMA传输操作正确性的代码。最后，带着本次操作结果及状态继续执行原来的程序。</p>
+</blockquote>
+<p>DMA是必需的吗？</p>
+<h3 id="IO通道"><a href="#IO通道" class="headerlink" title="IO通道"></a>IO通道</h3><p>DMA的缺点<br>    缓慢而简单，不能支持复杂的I / O编程<br>I / O通道简介<br>    特殊芯片（PU）用于管理I / O设备<br>    字符复用信道，选择复用信道，组复用信道<br>    I / O通道与CPU共享内存，并与CPU分别工作<br>I / O通道的结构<br>    CAW：地址寄存器，将I / O通道程序的地址存储在内存中<br>    CCW：命令寄存器，存储当前的I / O命令<br>    CSW：状态寄存器，用于存储I / O操作结果的状态<br>    CDW：数据寄存器，数据缓冲区</p>
+<pre><code>![](http://oysmkdi7t.bkt.clouddn.com/18-1-17/67957883.jpg)
+</code></pre><h2 id="IO软件"><a href="#IO软件" class="headerlink" title="IO软件"></a>IO软件</h2><p>同步阻塞VS异步传输<br>    阻塞：用户程序将暂停（挂起），直到I / O操作完成<br>    数据传输：中断到来之前，CPU正在异步工作（对程序来说是阻塞）<br>错误处理<br>    硬件级错误处理：由设备执行（尽量在底层执行）<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理<br>统一命名：一个文件或一个设备的名字应该是一个简单的字符串或是一个整数，不应依赖于设备：<br>    设备独立的概念：<strong>访问任意IO设备而无须事先制定设备</strong><br>    使用I / O设备地址映射名称<br>缓冲<br>    如何根据缓冲区维护数据缓冲区和控制数据传输：数据离开设备通常不会直接到达目的地。（实时约束）<br>设备的分配和释放<br>    如何实现I / O设备共享？<br>    如何避免死锁？</p>
+<h3 id="IO软件层次"><a href="#IO软件层次" class="headerlink" title="IO软件层次"></a>IO软件层次</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/68828231.jpg" alt=""></p>
+<h4 id="中断-1"><a href="#中断-1" class="headerlink" title="中断"></a>中断</h4><p>如何由用户控制I / O设备？<br>    用户进程请求I / O并被阻止<br>    设备驱动程序启动I / O操作并被阻止<br>    I / O设备完成操作并发送中断<br>    设备驱动程序完成并且用户进程被唤醒<br>中断的工作流程<br>    硬件级错误处理：由设备执行<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理</p>
+<p><strong>在终端形成之后，在软中断中</strong>：<br>保存没被硬件保存的所有寄存器<br>为中断服务程序设置上下文（运行环境）<br>为中断服务程序设置栈<br>应答中断控制器, 再次开放中断<br>寄存器从被保存的地方复制到进程表中<br>运行中断服务程序<br>为下次要运行进程设置ＭＭＵ上下文<br>装载新的进程寄存器<br>开始运行新进程</p>
+<h4 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/8186980.jpg" alt=""></p>
+<p>对设备执行操作进行控制的代码是设备驱动程序</p>
+<p>设备驱动程序的逻辑位置被指明<br>驱动程序与设备控制器之间通过总线完成通信</p>
+<p>设备驱动程序介绍<br>    控制设备控制器的说明：更上层，忽视了设备之间的区别<br>    设备驱动程序始终视为内核进程：这样才能访问设备控制的寄存器（可以作为用户进程，需要系统调用，消除系统崩溃的一个源头）<br>    OS为抽象驱动程序提供统一的接口：如上图<br>    设备驱动程序：静态库或动态库（目前主流是动态）<br>设备驱动程序的工作流程<br>    接收并检查高级进程发送的参数<br>    检查设备并启动设备（当前是不是在使用？初始化设备，电源需求，日志等）<br>    配置设备的寄存器（将向设备发送的指令存进设备控制器的控制寄存器，检查控制器是不是已经接收命令并准备接受下一个命令，直到所有命令都送出）<br>    接收I / O操作的状态<br>设备驱动程序的重要问题<br>    同步阻塞VS无延迟运行（需要长时间处理，设备驱动程序进程阻塞自己，直到中断到来唤醒；不需要长时间，完成后应检查错误。随后可能会将数据发给某个设备无关软件，返回一个信息。如果还有命令就执行，没有的话就阻塞自己）<br>    可重入：驱动程序的复杂性（第一次调用完成之前第二次到来<br>    可热插拔的系统和内存请求：传送必须被终止，请求应该被抹去。有时候新设备的到来可能夺走旧设备的资源</p>
+<pre><code>设备驱动程序以阿布年不允许系统调用，但是可以调用内核的某些过程。比如DMA、定时器、分配释放硬接线的内存页面等。
+</code></pre><h3 id="与设备无关的io软件"><a href="#与设备无关的io软件" class="headerlink" title="与设备无关的io软件"></a>与设备无关的io软件</h3><ol>
+<li><p>设备驱动程序的统一接口</p>
+</li>
+<li><p>引入缓冲的方式</p>
+</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/71738832.jpg" alt=""></p>
+<p>(a) 无缓冲输入<br>(b) 缓冲区放在用户空间<br>(c) 缓冲区在核心空间，然后被复制到用户空间<br>(d) 在内核空间有双缓冲区</p>
+<ol>
+<li>适当的使用缓冲</li>
+</ol>
+<p>缓冲技术在io中很普遍，但是数据传递中太多的缓冲会影响系统性能</p>
+<ol>
+<li><p>IO中错误报告：</p>
+<ol>
+<li>建立io的错误处理机制，尽量在底层处理错误</li>
+<li>分别处理不同错误：如编程/io</li>
+</ol>
+</li>
+<li><p>分配与释放专用设备</p>
+<p>根据设备使用特性建立分配与释放原则（独享设备／共享设备），直接释放或队列管理．</p>
+</li>
+<li><p>建立与设备无关的数据传递格式</p>
+<p>不同设备数据传递格式不同，但须用软件隔离此特性，使上层软件不必考虑设备访问中的这一特性，如访问块大小的转换。</p>
+</li>
+</ol>
+<h3 id="用户空间的IO"><a href="#用户空间的IO" class="headerlink" title="用户空间的IO"></a>用户空间的IO</h3><p> SDK / DDK或编程库<br>    隐藏设备驱动程序的细节，使用户访问I / O设备变得简单<br>    如“cout”，“print”……<br>后台程序和守护进程<br>    用户的虚拟设备<br>    设备共享的缓冲和调度</p>
+<h3 id="spooling"><a href="#spooling" class="headerlink" title="spooling"></a>spooling</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg" alt=""></p>
+<p>预输入模块：将作业输入到输入井中；<br>缓输出模块：将作业结果缓冲式输出到独享设备上；<br>作业调度模块：控制作业从输入井中取数，向输出井中送数；<br>输入、输出井：在磁盘上开辟的两个 “井”区域。 </p>
+<h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><p>磁盘是一种外设，CPU和内存访问速度比磁盘快若干个数量级，磁盘系统的性能对整个系统性能有重要影响，磁盘设备管理的目标就是提高磁盘的访问速度和安全性。从以下几方面讲：</p>
+<pre><code>1. 磁盘硬件及访问性能
+2.RAID
+3.CD-ROM
+4.可刻录／可重写ＣＤ
+5.ＤＶＤ
+6. 磁盘格式化问题
+7.磁盘访问调度策略
+</code></pre><p>柱面定位时间：磁头移动到指定柱面的机械运动时间；<br>旋转延迟时间：磁盘旋转到指定扇区的机械运动时间；它与磁盘转速相关，如：软盘转速可为600r/m(每分钟转速)，硬盘可为10000r/m。<br>数据传送时间：从指定扇区读写数据的时间。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg" alt=""></p>
+<pre><code>柱面定位（寻道）时间在访问时间中是主项，合理组织磁盘数据的存储位置可提高磁盘I/O性能。
+</code></pre><p>例：读一个128KB大小的文件：<br>(1)文件若由8个连续磁道(每磁道32个扇区)上的256个扇区构成：<br>        20ms+(8.3ms+16.7ms)<em>8=220ms;<br>其中，柱面定位时间为20ms，旋转延迟时间为8.3ms，32扇区数据传送时间为16.7ms；<br>(2)文件若由256个随机分布的扇区构成：<br>        (20ms+8.3ms+0.5ms)</em>256=7373ms;<br>其中，1扇区数据传送时间为0.5ms；<br>随机分布时的访问时间为连续分布时的33.5倍。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>短查找时间优先算法（SSTF）：按磁头臂移动最小距离优先分配磁盘。磁盘使用率高，分配快。</p>
+<p>扫描(SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，然后反方向移动再进行分配。保证队列中不出现饿死情况。（或称电梯法）</p>
+<p>循环扫描(C-SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，到头后返回重新移动。可减少等待时间。</p>
+<p> N步扫描(N-step-SCAN)算法：把磁盘I/O请求队列分成长度为N的段，每次使用扫描算法处理这N个请求。当N=1时，该算法退化为FIFO算法。</p>
+<p> 双队列扫描(FSCAN)算法：请求队列分成两个，一个用做处理，一个用做存放新到请求。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YaYi
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2018/01/16/OS/chap5-设备/" title="chap5-设备">http://yoursite.com/2018/01/16/OS/chap5-设备/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
+  
+</div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/16/OS/chap6-死锁/" rel="next" title="chap6-死锁">
+                <i class="fa fa-chevron-left"></i> chap6-死锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="YaYi" />
+            
+              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设备基础"><span class="nav-number">1.</span> <span class="nav-text">设备基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件介绍"><span class="nav-number">1.1.</span> <span class="nav-text">硬件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备的工作流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">设备的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何访问设备？"><span class="nav-number">1.1.2.</span> <span class="nav-text">如何访问设备？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备工作模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">设备工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#忙等待"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">忙等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中断"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DMA"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">DMA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO通道"><span class="nav-number">1.1.4.</span> <span class="nav-text">IO通道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO软件"><span class="nav-number">1.2.</span> <span class="nav-text">IO软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO软件层次"><span class="nav-number">1.2.1.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断-1"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">设备驱动程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与设备无关的io软件"><span class="nav-number">1.2.2.</span> <span class="nav-text">与设备无关的io软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户空间的IO"><span class="nav-number">1.2.3.</span> <span class="nav-text">用户空间的IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spooling"><span class="nav-number">1.2.4.</span> <span class="nav-text">spooling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘管理"><span class="nav-number">2.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">2.1.</span> <span class="nav-text">算法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YaYi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共80.1k字</span>
+</div>
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>
