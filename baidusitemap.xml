@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/08/Python/numpy_not_found/</loc>
+    <lastmod>2018-04-10T07:34:24.198Z</lastmod>
+    <data>
+        <display>
+        <title>ModuleNotFoundError:No module named 'numpy' in pyCharm</title>
+        <pubTime>2018-04-08T12:37:24.276Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/17/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%A4%8D%E4%B9%A0%E8%AF%BE/</loc>
+    <lastmod>2018-01-18T05:18:39.393Z</lastmod>
+    <data>
+        <display>
+        <title>编译复习课</title>
+        <pubTime>2018-01-17T09:04:37.000Z</pubTime>
+        
+        <tag>编译</tag>
+         
+         
+           
+             
+              <breadCrumb title="编译" url="http://yoursite.com/categories/%E7%BC%96%E8%AF%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/01/16/OS/chap5-%E8%AE%BE%E5%A4%87/</loc>
     <lastmod>2018-01-16T18:35:52.265Z</lastmod>
     <data>
@@ -691,9 +731,9 @@
         <title>树莓派解析域名失败导致apt-get update不可用</title>
         <pubTime>2017-10-31T14:57:47.000Z</pubTime>
         
-        <tag>OS</tag>
-         
         <tag>物联网</tag>
+         
+        <tag>OS</tag>
          
          
            

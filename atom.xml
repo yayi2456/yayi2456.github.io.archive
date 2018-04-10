@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-16T18:35:52.265Z</updated>
+  <updated>2018-04-10T07:34:24.198Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ModuleNotFoundError:No module named &#39;numpy&#39; in pyCharm</title>
+    <link href="http://yoursite.com/2018/04/08/Python/numpy_not_found/"/>
+    <id>http://yoursite.com/2018/04/08/Python/numpy_not_found/</id>
+    <published>2018-04-08T12:37:24.276Z</published>
+    <updated>2018-04-10T07:34:24.198Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个错误折磨了我三天….各种折磨….终于在今天给解决了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编译复习课</title>
+    <link href="http://yoursite.com/2018/01/17/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%A4%8D%E4%B9%A0%E8%AF%BE/"/>
+    <id>http://yoursite.com/2018/01/17/编译原理/编译复习课/</id>
+    <published>2018-01-17T09:04:37.000Z</published>
+    <updated>2018-01-18T05:18:39.393Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;词法分析语法分析语义分析：分析阶段&lt;br&gt;中间…综合阶段&lt;/p&gt;
+&lt;p&gt;使用算法构造对应模块程序&lt;/p&gt;
+&lt;p&gt;各个阶段做什么事？&lt;br&gt;通常倒过来问：某个事情在哪个阶段做？&lt;/p&gt;
+&lt;p&gt;词法：将字符流切成单词流&lt;br&gt;语法：将单词流构建语法树&lt;br&gt;语义：类型检查、变量
+        
+      
+    
+    </summary>
+    
+      <category term="编译" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91/"/>
+    
+    
+      <category term="编译" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>chap5-设备</title>
@@ -499,70 +548,6 @@
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>chap2-进程与线程</title>
-    <link href="http://yoursite.com/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2017/11/06/OS/chap2-进程与线程/</id>
-    <published>2017-11-06T06:13:37.000Z</published>
-    <updated>2018-01-15T10:53:53.961Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;导&quot;&gt;&lt;a href=&quot;#导&quot; class=&quot;headerlink&quot; title=&quot;导&quot;&gt;&lt;/a&gt;导&lt;/h1&gt;&lt;p&gt;进程模型的进化：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;第一代：relay , vacuum tubes and
-        
-      
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JUnit之一</title>
-    <link href="http://yoursite.com/2017/11/05/JUnit%E4%B9%8B%E4%B8%80/"/>
-    <id>http://yoursite.com/2017/11/05/JUnit之一/</id>
-    <published>2017-11-05T07:27:08.000Z</published>
-    <updated>2017-11-06T08:58:51.946Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/ai92/article/details/302844&quot; target=&quot;_blank&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="实验室" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
-    
-    
-      <category term="实验室" scheme="http://yoursite.com/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
-    
-      <category term="计算机网络" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="模拟器" scheme="http://yoursite.com/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8/"/>
     
   </entry>
   

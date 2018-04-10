@@ -362,6 +362,856 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/OS/chap2-进程与线程/" itemprop="url">chap2-进程与线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="导"><a href="#导" class="headerlink" title="导"></a>导</h1><p>进程模型的进化：</p>
+<ol>
+<li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
+<li>第二代：批处理系统：一个程序完成所有工作。</li>
+<li>带三代：mutiprogramming and timesharing。CPU可以切换运行。</li>
+<li>第四代：现代OS：进程模型更加成熟，进程调度与相互交流更加成熟，内存保护与管理更加成熟。</li>
+</ol>
+<p><strong>进程</strong>：计算机上所有可以运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程。它包括输入输出程序与状态。</p>
+<p>需要区分进程与程序。</p>
+<p>进程创建：系统初始化、运行进程的创建进程系统调用被执行、用户请求、批处理作业初始化。</p>
+<p>进程终止：正常退出、出错退出（自愿）、严重错误、被杀死（非自愿）</p>
+<p>在unix中，每个进程有自己的父进程，有着明显的层次结构，但是在Windows中，虽然也有“句柄”来标识父进程，拥有句柄即可控制及对应的子进程，但是这个“句柄”可以被转让，就不存在明显的层次关系了。</p>
+<h2 id="为什么要并发（Cocurrency）？"><a href="#为什么要并发（Cocurrency）？" class="headerlink" title="为什么要并发（Cocurrency）？"></a>为什么要并发（Cocurrency）？</h2><p><strong>whats os?</strong><br>    A special kind of system software that can manage computer in  efficient and reasonable way. It is in charge of managing hardware resource, controlling the running of programs and providing useful services. It is a convenient platform for people to use computer</p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><ol>
+<li>使用cpu的基本数据结构<ol>
+<li>逻辑程序：被用户设计实现（envs）</li>
+<li>cpu指令序列：</li>
+<li>进程：程序与指令之间的数据结构</li>
+</ol>
+</li>
+</ol>
+<p><strong>进程</strong>：进程是某一个特定程序的运行实例，包括输入输出程序与状态。在分时操作系统（time-sharing os）中，CPU被多个进程分享，复杂的算法将被用于进程之间的调度。</p>
+<h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><p>基本状态：</p>
+<ol>
+<li>running：真正占用CPU</li>
+<li>ready：可以运行，等待CPU的使用权</li>
+<li>blocked：不能继续运行，等待外部事件（输入输出等）</li>
+</ol>
+<p>其他状态：</p>
+<ol>
+<li>new：进程的数据结构已经准备好，但是程序镜像尚未完成装载（env_create到icode_load之前，此时还不可以调用env_run）</li>
+<li>exit：程序已经完成了所有工作，但是还没有回收进程的数据结构（exit gracefully之后，free之前）</li>
+<li>suspend：运行镜像已经被换到硬盘里面了</li>
+</ol>
+<blockquote>
+<p>为什么block不能直接过渡到running：你都阻塞了，想回来啊？等吧。<br>为什么ready不能直接block？你都没有运行，怎么直到自己要等待一个外部事件去block？</p>
+</blockquote>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/82449429.jpg" alt=""></p>
+<p>那么为什么会<strong>挂起</strong>呢？</p>
+<p>挂起是由于：1.等待时间过长 2. 物理地址空间不足。导致该进程所需运行资源被切换到外存。</p>
+<p>页面置换是一件很麻烦的事情，需要进行一系列的硬盘操作，硬盘是一个极其慢的设备，那么为什么还要有挂起状态？（废话如果内存也能有120G那么多空间谁会给他换到硬盘啊）</p>
+<ol>
+<li>提高处理机效率：就绪进程表示空的时候，提交新进程，以提高处理机效率（<em>哈？</em>）</li>
+<li>为运行进程提供足够多的内存</li>
+<li>便于调试：在调试时，挂起被调试进程对其地址空间进行读写。</li>
+</ol>
+<p>什么时候会挂起呢？在进程等待外部事件（阻塞）的时候，有可能被挂起。</p>
+<p>除此之外的双挂起模型：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/87376882.jpg" alt=""></p>
+<p><strong>等待-&gt;等待挂起</strong>：没有进程处于就绪状态或者是就绪进程需要更多的内存资源。(???)<br><strong>就绪-&gt;就绪挂起</strong>：有高优先级的等待进程和低优先级的就绪进程（这是就绪进程被换到外存）<br><strong>运行-&gt;就绪挂起</strong>：对于抢先式分时系统，有高优先级的等待挂起进程因事件出现而进入就绪挂起。<br><strong>等待挂起-&gt;就绪挂起</strong>：等待的事件到了<br><strong>就绪挂起-&gt;就绪</strong>：没有就绪进程或者是就绪挂起进程的优先级比所有就绪进程的优先级都高<br><strong>等待挂起-&gt;等待</strong>：有一个进程释放了内存，一个等待挂起进程的优先级很高</p>
+<p>值得一提的是，winxp用的就是上面的双挂起模型。</p>
+<p><a href="http://blog.csdn.net/freeelinux/article/details/53562592" target="_blank" rel="external">对挂起的详细分析</a></p>
+<blockquote>
+<p>为什么要双挂起呢，os真的那么缺内存吗？<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/11990991.jpg" alt=""><br><a href="https://github.com/GcsSloop/Note/tree/master/OperatingSystem" target="_blank" rel="external">from:gcssloop/note</a></p>
+</blockquote>
+<p>linux下使用的进程模型是：</p>
+<ol>
+<li>TASK_RUNNING</li>
+<li>TASK_INTERRUPTIBLE：进程被挂起，直到某些条件变成真。（产生一个中断，在中断中释放一些该进程等待的系统资源，传递唤醒该进程的信号）<br>$$\color{red}{shenme玩意}$$</li>
+<li>TASK_UNINTERRUPTIBLE：除了信号不能使它的状态发生变化之外与前一个相同</li>
+<li>TASK_STOPED</li>
+<li>TASK_TRACED：进程运行被debugger打断</li>
+<li>EXIT_ZOMBIE：程序运行已经结束了，但是他的父进程还没有调用一个wait4()或是waitpid()系统调用来返回死掉进程的信息。</li>
+<li>EXIT_DEAD</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/55177783.jpg" alt=""></p>
+<p>$$\color{red}{so why… kill之后为什么不死}$$</p>
+<p>不同的os，其状态设置的差异很大。</p>
+<h2 id="进程数据结构"><a href="#进程数据结构" class="headerlink" title="进程数据结构"></a>进程数据结构</h2><p><strong>PCB：进程控制块</strong>：<br>这就是在jos里面的envs那个大数组了，它由操作系统内核维护，也叫进程描述符。（经过了jos的洗礼，其实不用说太多）</p>
+<p>所有pcb都在一个特定的内存空间之中。pcb表的size决定了os的并发度。不同状态的进程数据被存在不同的pcb表中。</p>
+<p>在一个正经系统中的pcb比env中的项更多，列为：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/88783439.jpg" alt=""></p>
+<p>为了将不同运行状态的pcb区分开，可以有两种方法，一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/92773297.jpg" alt=""><br>另一种是：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/64758197.jpg" alt=""></p>
+<p>其中第一种是在jos中使用的方式。</p>
+<h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>进程切换就是我们的sched函数了。<br>切换之前，需要保存在cpu运行程序的山下文（tf内容、pgdir等），切换之后，把新上来的进程的上下文恢复。</p>
+
+
+<iframe height="363" width="565" src="http://oysmkdi7t.bkt.clouddn.com/%E5%AA%92%E4%BD%932.mp4" frameborder="0" allowfullscreen>
+</iframe>
+
+
+<p>比如说sleep的实现：一个进程运行到了sleep，os去处理这个sleep，此时cpu的掌管权在kernel手里，随后设置一个硬件的时钟中断，然后保护现场，最后os就schedule，把运行权交给了另一个进程，另一个进程运行了一段时间之后硬件的时钟中断raise，打断了另一个进程的运行，于是os处理这个时钟中断保护现场，剥夺了另一个进程的运行权，再一次schedule，进程1开始运行。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/62249836.jpg" alt=""></p>
+<h2 id="运行镜像（process-image）"><a href="#运行镜像（process-image）" class="headerlink" title="运行镜像（process image）"></a>运行镜像（process image）</h2><p>运行镜像就是☞进程的整个生存周期的描述。</p>
+<p><strong>process image的内容</strong>：</p>
+<ol>
+<li>用户层面：该进程的用户地址空间，比如说程序、堆栈、数据段</li>
+<li>寄存器层面：pc、pcw、ir，栈指针其他寄存器</li>
+<li>系统层面：pcb等、动态内核指针</li>
+</ol>
+<p>（emm个人觉得，其实就是pcb里面保存的那些东西，以及那些指针指向的那些空间）</p>
+<h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h2><p>p82</p>
+<p>简述：</p>
+<p><strong>Q</strong>：什么时候调度？<br>    进程被创建、进程退出<br>    进程阻塞<br>    出现io中断</p>
+<p><strong>Q</strong>：为什么要调度？<br>    做更好的选择：优先级、运行时长<br>    保证CPU的效率</p>
+<p><strong>Q</strong>：怎么做调度？<br>    使用特定的方式选择一个进程占用CPU<br>    在切换的时候切换上下文</p>
+<p><strong>A</strong>：注意：</p>
+<ol>
+<li>调度的频率是非常重要的</li>
+<li>有抢占式调度与非抢占式调度</li>
+<li>CPU-bound（计算密集型）与i/o-bound（io密集型）进程</li>
+</ol>
+<p>CPU资源的时分复用 ：</p>
+<ol>
+<li>进程切换：CPU资源占用者切换</li>
+<li>处理机调度：从就绪队列中挑选进程、从CPU中挑选可使用的CPU</li>
+<li>调度程序：调度策略、调度时机</li>
+</ol>
+<h3 id="when-and-why"><a href="#when-and-why" class="headerlink" title="when and why"></a>when and why</h3><p>上述的调度时间是一个笼统的说法：</p>
+<ol>
+<li>内核运行调度程序的条件<br> 进程退出<br> 进程从运行态切换到等待</li>
+<li>非抢占系统中<br> 当前进程主动放弃CPU</li>
+<li>可抢占系统<br> 当前进程时间片用完<br> 中断请求被服务例程响应完成时</li>
+</ol>
+<p>其实在写完jos的sched函数之后，对何时调度应该有一个认识：无论是何时调度，都是os编写人员决定的（或是用户程序主动放弃）。os为了避免用户程序不自觉，提供了时间中断（timer interrupt），在每一个时间终端的处理中指定schedule。<br>再比如上面提到的io中断，这部分也是os决定的sched，因为trap(jos)是属于kernel部分。</p>
+<p>调度的目标：不同的系统中目标是不同的</p>
+<ol>
+<li><p>在所有系统中：</p>
+<ol>
+<li>公平性：给每一个进程一个公平使用CPU的机会</li>
+<li>策略强制执行:seeing thatstated policy is carried out</li>
+<li>平衡：保持整个系统都是有事可干</li>
+</ol>
+</li>
+<li><p>批处理系统：</p>
+<ol>
+<li>吞吐量：使单位时间的工作量达到最大</li>
+<li>周转时间（turnaround time）：在任务提交与任务完成之间时间尽可能小</li>
+<li>CPU利用率：让CPU一直有事可干</li>
+</ol>
+</li>
+<li><p>交互系统：</p>
+<ol>
+<li>响应时间</li>
+<li>Proportionality：达到用户期望值</li>
+</ol>
+</li>
+<li><p>实时系统：</p>
+<ol>
+<li>meet deadline：别丢数据</li>
+<li>可预测：在多媒体系统中别有质量上的降低</li>
+</ol>
+</li>
+</ol>
+<h3 id="goal"><a href="#goal" class="headerlink" title="goal"></a>goal</h3><p>那么给定一个调度算法，怎么比较他们之间的优劣呢？</p>
+<ol>
+<li>CPU使用率</li>
+<li>吞吐量：单位时间内完成进程的数量</li>
+<li>周转时间：进程从初始化到结束绝对时间</li>
+<li>等待时间：进程在<strong>就绪</strong>中的时间（不算等待状态的时间，因为这个时间其实是必须花费的）</li>
+<li>响应时间：从提交请求到请求响应时间</li>
+</ol>
+<p><strong>吞吐量与响应时间之间的区别</strong></p>
+<p>吞吐量是什么呢？其实就是希望通过合理的调度使规定时间内完成更多的进程，比如说文件传输的时候希望<strong>高带宽</strong>（10M/s与10k/s你想要哪个？）。<br>响应时间是什么呢？就是希望进程对某一个动作尽可能快的作出反应，比如点击按钮搜索之后多久才响应。</p>
+<p>吞吐量与响应时间其实是很不同的两个概念，两者我认为在某种情况下是此消彼长的。吞吐量描述的是整体，响应时间描述的特定。</p>
+<p><strong>响应时间目标</strong>：</p>
+<ol>
+<li>减少响应时间 </li>
+<li>减少平均响应时间的波动<br>在交互是系统中，减少平均响应时间波动其实更加重要。</li>
+</ol>
+<p>响应时间是os的计算延时。</p>
+<p><strong>吞吐量目标</strong>：</p>
+<ol>
+<li>增加吞吐量：减少os开销（减少上下文切换）、系统资源的高效利用（CPU、io）</li>
+<li>减少等待时间：减少每个进程在就绪呆的时间<br>os需要保证吞吐量的提高不会影响交互体验（os必须不时地进行调度，即使存在许多交互式任务）</li>
+</ol>
+<p>吞吐量是os的计算带宽</p>
+<h3 id="批处理系统中的调度算法"><a href="#批处理系统中的调度算法" class="headerlink" title="批处理系统中的调度算法"></a>批处理系统中的调度算法</h3><p>吞吐量、周转时间、CPU利用率</p>
+<ol>
+<li>先来先服务：非抢占式<br> 笨蛋算法、简单，某些情况下也合理、io密集型系统中对CPU利用率低到令人发指</li>
+<li>最短任务优先：非抢占式<br> 周转时间短、在现实的os中并不会是最优的</li>
+<li>最短剩余时间优先：抢占式<br> 将新任务的时间与当前任务的剩余运行时间做对比，如果新任务时间短就让新任务占据CPU、不现实啊</li>
+<li>三层调度<br> admission scheduler<br> memory scheduler<br> CPU scheduler</li>
+</ol>
+<h4 id="先来先服务（FCFS）"><a href="#先来先服务（FCFS）" class="headerlink" title="先来先服务（FCFS）"></a>先来先服务（FCFS）</h4><p>就是先来先运行，也没有抢占，运行到结束就行了。</p>
+<p>优点是非常简单，但是缺点更加明显。</p>
+<ol>
+<li>平均等待时间波动很大，短进程可能会在长进程后面</li>
+<li>资源利用率低（一直运行一个你说利用率能高吗），CPU密集型导致io闲置，io密集型导致CPU闲置。</li>
+</ol>
+<blockquote>
+<p>说到这里就想起来一个题外话。上编译课的时候编译老师说他上学那会儿用的编译器是非常老的编译器，性能也不好。一般都是晚上离开实验室的时候把写的东西运行上，第二天回来实验室的时候能出结果都已经很不错了。<br>os课的时候老师说，假如你买了一个服务要去运行自己的程序，本来你就是一个hello world，前面那个人的程序可能特别庞大需要一天来运行，你倒霉催的正好排在那人后面，你可能几秒就完事了，但是那个服务器好巧不巧用的FCFS，那你可就等吧。</p>
+</blockquote>
+<h4 id="最短时间优先算法（SPN）"><a href="#最短时间优先算法（SPN）" class="headerlink" title="最短时间优先算法（SPN）"></a>最短时间优先算法（SPN）</h4><p>每次选择就绪队列中的运行时间最短的进程来执行，就绪队列按照预期的执行时间来排序。</p>
+<p>非常容易就可以想到的是，SPN必定具有<strong>最短平均周转时间</strong>。（如果学过贪心算法，应该很清楚这一点）（吞吐量可不会，SPN是非抢占，只能串行运行的）</p>
+<p>缺点也非常明显，你一直运行hello world，人家正儿八经的要运行一天的大程序什么时候才能开始运行啊？<br>可能会导致<strong>饥饿</strong>。</p>
+<p>还有一个需要解决的问题是<strong>如何预测程序运行</strong>，不太可能准确预测一个程序需要的执行时间，尤其是当ifelse while等语句十分的情况下，这种运行时间一般都需要在运行时才能确定。<br>不能预测这个算法还有什么好实现的？<br>还有一种方法是问用户，你不能保证用户都是诚实的，但是你可以最多分配用户指定的时间，超出时间就杀死。但是这种方法真的太不友好太不专业了，程序运行中的状况很多，用户也不一定知道运行时间。</p>
+<p>所以这种方法其实是不太可行的。</p>
+<h4 id="最短剩余时间优先算法（SRT）"><a href="#最短剩余时间优先算法（SRT）" class="headerlink" title="最短剩余时间优先算法（SRT）"></a>最短剩余时间优先算法（SRT）</h4><p>是SPN的可抢占改进版，允许当新进程进入时新进程如果运行时间很短可以代替老进程运行。</p>
+<p>其实这才改是真正的最短平均周转时间。（即使是可抢占，也与吞吐量高无缘，又不会在等待的时候调度）。</p>
+<p>缺点也差不多与SPN差不多。</p>
+<h4 id="最高响应比优先算法（HRRN）"><a href="#最高响应比优先算法（HRRN）" class="headerlink" title="最高响应比优先算法（HRRN）"></a>最高响应比优先算法（HRRN）</h4><p>选择就绪队列中响应比R值最高的进程。不支持抢占。</p>
+<p><strong>响应比</strong>：R=(等待时间+执行时间)/执行时间</p>
+<p>那也就是等待的时间越长越容易被选中。是在短进程优先算法基础之上的改进，防止无止境地等待。</p>
+<h4 id="三层调度"><a href="#三层调度" class="headerlink" title="三层调度"></a>三层调度</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-14/65249341.jpg" alt=""></p>
+<h3 id="交互式系统中的调度"><a href="#交互式系统中的调度" class="headerlink" title="交互式系统中的调度"></a>交互式系统中的调度</h3><ol>
+<li>时间片轮转：抢占式<br> 时间片耗尽时触发调度、进程等待（阻塞）时触发调度</li>
+<li>多级队列：<br> 有多种优先级class，美哟中class存在同一个队列、根据优先级选择进程、高优先级低时间片保证公平</li>
+<li>优先级调度：抢占式<br> 每个进程有自己的优先级、CPU选择最高优先级、动态优先级来避免饥饿</li>
+</ol>
+<p><strong>处理机资源的使用模式</strong>：</p>
+<p>进程在CPU计算与io之间进行交替：每次调度决定在下一个CPU计算时将那个工作交给CPU，在时间片机制下，进程可能在结束当前CPU计算之前放弃CPU。</p>
+<h4 id="时间片轮转-（RR）"><a href="#时间片轮转-（RR）" class="headerlink" title="时间片轮转 （RR）"></a>时间片轮转 （RR）</h4><p>每当时间片结束，就会引发一个调度，每当进程自己要等待，引发一个调度。每当下去，自觉排在队尾。</p>
+<p>时间片轮转的问题是：</p>
+<ol>
+<li>额外的上下文切换开销</li>
+<li>时间片选择问题</li>
+</ol>
+<p>其实归根结底是时间片选择问题，额外的上下文切换是一定必须的。<br>如果时间片选择太大，就失去了调度的灵活性，等待时间变长，这在交互式系统中可能是不可忍受的。甚至在极限情况下，就退化成了上述的FCFS。<br>如果时间片选择太短，将会浪费大量的时间在上下文切换。比如在linux，上下文切换一次可能需要1ms，如果4ms是时间片长度，那么整个系统中有20%的时间都在做上下文切换。这是没有意义的浪费。<br>经验上，一般将浪费控制在1%，实践篇一般设置在20-50ms。<br>当n（就绪队列长度）比较大的时候，可以把某一些就绪状态的进程给传到就绪挂起。</p>
+<h4 id="多级队列调度算法（MQ）"><a href="#多级队列调度算法（MQ）" class="headerlink" title="多级队列调度算法（MQ）"></a>多级队列调度算法（MQ）</h4><p>就绪队列被划分为多个独立的子队列（终端、io、前台交互、后台批处理）<br>每个队列可以有自己的调度策略（前台RR，后台FCFS等）<br>队列之间的调度：</p>
+<ol>
+<li>固定优先级：可能导致饥饿</li>
+<li>时间片轮转：每个队列得到一个确定的能偶用于调度其进程的CPU总时间（比如前台80%后台20%）</li>
+</ol>
+<h4 id="多级反馈队列算法（MLFQ）"><a href="#多级反馈队列算法（MLFQ）" class="headerlink" title="多级反馈队列算法（MLFQ）"></a>多级反馈队列算法（MLFQ）</h4><p>进程可以在不同队列之间移动的多队列算法。时间片大小可以随着优先级级别增加而减小，如果进程在当前的时间片没有完成，降到下一个优先级。</p>
+<p>其特点是：CPU密集型的进程优先级下降很快，而io密集型进程停留在高优先级。</p>
+<h4 id="优先级算法（PS）"><a href="#优先级算法（PS）" class="headerlink" title="优先级算法（PS）"></a>优先级算法（PS）</h4><p>是多级队列算法的改进，平衡各进程对响应时间的要求。<br>分为抢占式与非抢占式。<br>通常可以控制其时间片长度。<br>如果io完成，提高优先级，如果时间片用完，将低优先级。</p>
+<p><strong>静态优先级</strong>：<br>在创建进程的时候，他的优先级就被确定，直到进程终止之前都不会改变。<br>（系统进程优先级高、io密集型优先级高）</p>
+<p><strong>动态优先级</strong>：<br>优先级在创建的时候被赋予，但是在进程运行的过程中可以被改变：</p>
+<ol>
+<li>在就绪队列中，等待时间延长优先级高。</li>
+<li>进程每执行一个时间片就降低这个进程的优先级。</li>
+</ol>
+<p>对于不同类型的进程：<br><strong>io密集型进程</strong>：他是最高级优先。<br>为什么io密集的优先级比较高呢？这是因为io密集型一般只会占用一小会儿CPU，随后就会等待io外部操作去了。最好的做法是，io一旦就绪就赶紧用一下CPU，然后就可以去等io事件了。如果io密集型进程的优先级比较低，将会浪费很多时间在就绪的等待上。<br>CPU密集型时常需要CPU资源，由于优先级低，可以使用更大的时间片，减少上下文切换的浪费。</p>
+<p>动态处理：<br>对于io密集型，尽量别减小优先级。（如果是MLFQ，这是几乎可以保证的，因为io密集，可能在给定的时间片中没有用完时间片就自己进入阻塞状态了）（me）<br>对于cpu密集型，在它的io完成之后，放回io请求时离开的队列，以免每次都回到最高优先级再逐次下降。</p>
+<h4 id="最短进程优先"><a href="#最短进程优先" class="headerlink" title="最短进程优先"></a>最短进程优先</h4><h4 id="保证调度"><a href="#保证调度" class="headerlink" title="保证调度"></a>保证调度</h4><p>向用户做出明确的性能保证，然后去实现它。</p>
+<p>初始：每个进程同等的share CPU。<br>随后：计算每个进程理应获得的时间与实际获得的时间之比。<br>结果：倾向于运行比率更低的进程，直到它的radio超过他的接近竞争者。</p>
+<h4 id="彩票调度"><a href="#彩票调度" class="headerlink" title="彩票调度"></a>彩票调度</h4><p>就是os卖彩票，给每个进程一个彼此不同的彩票，一旦需要调度，就抽彩票，看看谁中奖，中奖的哪个进程获得资源。<br>”所有进程是平等的，但是有一些进程更平等一些“<br>给某些重要的进程额外的彩票，增加他们中奖的几率。</p>
+<p>允许进程之间交换彩票，比如客户机进程获得了运行权，然后阻塞等待服务器的响应，这时客户机可以把自己的彩票给服务器机进程，以增加服务器及进程被选中的机会。（实际上，如果没有客户机进程，服务器及进程的存在就是一个错误）</p>
+<h3 id="调度实现"><a href="#调度实现" class="headerlink" title="调度实现"></a>调度实现</h3><p>unix：动态优先级算法<br>5.3BSD：MQ<br>Windows：优先级算法<br>Linux：抢占式调度（preemptive scheduling）</p>
+<h3 id="调度机制设定"><a href="#调度机制设定" class="headerlink" title="调度机制设定"></a>调度机制设定</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/81651596.jpg" alt=""><br>$$\color{red}{什么鬼这是}$$</p>
+<p>在oskernel设计调度算法，就像我们的schedule函数在kernel中完成，并封装用户接口供用户调用。</p>
+<p>除了时间片，允许用户也做出调度的决定，完成调度策略设置。</p>
+<p><strong>可以参考lab4的文档</strong></p>
+<h2 id="进程之间的通信"><a href="#进程之间的通信" class="headerlink" title="进程之间的通信"></a>进程之间的通信</h2><p>消息、管道、消息队列、共享内存</p>
+<p>可以参考lab4文档，里面有ipc以及lab5中有共享内存。</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p><strong>线程</strong>是进程中一个相对独立的、具有可调度特性的<strong>执行单元</strong>。</p>
+<p>线程一定不是陌生的，早在大二上学期，就在Java中接触了线程。线程作为实现进程中的并发而存在。</p>
+<p>系统提供了线程库Pthread：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/74457502.jpg" alt=""></p>
+<h2 id="线程库"><a href="#线程库" class="headerlink" title="线程库"></a>线程库</h2><p>线程库是针对那些不提供多线程支持的os而设计的在用户态下的库，线程库的处理对这些os是透明的。</p>
+<p>即使提供了核心线程支持的os，也有必要提供线程库，可以简化或有利于线程机制的使用。</p>
+<p>线程库提供：</p>
+<ol>
+<li>合适的多线程编程的接口</li>
+<li>记录线程状态和调度各个线程的运行机制</li>
+</ol>
+<p>在系统内部可以使用多种方式实现线程机制：</p>
+<ol>
+<li>ULT纯用户级线程：线程管理全部由用户程序完成，kernel只管理进程，增加”线程库“概念。</li>
+<li>KLT核心级线程：线程有kernel管理，kernel为用户提供系统调用。</li>
+</ol>
+<p><strong>ULT</strong>：<br>进程表在kernel，线程表在用户空间，使用线程库。线程表由运行时系统管理。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/40601574.jpg" alt=""></p>
+<p>ult的优点是：</p>
+<ol>
+<li>线程切换不需要陷入内核：比陷入内核快一个数量级</li>
+<li>允许进程制定自己的调度算法而不会影响os的调度算法程序</li>
+<li>ult管理模式可以在任何os下运行，不需要修改内核，只需要线程库。</li>
+</ol>
+<p>ult的不足是：</p>
+<ol>
+<li>系统调用会引起进程阻塞</li>
+<li>不利于多处理器并行（<strong>why？？？</strong>）</li>
+</ol>
+<blockquote>
+<p>关于系统阻塞的问题：<br>os并不知道进程里还有线程，当一个线程在尚未发生键盘操作的时候读键盘，将会引发阻塞。这时可能整个进程都会被os的调度算法调度下来，整个进程都会阻塞。而要使用线程，应该允许每个线程都能够阻塞调用，而不影响其他线程的运行。现在显然是不行。<br>有两种解决方法，一是修改read在没有外部事件时返回0，但是对read语义的改变休要大量代码的修改。<br>另一种是允许进行阻塞检查，仅在外部事件发生时才进行系统调用，否则先让出使用权给其他线程运行。这种方式一点都不好看，但是也没有其他的方法了。</p>
+<p>还有一个问题是进程的无休止运行。没有时间片操作。<br>对ult最大的争论是程序员一般只会在经常发生线程阻塞的程序中才会大量使用线程。</p>
+</blockquote>
+<p><strong>klt</strong>：<br>线程与进程都在用户空间完成（what？）<br>进程表与线程表都在kernel</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/46110689.jpg" alt=""></p>
+<p>优点：<br>线程在kernel中有信息，系统调用基于线程（不存在上述的阻塞）<br>可以克服ult的阻塞与并行度差的缺点，并且kernel也可以使用多线程。</p>
+<p>缺点：<br>每次进行线程调度都需要陷入内核</p>
+<h2 id="线程的概念"><a href="#线程的概念" class="headerlink" title="线程的概念"></a>线程的概念</h2><p><strong>线程</strong>使劲蹭的一部分，描述指令流执行状态，是进程中的指令执行最小单元，是CPU调度的基本单位。</p>
+<p>在进程与线程机制中，进程作为<strong>资源分配</strong>角色，包括地址空间、打开文件等；线程作为<strong>处理机调度</strong>角色，描述进程资源环境中的指令执行序列状态。</p>
+<p>进程的表叫做<strong>TCB</strong>。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/26479287.jpg" alt=""></p>
+<p>为什么进程有自己独立的栈？<br>进程描述了指令执行状态，而栈中数据与之前执行的指令有关，因此每一个线程都应该有自己的栈。保证执行指令的独立性。</p>
+<ol>
+<li>调用函数返回</li>
+<li>errorno</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程中内容</th>
+<th style="text-align:center">线程中内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">地址空间</td>
+<td style="text-align:center">程序计数器</td>
+</tr>
+<tr>
+<td style="text-align:center">全局变量</td>
+<td style="text-align:center">寄存器</td>
+</tr>
+<tr>
+<td style="text-align:center">打开文件</td>
+<td style="text-align:center">堆栈</td>
+</tr>
+<tr>
+<td style="text-align:center">子进程</td>
+<td style="text-align:center">状态</td>
+</tr>
+<tr>
+<td style="text-align:center">即将发生的报警</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">信号与信号处理程序</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">账户信息</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51773333.jpg" alt=""></p>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>|进程|线程|<br>|资源分配单位|CPU调度单位|<br>|有完整的资源平台|只独享指令执行的必要资源|<br>|基本状态与其他状态与转换|就绪等待运行状态与转换|</p>
+<p>线程：减少并发执行的时间与空间开销</p>
+<ol>
+<li>创建时间比进程短（why）</li>
+<li>终止时间比进程短</li>
+<li>同一进层内的线程切换时间更短</li>
+<li>同一进程之间的线程共享内存与文件，不需要通过内核进行通信。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/87331439.jpg" alt=""></p>
+<p><strong>what is 多对多</strong></p>
+<h2 id="轻权进程"><a href="#轻权进程" class="headerlink" title="轻权进程"></a>轻权进程</h2><p>内核支持的用户线程。</p>
+<p>一个进程可以有一个或者多个轻量级进程，每个轻权进程由一个单独的内核线程支持。<br>太过复杂，最后被抛弃。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/47608393.jpg" alt=""></p>
+<h1 id="经典IPC问题"><a href="#经典IPC问题" class="headerlink" title="经典IPC问题"></a>经典IPC问题</h1><p>进程之间的通信，可以参见lab4ipc。</p>
+<h2 id="进程之间通信"><a href="#进程之间通信" class="headerlink" title="进程之间通信"></a>进程之间通信</h2><ol>
+<li><p>进程之间通信将产生什么问题？</p>
+<ol>
+<li>异步：从一个进程传递信息到另一个</li>
+<li>排外：与其他进程争夺资源</li>
+<li>同步：维护适当的运行序列</li>
+</ol>
+</li>
+<li><p>进程之间通信的难处：</p>
+<ol>
+<li>信息的格式：signal、switch、message</li>
+<li>排外与同步：合作问题</li>
+</ol>
+</li>
+<li><p>金字塔规则</p>
+</li>
+</ol>
+<p><strong>竞争条件</strong>：两个或多个进程读写某些共享数据，而最后的果取决于进程运行的精确时序。</p>
+<p>书上有一个打印机的例子， 就是说A与B都需要使用打印机，打印机维护in与out指针，供所有进程去访问。假设某一时刻A想打印东西，于是去查找out指针的值，存在临时变量next_free里面，这时时间片来了B上来了，B也要打印东西，于是正常的完成了将东西放在out的位置，out++。这时A回来了，他发现自己next_free是原out值，于是覆盖了B的文件数据，然后把next_free加一，存到out里面。</p>
+<h2 id="生产者与消费者问题"><a href="#生产者与消费者问题" class="headerlink" title="生产者与消费者问题"></a>生产者与消费者问题</h2><p>固定大小buffer，生产者加数据，消费者拿数据，更新count，当count是0的时候，消费者休眠，是N的时候生产者休眠。每个进程检查唤醒。</p>
+<p>——在数据更新的过程中访问了数据！</p>
+<p>概念：<br><strong>race condition</strong>：两个或更多进程竞争同一项资源，在一个进程占用资源的时候其他进程不应该访问。<br><strong>critical region</strong>：对共享内存进行访问的程序片段<br><strong>优秀结果标准</strong>：</p>
+<ol>
+<li>不可以有两个进程同时处于临界区</li>
+<li>不应对CPU的数量与速度有要求</li>
+<li>临界区外运行的进程不能阻塞其他进程</li>
+<li>进入临界区时不能无限等待</li>
+</ol>
+<p>《甘特图：临界区》</p>
+<p>实际程序中，可以将所有代码根据是否访问共享区域分为四个部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">entry section</div><div class="line">    critical section</div><div class="line">exit section</div><div class="line">    remainder section</div></pre></td></tr></table></figure>
+<h3 id="家庭采购协调问题"><a href="#家庭采购协调问题" class="headerlink" title="家庭采购协调问题"></a>家庭采购协调问题</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">时间</th>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3:00</td>
+<td style="text-align:center">看冰箱 没面包</td>
+<td style="text-align:center">–</td>
+</tr>
+<tr>
+<td style="text-align:center">3:05</td>
+<td style="text-align:center">离开家去商店</td>
+<td style="text-align:center">–</td>
+</tr>
+<tr>
+<td style="text-align:center">3:10</td>
+<td style="text-align:center">到达商店买面包</td>
+<td style="text-align:center">看冰箱 没面包</td>
+</tr>
+<tr>
+<td style="text-align:center">3:20</td>
+<td style="text-align:center">到家，放面包</td>
+<td style="text-align:center">去商店</td>
+</tr>
+<tr>
+<td style="text-align:center">3:25</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">到商店买面包</td>
+</tr>
+<tr>
+<td style="text-align:center">3:30</td>
+<td style="text-align:center">–</td>
+<td style="text-align:center">到家，放面包</td>
+</tr>
+</tbody>
+</table>
+<p>我们分析这个问题：</p>
+<ol>
+<li>如何保证买面包动作的成功与高效：有且仅有一个人去买</li>
+<li>可能的解决：加锁 导致的问题：无法取到冰箱中其他东西<br>（具体查看PPT，时间有限）</li>
+</ol>
+<p>关于临界与外部事件发生：可以将等待临界空闲的进程转到阻塞态。</p>
+<h3 id="忙等待"><a href="#忙等待" class="headerlink" title="忙等待"></a>忙等待</h3><p>设计思路：通过全局变量保存临界区状态供进程参考</p>
+<h4 id="屏蔽中断（disabling-interrupts）"><a href="#屏蔽中断（disabling-interrupts）" class="headerlink" title="屏蔽中断（disabling interrupts）"></a>屏蔽中断（disabling interrupts）</h4><p>基本思想是在进入临界区之前关中断，这就导致时钟中断也会被关闭，从而没有进程可以打断它。</p>
+<p>问题：</p>
+<ol>
+<li>不支持多CPU</li>
+<li>把关中断权限交给用户是不明智的选择</li>
+</ol>
+<p>但是对于内核来说，关中断是一种很好的方法，可以用来维护多线程（如果支持）或者多CPU之间对就绪队列等的访问<br>（别都选到一个进程就尴尬了，在jos里这会发生错误）（话说，在jos里面实现多CPU的时候可有内核锁机制，下面来看一看锁都加在了哪里）</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/64321100.jpg" alt=""></p>
+<h4 id="锁变量（Lock-variable）"><a href="#锁变量（Lock-variable）" class="headerlink" title="锁变量（Lock variable）"></a>锁变量（Lock variable）</h4><p>保存一个名为lock之类的全局变量供各个进程进行检查，实际上无济于事——这不也是临界区吗</p>
+<h4 id="严格轮换法（Strict-alertnation）"><a href="#严格轮换法（Strict-alertnation）" class="headerlink" title="严格轮换法（Strict alertnation）"></a>严格轮换法（Strict alertnation）</h4><p>要求进程轮流进入临界区。看了代码就会明白：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">    <span class="keyword">while</span>(trun!=<span class="number">0</span>);<span class="comment">//A进程必须等待turn是0的时候才能进去</span></div><div class="line">    critical_region();</div><div class="line">    turn=<span class="number">1</span>;</div><div class="line">    noncritical_region();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">    <span class="keyword">while</span>(turn!=<span class="number">1</span>);<span class="comment">//B进程必须等到turn是1</span></div><div class="line">    critical_region();</div><div class="line">    turn=<span class="number">0</span>;</div><div class="line">    nocritcal_region();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不是一个很好的方案。</p>
+<p>缺点：</p>
+<ol>
+<li>违反了“进程不应该被处于非临界区的进程阻塞”</li>
+<li>浪费CPU时间：忙等待时间</li>
+</ol>
+<p>很明显啊，他们在轮转的时候，如果A这时需要进入临界区但是B在运行非临界区的程序，A可以被放到阻塞态，这时违反了规则3<br>A可以继续循环，这时每次A上去CPU都会浪费时间空循环，还不如去阻塞态。</p>
+<p>还有，如果A需要多次进入临界区，而B主要时间在非临界区，A的效率就变得非常低，绝大多数时间都是在空转。</p>
+<p><strong>自旋锁</strong>：用于忙等待的锁。</p>
+<p>PPT另有两种，都是失败的方法。暂且不提。</p>
+<h4 id="Peterson算法"><a href="#Peterson算法" class="headerlink" title="Peterson算法"></a>Peterson算法</h4><p>1981-满足线程之间互斥的经典基于软件的解法</p>
+<p>似乎仅用于两个进程：<br><a href="https://zh.wikipedia.org/wiki/Peterson%E7%AE%97%E6%B3%95" target="_blank" rel="external">wiki</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1</span></div><div class="line"><span class="meta">#deine N 2 <span class="comment">//进程数量</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> turn;<span class="comment">//轮到进程编号</span></div><div class="line"><span class="keyword">int</span> interested[N];个各进程是不是想去临界区，是不是已经在临界区</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">enter_region</span><span class="params">(<span class="keyword">int</span> process)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> other;<span class="comment">//在临界区的</span></div><div class="line">    other=<span class="number">1</span>-process;</div><div class="line">    interested[process]=TRUE;<span class="comment">//我想进去l临界区</span></div><div class="line">    turn=other;<span class="comment">//</span></div><div class="line">    <span class="keyword">while</span>(turn==other &amp;&amp; interested[other]==TRUE);<span class="comment">//</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">leave_region</span><span class="params">(<span class="keyword">int</span> process)</span></span>&#123;</div><div class="line">    interested[process]=FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行到while处可能会挂起。</p>
+<p>怎么使用呢？在每个进程进入临界区之前调用critical_region，退出之后调用leave_region。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/88550095.jpg" alt=""></p>
+<p><strong>扩展到N个线程的互斥filter算法</strong>：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/67570267.jpg" alt=""></p>
+<h4 id="TSL"><a href="#TSL" class="headerlink" title="TSL"></a>TSL</h4><p>指令：TSL RX LOCK</p>
+<p>将lock给rx然后往lock中存一个非0值：保证原子操作，锁内存总线。</p>
+<p>代码：<br>    enter_region:<br>        TSL REGISTER , LOCK//原值在寄存器，新值在内存<br>        CMP REGISTER,#0<br>        JNE enter_region<br>        RET//原来是0，可以进去了<br>    leave_region:<br>        MOVE LOCK , #0<br>        RET</p>
+<p>一个可以代替tsl的是xchg（是不是很眼熟！）<br>xchg完成的操作是交换两个位置的内容。</p>
+<pre><code>enter_region:
+    MOVE REGISTER,#1
+    XCHG REGISTER,LOCK
+    CMP REGISTER,#0
+    JNE enter_region
+    RET
+leave_region:
+    MOVE LOCK, #0
+    RET
+</code></pre><p>锁是一个抽象的数据结构，有方法Acquire与Release。</p>
+<p>在获取所的时候，如果锁目前被别人拥有，就等待。<br>释放锁的时候，通知那些等待的进程你们等的锁到了。</p>
+<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>使用TSL实现自旋锁：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Lock::Acquire()&#123;</div><div class="line">    <span class="keyword">while</span>(test-<span class="keyword">and</span>-<span class="built_in">set</span>(value));</div><div class="line">&#125;</div><div class="line">Lock::Release()&#123;</div><div class="line">    value=<span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Acquire:不停地区获取锁的值并将锁的值赋为1，直到锁的值变为0。（说明有进程从临界区出来了）</p>
+<p>忙等待确实可以解决2个进程之间互斥运行的问题，但是缺点也很多，浪费CPU时间，编程困难，可能会造成优先级错乱。</p>
+<h4 id="无忙等待锁"><a href="#无忙等待锁" class="headerlink" title="无忙等待锁"></a>无忙等待锁</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg" alt=""></p>
+<h3 id="睡眠与唤醒"><a href="#睡眠与唤醒" class="headerlink" title="睡眠与唤醒"></a>睡眠与唤醒</h3><p>进程间通信<strong>原语</strong>，在无法进入临界区的时候进入阻塞状态而不是忙等待。</p>
+<p>当一个进程发现自己不能进入临界区的时候，就系统调用sleep，阻塞去。另一个进程要离开临界区，就调用wakeup将她唤醒。<br>sleep\wakeup(pid);</p>
+<h4 id="简单睡眠唤醒机制"><a href="#简单睡眠唤醒机制" class="headerlink" title="简单睡眠唤醒机制"></a>简单睡眠唤醒机制</h4><p>正如上述。</p>
+<p>悲惨的是，假如wakeup信号丢失了，没有被唤醒的进程还在阻塞，假如剩余一个进程进入临界区需要该进程的作用，就都阻塞。</p>
+<p>对MCPU不支持：使用进程号。</p>
+<p>终于，现在可以考虑一下生产者消费者的解决了：</p>
+<p>略。可见书或PPT</p>
+<p>这是失败的解决，可能会导致wakeup信号丢失结果二人都去阻塞。</p>
+<h3 id="信号量解决"><a href="#信号量解决" class="headerlink" title="信号量解决"></a>信号量解决</h3><p>P-&gt;down V-&gt;up</p>
+<p><strong>信号量</strong>：一种新的变量类型，表示唤醒操作剩余次数。（所有相关线程引起的总竞争条件检查次数）<br><strong>信号</strong>是一个抽象数据类型，由一个整形变量与两个原子操作组成。</p>
+<p>down：对某个信号量down是检查他的value，如果不是0，就减一，如果是0就去sleep。<br>up：对某个信号量的值加1。如果睡眠，就唤醒。</p>
+<p>信号量是被保护的，在初始化完成之后，只能通过pv修改，而pv操作是被保证的原子操作。</p>
+<p>通常嘉定信号量是公平的，也就是说不会一直被阻塞在p操作。（假设先进先出）</p>
+<p>信号量的实现与前面说到的无忙等待锁很像：<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/30861938.jpg" alt=""><br>其实block也相当于被调度了。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/8720151.jpg" alt=""></p>
+<p>区别在于前面说的无忙等待锁并不是原子性的。</p>
+<p><strong>解决方案</strong>：<br>每一个临界区设置一个信号量对象，初值是1代表初始时可以进入一个到临界区去。<br>p在进入之前，v在进入之后。必须成对出现。</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>同步可能会被调度序列打乱。（？）</p>
+<p>同步与互斥的区别：</p>
+<ol>
+<li>互斥值放值其他进程进入cr</li>
+<li>同步是指实现一个合理的逻辑序列</li>
+</ol>
+<p>whats this<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/11688740.jpg" alt=""></p>
+<h4 id="ipc问题分析——使用信号量解决生产者消费者问题"><a href="#ipc问题分析——使用信号量解决生产者消费者问题" class="headerlink" title="ipc问题分析——使用信号量解决生产者消费者问题"></a>ipc问题分析——使用信号量解决生产者消费者问题</h4><p>1.ipc问题产生 原因：</p>
+<ol>
+<li>物理序列依赖于调度</li>
+<li>逻辑序列依赖应用层需的意愿</li>
+<li>竞争条件排斥资源获取</li>
+</ol>
+<p>在内核态以及用户态都有ipc问题，在内核态是io设备的管理，在用户态是网络应用、数据库等的管理。</p>
+<p>ipc问题的关键在于：</p>
+<ol>
+<li>理解逻辑与物理序列  </li>
+<li>逻辑序列依赖于调度</li>
+<li>逻辑序列可以被用户控制</li>
+</ol>
+<p>whats that…..</p>
+<p>使用信号量可以实现条件同步。</p>
+<p><strong>生产者消费者问题</strong>：<br>一共需要三个信号量：mutex\full\empty。<br>首先，buffer是一个临界区，无论核心进入临界区出来临界区都需要一个信号量，其次，当buffer满的时候（N），生产者不可以进去buffer，需要消费者消费之后up才能进，消费者同理。<br>我认为，后两者实际上是在利用信号量的特点完成程序的逻辑部分，而不仅仅是对临界区的进入控制。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/97276693.jpg" alt=""></p>
+<h4 id="monitor-solution"><a href="#monitor-solution" class="headerlink" title="monitor solution"></a>monitor solution</h4><p>信号量的一个缺点是对编程者来说不好写出代码。</p>
+<p>monitor（管程）是一对过程、变量、数据结构的集合，（可以被看作是编译器），他们组成一个特殊的模块或软件包</p>
+<p>应用：任意时刻管程中只能有一个活跃进程（有效完成互斥）<br>wait and signal：就像pv、du一样<br>不足：只有很少的语言支持。</p>
+<h3 id="管程"><a href="#管程" class="headerlink" title="管程"></a>管程</h3><p>组成：一个锁（管程代码互斥）、0或多个条件变量（管理共享数据的并发访问）</p>
+<p>进入管程时的互斥由编译器完成</p>
+<p><strong>条件变量</strong>：（像是信号量一样的东西）是管程内的的等待机制，允许在进程无法继续运行的时候被阻塞。<br><strong>wait</strong>：无法继续运行时调用，将自己阻塞并掉一个互斥访问进管程<br><strong>signal</strong>：指示一个呼哧进程开始运行，自己退出管程。</p>
+<p>wait与signal很像是在之前的sleep与wakeup。但是关键的区别是，这里管程保证了互斥，不允许在wait之前切换进程进入管程。（其实存疑）</p>
+<h4 id="条件变量实现"><a href="#条件变量实现" class="headerlink" title="条件变量实现"></a>条件变量实现</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/49329583.jpg" alt=""></p>
+<h4 id="管程解决生产者-消费者问题"><a href="#管程解决生产者-消费者问题" class="headerlink" title="管程解决生产者-消费者问题"></a>管程解决生产者-消费者问题</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/21915703.jpg" alt=""></p>
+<h4 id="hansen与hoare"><a href="#hansen与hoare" class="headerlink" title="hansen与hoare"></a>hansen与hoare</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-15/51508560.jpg" alt=""></p>
+<p>hansen主张signal只能是管程过程最后一个语句，二hoare则认为不一定，主张signal之后就应该自己阻塞让新的进程进入管程运行。</p>
+<p>也是因为这样，，hansen的判断方式使用while而hoare判断使用if。</p>
+<p><a href="http://www.cnblogs.com/xybaby/p/6516387.html" target="_blank" rel="external">并发与同步-xybaby</a></p>
+<blockquote>
+<p>同步互斥，就是在并发的前提下保证一些操作的原子性。</p>
+</blockquote>
+<h2 id="IPC问题：哲学家就餐"><a href="#IPC问题：哲学家就餐" class="headerlink" title="IPC问题：哲学家就餐"></a>IPC问题：哲学家就餐</h2><p><strong>对互斥访问有限资源的竞争建模</strong></p>
+<blockquote>
+<p>进程同步也是进程之间直接的制约关系，是为完成某种任务而建立的两个或多个线程，这个线程需要在某些位置上协调他们的工作次序而等待、传递信息所产生的制约关系。进程间的直接制约关系来源于他们之间的合作。</p>
+<p>from：<a href="http://www.cnblogs.com/CareySon/archive/2012/04/14/Process-SynAndmutex.html" target="_blank" rel="external">浅谈进程同步与互斥的概念-宋沄剑</a></p>
+</blockquote>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>互斥：相邻哲学家只有一个人可以使用筷子</p>
+<p>同步：</p>
+<ol>
+<li>想要进餐的哲学家应该拿到两个筷子</li>
+<li>同一时刻至多有两个哲学家一同进餐</li>
+<li>死锁与饥饿避免</li>
+</ol>
+<p>ppt</p>
+<h2 id="IPC问题：读者与写者"><a href="#IPC问题：读者与写者" class="headerlink" title="IPC问题：读者与写者"></a>IPC问题：读者与写者</h2><p><strong>为数据库访问建模</strong></p>
+<p>（会不会产生问题：在不是writer想要放弃的时候强迫writer放弃）——理解错误，<br>P：可不可以得到资源？可以，OK继续执行：不可以OK我去阻塞<br>这个“我”指的是“调用P的那个过程。</p>
+<p>保证公平这个，concur是什么？是</p>
+<p>##IPC问题：睡觉的理发师</p>
+<h2 id="猴子过索桥"><a href="#猴子过索桥" class="headerlink" title="猴子过索桥"></a>猴子过索桥</h2><h3 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/JUnit之一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Be With Me">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/05/JUnit之一/" itemprop="url">JUnit之一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T15:27:08+08:00">
+                2017-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/实验室/" itemprop="url" rel="index">
+                    <span itemprop="name">实验室</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://blog.csdn.net/ai92/article/details/302844" target="_blank" rel="external">这是一个简单的JUnit入门介绍</a>。</p>
+<p>junit是一个测试框架，把一个java工程按照JUnit运行的时候会启动这些检测，但是这并不影响这个项目作为一个JAVA程序的本质。这个程序仍然可以以Java Application来运行。</p>
+<h2 id="在eclipse中使用Junit4进行单元测试"><a href="#在eclipse中使用Junit4进行单元测试" class="headerlink" title="在eclipse中使用Junit4进行单元测试"></a>在eclipse中使用Junit4进行单元测试</h2><p>安装eclipse的时候，应该已经有了junit的jar包，如果没有，可以自己去<strong>maven仓库</strong>搜索下载。</p>
+<p><a href="http://tech.sina.com.cn/s/2010-01-18/14081218926.shtml" target="_blank" rel="external">在eclipse中使用Junit4进行单元测试</a></p>
+<p>为了方便，我会把上述的方法自己实践并写在下面：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/17569873.jpg" alt=""></p>
+<p>不要直接finish。点击next，你将可以选择对哪些方法进行测试，eclipse就会自动帮你命名（which is very essential）</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/14409795.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-6/45619270.jpg" alt=""></p>
+<p>看！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2172,254 +3022,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/背包问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/背包问题/" itemprop="url">背包问题初涉</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>算法上机考试，怎么说，虽然没做出来但是收获很多？好吧也只能这么安慰自己了</p>
-<hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//硬币。存储硬币的价值及其对应个数</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Coins</span>&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> value;</div><div class="line">	<span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//更小值函数。若值为0，代表不可能，返回另一个值，否则返回更小值</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mini</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a == <span class="number">0</span>)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">if</span> (b == <span class="number">0</span>)<span class="keyword">return</span> a;</div><div class="line">	<span class="keyword">if</span> (a &gt; b)<span class="keyword">return</span> b;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"><span class="comment">//int max(int a,int b)&#123;</span></div><div class="line"><span class="comment">//	if(a&gt;b)return a;</span></div><div class="line"><span class="comment">//	else return b;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//int comp(const void *a,const void *b)&#123;</span></div><div class="line"><span class="comment">//	Coins* A=(Coins*)a,*B=(Coins*)b;</span></div><div class="line"><span class="comment">//	if(A-&gt;value&gt;B-&gt;value)return -1;</span></div><div class="line"><span class="comment">//	else if (A-&gt;value&lt;B-&gt;value)return 1;</span></div><div class="line"><span class="comment">//	else return 0;</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="comment">//找零钱的函数，coins存储了各种硬币的面值与个数，n是硬币种数（coins的长度），m是找零的钱数。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetCoin</span><span class="params">(Coins*coins, <span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//新建一个二维数组用于存储在每一个要找的钱数下用i种硬币最少用几个硬币</span></div><div class="line"></div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>]; </div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span> [m + <span class="number">1</span>];</div><div class="line"></div><div class="line">	<span class="comment">//初始时，用0个硬币找除0以外的钱数，不可能。</span></div><div class="line">	<span class="comment">//且用0作为初始值便于后续计算。</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = <span class="number">0</span>; M[<span class="number">1</span>][i] = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;	<span class="comment">//对前i种硬币</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++) &#123;	<span class="comment">//要找j的零钱</span></div><div class="line">			<span class="keyword">int</span> dola = M[<span class="number">0</span>][j];	<span class="comment">//保存未更新之前的值</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= coins[i].num; k++) &#123;	<span class="comment">//对这种硬币的每个数量</span></div><div class="line">				<span class="keyword">if</span> ((j - k*(coins[i].value) &lt; <span class="number">0</span>)) &#123;	<span class="comment">//若k个硬币总钱数大于j，不可能。break</span></div><div class="line">					M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j]; M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j]; <span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				<span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] != <span class="number">0</span>))</div><div class="line"></div><div class="line">				<span class="comment">//否则。若满足条件，说明在M[0][j-k*(coins[i].value)]处有满足条件的解，与M[0][j]计算更好的值。此时这里一定有非0解</span></div><div class="line"></div><div class="line">					M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k + M[<span class="number">0</span>][j - k*(coins[i].value)]);</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> ((M[<span class="number">0</span>][j - k*(coins[i].value)] == <span class="number">0</span>)) &#123;<span class="comment">//否则，不一定存在非0解</span></div><div class="line">					<span class="keyword">if</span> (k*(coins[i].value) == j) &#123;<span class="comment">//若存在k个硬币正好找j元，更新解</span></div><div class="line">						M[<span class="number">0</span>][j] = mini(M[<span class="number">0</span>][j], k);</div><div class="line">						<span class="comment">//M[1][j] = M[0][j];</span></div><div class="line">						<span class="comment">//M[0][j] = dola;</span></div><div class="line">						<span class="comment">//break;不行！</span></div><div class="line">					&#125;</div><div class="line">					<span class="keyword">else</span> M[<span class="number">0</span>][j] = M[<span class="number">0</span>][j];<span class="comment">//否则，不更新解</span></div><div class="line">				&#125;</div><div class="line">				</div><div class="line">		&#125;</div><div class="line">			<span class="comment">//将M[0]转移到M[1]，M[0]恢复原值继续下一轮计算。这样可以防止对硬币i使用的数目多于现有数目的情况</span></div><div class="line"></div><div class="line">			M[<span class="number">1</span>][j] = M[<span class="number">0</span>][j];</div><div class="line">			M[<span class="number">0</span>][j] = dola;</div><div class="line"><span class="comment">//			cout &lt;&lt; M[1][j] &lt;&lt; " ,";</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; j++)M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];<span class="comment">//把新值给M[0]，进行对下一种硬币的分析。</span></div><div class="line">	<span class="comment">//	cout &lt;&lt; endl;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> M[<span class="number">0</span>][m];<span class="comment">//返回最优解</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//int Getcoin(int*coins,int m,int n,int**M,int**N)&#123;</span></div><div class="line"><span class="comment">//	int*resu = new int[n], *resunum = new int[n];</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;=m;i++)&#123;N[0][i]=0;</span></div><div class="line"><span class="comment">//	M[0][i]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=0;i&lt;2;i++)&#123;N[i][0]=0;</span></div><div class="line"><span class="comment">//	M[i][0]=0;&#125;</span></div><div class="line"><span class="comment">//	for(int i=1;i&lt;=n;i++)&#123;</span></div><div class="line"><span class="comment">//		for(int j=1;j&lt;=m;j++)&#123;</span></div><div class="line"><span class="comment">//			//cout &lt;&lt; "the j" &lt;&lt; j &lt;&lt; endl;</span></div><div class="line"><span class="comment">//			if (coins[i - 1] &gt; j) &#123; M[1][j] = M[0][j]; N[1][j] = N[0][j];  &#125;</span></div><div class="line"><span class="comment">//			else&#123;</span></div><div class="line"><span class="comment">//				M[1][j]=max(M[0][j],coins[i-1]+M[0][j-coins[i-1]]);</span></div><div class="line"><span class="comment">//				if(M[1][j]==M[0][j])N[1][j]=N[0][j];</span></div><div class="line"><span class="comment">//				else if(M[1][j]==coins[i-1]+M[0][j-coins[i-1]]) N[1][j]=1+N[0][j-coins[i-1]];</span></div><div class="line"><span class="comment">//				else N[1][j] = N[0][j] &lt; N[0][j - coins[i - 1]] ? N[0][j] : 1+N[0][j - coins[i - 1]];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//		for (int j = 0; j &lt;= m; j++) &#123;</span></div><div class="line"><span class="comment">//			M[0][j] = M[1][j];</span></div><div class="line"><span class="comment">//			N[0][j] = N[1][j];</span></div><div class="line"><span class="comment">//			cout &lt;&lt; "(" &lt;&lt; M[0][j] &lt;&lt; "," &lt;&lt; N[0][j] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//		cout &lt;&lt;i&lt;&lt;" , "&lt;&lt;coins[i-1]&lt;&lt; endl;</span></div><div class="line"><span class="comment">//		resu[i - 1] = M[0][m];</span></div><div class="line"><span class="comment">//		resunum[i - 1] = N[0][m];</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	int min=-1;</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//	for (int i = 0; i &lt; n; i++) &#123;</span></div><div class="line"><span class="comment">////		cout &lt;&lt; "(" &lt;&lt; resu[i] &lt;&lt; "," &lt;&lt; resunum[i] &lt;&lt; ")";</span></div><div class="line"><span class="comment">//		if (resu[i] == m) &#123;</span></div><div class="line"><span class="comment">//			if (min == -1)min = resunum[i];</span></div><div class="line"><span class="comment">//			if (resunum[i] &lt; min)min = resunum[i];</span></div><div class="line"><span class="comment">//		&#125;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line"><span class="comment">//	return min;</span></div><div class="line"><span class="comment">//	</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> n;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; n;</div><div class="line">		Coins*coins = <span class="keyword">new</span> Coins[n];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; coins[i].value &gt;&gt; coins[i].num;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> m;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; m;</div><div class="line"></div><div class="line">		<span class="comment">//如果要找的钱数是0，最少需要0个硬币</span></div><div class="line">		<span class="keyword">if</span> (m == <span class="number">0</span>) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>; <span class="keyword">return</span> <span class="number">0</span>; &#125;</div><div class="line">		<span class="comment">//	qsort(coins,n,sizeof(coins[0]),comp);</span></div><div class="line">		<span class="comment">//	int sum=0;</span></div><div class="line">		<span class="comment">//	for(int i=0;i&lt;n;i++)</span></div><div class="line">		<span class="comment">//		sum+=coins[i].num;</span></div><div class="line">		<span class="comment">//	int*Mycoin=new int[sum];</span></div><div class="line">		<span class="comment">//	int soum=sum;</span></div><div class="line">		<span class="comment">//	sum=coins[0].num;</span></div><div class="line">		<span class="comment">///*	for(int i=0,j=0;i&lt;soum;i++)&#123;</span></div><div class="line">		<span class="comment">//		if(i==sum)&#123;sum+=coins[j+1].num;j++;&#125;</span></div><div class="line">		<span class="comment">//		Mycoin[i]=coins[j].value;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; Mycoin[i] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//	&#125;*/</span></div><div class="line">		<span class="comment">//		int k = 0;</span></div><div class="line">		<span class="comment">//		for (int i = 0; i&lt;n; i++) &#123;</span></div><div class="line">		<span class="comment">//			for (int j = 0; j &lt; coins[i].num;j++) &#123;</span></div><div class="line">		<span class="comment">//				Mycoin[k] = coins[i].value;</span></div><div class="line">		<span class="comment">//				cout &lt;&lt; Mycoin[k] &lt;&lt; " ";</span></div><div class="line">		<span class="comment">//				k++;</span></div><div class="line">		<span class="comment">//			&#125;</span></div><div class="line">		<span class="comment">//		&#125;</span></div><div class="line">		<span class="comment">//		cout &lt;&lt; "totally" &lt;&lt; soum &lt;&lt; endl;</span></div><div class="line">		<span class="comment">//		int**M=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)M[i]=new int[m+1];</span></div><div class="line">		<span class="comment">//		int**N=new int*[2];</span></div><div class="line">		<span class="comment">//		for(int i=0;i&lt;2;i++)N[i]=new int[m+1];</span></div><div class="line">		</div><div class="line">			<span class="comment">// pp=Getcoin(Mycoin,m,soum,M,N);</span></div><div class="line">			<span class="comment">//cout &lt;&lt; pp &lt;&lt; endl;</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> pp;</div><div class="line">		pp = GetCoin(coins, n, m);</div><div class="line">		<span class="comment">//若最终返回0即为不可能，输出-1。</span></div><div class="line">		<span class="keyword">if</span> (pp != <span class="number">0</span>)<span class="built_in">cout</span> &lt;&lt; pp;</div><div class="line">		<span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/序列比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/序列比较/" itemprop="url">序列比较</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T22:57:47+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pixel</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a, b;</div><div class="line">    Pixel(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">		a = x; b = y;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (a &lt; b) &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; a)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (c &gt;= a)<span class="keyword">return</span> a;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (c &lt; b)<span class="keyword">return</span> c;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> b;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">alpha</span><span class="params">(<span class="keyword">char</span> fir, <span class="keyword">char</span> sec)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (fir == sec)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;<span class="comment">/*</span></div><div class="line"><span class="comment">int S(int m, int n, string a, string b, int beta) &#123;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		M[i][0] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 0; i &lt;= n; i++)</span></div><div class="line"><span class="comment">		M[0][i] = i*beta;</span></div><div class="line"><span class="comment">	for (int i = 1; i &lt;= m; i++)</span></div><div class="line"><span class="comment">		for (int j = 1; j &lt;= n; j++)</span></div><div class="line"><span class="comment">			M[i][j] = min(alpha(a[i-1],b[j-1]) + M[i-1][j-1], beta + M[i-1][j], beta + M[i][j-1]);</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">	return M[m ][n];</span></div><div class="line"><span class="comment">&#125;</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">void back(int m, int n, string A,string B,int*result,int beta) &#123;</span></div><div class="line"><span class="comment">	if (m&lt;A.length()&amp;&amp;n&lt;B.length()&amp;&amp;M[m][n] +alpha(A[m],B[n])== M[m+1][n+1]) &#123;</span></div><div class="line"><span class="comment">		result[m] = 0;</span></div><div class="line"><span class="comment">		back(m + 1, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if (m&lt;A.length()&amp;&amp;n&lt;=B.length()&amp;&amp;M[m][n]+beta ==  M[m + 1][n]) &#123;</span></div><div class="line"><span class="comment">		result[m ] = 1;</span></div><div class="line"><span class="comment">		back(m +1, n, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">	else if(m&lt;=A.length()&amp;&amp;n&lt;B.length()) &#123;</span></div><div class="line"><span class="comment">		result[m] = -1;</span></div><div class="line"><span class="comment">		back(m, n + 1, A,B,result,beta);</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;*/</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">SL</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[<span class="number">2</span>];</div><div class="line">	M[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	M[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[b.length() + <span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</div><div class="line">		M[<span class="number">0</span>][i] = beta*i;</div><div class="line">	&#125;	</div><div class="line">	M[<span class="number">1</span>][<span class="number">0</span>] = beta;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">		M[<span class="number">1</span>][<span class="number">0</span>] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">1</span>][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[<span class="number">0</span>][j - <span class="number">1</span>], beta + M[<span class="number">1</span>][j - <span class="number">1</span>], beta + M[<span class="number">0</span>][j]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</div><div class="line">			M[<span class="number">0</span>][j] = M[<span class="number">1</span>][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> re = M[<span class="number">0</span>][n];</div><div class="line">	<span class="keyword">delete</span>[]M;</div><div class="line">	<span class="keyword">return</span> re;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DACA</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> r,<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="built_in">string</span> a, <span class="built_in">string</span> b, <span class="built_in">stack</span>&lt;Pixel&gt;*P,<span class="keyword">int</span> beta)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x-o &lt;= <span class="number">1</span> || y-r &lt;= <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">int</span>**M = <span class="keyword">new</span> <span class="keyword">int</span>*[x+<span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x -o+ <span class="number">1</span>; i++) &#123;</div><div class="line">			M[i] = <span class="keyword">new</span> <span class="keyword">int</span>[y -r+ <span class="number">1</span>];</div><div class="line">			M[i][<span class="number">0</span>] = beta*i;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= y-r; i++)</div><div class="line">			M[<span class="number">0</span>][i] = i*beta;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x-o; i++)</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= y-r; j++) &#123;</div><div class="line">				M[i][j] = min(alpha(a[i - <span class="number">1</span>], b[j - <span class="number">1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>], beta + M[i][j - <span class="number">1</span>], beta + M[i - <span class="number">1</span>][j]);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x-o; i &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">		<span class="keyword">int</span> j = y - r;</div><div class="line">			<span class="keyword">for</span> (j=y-r; j &gt;= <span class="number">0</span>; ) &#123;</div><div class="line">				<span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == alpha(a[i<span class="number">-1</span>], b[j<span class="number">-1</span>]) + M[i - <span class="number">1</span>][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i = i - <span class="number">1</span>; j = j - <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">1</span>&amp;&amp;j&gt;=<span class="number">0</span>&amp;&amp;M[i][j] == beta + M[i - <span class="number">1</span>][j]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i - <span class="number">1</span>+o, j+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					i -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">1</span>&amp;&amp;M[i][j] == beta + M[i][j - <span class="number">1</span>]) &#123;</div><div class="line">					Pixel*p = <span class="keyword">new</span> Pixel(i+o, j - <span class="number">1</span>+r);</div><div class="line">					P-&gt;push(*p);</div><div class="line">					j -= <span class="number">1</span>; </div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (j == <span class="number">0</span> &amp;&amp; i == <span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="built_in">string</span> a2;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"here:"</span> &lt;&lt;( y-r) / <span class="number">2</span>  &lt;&lt; <span class="string">","</span> &lt;&lt; y-r &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">string</span> b2 =b.substr((y-r) / <span class="number">2</span> , y-r);</div><div class="line">	<span class="keyword">int</span> q[<span class="number">2</span>] = &#123; <span class="number">0</span>,<span class="number">0</span> &#125;;</div><div class="line">	<span class="keyword">int</span> min;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= x-o; i++) &#123;</div><div class="line">		a2 = a.substr(i, x-o);</div><div class="line">		q[<span class="number">0</span>]=SL(i, (y-r) / <span class="number">2</span>, a, b, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span>;</div><div class="line">		q[<span class="number">0</span>]+=SL(x-o - i, y-r - (y-r) / <span class="number">2</span>, a2, b2, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"done!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">if</span> (i == <span class="number">0</span>)min = q[<span class="number">0</span>];</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">if</span> (min &gt; q[<span class="number">0</span>]) &#123;</div><div class="line">				min = q[<span class="number">0</span>];</div><div class="line">				q[<span class="number">1</span>] = i;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	min = q[<span class="number">1</span>]+o;</div><div class="line">	Pixel*p = <span class="keyword">new</span> Pixel(min, (y - r) / <span class="number">2</span> + r);</div><div class="line">	P-&gt;push(*p);</div><div class="line">	</div><div class="line">	DACA(o,r,min, (y-r) / <span class="number">2</span>+r, a, b, P, beta);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"and here:"</span> &lt;&lt; min &lt;&lt; <span class="string">","</span> &lt;&lt; x &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	a2 = a.substr(min-o , x-o);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"hhhh"</span> &lt;&lt; x - min &lt;&lt; <span class="string">";;;"</span> &lt;&lt; y - y / <span class="number">2</span>;</div><div class="line">	DACA(min,(y-r)/<span class="number">2</span>+r,x  , y , a2, b2, P, beta);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">string</span> A, B;</div><div class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B) &#123;</div><div class="line">		<span class="built_in">stack</span>&lt;Pixel&gt;*P = <span class="keyword">new</span> <span class="built_in">stack</span>&lt;Pixel&gt;();</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; SL(A.length(), B.length(), A, B,<span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		DACA(<span class="number">0</span>,<span class="number">0</span>,A.length(), B.length(), A, B, P, <span class="number">1</span>);</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"LLLLL"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">while</span>(!(P-&gt;empty())) &#123;</div><div class="line">				Pixel p = (P-&gt;top());</div><div class="line">				P-&gt;pop();</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; p.a &lt;&lt; <span class="string">","</span> &lt;&lt; p.b &lt;&lt; <span class="string">")"</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="keyword">delete</span> P;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"what!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2474,7 +3076,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2485,7 +3087,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2496,7 +3098,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2599,7 +3201,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共80.1k字</span>
+  <span class="post-count">博客全站共82.1k字</span>
 </div>
 
 
