@@ -95,7 +95,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Be With Me" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml" />
 
 
 
@@ -104,13 +104,13 @@
 
 <meta name="description" content="来如春梦不多时 去似朝云无觅处">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Be With Me">
+<meta property="og:title" content="日和">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="Be With Me">
+<meta property="og:site_name" content="日和">
 <meta property="og:description" content="来如春梦不多时 去似朝云无觅处">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Be With Me">
+<meta name="twitter:title" content="日和">
 <meta name="twitter:description" content="来如春梦不多时 去似朝云无觅处">
 
 
@@ -147,7 +147,7 @@
 
 
 
-  <title>Be With Me</title>
+  <title>日和</title>
   
 
 
@@ -188,12 +188,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Be With Me</span>
+        <span class="site-title">日和</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">最喜欢你啦！</p>
+        <p class="site-subtitle">BE WITH ME</p>
       
   </div>
 
@@ -362,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YaYi">
@@ -371,7 +371,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -381,7 +381,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/29/编译原理/语法分析/" itemprop="url">编译原理——语法分析</a></h1>
+                <a class="post-title-link" href="/2017/11/29/编译原理/语法制导翻译/" itemprop="url">编译原理——语法分析</a></h1>
         
 
         <div class="post-meta">
@@ -454,60 +454,14 @@
 
       
         
-          
-            <h1 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h1><p>终于开始语法分析的复习了！</p>
-<p>上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3. 检错机制加入（其他就不行？）</p>
-<p>语法分析器的位置（等待加图）</p>
-<p>通用的语法分析器几乎是不可能保证效率的（目前有通用的语法分析器，Cocke-Younger-Kasami），目前有两种算法，<strong>自底向上</strong>（对应最左推导LL），<strong>自顶向下</strong>（对应最右推导LR）。</p>
-<h2 id="语法错误处理"><a href="#语法错误处理" class="headerlink" title="语法错误处理"></a>语法错误处理</h2><p>在编程中可能会发生不同的错误，在词法（拼写错误）、语法（单词漏写、顺序错误）、语义、逻辑上都可能会发生错误，其中，语法错误相对较多，成为检查重点。</p>
-<p>对语法错误的分析相对简单：它具有<strong>可行前缀/活前缀</strong>特性，在使用给定词法串前缀加上一些字符不能构成该语法的正确语言串时，就会发生错误。</p>
-<p>处理错误有三个目标：清楚报告出现的错误、快速从错误中恢复、不能对正确程序的编译处理造成太大的影响。</p>
-<blockquote>
-<p>给出一个报告错误的方法：打印出有问题的那行 -&gt; 给出一个错误所在地的指针</p>
-</blockquote>
-<p>错误处理一般在于自圆其说。很难清晰的预测程序员原本的意图，只需要报告最一般的错误可能。</p>
-<h3 id="错误恢复策略"><a href="#错误恢复策略" class="headerlink" title="错误恢复策略"></a>错误恢复策略</h3><p><strong>Panic模式</strong>：遇到错误之后，不断丢弃输入中的符号。直到发现$\color{red}{同步词法单元}$集合中的符号。</p>
-<p>$\color{red}{同步词法单元}$：通常是界限符，比如分号、右大括号。他们的意图清晰，没有二义性。编译器的设计这必须为自己的编译器定义合适的同步词法单元。</p>
-<p>panic模式可能会丢掉很多正常输入（这些失去的分析有可能会影响接下来的分析），但是这种模式很简单，能够保证不会进入无限循环。接下来的几个方法都不能保证。</p>
-<p><strong>短语级</strong>：局部修正，继续分析。比如，可能会做一些逗号换分号，加减分号的操作。已经在一些修复型编译器中使用。</p>
-<p>需要避免进入无限循环。比如设定是”在有错误的串前面加一个分号“，就可能会一直循环下去。</p>
-<p>可以与panic结合，避免丢弃太多单词。</p>
-<p><strong>错误产生式</strong>：描述错误模式。</p>
-<p>可以更好的进行修正，检测错误信息。</p>
-<p><strong>全局修正</strong>：x</p>
-<h2 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h2><h3 id="正式定义"><a href="#正式定义" class="headerlink" title="正式定义"></a>正式定义</h3><p>一个上下文无关文法由<strong>终结符</strong>、<strong>非终结符</strong>、<strong>一个开始符号</strong>、<strong>一组产生式</strong>组成。使用符号描述是：$(V<em>{T} , V</em>{N} , S , p)$</p>
-<p>在文法中有一些约定的命名方式（待补充）</p>
-<h3 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h3><p>实际上是语法等价的一个替换过程。使用右部替换左部。</p>
-<p><strong>形式化定义</strong>：<br>$$\alphaA\beta \Rightarrow \alpha\gama\beta 当且仅当存在 A \rightarrow \gama$$</p>
-<p>$$  $$</p>
-<h3 id="推导与语言"><a href="#推导与语言" class="headerlink" title="推导与语言"></a>推导与语言</h3><p><strong>最左推导</strong>：总是替换最左边的非终结符</p>
-<p><strong>最右推导</strong>：总是替换最右边的非终结符</p>
-<p><strong>形式化定义</strong>：</p>
-<h3 id="推导与语法分析树"><a href="#推导与语法分析树" class="headerlink" title="推导与语法分析树"></a>推导与语法分析树</h3><p>一颗语法树可能会对应多个推导过程。如果限制了最左或者最右，那么一个语法树就只能对应一个推导。</p>
-<h3 id="CFG设计"><a href="#CFG设计" class="headerlink" title="CFG设计"></a>CFG设计</h3><p>正则表达式可描述符号串$\in$GFG可描述字符串</p>
-<h4 id="NFA-gt-CFG"><a href="#NFA-gt-CFG" class="headerlink" title="NFA-&gt;CFG"></a>NFA-&gt;CFG</h4><p>在CFG，与正则不同的是：CFG的开始符号是所有，正则的终态是空串；CFG的终态是空串，正则的终态是所有。</p>
-<p>因此：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-29/75004681.jpg" alt=""></p>
-<p>终态：$A_i \rightarrow \epsilon$</p>
-<blockquote>
-<p>形如xy(x!=y)的01串：（不能用正则）</p>
-<ol>
-<li>奇数串：S-&gt;B|BSB B-&gt;0|1</li>
-<li>偶数串：拆成两个穿拼接形式。只要两个奇数串中心位置不同，拼出的偶数串就符合上述描述。<br>给出证明：</li>
-</ol>
-</blockquote>
-<p>证明：</p>
-<h4 id="CFG验证"><a href="#CFG验证" class="headerlink" title="CFG验证"></a>CFG验证</h4><p>证明CFG G生成语言L：互相包含。</p>
-<blockquote>
-<p>一个例子（略）</p>
-</blockquote>
-<h4 id="CFG修改"><a href="#CFG修改" class="headerlink" title="CFG修改"></a>CFG修改</h4><ol>
-<li>去错</li>
-<li>重写：满足特殊要求</li>
-</ol>
-<p>$$不合要求的问题<br>\begin{cases}<br>二义性 \<br>\epsilon-moves \<br>回路 \<br>左递归 \<br>提取左公因子<br>\end{cases}<br>$$</p>
-<h4 id="消除二义性"><a href="#消除二义性" class="headerlink" title="消除二义性"></a>消除二义性</h4>
-          
+          <p>Tiny C中的语法树：节点分为两类 语句 表达式<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/编译原理/语法制导翻译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -566,7 +520,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -959,7 +913,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -1131,7 +1085,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -1297,7 +1251,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -1506,7 +1460,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -1710,7 +1664,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -1861,7 +1815,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -2006,7 +1960,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
@@ -2307,7 +2261,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Be With Me">
+      <meta itemprop="name" content="日和">
     </span>
 
     
