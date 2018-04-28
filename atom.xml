@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-26T13:03:10.259Z</updated>
+  <updated>2018-04-28T07:44:25.329Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次linux server版本的get桌面</title>
+    <link href="http://yoursite.com/2018/04/27/%E8%AE%B0%E4%B8%80%E6%AC%A1linux-server%E7%89%88%E6%9C%AC%E7%9A%84get%E6%A1%8C%E9%9D%A2/"/>
+    <id>http://yoursite.com/2018/04/27/记一次linux-server版本的get桌面/</id>
+    <published>2018-04-27T04:22:00.000Z</published>
+    <updated>2018-04-28T07:44:25.329Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;流水账，顺便带一点操作方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>ModuleNotFoundError:No module named &#39;numpy&#39; in pyCharm</title>
@@ -518,36 +538,6 @@
     
     
       <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>chap3-内存管理</title>
-    <link href="http://yoursite.com/2017/11/06/OS/chap3-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2017/11/06/OS/chap3-内存管理/</id>
-    <published>2017-11-06T06:13:37.000Z</published>
-    <updated>2018-01-16T13:37:52.995Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;内存中的概念&quot;&gt;&lt;a href=&quot;#内存中的概念&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
