@@ -111,7 +111,7 @@
 <meta property="og:description" content="流水账，顺便带一点操作方法。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-4-28/12633202.jpg">
-<meta property="og:updated_time" content="2018-04-28T07:44:25.329Z">
+<meta property="og:updated_time" content="2018-05-15T06:57:04.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次linux server版本的get桌面">
 <meta name="twitter:description" content="流水账，顺便带一点操作方法。">
@@ -478,14 +478,28 @@
 </blockquote>
 <hr>
 <p>然后开始奋战在get桌面。其实这本来是一件很简单的事，但是由于校园网需要登陆+pppoeconfig文件找不到+命令行下登陆困难，这件事困扰了我一下午…其实最终这个问题也不是我解决的…使它自己好的…</p>
+<p>首先新装的系统需要更新一下：<code>sudo apt-get update</code></p>
 <p><a href="http://blog.creke.net/696.html" target="_blank" rel="external">具体命令看这里。</a></p>
+<p><strong>注意</strong>：中文包可能会出出现“not avaliable”，这是因为需要指明安装简体还是繁体。<strong>hans</strong>是简体，<strong>hant</strong>是繁体。</p>
 <p>首先，目前的情况是：</p>
 <ol>
 <li>up2没有wifi模块不能无线连接</li>
 <li>一台不支持ipv6的路由器，好处是路由器一次登陆各设备都能上网。目前大多数路由器应该都是这样（那应该叫做AP</li>
-<li>两根网线，一个给路由器WLAN，一个从路由器的LAN<br>接到UP2的网口。</li>
+<li>两根网线，一个给路由器WLAN，一个从路由器的LAN接到UP2的网口。</li>
+<li>显示屏鼠标键盘都是必备的</li>
 </ol>
-<p>按理来说，我用PC连wifi登陆，然后UP2这边就应该能上网了，怪事是这样的：我登陆了wifi，发现欸怎么还有不能从</p>
+<p>按理来说，我用PC连wifi登陆，然后UP2这边就应该能上网了，怪事是这样的：我登陆了wifi，发现欸怎么还不能从板子那边上网，但是很奇怪有的时候又可以get到，但是过了一会儿就会说无法从[web]得到数据，这个web就是我们学校登陆界面的网址。于是我就ping一下，ping不通，curl一个网址，也是传回登陆界面得html。emmm…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl www.bing.com</div></pre></td></tr></table></figure>
+<p>这个问题其实我也没有解决，因为是可以上一段时间网的，就是不断地重新apt-get install，直到某次的进度达到100%（因为每次运行都会从上次失败的地方重新开始）。<br>总之，最后还是get到了桌面。<br><strong>但是应该是一直可以连接网络才对</strong><br><strong>想知道校园网网关的原理</strong></p>
+<p>这时，get到的桌面就只有一个壁纸，其他什么都没有，可以<a href="https://www.zhihu.com/question/41770698" target="_blank" rel="external">这样安装unity桌面</a><br>上面的网页仅供参考，因为这里是新装的，就是因为没有装unity桌面，这样：<code>sudo apt-get install unity</code>应该就行。</p>
+<hr>
+<p>啊这么久以后了，今天脑子一抽卸载了python3，许多包都卸载了，决定重刷，这次试一试自己装桌面，不直接整包了。</p>
+<blockquote>
+<p>正好了解一些python3的问题吧。</p>
+</blockquote>
+<p>之后中文输入法什么的就在设置里面找就行了。</p>
+<hr>
+<p>至此，终于把板子恢复了~</p>
 
       
     </div>
@@ -552,6 +566,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/17/ubuntu-windows共享文件夹/" rel="prev" title="ubuntu-windows 共享文件夹">
+                ubuntu-windows 共享文件夹 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -621,7 +639,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -632,7 +650,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -643,7 +661,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -746,7 +764,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共82.8k字</span>
+  <span class="post-count">博客全站共85.7k字</span>
 </div>
 
 
