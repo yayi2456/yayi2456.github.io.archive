@@ -362,6 +362,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/04/OS/串讲/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YaYi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/04/OS/串讲/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T19:41:56+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="文件写入时发生了什么？"><a href="#文件写入时发生了什么？" class="headerlink" title="文件写入时发生了什么？"></a>文件写入时发生了什么？</h2><p>在内存中创建一个新的inode节点或者索引节点，如果存在，在文件系统中找到对应的inode。</p>
+<p>修改文件夹对应的数据节点。<br>最初只在内存中修改并标记这块数据已经被修改了，你记得帮我写回去。</p>
+<p>close并不能使数据立即回到硬盘上。pagebuffer可以被禁用。fsync可以强制立即写回磁盘。</p>
+<pre><code>//sqlite将收到文件系统缓存影响。
+</code></pre><p>先写数据还是先写索引？更偏向于先写数据，这样顶多修改内容存不上，如果先写索引，可能导致文件系统将无效数据误认为是文件数据。</p>
+<h2 id="文件删除时发生了什么"><a href="#文件删除时发生了什么" class="headerlink" title="文件删除时发生了什么"></a>文件删除时发生了什么</h2><p>找到对应的inode：这时在cache内存（pagecache）以及文件系统上都存有该文件的数据。</p>
+<p>在内存中删除inode，清除页面。<br>把硬盘中的inode清除，对应数据块清除，硬盘中的块标记为未使用，文件夹中的项删除。</p>
+<p>一个文件（夹）怎样叫做存在？1.在某一个文件夹下有她的树根的索引 2.在占用未占用位图中存在数据块占用标志。</p>
+<p>如何恢复一个被误删的文件？寻找树根。而树根是有特点的。一个文件恢复需要扫描位图中显示的未使用的数据块，找到树根，然后顺着树根找到所有文件。<br>所以，一旦误删，就不能再动硬盘了，再动硬盘可能会破坏原来的数据，导致文件直接找不到或者缺失或者？（不会乱码咩）</p>
+<p>怎样快速删除文件并且不可恢复？<br>删除与覆盖、与文件系统相关、把我的空lab5给他复制过去hhh。</p>
+<h2 id="关机时发生了什么？"><a href="#关机时发生了什么？" class="headerlink" title="关机时发生了什么？"></a>关机时发生了什么？</h2><p>init在接收到特定信号时发起关机</p>
+<p>使用SIGSTOP提示关机，使用SIGKILL强制关机</p>
+<p>各种内存数据回写。</p>
+<p>意外断电？<br>1.可能数据在内存中没有被回写 2.磁头正在飞行（可能会有保护机制） 3.磁头正在写入<br>如果搞坏了磁介质可能只是这个地方不能读写，但是<br>RAID1多地机房。</p>
+<p>意外断电防护：使用重力传感器，（磁头）失重时将会尽快写入数据。</p>
+<h2 id="开机时发生了什么"><a href="#开机时发生了什么" class="headerlink" title="开机时发生了什么"></a>开机时发生了什么</h2><p>跳转到指定地址取指令（0xfffff0或0x00000000（手机））：<br>bios中存在一些基本指令：兼容机的标准化使得BIOS可以适配大量硬件</p>
+<p>硬盘数据载入内存 这是因为硬盘的读取模式也兼容给bios的读写。</p>
+<p>格式化C盘再复制回去：NTLDR missing：NTFS系统自身的代码。VBR：ntfs文件系统的加载器，包含文件系统的读取方式与操作系统。使用vbr把文件load进来。</p>
+<p>操作系统接管运行，为进程准备环境。</p>
+<p>init进程创建用户交互进程。winlogon。init不做任何操作只等关机，其他任务都是init的子进程的工作。</p>
+<p>为什么不拷贝一份新的而是使用父进程的？子进程直接自己调用exec，直接调用（freertos）。拷贝执行？？？<br>子进程在出来之后就已经是一个完整的pcb了。</p>
+<p>父进程可以接收子进程的main函数的返回值。<br>父进程等待子进程退出，由父进程替子进程收拾残局：找到他分配的页面，转为可用页面。SIGCHILD。<br>如果一个进程的父进程先自己退出了，这个子进程的父进程就变成init。</p>
+<h2 id="exec时发生了什么？"><a href="#exec时发生了什么？" class="headerlink" title="exec时发生了什么？"></a>exec时发生了什么？</h2><p>在文件系统中找到文件，读取文件目录树</p>
+<p>将文件映射入内存</p>
+<p>程序执行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/02/编译原理/我的编译器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2159,157 +2306,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/哈希/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/哈希/" itemprop="url">哈希</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T23:57:33+08:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>emmm…大二的时候DS只考了80，出来混的，总是要还的。</p>
-<h2 id="不希望文件太多都小于512k，会占我的空间。"><a href="#不希望文件太多都小于512k，会占我的空间。" class="headerlink" title="不希望文件太多都小于512k，会占我的空间。"></a>不希望文件太多都小于512k，会占我的空间。</h2><h1 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h1><p>哈希其实没什么神秘的，不过是一群贪心的人的产物。</p>
-<p>散列函数，将key转化为对应的value值得到索引。这个有诸如<strong>取模</strong>，<strong>ASCII平均</strong>，等等方法。橙皮书上有一种sfold，似乎性能会更好一些。</p>
-<h2 id="开哈希"><a href="#开哈希" class="headerlink" title="开哈希"></a>开哈希</h2><p>开哈希类似于静态链表，每一个value对应一个链表，成为挂着的桶。</p>
-<h2 id="闭哈希"><a href="#闭哈希" class="headerlink" title="闭哈希"></a>闭哈希</h2><p>闭哈希将node存储在给定的一个数组中。这个数组的下标将作为value的索引值，由于value可能重复，需要探查方式，有很多方式，比如线性探查与二次探查。</p>
-<p>关于闭哈希的删除，其实不必真的每次都向前挪，而是增加一个“墓碑”，它代表这里没有数据可以被插入，但是又不是真的空因为需要继续向前探查。<br>当次数多了性能就会下降，一种解决方式是向前挪，另一种是重新散列。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2364,7 +2360,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2375,7 +2371,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2386,7 +2382,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2489,7 +2485,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共85.7k字</span>
+  <span class="post-count">博客全站共86.0k字</span>
 </div>
 
 

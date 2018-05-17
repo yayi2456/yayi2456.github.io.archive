@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-17T14:07:08.262Z</updated>
+  <updated>2018-05-17T16:21:06.698Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>标准日本语初级(上)第一课</title>
+    <link href="http://yoursite.com/2018/05/17/%E6%97%A5%E8%AF%AD%E7%99%BD%E7%99%BD/%E6%A0%87%E5%87%86%E6%97%A5%E6%9C%AC%E8%AF%AD%E4%B8%8A1/"/>
+    <id>http://yoursite.com/2018/05/17/日语白白/标准日本语上1/</id>
+    <published>2018-05-17T15:26:18.430Z</published>
+    <updated>2018-05-17T16:21:06.698Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;单词&quot;&gt;&lt;a href=&quot;#单词&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="日本語" scheme="http://yoursite.com/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
+    
+    
+      <category term="日本語" scheme="http://yoursite.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu-windows 共享文件夹</title>
@@ -505,34 +531,6 @@
     
     
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>哈希</title>
-    <link href="http://yoursite.com/2017/11/12/%E5%93%88%E5%B8%8C/"/>
-    <id>http://yoursite.com/2017/11/12/哈希/</id>
-    <published>2017-11-12T15:57:33.000Z</published>
-    <updated>2017-11-14T15:57:20.654Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;hr&gt;
-&lt;p&gt;emmm…大二的时候DS只考了80，出来混的，总是要还的。&lt;/p&gt;
-&lt;h2 id=&quot;不希望文件太多都小于512k，会占我的空间。&quot;&gt;&lt;a href=&quot;#不希望文件太多都小于512k，会占我的空间。&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="数据结构" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
