@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="实际写的时间应该是2017年9-26。最初写在了CSDN。因为要放弃CSDN了，就挪过来。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-17T14:07:08.262Z">
+<meta property="og:updated_time" content="2018-05-19T07:47:50.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu-windows 共享文件夹">
 <meta name="twitter:description" content="实际写的时间应该是2017年9-26。最初写在了CSDN。因为要放弃CSDN了，就挪过来。">
@@ -468,10 +468,16 @@
 <li>File System中输入：smb://[ip]</li>
 </ol>
 <p>OK。</p>
-<p>如果linux提示：failed to mount windows share:connection timed out，因为win10里面默认关闭了SMB服务。<br>询问Cortana“启用或关闭windows功能”（或者打开控制面板自己找这一项），找到<strong>SMB 1.0/CIFS 文件共享支持</strong>，打开，之后会被要求重启。电脑重启之后，就可以连接啦！<br>解决方法来源:<a href="https://kodi.wiki/view/SMB/Windows#Connection_Timed_Out" target="_blank" rel="external">SMB/Windows</a></p>
+<p>如果linux提示：failed to mount windows share:connection timed out，但是无论从虚拟机ping主机还是主机ping虚拟机都能ping通，说明是因为win10里面默认关闭了SMB服务。<br>询问Cortana“启用或关闭windows功能”（或者打开控制面板自己找这一项），找到<strong> SMB 1.0/CIFS 文件共享支持</strong>，打开，之后会被要求重启。电脑重启之后，就可以连接啦！<br>解决方法来源:<a href="https://kodi.wiki/view/SMB/Windows#Connection_Timed_Out" target="_blank" rel="external">SMB/Windows</a></p>
 <p>连接的时候会要求用户名与密码，这是因为直接连接了机器，这个密码是要求Windows机器的账户密码。<br>其实我觉得有点奇怪…因为上述设置的时候明明“everyone”可以读写。不过无伤大雅，就没有再管。</p>
 <hr>
 <p>目前存在的问题：无法传输2M的pdf文件。但是6K的txt可以很快传输。</p>
+<hr>
+<p>#519再次更新：</p>
+<p>前面说到无法传输pdf，实际上是超过了1M甚至几百K的文件不能传输，会有提示<code>Connection timed out</code>。<br>昨天看了些解决方案，都需要修改smb源码至少也需要修改conf文件。改了之后重启仍然不能传输。</p>
+<p><a href="https://blog.csdn.net/shanshui90/article/details/8843500" target="_blank" rel="external">具体修改方式点这里</a></p>
+<p>今天忽然就好了….而且传输速度很快…</p>
+<hr>
 
       
     </div>
@@ -761,7 +767,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.0k字</span>
+  <span class="post-count">博客全站共86.2k字</span>
 </div>
 
 

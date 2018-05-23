@@ -112,7 +112,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86#/media/File:Dydx_zh.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-3-19/26208230.jpg">
-<meta property="og:updated_time" content="2018-05-17T14:09:06.714Z">
+<meta property="og:updated_time" content="2018-05-21T07:32:30.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="matlab notes">
 <meta name="twitter:description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数    解方程 微分积分">
@@ -506,6 +506,12 @@
 </ul>
 </li>
 <li><a href="#">经典线性回归分析与预测</a></li>
+<li><a href="#">线性回归扩展</a><ul>
+<li><a href="#">交互式多线性回归分析：</a></li>
+<li><a href="#">岭回归：针对多重共线问题</a></li>
+<li><a href="#"></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#">零碎的</a></li>
@@ -678,7 +684,21 @@ doc specgraph
 <p>$$\rho=1-\frac{6\sum_{i=1}^{n}{(x_i-y_i)^2}}{n(n^2-1)}$$</p>
 <p>其中x，y都应该是有序变量。</p>
 <p>可以用来检测排序总体之间是不是存在相关性：<br>零假设是两个变量之间不存在相关关系，即$\rho<em>s=0$，检验的统计量$t</em>\gamma=\rho_s\sqrt{n-1}$。当n&gt;=30，采用z检验。</p>
-<h3 id="jackknife"><a href="#jackknife" class="headerlink" title="jackknife"></a>jackknife</h3><h2 id="经典线性回归分析与预测"><a href="#经典线性回归分析与预测" class="headerlink" title="经典线性回归分析与预测"></a>经典线性回归分析与预测</h2><h1 id="零碎的"><a href="#零碎的" class="headerlink" title="零碎的"></a>零碎的</h1><ol>
+<h3 id="jackknife"><a href="#jackknife" class="headerlink" title="jackknife"></a>jackknife</h3><h2 id="经典线性回归分析与预测"><a href="#经典线性回归分析与预测" class="headerlink" title="经典线性回归分析与预测"></a>经典线性回归分析与预测</h2><h2 id="线性回归扩展"><a href="#线性回归扩展" class="headerlink" title="线性回归扩展"></a>线性回归扩展</h2><p>验证正态分布：<code>chizgof</code></p>
+<ol>
+<li>matlab使用反斜线算子<code>\</code>解线性方程组。</li>
+<li><code>help regress</code> <code>help robustfit</code>：识别数据中的异常值</li>
+<li><code>leverage</code>：计算X的QR分解之后的杠杆值：这个值接近1，则预测值接近于实际值。</li>
+</ol>
+<p><strong>aoctool</strong>函数：</p>
+<p><strong>MATLAB应用</strong></p>
+<h3 id="交互式多线性回归分析："><a href="#交互式多线性回归分析：" class="headerlink" title="交互式多线性回归分析："></a>交互式多线性回归分析：</h3><p>###逐步回归分析：** <code>stepwise</code></p>
+<h3 id="岭回归：针对多重共线问题"><a href="#岭回归：针对多重共线问题" class="headerlink" title="岭回归：针对多重共线问题"></a>岭回归：针对多重共线问题</h3><p><code>ridge</code></p>
+<p>### </p>
+<p>polyconf polydemo</p>
+<p>nlparci nlinfit nlintool nlmefit glmfit glmval</p>
+<p>treedisp treeval</p>
+<h1 id="零碎的"><a href="#零碎的" class="headerlink" title="零碎的"></a>零碎的</h1><ol>
 <li>tic toc</li>
 <li>binocdf</li>
 <li>mnpdf</li>
@@ -923,7 +943,7 @@ doc specgraph
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一节"><span class="nav-number">1.</span> <span class="nav-text">第一节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量脚本与op"><span class="nav-number">2.</span> <span class="nav-text">变量脚本与op</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本-Scripts"><span class="nav-number">2.1.</span> <span class="nav-text">脚本 Scripts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量-variables"><span class="nav-number">2.2.</span> <span class="nav-text">变量 variables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标量"><span class="nav-number">2.2.1.</span> <span class="nav-text">标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组-Array"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组　Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵"><span class="nav-number">2.2.3.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据文件操作"><span class="nav-number">2.2.4.</span> <span class="nav-text">数据文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise：得到并存储当前时间"><span class="nav-number">2.2.5.</span> <span class="nav-text">Exercise：得到并存储当前时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作变量"><span class="nav-number">2.3.</span> <span class="nav-text">操作变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本plot"><span class="nav-number">2.4.</span> <span class="nav-text">基本plot</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化编程"><span class="nav-number">3.</span> <span class="nav-text">可视化编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户函数"><span class="nav-number">3.1.</span> <span class="nav-text">用户函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解方程"><span class="nav-number">3.2.</span> <span class="nav-text">解方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微分积分"><span class="nav-number">3.3.</span> <span class="nav-text">微分积分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4画图"><span class="nav-number">4.</span> <span class="nav-text">4画图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CELL"><span class="nav-number">4.1.</span> <span class="nav-text">CELL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct"><span class="nav-number">4.2.</span> <span class="nav-text">Struct</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5符号与模拟"><span class="nav-number">5.</span> <span class="nav-text">5符号与模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双变量分析"><span class="nav-number">6.</span> <span class="nav-text">双变量分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关系数计算"><span class="nav-number">6.1.</span> <span class="nav-text">相关系数计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pearson"><span class="nav-number">6.1.1.</span> <span class="nav-text">Pearson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spearman"><span class="nav-number">6.1.2.</span> <span class="nav-text">Spearman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jackknife"><span class="nav-number">6.1.3.</span> <span class="nav-text">jackknife</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典线性回归分析与预测"><span class="nav-number">6.2.</span> <span class="nav-text">经典线性回归分析与预测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#零碎的"><span class="nav-number">7.</span> <span class="nav-text">零碎的</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一节"><span class="nav-number">1.</span> <span class="nav-text">第一节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量脚本与op"><span class="nav-number">2.</span> <span class="nav-text">变量脚本与op</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本-Scripts"><span class="nav-number">2.1.</span> <span class="nav-text">脚本 Scripts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量-variables"><span class="nav-number">2.2.</span> <span class="nav-text">变量 variables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标量"><span class="nav-number">2.2.1.</span> <span class="nav-text">标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组-Array"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组　Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵"><span class="nav-number">2.2.3.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据文件操作"><span class="nav-number">2.2.4.</span> <span class="nav-text">数据文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise：得到并存储当前时间"><span class="nav-number">2.2.5.</span> <span class="nav-text">Exercise：得到并存储当前时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作变量"><span class="nav-number">2.3.</span> <span class="nav-text">操作变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本plot"><span class="nav-number">2.4.</span> <span class="nav-text">基本plot</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化编程"><span class="nav-number">3.</span> <span class="nav-text">可视化编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户函数"><span class="nav-number">3.1.</span> <span class="nav-text">用户函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解方程"><span class="nav-number">3.2.</span> <span class="nav-text">解方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微分积分"><span class="nav-number">3.3.</span> <span class="nav-text">微分积分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4画图"><span class="nav-number">4.</span> <span class="nav-text">4画图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CELL"><span class="nav-number">4.1.</span> <span class="nav-text">CELL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struct"><span class="nav-number">4.2.</span> <span class="nav-text">Struct</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5符号与模拟"><span class="nav-number">5.</span> <span class="nav-text">5符号与模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双变量分析"><span class="nav-number">6.</span> <span class="nav-text">双变量分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关系数计算"><span class="nav-number">6.1.</span> <span class="nav-text">相关系数计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pearson"><span class="nav-number">6.1.1.</span> <span class="nav-text">Pearson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spearman"><span class="nav-number">6.1.2.</span> <span class="nav-text">Spearman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jackknife"><span class="nav-number">6.1.3.</span> <span class="nav-text">jackknife</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典线性回归分析与预测"><span class="nav-number">6.2.</span> <span class="nav-text">经典线性回归分析与预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归扩展"><span class="nav-number">6.3.</span> <span class="nav-text">线性回归扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交互式多线性回归分析："><span class="nav-number">6.3.1.</span> <span class="nav-text">交互式多线性回归分析：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#岭回归：针对多重共线问题"><span class="nav-number">6.3.2.</span> <span class="nav-text">岭回归：针对多重共线问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#零碎的"><span class="nav-number">7.</span> <span class="nav-text">零碎的</span></a></li></ol></div>
             
 
           </div>
@@ -974,7 +994,7 @@ doc specgraph
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.0k字</span>
+  <span class="post-count">博客全站共86.2k字</span>
 </div>
 
 

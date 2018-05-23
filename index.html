@@ -1106,6 +1106,12 @@
 </ul>
 </li>
 <li><a href="#">经典线性回归分析与预测</a></li>
+<li><a href="#">线性回归扩展</a><ul>
+<li><a href="#">交互式多线性回归分析：</a></li>
+<li><a href="#">岭回归：针对多重共线问题</a></li>
+<li><a href="#"></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#">零碎的</a></li>
@@ -1278,7 +1284,21 @@ doc specgraph
 <p>$$\rho=1-\frac{6\sum_{i=1}^{n}{(x_i-y_i)^2}}{n(n^2-1)}$$</p>
 <p>其中x，y都应该是有序变量。</p>
 <p>可以用来检测排序总体之间是不是存在相关性：<br>零假设是两个变量之间不存在相关关系，即$\rho<em>s=0$，检验的统计量$t</em>\gamma=\rho_s\sqrt{n-1}$。当n&gt;=30，采用z检验。</p>
-<h3 id="jackknife"><a href="#jackknife" class="headerlink" title="jackknife"></a>jackknife</h3><h2 id="经典线性回归分析与预测"><a href="#经典线性回归分析与预测" class="headerlink" title="经典线性回归分析与预测"></a>经典线性回归分析与预测</h2><h1 id="零碎的"><a href="#零碎的" class="headerlink" title="零碎的"></a>零碎的</h1><ol>
+<h3 id="jackknife"><a href="#jackknife" class="headerlink" title="jackknife"></a>jackknife</h3><h2 id="经典线性回归分析与预测"><a href="#经典线性回归分析与预测" class="headerlink" title="经典线性回归分析与预测"></a>经典线性回归分析与预测</h2><h2 id="线性回归扩展"><a href="#线性回归扩展" class="headerlink" title="线性回归扩展"></a>线性回归扩展</h2><p>验证正态分布：<code>chizgof</code></p>
+<ol>
+<li>matlab使用反斜线算子<code>\</code>解线性方程组。</li>
+<li><code>help regress</code> <code>help robustfit</code>：识别数据中的异常值</li>
+<li><code>leverage</code>：计算X的QR分解之后的杠杆值：这个值接近1，则预测值接近于实际值。</li>
+</ol>
+<p><strong>aoctool</strong>函数：</p>
+<p><strong>MATLAB应用</strong></p>
+<h3 id="交互式多线性回归分析："><a href="#交互式多线性回归分析：" class="headerlink" title="交互式多线性回归分析："></a>交互式多线性回归分析：</h3><p>###逐步回归分析：** <code>stepwise</code></p>
+<h3 id="岭回归：针对多重共线问题"><a href="#岭回归：针对多重共线问题" class="headerlink" title="岭回归：针对多重共线问题"></a>岭回归：针对多重共线问题</h3><p><code>ridge</code></p>
+<p>### </p>
+<p>polyconf polydemo</p>
+<p>nlparci nlinfit nlintool nlmefit glmfit glmval</p>
+<p>treedisp treeval</p>
+<h1 id="零碎的"><a href="#零碎的" class="headerlink" title="零碎的"></a>零碎的</h1><ol>
 <li>tic toc</li>
 <li>binocdf</li>
 <li>mnpdf</li>
@@ -2800,7 +2820,7 @@ doc specgraph
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.0k字</span>
+  <span class="post-count">博客全站共86.2k字</span>
 </div>
 
 
