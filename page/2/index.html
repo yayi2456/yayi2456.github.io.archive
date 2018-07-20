@@ -362,6 +362,222 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap6-死锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/16/OS/chap6-死锁/" itemprop="url">chap6-死锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T21:39:37+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>死锁</strong>：如果一个进程集合中的每个进程都在等待只能由该进程集合中的其他进程才能引发的事件，该进程集合是死锁的。</p>
+<p>大多数情况下，都是在等另外的进程放弃所占的资源，但是由于所有的进程都不能运行，他们永远也等不到自己需要的资源</p>
+<p><strong>死锁产生条件</strong>：</p>
+<ol>
+<li>互斥条件：每个资源要么已经分配了一个进程，要么就是可用的</li>
+<li>占有和等待条件：已经得到了某个资源的进程可以请求新的资源</li>
+<li>不可抢占条件：已经分配给一个进程的资源不能强制性被抢占，只能被占有它的进程显式释放</li>
+<li>环路等待条件：死锁发生时，系统中一定有两个或者两个以上的进程组成的一条环路，该换路中的每一个进程都在等待下一个进程占有的资源。</li>
+</ol>
+<p><strong>死锁的危害</strong>：死锁进程永远不能活动，被持有的资源永远不可以访问<br>-&gt;不合理的资源获取可能会产生死锁（闭环，像数据库一样）</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<li><p>破坏4个条件，阻碍死锁发生</p>
+</li>
+<li><p>避免死锁发生</p>
+</li>
+<li><p>死锁检测与恢复</p>
+</li>
+<li><p>鸵鸟</p>
+</li>
+</ol>
+<h3 id="prevention"><a href="#prevention" class="headerlink" title="prevention"></a>prevention</h3><p>破坏四个条件</p>
+<ol>
+<li>互斥条件：虚拟共享资源<br> 避免分配那些不是绝对必须的资源，尽量做到尽可能少的进程可以真正请求资源<br> eg：使用打印机守护进程以及假脱打印机技术</li>
+<li>占有和等待条件：禁止已持有资源的进程等待其他资源<br> 在一次分配中满足一个进程的所有资源需求，否则进程将被阻塞，直到所有需要的资源都可用</li>
+<li>不可抢占条件：夺取死锁进程的资源并给其他进程<br> 避免引发混乱，使用虚拟化技术</li>
+<li>环路等待条件：为每种资源分配类型标识，进程必须按照升序/降序来请求资源。<br> 一种变体是不需要一定升序，但是需要不允许进程请求比当前所占有资源编号低的资源。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg" alt=""></p>
+<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>preventation不合理。</p>
+<p>系统必须判断这次请求资源是不是安全的，并且只能在安全的情况下得到资源。</p>
+<p><strong>安全状态</strong>：存在一个合理的资源分配序列<br><strong>不安全状态</strong>：不存在可以避免死锁的资源分配序列</p>
+<p>避免死锁的机制：os只在安全的情况下分配资源。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/33686334.jpg" alt=""></p>
+<p>阴影部分不能进。</p>
+<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><h4 id="单资源"><a href="#单资源" class="headerlink" title="单资源"></a>单资源</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/66291438.jpg" alt=""></p>
+<p>查看是否有进程还需要的资源数小于系统剩余的资源数，如果有，就分给他，如果没有，会产生死锁。</p>
+<p>也可以这样说：如果一个进程请求资源，检查是不是可以给他。</p>
+<h4 id="多资源"><a href="#多资源" class="headerlink" title="多资源"></a>多资源</h4><p>与单资源差不多，但是需要每一个还需要的资源数都是小于剩余的资源数，如果存在，就给，然后收回这个已经完成的资源，如果没有，就不可能成功了。</p>
+<h3 id="安全状态与死锁"><a href="#安全状态与死锁" class="headerlink" title="安全状态与死锁"></a>安全状态与死锁</h3><p>系统安全-&gt;没有死锁<br>没有死锁不一定是系统安全。但是只要确保系统是安全的，就一定不会死锁。</p>
+<h3 id="死锁检测与恢复"><a href="#死锁检测与恢复" class="headerlink" title="死锁检测与恢复"></a>死锁检测与恢复</h3><p>守护进程判断运行状态，长时间不运行则认为进入思索。</p>
+<p>可以使用图、集合、向量、矩阵等记录资源分配状态，试图找到环路。</p>
+<p>请求矩阵中的向量定义成qij，表示进程i请求类型j的资源量，代表当前进程产生的资源请求<br>初始态所有进程无标记，通过算法标记进程<br>最后查看：若有无标记的进程，则说明有死锁现 象存在</p>
+<p><strong>算法</strong>：<br>1）在分配矩阵中标记一行全为0的进程<br>2）向量W初始化成可用向量Available<br>3）按下标i查找，进程i未标记并且该进程的请求向量小于等于W，就进行标记；若找不到这样的行，算法终止。<br>4）若找到这样的行，标记进程i后，再把分配矩阵中的相应行加到W中，返回步骤3。</p>
+<p>其实就是银行家算法</p>
+<p><strong>恢复</strong>：</p>
+<ol>
+<li>抢占</li>
+<li>Backdating：设置检查点在进程中，当检测到死锁时，进程将返回到检查点。</li>
+<li>进程查杀：直接杀死进程。</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/76831176.jpg" alt=""></p>
+<h2 id="非资源死锁"><a href="#非资源死锁" class="headerlink" title="非资源死锁"></a>非资源死锁</h2><ol>
+<li><p>两阶段加锁<br>对需要修改的数据：先请求加锁，再修改数据；若有一个数据已加锁，进程则释放所有加锁的记录。（像csmaca一样</p>
+</li>
+<li><p>通信死锁<br>通信中多个进程发送信息，但需要阻塞当前进程等待对方回复。若发送信息丢失，则死锁。<br>解决办法：超时中断；</p>
+</li>
+<li><p>活锁<br>所谓活锁既是：进程没有死锁，但却无法运行下去，只是在不断的重复尝试，如冲突检测。</p>
+</li>
+<li><p>进程饿死<br>由于条件限制使有些进程请求永远无法得到服务，进程被饿死。从饿死进程角度看，像是发生了死锁。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/16/月华/流光/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1207,6 +1423,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/编译原理/语法制导翻译/" itemprop="url">编译原理——语法分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:05:47+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编译原理/" itemprop="url" rel="index">
+                    <span itemprop="name">编译原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Tiny C中的语法树：节点分为两类 语句 表达式<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/编译原理/语法制导翻译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1353,155 +1718,6 @@
 <p>$$不合要求的问题<br>\begin{cases}<br>二义性 \<br>\epsilon-moves \<br>回路 \<br>左递归 \<br>提取左公因子<br>\end{cases}<br>$$</p>
 <h4 id="消除二义性"><a href="#消除二义性" class="headerlink" title="消除二义性"></a>消除二义性</h4>
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻瓜日和">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/29/编译原理/语法制导翻译/" itemprop="url">编译原理——语法分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T17:05:47+08:00">
-                2017-11-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编译原理/" itemprop="url" rel="index">
-                    <span itemprop="name">编译原理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tiny C中的语法树：节点分为两类 语句 表达式<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/29/编译原理/语法制导翻译/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -2284,155 +2500,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/计算机网络/简单udp通信实现-java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻瓜日和">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/15/计算机网络/简单udp通信实现-java/" itemprop="url">网络编程一：UDP,CMD,TCP,WebServer</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:12:40+08:00">
-                2017-11-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/15/计算机网络/简单udp通信实现-java/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2487,7 +2554,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2612,7 +2679,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共112.1k字</span>
+  <span class="post-count">博客全站共126.3k字</span>
 </div>
 
 

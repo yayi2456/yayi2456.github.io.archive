@@ -14,8 +14,8 @@
 
 <script>
     (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
+        if('yayi'){
+            if (prompt('请输入文章密码') !== 'yayi'){
                 alert('密码错误！');
                 history.back();
             }
@@ -102,20 +102,20 @@
 
 
 
-<meta name="description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数    解方程 微分积分">
+<meta name="description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数 解方程 微分积分   4画">
 <meta name="keywords" content="matlab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="matlab notes">
 <meta property="og:url" content="http://yoursite.com/2018/02/26/MATLAB/matlab_notes/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数    解方程 微分积分">
+<meta property="og:description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数 解方程 微分积分   4画">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86#/media/File:Dydx_zh.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-3-19/26208230.jpg">
-<meta property="og:updated_time" content="2018-07-20T15:50:32.425Z">
+<meta property="og:updated_time" content="2018-07-20T17:43:28.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="matlab notes">
-<meta name="twitter:description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数    解方程 微分积分">
+<meta name="twitter:description" content="nkes113@nankai.edu.cn 哈佛 mit matlab ixl.com 公邮nkmatlab2018@126.comcode:besidenk   第一节 变量脚本与op 脚本 Scripts 变量 variables 标量 数组　Array 矩阵 数据文件操作 Exercise：得到并存储当前时间   操作变量 基本plot   可视化编程 用户函数 解方程 微分积分   4画">
 <meta name="twitter:image" content="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86#/media/File:Dydx_zh.jpg">
 
 
@@ -468,53 +468,51 @@
 <p>公邮nkmatlab2018@126.com<br>code:besidenk</p>
 <!-- TOC -->
 <ul>
-<li><a href="#">第一节</a></li>
-<li><a href="#op">变量脚本与op</a><ul>
-<li><a href="#scripts">脚本 Scripts</a></li>
-<li><a href="#variables">变量 variables</a><ul>
-<li><a href="#">标量</a></li>
-<li><a href="#array">数组　Array</a></li>
-<li><a href="#">矩阵</a></li>
-<li><a href="#">数据文件操作</a></li>
-<li><a href="#exercise">Exercise：得到并存储当前时间</a></li>
+<li><a href="#第一节">第一节</a></li>
+<li><a href="#变量脚本与op">变量脚本与op</a><ul>
+<li><a href="#脚本-scripts">脚本 Scripts</a></li>
+<li><a href="#变量-variables">变量 variables</a><ul>
+<li><a href="#标量">标量</a></li>
+<li><a href="#数组　array">数组　Array</a></li>
+<li><a href="#矩阵">矩阵</a></li>
+<li><a href="#数据文件操作">数据文件操作</a></li>
+<li><a href="#exercise得到并存储当前时间">Exercise：得到并存储当前时间</a></li>
 </ul>
 </li>
-<li><a href="#">操作变量</a></li>
-<li><a href="#plot">基本plot</a></li>
+<li><a href="#操作变量">操作变量</a></li>
+<li><a href="#基本plot">基本plot</a></li>
 </ul>
 </li>
-<li><a href="#">可视化编程</a><ul>
-<li><a href="#">用户函数</a></li>
+<li><a href="#可视化编程">可视化编程</a><ul>
+<li><a href="#用户函数">用户函数</a></li>
+<li><a href="#解方程">解方程</a></li>
+<li><a href="#微分积分">微分积分</a></li>
 </ul>
 </li>
-<li><a href="#"></a><ul>
-<li><a href="#">解方程</a></li>
-<li><a href="#">微分积分</a></li>
-</ul>
-</li>
-<li><a href="#4">4画图</a><ul>
+<li><a href="#4画图">4画图</a><ul>
 <li><a href="#cell">CELL</a></li>
 <li><a href="#struct">Struct</a></li>
 </ul>
 </li>
-<li><a href="#5">5符号与模拟</a></li>
-<li><a href="#">双变量分析</a><ul>
-<li><a href="#">相关系数计算</a><ul>
+<li><a href="#5符号与模拟">5符号与模拟</a></li>
+<li><a href="#双变量分析">双变量分析</a><ul>
+<li><a href="#相关系数计算">相关系数计算</a><ul>
 <li><a href="#pearson">Pearson</a></li>
 <li><a href="#spearman">Spearman</a></li>
 <li><a href="#jackknife">jackknife</a></li>
 </ul>
 </li>
-<li><a href="#">经典线性回归分析与预测</a></li>
-<li><a href="#">线性回归扩展</a><ul>
-<li><a href="#">交互式多线性回归分析：</a></li>
-<li><a href="#">岭回归：针对多重共线问题</a></li>
+<li><a href="#经典线性回归分析与预测">经典线性回归分析与预测</a></li>
+<li><a href="#线性回归扩展">线性回归扩展</a><ul>
+<li><a href="#交互式多线性回归分析">交互式多线性回归分析：</a></li>
+<li><a href="#逐步回归分析-stepwise">逐步回归分析：** <code>stepwise</code></a></li>
+<li><a href="#岭回归针对多重共线问题">岭回归：针对多重共线问题</a></li>
 <li><a href="#"></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#">零碎的</a></li>
+<li><a href="#零碎的">零碎的</a></li>
 </ul>
 <!-- /TOC -->
 <h1 id="第一节"><a href="#第一节" class="headerlink" title="第一节"></a>第一节</h1><p>经典统计学</p>
@@ -853,7 +851,7 @@ doc specgraph
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -994,7 +992,7 @@ doc specgraph
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共112.1k字</span>
+  <span class="post-count">博客全站共126.3k字</span>
 </div>
 
 

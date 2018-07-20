@@ -362,6 +362,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/21/算法与数据结构/miniumtree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/21/算法与数据结构/miniumtree/" itemprop="url">miniumtree</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T00:59:33+08:00">
+                2017-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="comment">//定义了一个类，包含起点与终点以及权值</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Edge</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> startnode;</div><div class="line">	<span class="keyword">int</span> endnode;</div><div class="line">	<span class="keyword">int</span> weightvalue;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">GetValue</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">void</span> Edge::GetValue(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c) &#123;</div><div class="line">	startnode = a;</div><div class="line">	endnode = b;</div><div class="line">	weightvalue = c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//交换函数，交换两个Edge值</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">swap</span><span class="params">(Edge &amp;a, Edge &amp;b)</span> </span>&#123;</div><div class="line">	Edge tmp = a;</div><div class="line">	a = b;</div><div class="line">	b = tmp;</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//快排函数，完成按weightvalue对Edge数组由小到大排序的功能。s时开始点的坐标，e是结束点的坐标</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(Edge*origin,<span class="keyword">int</span> s,<span class="keyword">int</span> e)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (s &gt;= e)<span class="keyword">return</span> ;<span class="comment">//如果起始&gt;=结束，return</span></div><div class="line">	<span class="comment">//选择中间点作为枢轴</span></div><div class="line">	swap(origin[(s + e) / <span class="number">2</span>], origin[e]);</div><div class="line">	<span class="comment">//lastlittle记录了上次那个比枢轴更小的数的位置的下一个位置</span></div><div class="line">	<span class="keyword">int</span> lastlittle = s<span class="number">-1</span>  ;</div><div class="line">	<span class="comment">//遍历，如果遇到比枢轴大的不予理睬，否则与上次记录的位置（一定比枢轴更大）上的数交换</span></div><div class="line">	<span class="comment">//完成后将在主轴两侧分别是比枢轴大和比枢轴小的数</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt;= e; i++)</div><div class="line">		<span class="keyword">if</span> (origin[i].weightvalue &lt;= origin[e].weightvalue) &#123;</div><div class="line">			swap(origin[i], origin[++lastlittle]);</div><div class="line">		&#125;</div><div class="line">	<span class="comment">//递归继续进行排序</span></div><div class="line">	quickSort(origin, s, lastlittle - <span class="number">1</span>);</div><div class="line">	quickSort(origin, lastlittle+<span class="number">1</span>, e);</div><div class="line">&#125;</div><div class="line"><span class="comment">//使用DFS思想判断一个图中是否有环</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">isCircle</span><span class="params">(<span class="keyword">int</span>**rect, <span class="keyword">int</span> s,<span class="keyword">int</span> n,<span class="keyword">int</span> &amp;lastflag,<span class="keyword">int</span> times)</span> </span>&#123;</div><div class="line">    rect[s][n] = times;<span class="comment">//node结点设置为已经被遍历</span></div><div class="line">	<span class="keyword">int</span> now = s;</div><div class="line">	<span class="comment">//从s结点开始进行深度优先的遍历</span></div><div class="line">	<span class="keyword">while</span>(now&lt;n) &#123;</div><div class="line">		<span class="keyword">if</span> (lastflag == <span class="number">1</span>)<span class="keyword">return</span>;<span class="comment">//已经找到了环，不必继续遍历下去</span></div><div class="line">		<span class="keyword">int</span> flag = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">			<span class="keyword">if</span> ((rect[s][i] &lt;=times) &amp;&amp; (rect[i][s] &gt;<span class="number">0</span>)) &#123;</div><div class="line">				rect[s][i] = rect[i][s] = times+<span class="number">1</span>;<span class="comment">//为防止对称的影响，总是将两个一同变化</span></div><div class="line">				now = i;</div><div class="line">				flag = <span class="number">1</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		<span class="comment">//如果没有找到后续未遍历节点，就退出对这个该节点的寻找</span></div><div class="line">		<span class="keyword">if</span> (flag==<span class="number">0</span>)<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">if</span> (rect[now][n] == times) &#123;</div><div class="line">			lastflag = <span class="number">1</span>;<span class="comment">//若找到了环，就把标志位置为1,退出。</span></div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		isCircle(rect, now, n, lastflag,times);<span class="comment">//否则接着遍历</span></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> totalweight = <span class="number">0</span>;<span class="comment">//总的weight值</span></div><div class="line">	<span class="keyword">int</span> n, m;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</div><div class="line">	<span class="comment">//开一个二维数组用于存图并对之进行初始化</span></div><div class="line">	<span class="keyword">int</span>**isin = <span class="keyword">new</span> <span class="keyword">int</span>*[n];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		isin[i] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++)</div><div class="line">			isin[i][j] = <span class="number">0</span>;</div><div class="line">	<span class="comment">//Edge类用来存图并方便地完成weightvalue由小到大的排序</span></div><div class="line">	Edge*alledges = <span class="keyword">new</span> Edge[m];</div><div class="line">	<span class="keyword">int</span> startn, endn, weightn;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; startn &gt;&gt; endn &gt;&gt; weightn;</div><div class="line">		startn--;</div><div class="line">		endn--;</div><div class="line">		alledges[i].GetValue(startn, endn, weightn);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//完成数据的初始化</span></div><div class="line">	<span class="comment">//快排完成排序</span></div><div class="line">	quickSort(alledges, <span class="number">0</span>, m - <span class="number">1</span>);</div><div class="line">	<span class="comment">//从最小的weightvalue的边开始往最小生成树里面添加</span></div><div class="line">	<span class="keyword">int</span> whichedge = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="comment">//当节点还没全添加进去而且边的个数没有越界</span></div><div class="line">	<span class="keyword">while</span> (whichedge &lt; m) &#123;</div><div class="line">		<span class="comment">//现在要考虑的边的起始与结束点</span></div><div class="line">		<span class="keyword">int</span> s = alledges[whichedge].startnode;</div><div class="line">		<span class="keyword">int</span> e = alledges[whichedge].endnode;</div><div class="line">		isin[s][e] = <span class="number">1</span>;</div><div class="line">		isin[e][s] = <span class="number">1</span>;</div><div class="line">		<span class="comment">//先将它们添加到图上</span></div><div class="line">		 <span class="comment">//调用isCircle函数，判断添加了该边之后会不会构成圈</span></div><div class="line">		<span class="keyword">int</span> iscircle = <span class="number">0</span>;</div><div class="line">		isCircle(isin, s, n, iscircle,whichedge+<span class="number">1</span>);</div><div class="line">		<span class="comment">//若未构成圈</span></div><div class="line">		<span class="keyword">if</span> (!iscircle) &#123;</div><div class="line">			<span class="comment">//增加权值总数</span></div><div class="line">			totalweight += alledges[whichedge].weightvalue;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//否则这个边不被需要，从图上删去</span></div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			isin[s][e] = <span class="number">0</span>;</div><div class="line">			isin[e][s] = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//考虑下一条边</span></div><div class="line">		whichedge++;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//输出总权值</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; totalweight;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1618,7 +1762,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1743,7 +1887,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共112.1k字</span>
+  <span class="post-count">博客全站共126.3k字</span>
 </div>
 
 

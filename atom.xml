@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-20T17:30:21.138Z</updated>
+  <updated>2018-07-20T17:43:27.753Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>matlab notes</title>
+    <link href="http://yoursite.com/2018/05/29/MATLAB/matlab%E5%A4%8D%E4%B9%A0/"/>
+    <id>http://yoursite.com/2018/05/29/MATLAB/matlab复习/</id>
+    <published>2018-05-29T08:55:39.779Z</published>
+    <updated>2018-07-20T17:43:27.753Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;概率分布&quot;&gt;&lt;a href=&quot;#概率分布&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="matlab" scheme="http://yoursite.com/categories/matlab/"/>
+    
+    
+      <category term="matlab" scheme="http://yoursite.com/tags/matlab/"/>
+    
+  </entry>
   
   <entry>
     <title>对话框（5</title>
@@ -156,7 +183,7 @@
     <link href="http://yoursite.com/2018/02/26/MATLAB/matlab_notes/"/>
     <id>http://yoursite.com/2018/02/26/MATLAB/matlab_notes/</id>
     <published>2018-02-26T06:27:50.037Z</published>
-    <updated>2018-07-20T15:50:32.425Z</updated>
+    <updated>2018-07-20T17:43:28.068Z</updated>
     
     <summary type="html">
     
@@ -372,6 +399,26 @@
   
   <entry>
     <title>编译原理——语法分析</title>
+    <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
+    <id>http://yoursite.com/2017/11/29/编译原理/语法制导翻译/</id>
+    <published>2017-11-29T09:05:47.000Z</published>
+    <updated>2017-12-03T15:38:18.619Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Tiny C中的语法树：节点分为两类 语句 表达式&lt;br&gt;
+    
+    </summary>
+    
+      <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编译原理——语法分析</title>
     <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2017/11/29/编译原理/语法分析/</id>
     <published>2017-11-29T09:05:47.000Z</published>
@@ -387,26 +434,6 @@
 &lt;p&gt;上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3.
         
       
-    
-    </summary>
-    
-      <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编译原理——语法分析</title>
-    <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
-    <id>http://yoursite.com/2017/11/29/编译原理/语法制导翻译/</id>
-    <published>2017-11-29T09:05:47.000Z</published>
-    <updated>2017-12-03T15:38:18.619Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Tiny C中的语法树：节点分为两类 语句 表达式&lt;br&gt;
     
     </summary>
     
@@ -499,28 +526,6 @@
     
     
       <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络编程一：UDP,CMD,TCP,WebServer</title>
-    <link href="http://yoursite.com/2017/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%AE%80%E5%8D%95udp%E9%80%9A%E4%BF%A1%E5%AE%9E%E7%8E%B0-java/"/>
-    <id>http://yoursite.com/2017/11/15/计算机网络/简单udp通信实现-java/</id>
-    <published>2017-11-15T14:12:40.000Z</published>
-    <updated>2018-07-20T15:58:52.428Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
