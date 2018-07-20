@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
+<meta name="description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lab5_Document">
 <meta property="og:url" content="http://yoursite.com/2017/01/05/OS/Lab5_Document/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
+<meta property="og:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/52660650.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/36171430.jpg">
@@ -171,10 +171,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/44717482.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/31362968.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-30/10360665.jpg">
-<meta property="og:updated_time" content="2018-01-14T19:13:43.338Z">
+<meta property="og:updated_time" content="2018-07-20T16:43:21.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lab5_Document">
-<meta name="twitter:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对">
+<meta name="twitter:description" content="Lab5-DocumentFile system preliminariesSectors and Blocks大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以块为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。 在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-28/52660650.jpg">
 
 
@@ -428,7 +428,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/05/OS/Lab5_Document/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -529,7 +529,8 @@
       
 
       
-        <h1 id="Lab5-Document"><a href="#Lab5-Document" class="headerlink" title="Lab5-Document"></a>Lab5-Document</h1><h2 id="File-system-preliminaries"><a href="#File-system-preliminaries" class="headerlink" title="File system preliminaries"></a>File system preliminaries</h2><h3 id="Sectors-and-Blocks"><a href="#Sectors-and-Blocks" class="headerlink" title="Sectors and Blocks"></a>Sectors and Blocks</h3><p>大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以<strong>块</strong>为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。</p>
+        <a id="more"></a>
+<h1 id="Lab5-Document"><a href="#Lab5-Document" class="headerlink" title="Lab5-Document"></a>Lab5-Document</h1><h2 id="File-system-preliminaries"><a href="#File-system-preliminaries" class="headerlink" title="File system preliminaries"></a>File system preliminaries</h2><h3 id="Sectors-and-Blocks"><a href="#Sectors-and-Blocks" class="headerlink" title="Sectors and Blocks"></a>Sectors and Blocks</h3><p>大多数磁盘并不是以字节为单位进行读写，而是以512字节为单位的扇区进行。文件系统经常是以<strong>块</strong>为单位申请使用磁盘。扇区大小是磁盘的性质，块则是os使用磁盘的一个方面。文件系统的块大小必须是扇区大小的整数倍。</p>
 <p>在unix的x86系统中，使用的块大小是512字节。现今由于存储介质的日益廉价以及对存储空间大粒度的操作的高效性，多数os都是用了更大的块。jos使用4k的块，正好和页大小一样。</p>
 <h3 id="Superblocks"><a href="#Superblocks" class="headerlink" title="Superblocks"></a>Superblocks</h3><p>文件系统一般会把文件的meta-data保存在一个便于访问的地方，这些data包括块大小、磁盘大小等数据，保存这些meta-data的地方被称为<strong>超级块</strong>。</p>
 <p>这里的文件系统只有一个超级块，他将会在block1。真正的文件系统一般会有很多个超级块，这样当某一个超级块崩溃的时候，其他的超级块还能正常使用。</p>
@@ -681,7 +682,7 @@
         <ul class="post-copyright">
   <li class="post-copyright-author">
     <strong>本文作者：</strong>
-    YaYi
+    傻瓜日和
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
@@ -728,8 +729,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/29/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/06/JAVA/使用命令窗口运行java程序/" rel="prev" title="java:Calculator">
+                java:Calculator <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -796,9 +797,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.gif"
-                alt="YaYi" />
+                alt="傻瓜日和" />
             
-              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
               <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
           </div>
 
@@ -809,7 +810,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -820,7 +821,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -831,7 +832,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -923,7 +924,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">YaYi</span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
 
   
 </div>
@@ -950,7 +951,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.2k字</span>
+  <span class="post-count">博客全站共112.1k字</span>
 </div>
 
 

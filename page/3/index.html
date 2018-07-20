@@ -362,10 +362,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/哈希/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/OS/实验串讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -381,7 +381,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/12/哈希/" itemprop="url">哈希</a></h1>
+                <a class="post-title-link" href="/2017/11/14/OS/实验串讲/" itemprop="url">实验串讲</a></h1>
         
 
         <div class="post-meta">
@@ -393,8 +393,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T23:57:33+08:00">
-                2017-11-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T22:05:33+08:00">
+                2017-11-14
               </time>
             
 
@@ -416,8 +416,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT Lab</span>
                   </a>
                 </span>
 
@@ -455,15 +466,207 @@
       
         
           
-            <hr>
-<p>emmm…大二的时候DS只考了80，出来混的，总是要还的。</p>
-<h2 id="不希望文件太多都小于512k，会占我的空间。"><a href="#不希望文件太多都小于512k，会占我的空间。" class="headerlink" title="不希望文件太多都小于512k，会占我的空间。"></a>不希望文件太多都小于512k，会占我的空间。</h2><h1 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h1><p>哈希其实没什么神秘的，不过是一群贪心的人的产物。</p>
-<p>散列函数，将key转化为对应的value值得到索引。这个有诸如<strong>取模</strong>，<strong>ASCII平均</strong>，等等方法。橙皮书上有一种sfold，似乎性能会更好一些。</p>
-<h2 id="开哈希"><a href="#开哈希" class="headerlink" title="开哈希"></a>开哈希</h2><p>开哈希类似于静态链表，每一个value对应一个链表，成为挂着的桶。</p>
-<h2 id="闭哈希"><a href="#闭哈希" class="headerlink" title="闭哈希"></a>闭哈希</h2><p>闭哈希将node存储在给定的一个数组中。这个数组的下标将作为value的索引值，由于value可能重复，需要探查方式，有很多方式，比如线性探查与二次探查。</p>
-<p>关于闭哈希的删除，其实不必真的每次都向前挪，而是增加一个“墓碑”，它代表这里没有数据可以被插入，但是又不是真的空因为需要继续向前探查。<br>当次数多了性能就会下降，一种解决方式是向前挪，另一种是重新散列。</p>
+            <a id="more"></a>
+<h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
+<p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
+<p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
+<hr>
+<p><strong>iret</strong>：系统指令，从中断中返回。<br><strong>ret</strong>：从函数中返回<br><strong>retf</strong>：与ret基本一样，从函数中返回。（弹出栈，拿出返回地址（就是下一条语句）返回值，丢掉压栈参数）</p>
+<p>中断是一个硬件的事件，中断返回与函数返回不同。当一个中断来了，不管你当时在干嘛，就乖乖地保存一下现场去响应中断。这个<strong>保存现场</strong>，包括了硬件将会自动帮你保存的一些现场，比如CS、SS、Flag等等，这些是自动存下的，iret的作用就是自动地将这些东西都弹出。但是这些现场保存并不够，通用寄存器是不会帮你保存的。</p>
+<p>ret、iret等等在汇编之中可以随意调用，并不需要其他约束。如果当你在汇编中不是函数（中断）的里面调用了这些，它会干些什么呢？<br>他会把自己认为的自己保存进去的那些东西弹出来，一个是返回地址给PC，一个是返回值给保存返回值的东西。即使没有调用函数，ret的行为也是固定的：<strong>从栈顶弹出两个值，一个给PC，一个给存储返回值的东西</strong>，iret的行为也是固定的，就是从栈顶弹出东西给那些变量。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg" alt=""><br>这就是保护现场之后的栈。<br>ret是弹出到eip，retf弹出到CS，iret弹出到CS（代码段）、EFLAGS，根据是否改变特权等级，iret会连下面的SS以及esp一起弹出来。</p>
+<p>这样，如果一个程序在栈中事先在栈中存了一些数据，然后调用了iret，iret不管栈中究竟是什么，就会弹出5（3）个元素，给对应的寄存器。ret和retf也类似。因此，在汇编中ret们与高级语言的return们的作用不同，汇编中的ret们只是<strong>提供了一个批量修改寄存器的方法</strong>。</p>
+<p>系统中有两种中断。中断可能在任意时间发生。在用户模式下与在特权模式下中断发生后系统的动作是不相同的。</p>
+<p>在用户模式下，系统会保存这些东西：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg" alt=""><br>还记得在“内存管理”的lab里面讲过的<strong>段选择子</strong>，其中有两个bit标识自己处在什么特权模式下的特权位。这里面有两个段选择子，一个是栈的，一个是代码段的，由于在用户模式下，可以看到CS代码段选择子与SS栈选择子的特权位RPL都是3。</p>
+<p>在特权模式下，一旦发生中断：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/84089468.jpg" alt=""><br>这时保存的东西比较少。</p>
+<p>无论在哪种模式下一旦调用iret，就把这些东西（其实不一定是这些东西，只是对应栈顶的几个数据）弹出去给对应的寄存器。</p>
+<h3 id="正题：特权降级"><a href="#正题：特权降级" class="headerlink" title="正题：特权降级"></a>正题：特权降级</h3><p>考虑做完lab2，系统在特权级是0的模式下，这是需要现将自己降级成为特权3的模式，再去运行用户程序。怎么降？</p>
+<p>要伪造一个场景：刚刚一个用户程序产生了一个中断所以我升级了，现在我要中断返回。于是我去伪造了一个栈，在栈里头存上了iret希望的那5个数据，每一个是32位。然后调用iret，这些就会从栈中弹出来到达对应的寄存器，然后我就回到了用户模式，那两个段选择子的特权级值就被改为了3。<br>这里需要注意的是，系统原来使用的特权级是0的栈，iret之后这个栈空掉了，但是系统不再使用这个栈，而是重新为用户态开避了一个新的栈，这个栈不再是以前的那个栈了，这个栈放在用户空间的数据段里，它的权限也是3。</p>
+<blockquote>
+<p>为什么要这样设计呢？在特权模式下，系统并不想和特权级更低的用户态共用一个特权级更高的栈。另一个方面从安全考虑，为了防止用户态随意弹出数据随意插入数据破坏内核运行。</p>
+</blockquote>
+<p>从特权模式到达用户模式，新创建了一个栈给用户程序使用，这是在刚上电的时候，还没有用户程序运行。用户程序运行过程中可能会有系统调用回到特权模式下，这是将会使用前面提到的系统用的那个栈，系统调用完成之后，不会再为用户程序创建新的栈了，一是占空间，一是以前的运行态不能就这样丢掉。就还让它回到自己原来的栈。</p>
+<h2 id="特权级提升"><a href="#特权级提升" class="headerlink" title="特权级提升"></a>特权级提升</h2><p>中断、异常、系统调用：我需要更高特权的东西帮帮我。</p>
+<p>在80386中，系统调用就是一个中断。异常是需要紧急处理的中断。</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>在32位机器上的中断是一个很复杂的机制，因为那时保护模式已经建立了起来，整个运行在虚拟地址空间上。所以当中段发生的时候，系统使用<strong>中断描述符表</strong>，写着自己所有的中断号。<br>中断描述符寄存器（IDTR）中存的就是中断描述符表（IDT）在内存中的位置以及大小。表按照中断号排序，每一个中断描述符在80386中被叫做一个门，<strong>中断门</strong>（中断），<strong>陷阱门</strong>（异常）。会根z中断发生的编号从表中取出对应的描述符（门），<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg" alt=""><br>取回的描述符是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg" alt=""><br>segment selector与offset用来描述在段机制下自己的中断响应函数的位置。segment selector负责在GDT里面找到对应的段，offset负责找对应的偏移量。找到函数之后，保存现场并执行响应函数。</p>
+<p>在终端发生的时候，系统将会看一下产生中断的程序的特权级，决定应该怎样保护现场。如果在特权状态，不用换栈，只需要保存更少的东西，而处于用户状态下的程序在执行完中断响应函数之后还要从（？）退回到自己的用户栈，保存了更多的东西。</p>
+<h3 id="正题：特权级提升"><a href="#正题：特权级提升" class="headerlink" title="正题：特权级提升"></a>正题：特权级提升</h3><p>从特权模式3切换到特权模式0，实际上就是响应一个中断，这就是上面图中的trap。</p>
+<p>对于用户程序，os并不信任。当trap发生时，当前用户程序的运行状态会被存入到<strong>内核栈</strong>中，而用户栈并没有变化。这也是中断与普通函数调用的不同。<br>现在已经进入了特权模式，如果不作任何操作，只是调用一个iret，前面讲到的CS，SS特权级3又会被写入到寄存器里面，就又回到了用户态。为了能留在特权模式下，对栈进行伪造，假装在进入终端之前就是一个特权模式：也就是把上面提到的用户态发生中断的栈信息修改成特权模式发生中断的栈信息。这时iret，就可以留在特权模式下。</p>
+<p>但是：在伪造的时候，SS被扔掉了。怎么回去呢？80386提供了一个<strong>TSS任务状态段</strong>，它几乎可以存下CPU上所有的寄存器的不止一份拷贝。TSS每个进程一个，会存下一个进程在切换特权状态的时候原特权状态下的SS的值。系统将会自己对TSS进行维护，以确保切换模式时栈的跳转。</p>
+<p>TSS存在于哪里呢？在GDT里面有一个TSS的描述符：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg" alt=""></p>
+<p>80386中有4个特权模式，目前在虚拟化技术下只是用了3个。</p>
+<p>有一个叫做TSR的寄存器，存着selector、base addr以及segment limit。便于直接找到TSS。</p>
+<p>如果想要回到用户模式，进入trap，伪造一个从用户态过来的栈，iret即可。</p>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>用户程序可以通过系统调用访问内核服务，这个过程需要指定中断号，使用tarp或者特殊指令（SYSENTER/SYSEXIT）实现。</p>
+<h2 id="关于这次实验"><a href="#关于这次实验" class="headerlink" title="关于这次实验"></a>关于这次实验</h2><p>这里的env就是课上讲的pcb。<br>父子进程的一个作用是父进程要为子进程收尸。</p>
+<p>elf格式：linux下的可执行。<br>创建进程并执行elf：没有文件系统怎么办？<br>把指定的文件链接进目标文件，骗bootloader把程序也搬进内存。</p>
+<p>-b binary path:-b帮我搬进来。binary这是个可执行程序。<br>然后重生成一个符号表。<br>把这个文件作为一个大数组缀到最后，然后直接使用这个数组。</p>
+<p>编码的时候，这个数组还没有，链接的时候才有，怎么办？定义一个外部变量extern。<br>只需知道生成符号表的规则，然后按规则命名即可。</p>
+<p>进来之后还只是一个大数组，还需要经过链接之后映射要对应的虚拟地址才能执行。</p>
+<h1 id="Lab4-Preemptive-Multitasking"><a href="#Lab4-Preemptive-Multitasking" class="headerlink" title="Lab4-Preemptive Multitasking"></a>Lab4-Preemptive Multitasking</h1><p>lab3做完之后，当一个进程结束之后，就退出。在这个实验中，主要完成的是</p>
+<p>本次实验主要是决定：在何时利用什么原则什么地方切换进程。<br>上下文怎么切换？其中一项：一定要把页表换掉，也就是把cr3中的页目录项换掉。之后，连接tlb也会失效，处理流水线，吧上一个进程的东西全部清理掉。</p>
+<p>本实验大部分代码都已经写完了，主要是读代码。</p>
+<p>如何实现更加有效的调度？更加频繁的调用schedule_yeid。</p>
+<p>时钟中断的作用：打断正在执行的程序，调用sched_yield进行进程轮转</p>
+<p>在本次实验中有一个时钟中断，你要做的就是在这个时钟中断的响应函数之中做一些事情，决定下一个进程怎么上去谁会上去（就是我们学习过的调度算法）</p>
+<h2 id="多核处理器"><a href="#多核处理器" class="headerlink" title="多核处理器"></a>多核处理器</h2><p>一开始是因为没有在一个进程运行的时候调用另一个进程的机制，本实验中的多核只是实验的设计者希望我们体验一下在系统中有多个进程活动是一个什么样的状态，因此鼓励你去多弄几个核心。<br>只要是单核，其实每一个时刻只能有一个进程运行。</p>
+<p>为什么会有多核处理器出现呢？在后摩尔时代，为了提升处理器的处理能力。</p>
+<p>主核会在系统上电之后接管机器，他们的地位并不是平等的。</p>
+<h3 id="现代处理器的休眠唤醒机制"><a href="#现代处理器的休眠唤醒机制" class="headerlink" title="现代处理器的休眠唤醒机制"></a>现代处理器的休眠唤醒机制</h3><p>现代处理器的模式一般有三种：active,idol,sleeping</p>
+<p>CPU在关闭的时候，内存并不会关闭。休眠时，找到一个调度点，这时不调度了，存好有用的东西，然后cpu耗电量就会变得非常低。有一个cpu中的寄存器会标志自己刚刚是休眠了还是关机了。如果是休眠，那么内存里面所有的东西都还在，只需要调到该去的地方，然后进行一轮新的调度；如果不是休眠而是关机了，内存中的东西就被清空了，就是上电启动过程。</p>
+<p>有时手机会坏掉，就是在锁屏（休眠）之后也会重新起动，这也就是cpu中的那个寄存器坏掉了。</p>
+<p>那么，如果帮一个休眠的cpu准备好了它的休眠位以及内存，就可以让它认为它是一个刚刚休眠的cpu。</p>
+<p>bsp是主核，在系统上电之后是只有主核启动，直到系统启动完之后，直到需要另外一个核心运行一个进程，bsp帮ap制造一个它刚刚在休眠的假象，然后唤醒它，这样这个ap就会认为自己是刚刚休眠的，然后继续执行。运行完之后，主核就会选择把这个核心给关掉，然后省电。</p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/算法与数据结构/哈希/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/12/算法与数据结构/哈希/" itemprop="url">哈希</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T23:57:33+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>emmm…大二的时候DS只考了80，出来混的，总是要还的。<br>不希望文件太多都小于512k，会占我的空间。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/12/算法与数据结构/哈希/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -516,7 +719,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/语言们的输出格式控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -606,7 +809,8 @@
       
         
           
-            <p><a href="http://www.cnblogs.com/leewiki/archive/2011/12/13/2286168.html" target="_blank" rel="external">待整理</a></p>
+            <a id="more"></a>
+<p><a href="http://www.cnblogs.com/leewiki/archive/2011/12/13/2286168.html" target="_blank" rel="external">待整理</a></p>
 
           
         
@@ -658,10 +862,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/编译原理——词法分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -677,7 +881,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/09/编译原理——词法分析/" itemprop="url">编译原理——词法分析</a></h1>
+                <a class="post-title-link" href="/2017/11/09/编译原理/编译原理——词法分析/" itemprop="url">编译原理——词法分析</a></h1>
         
 
         <div class="post-meta">
@@ -750,672 +954,14 @@
 
       
         
-          
-            <p>我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty</p>
-<blockquote>
-<p>时间：1012cp3 3:15开始 词法分析器介绍</p>
-<p>编译并不是一件轻松的事情，对于较大的系统，编译的速度并不理想，这也是为什么我们需要优化编译技术。</p>
-</blockquote>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><strong>词法单元（单词）</strong>：由一个词法单元名以及一个可选的属性值组成。名即是语法分析器的输入符号token。<br><strong>模式</strong>：一个词法单元的词素可能具有的形式。一个词素不能与两个或多个词法单元进行匹配（二义性）。<br><strong>词素</strong>：源程序中的字符序列，是程序中实际出现的字符串。</p>
-<blockquote>
-<p>在lex与yacc中，有时会有一个全局变量。他保存了当前词素（词法单元：关于这里，龙书里面的和wg写的不一样呢？）的属性值，这个属性值可以被记录在语法树上。</p>
-</blockquote>
-<h2 id="词法分析器要干些什么？"><a href="#词法分析器要干些什么？" class="headerlink" title="词法分析器要干些什么？"></a>词法分析器要干些什么？</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-12/6339247.jpg" alt=""></p>
-<ol>
-<li>读入源程序字符，生成词素，确定词法单元序列</li>
-<li>与符号表进行交互</li>
-<li>过滤掉源程序中的<strong>注释</strong>与<strong>空白</strong></li>
-<li>将编译器生成的错误信息与位置联系</li>
-<li>预处理：扫描阶段完成不需要生成词法单元的简单处理；词法分析阶段处理扫描阶段的输出并生成词法单元</li>
-</ol>
-<blockquote>
-<p>跳过了一些东西</p>
-</blockquote>
-<h1 id="正则表达式（正规表达式、正规式）"><a href="#正则表达式（正规表达式、正规式）" class="headerlink" title="正则表达式（正规表达式、正规式）"></a>正则表达式（正规表达式、正规式）</h1><p>为什么需要正则表达式来描述字符串序列呢？<br>像在上下文无关文法中所描述的那样，因为字符们所组成的可能的字符串是<strong>无穷</strong>的。</p>
-<p>单词是什么？单词的本质就是<strong>符号串的集合</strong>。正则表达式就是代替了自然语言对特定符号串集合的描述。</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>符号表</strong>：符号的有穷集合<br><strong>符号串</strong>：字母表中符号构成的有穷序列。也成<strong>句子</strong>，<strong>字</strong>。<strong>|s|</strong>代表<strong>字符串s的长度</strong>，$\epsilon$是空字符串。<br><strong>语言</strong>：是一个给定符号表上的特定的符号串的集合。</p>
-<p>比如：给定符号表{1,0}，有符号串01100010，一种语言是{0，1，00，11，000，111….}即串中只含一种字符的字符串集合。</p>
-<p>特例：$\varnothing$是<strong>空语言</strong>。{$\epsilon$}是只含空串的语言。</p>
-<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><h3 id="符号串的运算"><a href="#符号串的运算" class="headerlink" title="符号串的运算"></a>符号串的运算</h3><p><strong>连接</strong>：x=hou y=se xy=house    s$\epsilon$=$\epsilon$s=s  (emmmm说好的不能这样写呢？)<br><strong>幂</strong>：$s^n=s^(n-1) * s^1$</p>
-<h3 id="语言的运算"><a href="#语言的运算" class="headerlink" title="语言的运算"></a>语言的运算</h3><p>下表中运算符的优先级由低到高</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">运算</th>
-<th style="text-align:center">定义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">并</td>
-<td style="text-align:center">$L\cup M={ s \ s\in L 或 s\in M} $</td>
-</tr>
-<tr>
-<td style="text-align:center">交</td>
-<td style="text-align:center">$LM={ st \ s\in L 且 t\in M} $</td>
-</tr>
-<tr>
-<td style="text-align:center">Kleen闭包</td>
-<td style="text-align:center">$L^*=\cup_{i=0}^\infty L^i$</td>
-</tr>
-<tr>
-<td style="text-align:center">正则闭包</td>
-<td style="text-align:center">$L^*=\cup_{i=1}^\infty L^i$</td>
-</tr>
-</tbody>
-</table>
-<p>$$\color{red}{正则表达式&lt;-&gt;语言运算的简洁描述}$$</p>
-<h2 id="正则表达式定义"><a href="#正则表达式定义" class="headerlink" title="正则表达式定义"></a>正则表达式定义</h2><p>字母表$\sum$上的正规式r的定义规则，以及r所表示语言L(r)定义：</p>
-<ol>
-<li>$\epsilon$是正规式，表示语言{$\epsilon$}</li>
-<li>若$a\in \sum$则a是正规式，表示语言{a}</li>
-<li>r , s是正规式，表示语言L(r)与L(s)，则：<ol>
-<li>(r)|(s)是正规式，表示语言L(r)$\cup$L(s)</li>
-<li>(r)(s)是正规式，表示语言L(r)L(s)</li>
-<li>$(r)^*$是正规式，表示语言$(L(r))^*$</li>
-<li>(r)是正规式，表示语言L(r)</li>
-</ol>
-</li>
-</ol>
-<p>第三条的四条，优先级从上到下依次升高。</p>
-<blockquote>
-<p>$(a|b)^*$={所有由a、b组成的符号串}</p>
-</blockquote>
-<p>正规式<strong>等价</strong>：r=s &lt;-&gt; L(r)=L(s)</p>
-<p>正则运算的特性:<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-12/3363060.jpg" alt=""></p>
-<p>可以像产生式那样，为正规式指定名字：</p>
-<blockquote>
-<p>num -&gt; r1<br>其实，上下文无关文法的描述能力包含了正则表达式的描述能力。所有可以被正则表达式描述的都可以被上下文无关文法描述，但是正则表达式并不能描述某些上下文无关文法可以描述的东西。<br>那么为什么需要正则表达式来实现词法分析器？</p>
-<ol>
-<li>简化编译器的设计：使每一阶段需要做的事情更加简单清晰</li>
-<li>提高编译器的效率：使用专门的字符缓冲技术提高编译速度</li>
-<li>增强编译器的可移植性：输入设备相关的特殊性被限制在词法阶段</li>
-</ol>
-</blockquote>
-<p>下面举一个例子：</p>
-<blockquote>
-<p>无符号整数：<br>digit -&gt; 0|1|2|…|9<br>digits -&gt; digit digit*  其实也可以是$digit^+$<br>optional_fraction -&gt; .digits | $\epsilon$<br>optional_exponent -&gt; (E(+|-|$\epsilon$)digits)|$\epsilon<br>num -&gt; digits optional_fraction optional_exponent</p>
-</blockquote>
-<p><strong>符号简写：</strong></p>
-<p><strong>+</strong>:一个或多个实例<br><strong>?</strong>:0或1个实例：$r?=r|\epsilon$$\rightarrow$$L(r)\cup {\epsilon}$<br><strong>[]字符集</strong>:[abc]=&gt;a|b|c、[a-z0-9]=&gt;a|b|..|z|0|1..|9</p>
-<h2 id="非正规集"><a href="#非正规集" class="headerlink" title="非正规集"></a>非正规集</h2><p><strong>正规式无法描述的语言</strong>：{wcw|w是a、b组成的字符串}正规式无法描述平衡或嵌套的结构<br><strong>正规式只能表示</strong>：有限的重复、一个给定结构的无限重复</p>
-<p>关于正规式的练习，参考<a href="http://blank" target="_blank" rel="external">第三章练习</a></p>
-<h1 id="Lex"><a href="#Lex" class="headerlink" title="Lex"></a>Lex</h1><p>使用流程与yacc类似。</p>
-<p>$\color{red}{ATTENTION!</p>
-<p>在使用project wizard建立lex的时候你写的那个词法分析器的名字就是那个名字，</p>
-<p>你最好别自己再修改，否则在VS里面运行不出来！！！}$</p>
-<p>给的是字符流，出来的是单词流。</p>
-<p>规则段放正则表达式与语义动作。</p>
-<p>第四次作业词法分析器设计将会上传。<a href="http://blank" target="_blank" rel="external">click here to get</a></p>
-<h1 id="有限自动机"><a href="#有限自动机" class="headerlink" title="有限自动机"></a>有限自动机</h1><p>有限自动机可以直接转换成程序。</p>
-<h2 id="NFA"><a href="#NFA" class="headerlink" title="NFA"></a>NFA</h2><h1 id="从正则表达式到自动机"><a href="#从正则表达式到自动机" class="headerlink" title="从正则表达式到自动机"></a>从正则表达式到自动机</h1><p>从这之后，正是lex所做的事情。</p>
-<p>在这一节里，将介绍两个过程：一个是正则表达式到NFA，另一个是NFA到DFA。之所以让NFA做一个过渡，是因为正则表达式直接到DFA的算法很复杂。本次更新掠过。</p>
-<p>NFA与DFA的性能差别很大：NFA占用空间比较少，但是使用NFA进行词法分析需要在错误态停止，可能需要花费$O(2^n)$的时间复杂度；DFA占用空间很大（最坏情况下$O(2^n)$），但是使用它进行词法分析的时候接近线性时间。</p>
-<h2 id="正则-gt-NFA"><a href="#正则-gt-NFA" class="headerlink" title="正则 -&gt; NFA"></a>正则 -&gt; NFA</h2><p>正则表达式构造NFA使用<strong>MacMaughton-Yamada-Thompson算法</strong>。简称<strong>Thompson算法</strong>。这个算法描述如下：</p>
-<p><strong>基本规则：</strong></p>
-<h2 id="自动机运转"><a href="#自动机运转" class="headerlink" title="自动机运转"></a>自动机运转</h2><blockquote>
-<p>s $\leftarrow$ e -closure({s0});<br>c $\leftarrow$ nextchar;<br>while c $\neq$ eof do<br> s $\leftarrow$ e -closure(d(s,c));<br> c $\leftarrow$ nextchar;<br>end;<br>if S$\cap$F$\neq$ $\varnothing$ then return “yes”<br>         else return “no”</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>s $\leftarrow$ s0;<br>c $\leftarrow$ nextchar;<br>while c $\neq$ eof do<br> s $\leftarrow$ d(s,c);<br> c $\leftarrow$ nextchar;<br>end;<br>if s is in F then return “yes”<br>            else return “no”</p>
-</blockquote>
-<p>前面提到了，NFA占空间更少，DFA识别字符串更快，贪心的人类啊希望能糅合这两者的优点。看前面的NFA代码，其实在第四行那句，实际上就是前面提到的构造DFA的过程。人们想到使用Cache。使用NFA，当NFA构造出DFA的一个状态时，就把这个状态构造的条件以及状态本身存到cache里面。当while进一个c的时候，首先看一看现今状态加上c到达的态是不是已经存在cache，如果存在里面，最耗时间的那一部分就不用运行了。cache的管理仍然是程序局限性原则。占用空间不会太大以期望达到折衷的效果。</p>
-<p>如果要构造出一个Lax，需要将所有的正则表达式得到的NFA进行一个并操作（保留各自的终态以区分）。然后构造它的DFA。</p>
-<p>值得注意的是，这样不能在一个终态停止，而是在错误态终止并退回到最近经过的那个终态（每经过一个终态，记录当前的<strong>输入指针</strong>以及<strong>匹配模式</strong>）。以防止找到前缀，产生错误。这种方法是<strong>最长前缀法</strong>，在前面已经提到过。</p>
-<h1 id="DFA优化"><a href="#DFA优化" class="headerlink" title="DFA优化"></a>DFA优化</h1><p>DFA状态数其实不会太多的影响时间复杂度，当状态变少的时候，将会减少存储空间的消耗。</p>
-<p><strong>区分：</strong>一个符号串可区分两个状态：这一个串<strong>从这两个状态出发</strong>在DFA上得到的结果一个是accept，一个是reject。在做区分的时候，其实可以看到：最终字符串得到的终态在不同集合，则他们是可区分的。</p>
-<blockquote>
-<p>Ex<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-9/60487283.jpg" alt=""><br>a不能区分状态A与B。而且还可以看到，以a开头的所有字符串都不可能区分A与B了。再进一步看到，a不可能区分任意两个，因为所有状态在经过a的状态迁移之后都到达了状态B。<br>同理，b不可能区分ACE，以b开头的都不能区分ACE。但是b却可以区分BD。<br>不要忘记，$\epsilon$可是可以区分的。而且他的区分应该被放在最前面，那是因为$\epsilon$区分了终态与其他状态。</p>
-</blockquote>
-<p>在区分的过程中发现了这样一个规律：如果对于串s，A状态与B状态经过了s都到达同一个状态C，那么以s做前缀的字符串都不可能区分A与B了。当所有字符串都不能区分A与B的时候，可以把A与B合并成同一个状态。但是对于无穷的字符串，怎么确定 “所有都不行” 呢？ 在前面，我们已经提出了一个解决方案——当前缀s不行的时候，所有的sx都不行了。但是，即使是有了这个规律，使用“不行”的这种方法解决问题仍会显得繁琐。</p>
-<p>真正在执行的时候，实行的是<strong>分裂</strong>，这样，通过有顺序地枚举字符串，将能被区分开的状态分开。这样对于前面的<strong>不同集合</strong>的说法，也能更好地理解。</p>
-<p><strong>算法描述：</strong>首先使用$\epsilon$区分终态与非终态，将它们分为两个集合。随后，像子集构造法那样，有顺序地枚举输入字符串，将那些经过状态迁移能到达终态（不同集合）的状态剔除出去组成一个新的集合（如果两者到达同一个集合，这两者是不能区分的，应该在同一个集合），对于那些含有多个元素的集合，如果经过一系列不同的状态迁移到达不同的集合，仍需要继续分开。直到不再产生新的集合。</p>
-<blockquote>
-<p>仍然使用上面的例子，进行分裂的过程：</p>
-<ol>
-<li>$\epsilon$ -&gt; {A,B,C,D}、{E}</li>
-<li>a -&gt; {A,B,C,D}  ({B,B,B,B})-&gt;全部一样，以a打头的不用再试</li>
-<li>b -&gt; {A,B,C}{D}  ({C,D,C,E})</li>
-<li>b -&gt; {A,C}{B}{D}  ({C,C,D})  -&gt; 不同集合</li>
-</ol>
-<p>最终得到的最小DFA：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/65136532.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/4345780.jpg" alt=""></p>
-</blockquote>
-<p>最后使用新的状态进行迁移的时候，一定不会出现问题。</p>
-<h1 id="补充：从自动机到正则表达式"><a href="#补充：从自动机到正则表达式" class="headerlink" title="补充：从自动机到正则表达式"></a>补充：从自动机到正则表达式</h1><p>可以从一个DFA或NFA得到对应的正则表达式。但是这种方式并不是总是简单的，他只是提供了一个模糊的思路，当一个DFA很复杂的时候，还是需要有聪明才智才行。<br>这里只是简单的给出这个方法，具体可查看<a href="http://note.youdao.com/noteshare?id=9fa52c6fcb1a6637fbdb36f669852abe&amp;sub=9A6AEF1D34C044E68D8BD1AD2057996E" target="_blank" rel="external">这个文件</a>。</p>
-<p>为了使讨论更加简单，我们强制一个DFA/NFA应该有下列特性：</p>
-<ol>
-<li>初态可以到达任意其他状态，没有状态可以通过状态迁移到达初态</li>
-<li>只有一个终态，终态不能通过状态迁移到达非终态</li>
-<li>初态不能是终态</li>
-<li>除了初态与终态，其他状态彼此相连</li>
-</ol>
-<p>这四个条件看起来很可怕，其实当我们引入了$\varnothing$并根据情况添加初态终态之后，很容易可以把一个DFA/NFA转为一个符合要求的有限自动机。</p>
-<p>以一个例子来说明：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/17062978.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/80510309.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/99180281.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/86068172.jpg" alt=""></p>
-<p>为了不让自己沾沾自喜，必须指出上面给出的例子很简单，看下面这个：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/70925658.jpg" alt=""></p>
-<p>由于生成initstate的一个要求是，不能有进入initstate的箭头，好，像上面一样加一个init，加一个Ac，随即，在删除A的时候就会发现问题。这尼玛转来转去的究竟怎么写边上的正则表达式啊？！</p>
-<h1 id="能不能与好不好"><a href="#能不能与好不好" class="headerlink" title="能不能与好不好"></a>能不能与好不好</h1><p>在龙书的第九章。</p>
-<ol>
-<li><p>流程可否更加简洁？ 正则 -&gt; DFA：本质上还是做子集构造法-吧正则的某些位置对应NFA里面状态，位置集对应NFA的状态集</p>
-</li>
-<li><p>优化结果？ 最小DFA</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap3-内存管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/06/OS/chap3-内存管理/" itemprop="url">chap3-内存管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
-                2017-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/课/" itemprop="url" rel="index">
-                    <span itemprop="name">课</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="内存中的概念"><a href="#内存中的概念" class="headerlink" title="内存中的概念"></a>内存中的概念</h1><p><strong>地址空间</strong>：一个进程可用于寻址内存的一套地址集合。<br><strong>内存管理</strong>：逻辑地址与物理地址之间的映射<br><strong>内存管理的特性</strong>：</p>
-<ol>
-<li>高效：使得更多的地址可以被使用（其实都是骗–人–进程的）</li>
-<li>合理：alloc、free、locate、protect</li>
-<li>便利：？<br><strong>内存管理class</strong></li>
-<li>简单机制：静态固定</li>
-<li>复杂机制：交换、paging</li>
-</ol>
-<blockquote>
-<p>为什么会有这种欺骗的行为存在呢？<br>程序员希望拥有一个又大又快又永久的存储器，希望他们的寻址方式是统一的；但是实际上，又快又大又永久的存储器目前还是不现实的。<br>现在我们有的是：</p>
-<ul>
-<li>cache：非常快，昂贵</li>
-<li>内存：速度适中，价格适中</li>
-<li>硬盘：慢，廉价</li>
-</ul>
-</blockquote>
-<p>在计组课里面应该就学过一个各种存储器的速度金字塔。最快的寄存器甚至是按照字节来计算的存储设备。</p>
-<p>于是提出问题：如何使用有限的高速存储设备以及较多的低速存储设备来提高的响应速度呢？</p>
-<h2 id="内存管理的任务"><a href="#内存管理的任务" class="headerlink" title="内存管理的任务"></a>内存管理的任务</h2><ol>
-<li>申请与撤回：资源管理</li>
-<li>地址转换：映射管理</li>
-<li>分享与保护</li>
-<li>空间扩张：你本来不可能占4G的，你非说你占了4个G</li>
-</ol>
-<h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3><blockquote>
-<p>从接口中知道，CPU希望访问一个地址的时候，会给出对应的地址（上总线）以及对应的读写信号etc。</p>
-<p>对程序员来说，每一个程序就是一方天地，并不想在程序里面去思考你os应该解决的存储问题，程序认为自己的地址都是从m开始，想访问哪里就访问哪里，但是os并不可以这样做。<br>就像在实验中提到的那样，程序的elf（exe）文件中会有自己的链接地址，这个地址表示程序假设自己被加载到内存的位置，os加载运行的时候需要进行<strong>重定位</strong>，对程序中相关的地址都经过变换。</p>
-</blockquote>
-<p>对于上述问题，使用两个寄存器来解决，一个是<strong>基址寄存器</strong>，一个是<strong>界限寄存器</strong>，它们在每一个CPU中都存在。基址寄存器存储当前进程的开始物理地址，界限寄存器中存储该程序长度。</p>
-<p>当使用一个地址a的时候，首先判断a是否大于界限寄存器中存储的值，如果不是，再将a加上基址寄存器中的值，然后送到地址总线。这些动作都是CPU硬件完成的。</p>
-<h2 id="monoprograming：单道程序处理"><a href="#monoprograming：单道程序处理" class="headerlink" title="monoprograming：单道程序处理"></a>monoprograming：单道程序处理</h2><h2 id="multiprogramming"><a href="#multiprogramming" class="headerlink" title="multiprogramming"></a>multiprogramming</h2><p>支持多个进程的os内存管理都需要做什么？</p>
-<ol>
-<li>申请空间、释放空间</li>
-<li>地址转换、内存保护（several method）</li>
-<li>CPU利用：MTF的表现</li>
-<li>内存扩张：更加柔韧的内存管理</li>
-</ol>
-<p>使用partition来为每一个进程分配空间</p>
-<hr>
-<p><strong>动态分区分配</strong>：当程序被加载执行时，分配一个进程制定大小可变的分区，在此分区内地址连续<br>os需要维护所有进程的已分配数据结构以及空闲分区。<br>$$\color{red}{whats this}$$</p>
-<h3 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h3><p>通常情况下内存是不够用的。仅仅Windows后台应用都会占据一些内存，更不用说开浏览器，开vs等等。为了处理这样的情况，需要，把某一些进程放到外存，为当前运行进程提供内存空间。</p>
-<p><strong>交换</strong>：把一个完整的进程调入内存，使该进程运行一段时间，然后存回磁盘。<br>这里提到的交换还不是后面说到的页面置换。</p>
-<p><strong>交换中的内存管理</strong>：</p>
-<ol>
-<li>数据结构与算法：如何描述内存的使用 ； 如何申请、free内存</li>
-<li>函数执行：如何消除内存碎片</li>
-<li>核心问题的方法？灵活性、稳定性、扩展性</li>
-</ol>
-<p>关于内存碎片：<br>每次移入内存都是固定的大小，但是有时会移出去，有时会移进来，最终可能会产生许多内存空洞。为了消除内存空洞，需要进行<strong>碎片整理（内存紧缩）</strong>，这个操作很花时间。</p>
-<p><strong>碎片整理：紧缩</strong>：<br>什么时候移动？</p>
-<p><strong>碎片整理：分区对换</strong>：<br>通过抢占并回收处于等待状态进程的分区，增大可用空间。</p>
-<p>核心问题：<br>写程序肯定会经常new吧，这个new是动态分配的内存，只有在运行到这里的时候才会去帮你分配，这种空间是不可预知的，无法准确计算需要空间的最大值。于是在为没一个进程分配空间的时候都可以多分一点。<br>这种分法带来新的问题：<br>将进程换回外存的时候其实并不需要换那些没有有效数据的地址，这是一种浪费。</p>
-<h3 id="交换的空闲内存管理"><a href="#交换的空闲内存管理" class="headerlink" title="交换的空闲内存管理"></a>交换的空闲内存管理</h3><h4 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h4><p>就像lab5中的bitmap一样，0代表没有占用，1代表占用。不同的是，这里一个bit代表可能是内存中的一个<strong>分配单元</strong>，可能是4byte，可能是其他。</p>
-<p>但是使用位图的话，不利于分配连续的空间，因为需要查找连续的固定字节空间的时间可能比查找一个分配单元空闲多花更多时间。</p>
-<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>这并不是lab2中使用的方法。</p>
-<p>维护一个空闲内存段链表与已用内存段链表。在每一个节点标志其状态以及开始地址以及连续地址。</p>
-<p>这种方式对上述问题友好。新的问题是如何进行节点的更新与回收，这需要节点的合并与删除、增加等操作<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/19805712.jpg" alt=""></p>
-<p><strong>分区管理分配算法</strong>：</p>
-<p>当进行内存申请的时候，希望能尽量避免做内存紧缩，这就需要更好的申请方式，而不是每次遇到剩余空间比自己更多的就决定要这个块。</p>
-<ol>
-<li>首次适配：时间性能好、但会容易导致内存碎片</li>
-<li>下次适配：从上次分配的分区开始查找。时间性能好、空闲去分布均匀，较大的空闲分区不易保留</li>
-<li>最佳适配：较大空间保留，碎片小而多</li>
-<li>最坏适配：着更大的分配：较大分区不会被保留<blockquote>
-<p>最佳适配与最坏适配都可以通过维护二级索引来实现更快的查找</p>
-</blockquote>
-</li>
-<li>快速适配：链表的改变十分费劲。为常用大小的块提供专门的索引</li>
-</ol>
-<h3 id="总结：mono-multi-swap"><a href="#总结：mono-multi-swap" class="headerlink" title="总结：mono\multi\swap"></a>总结：mono\multi\swap</h3><ol>
-<li>位图连续空闲空间寻找</li>
-<li>链表的空洞</li>
-<li>交换的缺点：<ol>
-<li>内存碎片</li>
-<li>内存的动态增长</li>
-<li>如何利用小空间运行大进程？</li>
-</ol>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Mono</th>
-<th style="text-align:center">MFP</th>
-<th>Swapping</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Size of proc</td>
-<td style="text-align:center">total mem</td>
-<td style="text-align:center">partion size</td>
-<td>total size of free mem</td>
-</tr>
-<tr>
-<td style="text-align:center">Alloction</td>
-<td style="text-align:center">static</td>
-<td style="text-align:center">static</td>
-<td>dynamic</td>
-</tr>
-<tr>
-<td style="text-align:center">multi-programming</td>
-<td style="text-align:center">unsupported</td>
-<td style="text-align:center">supported</td>
-<td>supported</td>
-</tr>
-<tr>
-<td style="text-align:center">mem space</td>
-<td style="text-align:center">continuous</td>
-<td style="text-align:center">continuous</td>
-<td>continuous</td>
-</tr>
-<tr>
-<td style="text-align:center">mem growth</td>
-<td style="text-align:center">unsupported</td>
-<td style="text-align:center">un</td>
-<td>supported</td>
-</tr>
-</tbody>
-</table>
-<p>除了上述的碎片整理，还有<strong>覆盖</strong>技术：（程序员控制</p>
-<ol>
-<li>划分功能区（ifelse）</li>
-<li>确定模块之间的覆盖关系</li>
-<li>执行之前预先加载并交换</li>
-</ol>
-<p>其实是很不好完成的，基础就不好完成，不好判断功能模块，要求的编程技巧太高。</p>
-<p>但是，从覆盖技术引出了一个：虚拟内存</p>
-<h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><ol>
-<li>进程的程序段、数据段、堆栈段的总和可以大于物理存储空间</li>
-<li>进程不必完全装入内存</li>
-<li>os定时将暂且不用的信息换出内存</li>
-<li>os负责将换出去的换回来</li>
-</ol>
-<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><ol>
-<li>页：描述进程逻辑空间的单元</li>
-<li>页框：描述物理内存中对应的单元</li>
-<li>页表：页与页框之间的映射</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6075684.jpg" alt=""></p>
-<p>在标准的4KB页面中，位数分别是10-10-12</p>
-<p>页转换在mmu中完成，CPU访问到的，在程序之中执行的都是虚拟地址。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6791125.jpg" alt=""></p>
-<p>还记得在计组实验中还被问到了1/0是干吗的，至今难忘。</p>
-<p>可能会有是否越界的比较（在标准中不存在，这是因为数据都是正好的）</p>
-<hr>
-<p>为了考试…</p>
-<p>虚拟地址（英语：Virtual address space）在電腦的专用术语中是指标识一个虚拟（非物理地址）的实体地址。虚拟地址这个术语常用在虚拟内存和虚拟网络地址当中。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
-<p>在计算机科学中，物理地址（英语：physical address），也叫实地址（real address）、二进制地址（binary address），它是在地址总线上，以电子形式存在的，使得数据总线可以访问主存的某个特定存储单元的内存地址。from <a href="https://zh.wikipedia.org/wiki/%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
-<p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98" target="_blank" rel="external">wiki</a></p>
-<hr>
-<h3 id="页表项结构"><a href="#页表项结构" class="headerlink" title="页表项结构"></a>页表项结构</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><strong>page number</strong>：逻辑空间中的页id，<br><strong>frame num</strong>：物理空间中页框的id<br><strong>p/a</strong>：页是不是在内存里面<br><strong>protected</strong>：r/w/e，记录页允许的访问<br><strong>modified</strong>：是不是被修改（脏位<br><strong>referenced</strong>：这个页有没有被使用<br><strong>disable caching</strong>：页面禁用高速缓存</p>
-<blockquote>
-<p>why 禁用高速缓存？<br>对于那些映射到<strong>设备寄存器</strong>而不是普通物理内存的页面来说，不希望在自己等待设备对自己刚发出去的指令做反应的时候自己的导向地址竟然是cache而不是外部接口。</p>
-</blockquote>
-<p>in ppt:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">page num</th>
-<th>p/a</th>
-<th>frame num</th>
-<th>protected</th>
-<th>disable caching</th>
-<th>referenced</th>
-<th>modified</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<h4 id="Design-issue"><a href="#Design-issue" class="headerlink" title="Design issue"></a>Design issue</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/52513606.jpg" alt=""></p>
-<h3 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h3><p>10-10-12</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/10468357.jpg" alt=""></p>
-<p>除了修改位，每集页表项都是一样的。在非底层页表中，取值为0</p>
-<p>其实还可以更多级。</p>
-<h3 id="加速分页过程：TLB"><a href="#加速分页过程：TLB" class="headerlink" title="加速分页过程：TLB"></a>加速分页过程：TLB</h3><p>快表：一个将虚拟地址直接映射到物理地址的小型硬件设备，通常在MMU中，其中的项基本不超过64个。</p>
-<p>将虚拟地址放在MMU中进行转换时，首先查快表：将该页面号与TLB中所有项同时（并行）进行匹配，如果命中，而且不违反保护位，页框号可以直接从TLB拿出，不必再进行内存访问（访问存储有页表项的内存），如果保护位不允许，就会发生一个页面访问错误。</p>
-<p>如果不命中MMU就从内存中找页表项，并将最终找到的页号与页框号等拿出，淘汰tlb中某一个项并添加新来的项。</p>
-<p>当从tlb中淘汰值的时候，记得将tlb中存储的修改位换到页面。</p>
-<p>tlb表项（示例）</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">有效位</th>
-<th style="text-align:center">虚拟页面号</th>
-<th style="text-align:center">修改位</th>
-<th style="text-align:center">保护位</th>
-<th style="text-align:center">页框号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">123</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">RW</td>
-<td style="text-align:center">31</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">87</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">RX</td>
-<td style="text-align:center">87</td>
-</tr>
-</tbody>
-</table>
-<p>…</p>
-<p>既然TLB这么厉害，为什么不搞一个很大很大的TLB呢。<br>TLB属于高速设备，功耗非常大。</p>
-<h3 id="加速分页过程：软件TLB"><a href="#加速分页过程：软件TLB" class="headerlink" title="加速分页过程：软件TLB"></a>加速分页过程：软件TLB</h3><p>当tlb失效的时候，mmu将会告诉os，让os找到要找的页面，从tlb删除一个页面，把这个页加上去。<br>必须在有限的指令内完成，因为tlb失效更加频繁。</p>
-<p>但是，当tlb更大一些，这种机制就会变得很有效。这样做的好处是得到一个简单的mmu，从而为CPU其他性能改善提供了空间。</p>
-<p>os可以“直觉”那些页面要被使用，然后预先加载到tlb。</p>
-<p>《？》<br>在内存固定位置维护大的tlb表项的软件高速缓存。首先检查这个缓存，os可以实质性地减少失效。</p>
-<p><strong>软失效</strong>：页面在内存中但是映射不在tlb。<br><strong>硬失效</strong>：页面本身不再内存（当然也不在tlb<strong>so为什么是这样</strong>）</p>
-<h3 id="针对大内存：反置页表"><a href="#针对大内存：反置页表" class="headerlink" title="针对大内存：反置页表"></a>针对大内存：反置页表</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/42494861.jpg" alt=""></p>
-<p>为什么会出现反置页表？<br><a href="http://kejiao.cntv.cn/20110905/100155.shtml" target="_blank" rel="external">在64位系统下内存</a><br>64位系统，如果仍然保持一个页是4K，那么一共需要有$2^52$个页，只是存储这些页就花费几百G的空间，显然是不合理的。</p>
-<p>而目前面临的状态是实际的内存很小，于是可以为每一个页框记录一个页表项。这样对于4K的页以及1G的ram只需要$2^18$个页表项即可。<br>页表项中记录哪一个(进程,虚拟页面)对应于该页框。<br>虽然节省空间，但是不足也是很明显的：<br>将虚拟地址转换为物理地址变得困难</p>
-<p>可以使用tlb。但是当tlb失效的时候就很难。<br><strong>基于hash</strong>：把虚拟页号与进程号作为输入，得到的散列值来寻找。</p>
-<p><strong>hahs冲突</strong></p>
-<p><strong>虚拟存储的基本特征</strong>：</p>
-<ol>
-<li>不连续（$\color{red}{啥叫虚拟地址空间使用非连续？是说各个区分开吗}）</li>
-<li>大用户空间：提供给用户的虚拟地址空间可以大于实际的物理内存</li>
-<li>部分交换：虚拟存储只对部分虚拟地址进行调入调出。（不会像交换一样一下一个进程）</li>
-</ol>
-<p><strong>虚拟页式存储的外存管理</strong>：</p>
-<ol>
-<li>在哪里保存没有被映射的页？<ol>
-<li>需要可以方便的找到在外存中的页面内容</li>
-<li>交换空间（磁盘或文件）：采用特殊格式保存没有被映射的页面</li>
-</ol>
-</li>
-<li>虚拟页式存储中的外存选择<ol>
-<li>代码段：可执行二进制文件</li>
-<li>动态加载的共享式程序段</li>
-<li>其他段：交换空间</li>
-</ol>
-</li>
-</ol>
-<p><strong>虚拟页式存储的性能</strong>：有效存储访问时间</p>
-<p>EAT=访存时间*(1-p)+缺页异常处理时间*缺页率p</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/82455336.jpg" alt=""></p>
-<h2 id="pagingsys的工作流程"><a href="#pagingsys的工作流程" class="headerlink" title="pagingsys的工作流程"></a>pagingsys的工作流程</h2><ol>
-<li>全局pgtable初始化</li>
-<li>创建进程</li>
-<li>获取首指令<ol>
-<li>pgfault</li>
-<li>加载页</li>
-<li>更新pgtable</li>
-<li>更新tlb</li>
-</ol>
-</li>
-<li>页替换<ol>
-<li>pgfault</li>
-<li>选择一个页，写回磁盘</li>
-<li>把新页换到这里</li>
-<li>更新tlb</li>
-</ol>
-</li>
-</ol>
-<h2 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h2><ol>
-<li>如果内存还有剩余页，分配；把希望访问的页从disk装到这个物理空间，把这个页对应页表的a/p置为1，物理地址映射到新分配的物理地址，重新执行引起缺页中断的指令</li>
-<li>如果内存没有剩余的页面，依据页面置换算法选择一个将会被替换的物理页，如果这个物理页的值被修改过，把内存中的值写回外存，把对应逻辑页的a/p置为0，把希望访问的物理页装到这个空间，修改物理页对应的逻辑页面的指示物理页地址以及存在位，重新执行却页指令。</li>
-</ol>
-<blockquote>
-<p>我现在认为，前面提到的挂起状态与现在说的“为了腾内存空间而将一些进程存储的东西先存到外存”是不一样的。<br>挂起的意思应该是pcb都被移动到了外存，根本无法找到这个进程的运行情况，地址空间等；但是这里仅仅是为了节省内存空间，将某些页换到了外存，该进程还是可以继续运行的。只是在需要用这些页的时候可能会引发缺页中断。<br>挂起存在的理由不仅仅是为了节省内存，还有一点是为了更有效的调度，因为所有调度算法考虑的都是就绪队列的进程。</p>
-</blockquote>
-<h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><ol>
-<li>缺页中断：需要的页不存在内存之中</li>
-<li>页替换：当所有的物理页都被占用；选择一个页被换出去</li>
-<li>表现：<ol>
-<li>抖动：耗时，低效率</li>
-<li>预测：在需要之前就把页面加载进来</li>
-<li>最优方案：最远将来（不现实）</li>
-</ol>
-</li>
-</ol>
-<p>页面置换算法的功能与目标：</p>
-<ol>
-<li>功能：当出现缺页异常并且物理内存已经被占满，调出一个物理页给新需要的页使用</li>
-<li>设计目标：极可能减少页面的调入调出次数</li>
-</ol>
-<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><h3 id="最优页面置换算法"><a href="#最优页面置换算法" class="headerlink" title="最优页面置换算法"></a>最优页面置换算法</h3><p>通常是衡量置换算法的标准</p>
-<p>置换在未来最长时间内不访问的页面</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/96462944.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/314073.jpg" alt=""></p>
-<h3 id="最近未使用：NRU"><a href="#最近未使用：NRU" class="headerlink" title="最近未使用：NRU"></a>最近未使用：NRU</h3><p>发生pgfault的时候，检查所有页面，将页面分为四类：</p>
-<ol>
-<li>没有访问 没有修改</li>
-<li>没有访问 已经修改该</li>
-<li>已经访问 没有修改</li>
-<li>已经访问 已经修改</li>
-</ol>
-<p>需要替换的时候按照首先替换0的规则进行替换。</p>
-<p>这是因为每次访问页面都会引发中断：写R/W位，于是os可以利用这个时间做一些事。定时把R位清零来区别最近没有被访问的和已经访问的。</p>
-<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>替换最先被换进来的。</p>
-<p>通过维护一个记录所有位于内存的逻辑页面链表，将该链表按驻留时间排序，联手最长，连伟最短。缺页的时候进行置换，新页面加到链尾</p>
-<p>实现简单，可以用硬件实现，但是性能很差，基本不会单独使用这个算法。</p>
-<p><strong>Belady</strong>现象：</p>
-<p>分配的物理也数增加，但是却也次数也会增加的现象。</p>
-<p>原因：FIFO的置换特征与进程访问内存的动态特征矛盾<br>被他置换出去的不一定是近期不会访问的。</p>
-<h3 id="LRU：最近最少使用页面算法"><a href="#LRU：最近最少使用页面算法" class="headerlink" title="LRU：最近最少使用页面算法"></a>LRU：最近最少使用页面算法</h3><p>最近经常访问的页面可能在以后也会经常访问，最近不经常访问的页面可能以后也不会访问。于是选择最长时间没有被访问过的页面替换出去。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/30845425.jpg" alt=""></p>
-<blockquote>
-<p>这是最优置换算法的一种近似</p>
-</blockquote>
-<p>虽然可以实现，但是代价很高<br>——需要一个全面的链表，最少使用的在前，最多使用的在后。<br>——需要一个栈，访问页面的时候将这个页号压入栈，并把栈内相同的页号抽出，缺页时拿栈底</p>
-<p>使用一个n*n矩阵表示所有页框的信息，当k被访问的时候，把k行设置为1，k列设置为0，一段时间后，每一行的二进制值最小的就是最近最少使用的。</p>
-<p><strong>Simple Implementation</strong>：页表项上的计数器<br><strong>硬件实现</strong>：为n<em>n矩阵，使用了特殊的寄存器<br><em>*软件实现</em></em>：NFU</p>
-<h3 id="最不常用算法：LFU-NFU"><a href="#最不常用算法：LFU-NFU" class="headerlink" title="最不常用算法：LFU/NFU"></a>最不常用算法：LFU/NFU</h3><p>是对LRU的软件实现。</p>
-<p>将每个页面与一个计数器关联，取计数值最小的页面替换</p>
-<p>LFU的缺点是他从来不会忘记。以前频繁使用的页面很大可能不会被调出去。：<strong>通过计数器定时右移来改正</strong>-&gt;老化算法<br>LRU关注的是多久未访问而LFU关注的是访问次数，是不一样的。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/89846367.jpg" alt=""></p>
-<h3 id="时钟算法"><a href="#时钟算法" class="headerlink" title="时钟算法"></a>时钟算法</h3><p>环状结构，当一个缺页中断到来的时候，首先检查指针所在位置页面的访问位，如果是0就淘汰这个页面，否则置为0，转圈，转到的，如果是0就淘汰，如果是1就变成0，知道找到第一个0。</p>
-<p>是LRU与FIFO的折中。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/9967853.jpg" alt=""></p>
-<h3 id="改进的时钟算法"><a href="#改进的时钟算法" class="headerlink" title="改进的时钟算法"></a>改进的时钟算法</h3><p>在页面添加修改位，并在访问时进行相应修改：<br>新改的：RW。<br>每次扫过都将：如果R是1，把R置为0；如果R是0，如果W是1，写这页，写完之后W=0，接着找，如果R=0W=0，就是这个了。</p>
-<p>缺页时修改页面标志位，以跳过有修改的页面。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/7051850.jpg" alt=""></p>
-<hr>
-<p>上述的都是<strong>局部页面置换算法</strong>。<br>局部页面置换算法选择范围仅仅限于当前进程占用的空间，不考虑进程访存差异。<br><strong>全局页面置换算法</strong>可以逼出其他进程的物理页面：工作集算法、缺页率算法<br>需要动态确定好给每一个进程的物理页面数。</p>
-<hr>
-<p>CPU利用率达到极致以后，再增加并发进程数iu会出现内存抖动。<br>进程数少时，提高并发进程数，可提高CPU利用率<br>并发进程导致内存访问增加<br>并发进程的内存访问会降低了访存的局部性特征<br>局部性特征的下降会导致缺页率上升和CPU利用率下降</p>
-<h3 id="工作集"><a href="#工作集" class="headerlink" title="工作集"></a>工作集</h3><h3 id="缺页率置换算法"><a href="#缺页率置换算法" class="headerlink" title="缺页率置换算法"></a>缺页率置换算法</h3><p>缺页次数 / 内存访问次数 或 缺页平均时间间隔的倒数</p>
-<p><strong>影响缺页率</strong>：</p>
-<ol>
-<li>页面置换算法</li>
-<li>分配给进程的物理页数目</li>
-<li>页面大小</li>
-<li>程序的编写方法</li>
-</ol>
-<p>可以通过调整常驻集的大小，使每一个进程的缺页率保持在一个合适的值。<br>若进程缺页率过高，则增加常驻集以分配更多的物理页面<br>若进程缺页率过低，则减少常驻集以减少它的物理页面数</p>
-<blockquote>
-<p>为每一个页面计数，达到-m的时候，回收，你要页面就给页面。</p>
-</blockquote>
-<p>普通访问不做任何事情，缺页的时候，算一下多久没有缺页了，如果数值比较大，看一看是不是有的页面已经没用了，在这期间没有访问的页面被释放。如果小一些，看看是不是需要补一些页面。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/45924471.jpg" alt=""></p>
-<p><strong>页替换过程</strong></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/94487722.jpg" alt=""></p>
-<h1 id="段机制"><a href="#段机制" class="headerlink" title="段机制"></a>段机制</h1><p><strong>段</strong>：一个程序的逻辑分区<br><strong>页机制缺点</strong>：复杂，消耗资源</p>
-<p>地址映射：段中的addr +段中的偏移<br>内存分配：全局段表+本地段表<br>调度：需要时加载段<br>段+分页：用段技术组织节目内容，用分页技术组织物理内存</p>
-<h2 id="段地址空间"><a href="#段地址空间" class="headerlink" title="段地址空间"></a>段地址空间</h2><p>进程的段地址空间由多个段组成 ：<br>主代码段 子模块代码段 公用库代码段 堆栈段 堆数据(heap) 初始化数据段 符号表等</p>
-<p>段式存储管理的目的：<strong>更细粒度和灵活的分离与共享</strong>一般用于权限控制</p>
-<p>段一般是一种段是连续的。有起始地址以及段内偏移量。</p>
-<p><strong>段</strong>：表示访问方式和存储数据等属性相同的一段地址空间</p>
-<h2 id="段页结合"><a href="#段页结合" class="headerlink" title="段页结合"></a>段页结合</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/3276497.jpg" alt=""></p>
-<p>内存共享：通过指向相同的页表基址，实现进程之间的段共享。</p>
-<h2 id="link-of-segments"><a href="#link-of-segments" class="headerlink" title="link of segments"></a>link of segments</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/41368943.jpg" alt=""></p>
-
-          
+          <p>我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/编译原理/编译原理——词法分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1468,7 +1014,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap2-进程与线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1569,7 +1115,8 @@
       
         
           
-            <h1 id="导"><a href="#导" class="headerlink" title="导"></a>导</h1><p>进程模型的进化：</p>
+            <a id="more"></a>
+<h1 id="导"><a href="#导" class="headerlink" title="导"></a>导</h1><p>进程模型的进化：</p>
 <ol>
 <li>第一代：relay , vacuum tubes and plugboards。没有程序与进程的概念</li>
 <li>第二代：批处理系统：一个程序完成所有工作。</li>
@@ -2151,10 +1698,10 @@ leave_region:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/JUnit之一/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/OS/chap3-内存管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -2170,7 +1717,514 @@ leave_region:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/05/JUnit之一/" itemprop="url">JUnit之一</a></h1>
+                <a class="post-title-link" href="/2017/11/06/OS/chap3-内存管理/" itemprop="url">chap3-内存管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T14:13:37+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                    <span itemprop="name">课</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="内存中的概念"><a href="#内存中的概念" class="headerlink" title="内存中的概念"></a>内存中的概念</h1><p><strong>地址空间</strong>：一个进程可用于寻址内存的一套地址集合。<br><strong>内存管理</strong>：逻辑地址与物理地址之间的映射<br><strong>内存管理的特性</strong>：</p>
+<ol>
+<li>高效：使得更多的地址可以被使用（其实都是骗–人–进程的）</li>
+<li>合理：alloc、free、locate、protect</li>
+<li>便利：？<br><strong>内存管理class</strong></li>
+<li>简单机制：静态固定</li>
+<li>复杂机制：交换、paging</li>
+</ol>
+<blockquote>
+<p>为什么会有这种欺骗的行为存在呢？<br>程序员希望拥有一个又大又快又永久的存储器，希望他们的寻址方式是统一的；但是实际上，又快又大又永久的存储器目前还是不现实的。<br>现在我们有的是：</p>
+<ul>
+<li>cache：非常快，昂贵</li>
+<li>内存：速度适中，价格适中</li>
+<li>硬盘：慢，廉价</li>
+</ul>
+</blockquote>
+<p>在计组课里面应该就学过一个各种存储器的速度金字塔。最快的寄存器甚至是按照字节来计算的存储设备。</p>
+<p>于是提出问题：如何使用有限的高速存储设备以及较多的低速存储设备来提高的响应速度呢？</p>
+<h2 id="内存管理的任务"><a href="#内存管理的任务" class="headerlink" title="内存管理的任务"></a>内存管理的任务</h2><ol>
+<li>申请与撤回：资源管理</li>
+<li>地址转换：映射管理</li>
+<li>分享与保护</li>
+<li>空间扩张：你本来不可能占4G的，你非说你占了4个G</li>
+</ol>
+<h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3><blockquote>
+<p>从接口中知道，CPU希望访问一个地址的时候，会给出对应的地址（上总线）以及对应的读写信号etc。</p>
+<p>对程序员来说，每一个程序就是一方天地，并不想在程序里面去思考你os应该解决的存储问题，程序认为自己的地址都是从m开始，想访问哪里就访问哪里，但是os并不可以这样做。<br>就像在实验中提到的那样，程序的elf（exe）文件中会有自己的链接地址，这个地址表示程序假设自己被加载到内存的位置，os加载运行的时候需要进行<strong>重定位</strong>，对程序中相关的地址都经过变换。</p>
+</blockquote>
+<p>对于上述问题，使用两个寄存器来解决，一个是<strong>基址寄存器</strong>，一个是<strong>界限寄存器</strong>，它们在每一个CPU中都存在。基址寄存器存储当前进程的开始物理地址，界限寄存器中存储该程序长度。</p>
+<p>当使用一个地址a的时候，首先判断a是否大于界限寄存器中存储的值，如果不是，再将a加上基址寄存器中的值，然后送到地址总线。这些动作都是CPU硬件完成的。</p>
+<h2 id="monoprograming：单道程序处理"><a href="#monoprograming：单道程序处理" class="headerlink" title="monoprograming：单道程序处理"></a>monoprograming：单道程序处理</h2><h2 id="multiprogramming"><a href="#multiprogramming" class="headerlink" title="multiprogramming"></a>multiprogramming</h2><p>支持多个进程的os内存管理都需要做什么？</p>
+<ol>
+<li>申请空间、释放空间</li>
+<li>地址转换、内存保护（several method）</li>
+<li>CPU利用：MTF的表现</li>
+<li>内存扩张：更加柔韧的内存管理</li>
+</ol>
+<p>使用partition来为每一个进程分配空间</p>
+<hr>
+<p><strong>动态分区分配</strong>：当程序被加载执行时，分配一个进程制定大小可变的分区，在此分区内地址连续<br>os需要维护所有进程的已分配数据结构以及空闲分区。<br>$$\color{red}{whats this}$$</p>
+<h3 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术</h3><p>通常情况下内存是不够用的。仅仅Windows后台应用都会占据一些内存，更不用说开浏览器，开vs等等。为了处理这样的情况，需要，把某一些进程放到外存，为当前运行进程提供内存空间。</p>
+<p><strong>交换</strong>：把一个完整的进程调入内存，使该进程运行一段时间，然后存回磁盘。<br>这里提到的交换还不是后面说到的页面置换。</p>
+<p><strong>交换中的内存管理</strong>：</p>
+<ol>
+<li>数据结构与算法：如何描述内存的使用 ； 如何申请、free内存</li>
+<li>函数执行：如何消除内存碎片</li>
+<li>核心问题的方法？灵活性、稳定性、扩展性</li>
+</ol>
+<p>关于内存碎片：<br>每次移入内存都是固定的大小，但是有时会移出去，有时会移进来，最终可能会产生许多内存空洞。为了消除内存空洞，需要进行<strong>碎片整理（内存紧缩）</strong>，这个操作很花时间。</p>
+<p><strong>碎片整理：紧缩</strong>：<br>什么时候移动？</p>
+<p><strong>碎片整理：分区对换</strong>：<br>通过抢占并回收处于等待状态进程的分区，增大可用空间。</p>
+<p>核心问题：<br>写程序肯定会经常new吧，这个new是动态分配的内存，只有在运行到这里的时候才会去帮你分配，这种空间是不可预知的，无法准确计算需要空间的最大值。于是在为没一个进程分配空间的时候都可以多分一点。<br>这种分法带来新的问题：<br>将进程换回外存的时候其实并不需要换那些没有有效数据的地址，这是一种浪费。</p>
+<h3 id="交换的空闲内存管理"><a href="#交换的空闲内存管理" class="headerlink" title="交换的空闲内存管理"></a>交换的空闲内存管理</h3><h4 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h4><p>就像lab5中的bitmap一样，0代表没有占用，1代表占用。不同的是，这里一个bit代表可能是内存中的一个<strong>分配单元</strong>，可能是4byte，可能是其他。</p>
+<p>但是使用位图的话，不利于分配连续的空间，因为需要查找连续的固定字节空间的时间可能比查找一个分配单元空闲多花更多时间。</p>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>这并不是lab2中使用的方法。</p>
+<p>维护一个空闲内存段链表与已用内存段链表。在每一个节点标志其状态以及开始地址以及连续地址。</p>
+<p>这种方式对上述问题友好。新的问题是如何进行节点的更新与回收，这需要节点的合并与删除、增加等操作<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/19805712.jpg" alt=""></p>
+<p><strong>分区管理分配算法</strong>：</p>
+<p>当进行内存申请的时候，希望能尽量避免做内存紧缩，这就需要更好的申请方式，而不是每次遇到剩余空间比自己更多的就决定要这个块。</p>
+<ol>
+<li>首次适配：时间性能好、但会容易导致内存碎片</li>
+<li>下次适配：从上次分配的分区开始查找。时间性能好、空闲去分布均匀，较大的空闲分区不易保留</li>
+<li>最佳适配：较大空间保留，碎片小而多</li>
+<li>最坏适配：着更大的分配：较大分区不会被保留<blockquote>
+<p>最佳适配与最坏适配都可以通过维护二级索引来实现更快的查找</p>
+</blockquote>
+</li>
+<li>快速适配：链表的改变十分费劲。为常用大小的块提供专门的索引</li>
+</ol>
+<h3 id="总结：mono-multi-swap"><a href="#总结：mono-multi-swap" class="headerlink" title="总结：mono\multi\swap"></a>总结：mono\multi\swap</h3><ol>
+<li>位图连续空闲空间寻找</li>
+<li>链表的空洞</li>
+<li>交换的缺点：<ol>
+<li>内存碎片</li>
+<li>内存的动态增长</li>
+<li>如何利用小空间运行大进程？</li>
+</ol>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Mono</th>
+<th style="text-align:center">MFP</th>
+<th>Swapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Size of proc</td>
+<td style="text-align:center">total mem</td>
+<td style="text-align:center">partion size</td>
+<td>total size of free mem</td>
+</tr>
+<tr>
+<td style="text-align:center">Alloction</td>
+<td style="text-align:center">static</td>
+<td style="text-align:center">static</td>
+<td>dynamic</td>
+</tr>
+<tr>
+<td style="text-align:center">multi-programming</td>
+<td style="text-align:center">unsupported</td>
+<td style="text-align:center">supported</td>
+<td>supported</td>
+</tr>
+<tr>
+<td style="text-align:center">mem space</td>
+<td style="text-align:center">continuous</td>
+<td style="text-align:center">continuous</td>
+<td>continuous</td>
+</tr>
+<tr>
+<td style="text-align:center">mem growth</td>
+<td style="text-align:center">unsupported</td>
+<td style="text-align:center">un</td>
+<td>supported</td>
+</tr>
+</tbody>
+</table>
+<p>除了上述的碎片整理，还有<strong>覆盖</strong>技术：（程序员控制</p>
+<ol>
+<li>划分功能区（ifelse）</li>
+<li>确定模块之间的覆盖关系</li>
+<li>执行之前预先加载并交换</li>
+</ol>
+<p>其实是很不好完成的，基础就不好完成，不好判断功能模块，要求的编程技巧太高。</p>
+<p>但是，从覆盖技术引出了一个：虚拟内存</p>
+<h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><ol>
+<li>进程的程序段、数据段、堆栈段的总和可以大于物理存储空间</li>
+<li>进程不必完全装入内存</li>
+<li>os定时将暂且不用的信息换出内存</li>
+<li>os负责将换出去的换回来</li>
+</ol>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><ol>
+<li>页：描述进程逻辑空间的单元</li>
+<li>页框：描述物理内存中对应的单元</li>
+<li>页表：页与页框之间的映射</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6075684.jpg" alt=""></p>
+<p>在标准的4KB页面中，位数分别是10-10-12</p>
+<p>页转换在mmu中完成，CPU访问到的，在程序之中执行的都是虚拟地址。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/6791125.jpg" alt=""></p>
+<p>还记得在计组实验中还被问到了1/0是干吗的，至今难忘。</p>
+<p>可能会有是否越界的比较（在标准中不存在，这是因为数据都是正好的）</p>
+<hr>
+<p>为了考试…</p>
+<p>虚拟地址（英语：Virtual address space）在電腦的专用术语中是指标识一个虚拟（非物理地址）的实体地址。虚拟地址这个术语常用在虚拟内存和虚拟网络地址当中。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
+<p>在计算机科学中，物理地址（英语：physical address），也叫实地址（real address）、二进制地址（binary address），它是在地址总线上，以电子形式存在的，使得数据总线可以访问主存的某个特定存储单元的内存地址。from <a href="https://zh.wikipedia.org/wiki/%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80" target="_blank" rel="external">wiki</a></p>
+<p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。与没有使用虚拟内存技术的系统相比，使用这种技术的系统使得大型程序的编写变得更容易，对真正的物理内存（例如RAM）的使用也更有效率。from <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98" target="_blank" rel="external">wiki</a></p>
+<hr>
+<h3 id="页表项结构"><a href="#页表项结构" class="headerlink" title="页表项结构"></a>页表项结构</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><strong>page number</strong>：逻辑空间中的页id，<br><strong>frame num</strong>：物理空间中页框的id<br><strong>p/a</strong>：页是不是在内存里面<br><strong>protected</strong>：r/w/e，记录页允许的访问<br><strong>modified</strong>：是不是被修改（脏位<br><strong>referenced</strong>：这个页有没有被使用<br><strong>disable caching</strong>：页面禁用高速缓存</p>
+<blockquote>
+<p>why 禁用高速缓存？<br>对于那些映射到<strong>设备寄存器</strong>而不是普通物理内存的页面来说，不希望在自己等待设备对自己刚发出去的指令做反应的时候自己的导向地址竟然是cache而不是外部接口。</p>
+</blockquote>
+<p>in ppt:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">page num</th>
+<th>p/a</th>
+<th>frame num</th>
+<th>protected</th>
+<th>disable caching</th>
+<th>referenced</th>
+<th>modified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="Design-issue"><a href="#Design-issue" class="headerlink" title="Design issue"></a>Design issue</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/52513606.jpg" alt=""></p>
+<h3 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h3><p>10-10-12</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/10468357.jpg" alt=""></p>
+<p>除了修改位，每集页表项都是一样的。在非底层页表中，取值为0</p>
+<p>其实还可以更多级。</p>
+<h3 id="加速分页过程：TLB"><a href="#加速分页过程：TLB" class="headerlink" title="加速分页过程：TLB"></a>加速分页过程：TLB</h3><p>快表：一个将虚拟地址直接映射到物理地址的小型硬件设备，通常在MMU中，其中的项基本不超过64个。</p>
+<p>将虚拟地址放在MMU中进行转换时，首先查快表：将该页面号与TLB中所有项同时（并行）进行匹配，如果命中，而且不违反保护位，页框号可以直接从TLB拿出，不必再进行内存访问（访问存储有页表项的内存），如果保护位不允许，就会发生一个页面访问错误。</p>
+<p>如果不命中MMU就从内存中找页表项，并将最终找到的页号与页框号等拿出，淘汰tlb中某一个项并添加新来的项。</p>
+<p>当从tlb中淘汰值的时候，记得将tlb中存储的修改位换到页面。</p>
+<p>tlb表项（示例）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">有效位</th>
+<th style="text-align:center">虚拟页面号</th>
+<th style="text-align:center">修改位</th>
+<th style="text-align:center">保护位</th>
+<th style="text-align:center">页框号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">123</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">RW</td>
+<td style="text-align:center">31</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">87</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">RX</td>
+<td style="text-align:center">87</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
+<p>既然TLB这么厉害，为什么不搞一个很大很大的TLB呢。<br>TLB属于高速设备，功耗非常大。</p>
+<h3 id="加速分页过程：软件TLB"><a href="#加速分页过程：软件TLB" class="headerlink" title="加速分页过程：软件TLB"></a>加速分页过程：软件TLB</h3><p>当tlb失效的时候，mmu将会告诉os，让os找到要找的页面，从tlb删除一个页面，把这个页加上去。<br>必须在有限的指令内完成，因为tlb失效更加频繁。</p>
+<p>但是，当tlb更大一些，这种机制就会变得很有效。这样做的好处是得到一个简单的mmu，从而为CPU其他性能改善提供了空间。</p>
+<p>os可以“直觉”那些页面要被使用，然后预先加载到tlb。</p>
+<p>《？》<br>在内存固定位置维护大的tlb表项的软件高速缓存。首先检查这个缓存，os可以实质性地减少失效。</p>
+<p><strong>软失效</strong>：页面在内存中但是映射不在tlb。<br><strong>硬失效</strong>：页面本身不再内存（当然也不在tlb<strong>so为什么是这样</strong>）</p>
+<h3 id="针对大内存：反置页表"><a href="#针对大内存：反置页表" class="headerlink" title="针对大内存：反置页表"></a>针对大内存：反置页表</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/42494861.jpg" alt=""></p>
+<p>为什么会出现反置页表？<br><a href="http://kejiao.cntv.cn/20110905/100155.shtml" target="_blank" rel="external">在64位系统下内存</a><br>64位系统，如果仍然保持一个页是4K，那么一共需要有$2^52$个页，只是存储这些页就花费几百G的空间，显然是不合理的。</p>
+<p>而目前面临的状态是实际的内存很小，于是可以为每一个页框记录一个页表项。这样对于4K的页以及1G的ram只需要$2^18$个页表项即可。<br>页表项中记录哪一个(进程,虚拟页面)对应于该页框。<br>虽然节省空间，但是不足也是很明显的：<br>将虚拟地址转换为物理地址变得困难</p>
+<p>可以使用tlb。但是当tlb失效的时候就很难。<br><strong>基于hash</strong>：把虚拟页号与进程号作为输入，得到的散列值来寻找。</p>
+<p><strong>hahs冲突</strong></p>
+<p><strong>虚拟存储的基本特征</strong>：</p>
+<ol>
+<li>不连续（$\color{red}{啥叫虚拟地址空间使用非连续？是说各个区分开吗}）</li>
+<li>大用户空间：提供给用户的虚拟地址空间可以大于实际的物理内存</li>
+<li>部分交换：虚拟存储只对部分虚拟地址进行调入调出。（不会像交换一样一下一个进程）</li>
+</ol>
+<p><strong>虚拟页式存储的外存管理</strong>：</p>
+<ol>
+<li>在哪里保存没有被映射的页？<ol>
+<li>需要可以方便的找到在外存中的页面内容</li>
+<li>交换空间（磁盘或文件）：采用特殊格式保存没有被映射的页面</li>
+</ol>
+</li>
+<li>虚拟页式存储中的外存选择<ol>
+<li>代码段：可执行二进制文件</li>
+<li>动态加载的共享式程序段</li>
+<li>其他段：交换空间</li>
+</ol>
+</li>
+</ol>
+<p><strong>虚拟页式存储的性能</strong>：有效存储访问时间</p>
+<p>EAT=访存时间*(1-p)+缺页异常处理时间*缺页率p</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/82455336.jpg" alt=""></p>
+<h2 id="pagingsys的工作流程"><a href="#pagingsys的工作流程" class="headerlink" title="pagingsys的工作流程"></a>pagingsys的工作流程</h2><ol>
+<li>全局pgtable初始化</li>
+<li>创建进程</li>
+<li>获取首指令<ol>
+<li>pgfault</li>
+<li>加载页</li>
+<li>更新pgtable</li>
+<li>更新tlb</li>
+</ol>
+</li>
+<li>页替换<ol>
+<li>pgfault</li>
+<li>选择一个页，写回磁盘</li>
+<li>把新页换到这里</li>
+<li>更新tlb</li>
+</ol>
+</li>
+</ol>
+<h2 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h2><ol>
+<li>如果内存还有剩余页，分配；把希望访问的页从disk装到这个物理空间，把这个页对应页表的a/p置为1，物理地址映射到新分配的物理地址，重新执行引起缺页中断的指令</li>
+<li>如果内存没有剩余的页面，依据页面置换算法选择一个将会被替换的物理页，如果这个物理页的值被修改过，把内存中的值写回外存，把对应逻辑页的a/p置为0，把希望访问的物理页装到这个空间，修改物理页对应的逻辑页面的指示物理页地址以及存在位，重新执行却页指令。</li>
+</ol>
+<blockquote>
+<p>我现在认为，前面提到的挂起状态与现在说的“为了腾内存空间而将一些进程存储的东西先存到外存”是不一样的。<br>挂起的意思应该是pcb都被移动到了外存，根本无法找到这个进程的运行情况，地址空间等；但是这里仅仅是为了节省内存空间，将某些页换到了外存，该进程还是可以继续运行的。只是在需要用这些页的时候可能会引发缺页中断。<br>挂起存在的理由不仅仅是为了节省内存，还有一点是为了更有效的调度，因为所有调度算法考虑的都是就绪队列的进程。</p>
+</blockquote>
+<h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><ol>
+<li>缺页中断：需要的页不存在内存之中</li>
+<li>页替换：当所有的物理页都被占用；选择一个页被换出去</li>
+<li>表现：<ol>
+<li>抖动：耗时，低效率</li>
+<li>预测：在需要之前就把页面加载进来</li>
+<li>最优方案：最远将来（不现实）</li>
+</ol>
+</li>
+</ol>
+<p>页面置换算法的功能与目标：</p>
+<ol>
+<li>功能：当出现缺页异常并且物理内存已经被占满，调出一个物理页给新需要的页使用</li>
+<li>设计目标：极可能减少页面的调入调出次数</li>
+</ol>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><h3 id="最优页面置换算法"><a href="#最优页面置换算法" class="headerlink" title="最优页面置换算法"></a>最优页面置换算法</h3><p>通常是衡量置换算法的标准</p>
+<p>置换在未来最长时间内不访问的页面</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/96462944.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/314073.jpg" alt=""></p>
+<h3 id="最近未使用：NRU"><a href="#最近未使用：NRU" class="headerlink" title="最近未使用：NRU"></a>最近未使用：NRU</h3><p>发生pgfault的时候，检查所有页面，将页面分为四类：</p>
+<ol>
+<li>没有访问 没有修改</li>
+<li>没有访问 已经修改该</li>
+<li>已经访问 没有修改</li>
+<li>已经访问 已经修改</li>
+</ol>
+<p>需要替换的时候按照首先替换0的规则进行替换。</p>
+<p>这是因为每次访问页面都会引发中断：写R/W位，于是os可以利用这个时间做一些事。定时把R位清零来区别最近没有被访问的和已经访问的。</p>
+<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>替换最先被换进来的。</p>
+<p>通过维护一个记录所有位于内存的逻辑页面链表，将该链表按驻留时间排序，联手最长，连伟最短。缺页的时候进行置换，新页面加到链尾</p>
+<p>实现简单，可以用硬件实现，但是性能很差，基本不会单独使用这个算法。</p>
+<p><strong>Belady</strong>现象：</p>
+<p>分配的物理也数增加，但是却也次数也会增加的现象。</p>
+<p>原因：FIFO的置换特征与进程访问内存的动态特征矛盾<br>被他置换出去的不一定是近期不会访问的。</p>
+<h3 id="LRU：最近最少使用页面算法"><a href="#LRU：最近最少使用页面算法" class="headerlink" title="LRU：最近最少使用页面算法"></a>LRU：最近最少使用页面算法</h3><p>最近经常访问的页面可能在以后也会经常访问，最近不经常访问的页面可能以后也不会访问。于是选择最长时间没有被访问过的页面替换出去。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/30845425.jpg" alt=""></p>
+<blockquote>
+<p>这是最优置换算法的一种近似</p>
+</blockquote>
+<p>虽然可以实现，但是代价很高<br>——需要一个全面的链表，最少使用的在前，最多使用的在后。<br>——需要一个栈，访问页面的时候将这个页号压入栈，并把栈内相同的页号抽出，缺页时拿栈底</p>
+<p>使用一个n*n矩阵表示所有页框的信息，当k被访问的时候，把k行设置为1，k列设置为0，一段时间后，每一行的二进制值最小的就是最近最少使用的。</p>
+<p><strong>Simple Implementation</strong>：页表项上的计数器<br><strong>硬件实现</strong>：为n<em>n矩阵，使用了特殊的寄存器<br><em>*软件实现</em></em>：NFU</p>
+<h3 id="最不常用算法：LFU-NFU"><a href="#最不常用算法：LFU-NFU" class="headerlink" title="最不常用算法：LFU/NFU"></a>最不常用算法：LFU/NFU</h3><p>是对LRU的软件实现。</p>
+<p>将每个页面与一个计数器关联，取计数值最小的页面替换</p>
+<p>LFU的缺点是他从来不会忘记。以前频繁使用的页面很大可能不会被调出去。：<strong>通过计数器定时右移来改正</strong>-&gt;老化算法<br>LRU关注的是多久未访问而LFU关注的是访问次数，是不一样的。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/89846367.jpg" alt=""></p>
+<h3 id="时钟算法"><a href="#时钟算法" class="headerlink" title="时钟算法"></a>时钟算法</h3><p>环状结构，当一个缺页中断到来的时候，首先检查指针所在位置页面的访问位，如果是0就淘汰这个页面，否则置为0，转圈，转到的，如果是0就淘汰，如果是1就变成0，知道找到第一个0。</p>
+<p>是LRU与FIFO的折中。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/9967853.jpg" alt=""></p>
+<h3 id="改进的时钟算法"><a href="#改进的时钟算法" class="headerlink" title="改进的时钟算法"></a>改进的时钟算法</h3><p>在页面添加修改位，并在访问时进行相应修改：<br>新改的：RW。<br>每次扫过都将：如果R是1，把R置为0；如果R是0，如果W是1，写这页，写完之后W=0，接着找，如果R=0W=0，就是这个了。</p>
+<p>缺页时修改页面标志位，以跳过有修改的页面。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/7051850.jpg" alt=""></p>
+<hr>
+<p>上述的都是<strong>局部页面置换算法</strong>。<br>局部页面置换算法选择范围仅仅限于当前进程占用的空间，不考虑进程访存差异。<br><strong>全局页面置换算法</strong>可以逼出其他进程的物理页面：工作集算法、缺页率算法<br>需要动态确定好给每一个进程的物理页面数。</p>
+<hr>
+<p>CPU利用率达到极致以后，再增加并发进程数iu会出现内存抖动。<br>进程数少时，提高并发进程数，可提高CPU利用率<br>并发进程导致内存访问增加<br>并发进程的内存访问会降低了访存的局部性特征<br>局部性特征的下降会导致缺页率上升和CPU利用率下降</p>
+<h3 id="工作集"><a href="#工作集" class="headerlink" title="工作集"></a>工作集</h3><h3 id="缺页率置换算法"><a href="#缺页率置换算法" class="headerlink" title="缺页率置换算法"></a>缺页率置换算法</h3><p>缺页次数 / 内存访问次数 或 缺页平均时间间隔的倒数</p>
+<p><strong>影响缺页率</strong>：</p>
+<ol>
+<li>页面置换算法</li>
+<li>分配给进程的物理页数目</li>
+<li>页面大小</li>
+<li>程序的编写方法</li>
+</ol>
+<p>可以通过调整常驻集的大小，使每一个进程的缺页率保持在一个合适的值。<br>若进程缺页率过高，则增加常驻集以分配更多的物理页面<br>若进程缺页率过低，则减少常驻集以减少它的物理页面数</p>
+<blockquote>
+<p>为每一个页面计数，达到-m的时候，回收，你要页面就给页面。</p>
+</blockquote>
+<p>普通访问不做任何事情，缺页的时候，算一下多久没有缺页了，如果数值比较大，看一看是不是有的页面已经没用了，在这期间没有访问的页面被释放。如果小一些，看看是不是需要补一些页面。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/45924471.jpg" alt=""></p>
+<p><strong>页替换过程</strong></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/94487722.jpg" alt=""></p>
+<h1 id="段机制"><a href="#段机制" class="headerlink" title="段机制"></a>段机制</h1><p><strong>段</strong>：一个程序的逻辑分区<br><strong>页机制缺点</strong>：复杂，消耗资源</p>
+<p>地址映射：段中的addr +段中的偏移<br>内存分配：全局段表+本地段表<br>调度：需要时加载段<br>段+分页：用段技术组织节目内容，用分页技术组织物理内存</p>
+<h2 id="段地址空间"><a href="#段地址空间" class="headerlink" title="段地址空间"></a>段地址空间</h2><p>进程的段地址空间由多个段组成 ：<br>主代码段 子模块代码段 公用库代码段 堆栈段 堆数据(heap) 初始化数据段 符号表等</p>
+<p>段式存储管理的目的：<strong>更细粒度和灵活的分离与共享</strong>一般用于权限控制</p>
+<p>段一般是一种段是连续的。有起始地址以及段内偏移量。</p>
+<p><strong>段</strong>：表示访问方式和存储数据等属性相同的一段地址空间</p>
+<h2 id="段页结合"><a href="#段页结合" class="headerlink" title="段页结合"></a>段页结合</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/3276497.jpg" alt=""></p>
+<p>内存共享：通过指向相同的页表基址，实现进程之间的段共享。</p>
+<h2 id="link-of-segments"><a href="#link-of-segments" class="headerlink" title="link of segments"></a>link of segments</h2><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/41368943.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/往事不堪回首烟雨中/JUnit之一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/05/往事不堪回首烟雨中/JUnit之一/" itemprop="url">JUnit之一</a></h1>
         
 
         <div class="post-meta">
@@ -2318,7 +2372,7 @@ leave_region:
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络番外3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -2371,28 +2425,6 @@ leave_region:
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/计算机网络/" itemprop="url" rel="index">
                     <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
                   </a>
                 </span>
 
@@ -2500,10 +2532,10 @@ leave_region:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络应用层番外二/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/计算机网络/计算机网络应用层番外二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -2519,7 +2551,7 @@ leave_region:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/04/计算机网络应用层番外二/" itemprop="url">计算机网络应用层之番外二</a></h1>
+                <a class="post-title-link" href="/2017/11/04/计算机网络/计算机网络应用层番外二/" itemprop="url">计算机网络应用层之番外二</a></h1>
         
 
         <div class="post-meta">
@@ -2561,28 +2593,6 @@ leave_region:
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -2615,7 +2625,8 @@ leave_region:
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
+            <a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实这里该是运输层番外….但是这是应用层作业啦。</p>
 <p>多用户并发访问与可靠文件传输，不能有下载大小的限制。</p>
 <p>为了用UDP实现多用户并发访问，一定是需要使用多个socket。仿照FTP的协议设计：使用一个UDP的socket在master进行监听，这个socket绑定一个确定的端口号，用户客户机连接服务器发请求使用。</p>
 <p>考虑的请求比较小，可以使用一个包传送完成：</p>
@@ -2705,10 +2716,10 @@ leave_region:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/覆千秋1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -2724,7 +2735,7 @@ leave_region:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/03/覆千秋1/" itemprop="url">覆千秋1</a></h1>
+                <a class="post-title-link" href="/2017/11/04/MFC基础/MFC：窗口文档视图（3/" itemprop="url">窗口文档试图（3</a></h1>
         
 
         <div class="post-meta">
@@ -2736,8 +2747,8 @@ leave_region:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T21:46:15+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T01:17:56+08:00">
+                2017-11-04
               </time>
             
 
@@ -2746,50 +2757,6 @@ leave_region:
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/" itemprop="url" rel="index">
-                    <span itemprop="name">我的故事</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/" itemprop="url" rel="index">
-                    <span itemprop="name">枯骨流沙</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的故事/枯骨流沙/覆千秋/" itemprop="url" rel="index">
-                    <span itemprop="name">覆千秋</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -2819,12 +2786,11 @@ leave_region:
 
       
         
-          <h1 id="夜色凉"><a href="#夜色凉" class="headerlink" title="夜色凉"></a>夜色凉</h1><p>将军府的海棠开了。</p>
-<p>粉粉嫩嫩，一簇一簇的，细风吹来，花朵轻轻落在地上，把这个小园衬出几分诗意。</p>
-<p>只是府上光景却不如这海棠繁盛。</p>
+          <hr>
+<p>麻蛋！这已经是第三次了！你妹的第三章！！！！！还好CSDN还有视图！只是又要自己动手麻了！！！</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/03/覆千秋1/#more" rel="contents">
+            <a class="btn" href="/2017/11/04/MFC基础/MFC：窗口文档视图（3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2865,167 +2831,11 @@ leave_region:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/计算机网络/计算机网络网络层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/02/计算机网络/计算机网络网络层/" itemprop="url">计算机网络网络层</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T22:12:40+08:00">
-                2017-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p># </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3062,9 +2872,9 @@ leave_region:
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.gif"
-                alt="YaYi" />
+                alt="傻瓜日和" />
             
-              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
               <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
           </div>
 
@@ -3075,7 +2885,7 @@ leave_region:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3086,7 +2896,7 @@ leave_region:
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3097,7 +2907,7 @@ leave_region:
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3173,7 +2983,7 @@ leave_region:
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">YaYi</span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
 
   
 </div>
@@ -3200,7 +3010,7 @@ leave_region:
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.2k字</span>
+  <span class="post-count">博客全站共112.1k字</span>
 </div>
 
 

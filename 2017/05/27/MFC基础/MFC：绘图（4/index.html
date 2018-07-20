@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if('yayi'){
+            if (prompt('请输入文章密码') !== 'yayi'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MFC,可视化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="第四章啦~今天多少有点愧疚呢。">
+<meta name="keywords" content="MFC,可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="绘图（4">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/index.html">
+<meta property="og:site_name" content="日和">
+<meta property="og:description" content="第四章啦~今天多少有点愧疚呢。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419220653966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419102918482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419104210576?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419112134349?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419114057080?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419220305121?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419221657238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419234810898?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419234826039?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419235035854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419235204371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170419235515422?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420092343122?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420092626164?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420092859668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420093057985?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420093134000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420100502860?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420103025515?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420104746713?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420105532178?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420110049482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420110920885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170420111428689?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170422152613716?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170422154925941?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170422155219005?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="d:/yayi/Pictures/鼠标拖动圆.png">
+<meta property="og:updated_time" content="2018-07-20T17:30:21.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="绘图（4">
+<meta name="twitter:description" content="第四章啦~今天多少有点愧疚呢。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170419220653966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/"/>
+
+
+
+
+
+  <title>绘图（4 | 日和</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">日和</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">BE WITH ME</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">绘图（4</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T01:18:37+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>第四章啦~今天多少有点愧疚呢。</p>
+<a id="more"></a>
+<hr>
+<h1 id="一、设备环境类"><a href="#一、设备环境类" class="headerlink" title="一、设备环境类"></a>一、设备环境类</h1><p>设备文本用来实现程序的可视化输出，它提供一张画布。图形既可以通过屏幕显示，也可以通过打印机等设备输出。</p>
+<p><strong>这里不太清楚，回去需要看书</strong></p>
+<blockquote>
+<p>以下是一些设备环境类：<br>CDC：MFC的设备文本基类<br>CClientDC：客户区（不包括边框、标题栏、菜单栏）的设备文本类<br>CWindowsDC：程序窗口的设备文本类<br>CPaintDC：OnPaint函数使用的设备文本类</p>
+</blockquote>
+<p>为了说明上述各个类得到的区域，下面举一个具体例子：</p>
+<p>在C×View的类里面写一个鼠标左键的点击消息，当点击时，画一条线。</p>
+<p>首先是最常用的：CDC<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CDC*pDC=GetDC();</div><div class="line">pDC-&gt;MoveTo(<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">pDC-&gt;LineTo(point);</div><div class="line">ReleaseDC(pDC);</div></pre></td></tr></table></figure></p>
+<p>最终运行得到的结果是：</p>
+<p><img src="http://img.blog.csdn.net/20170419220653966?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> C×View::OnLButtonDown(UINT nFlags,CPoint point)&#123;</div><div class="line">   <span class="function">CClientDC <span class="title">dc</span><span class="params">(<span class="keyword">this</span>)</span></span>;</div><div class="line">   dc.MoveTo(<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">   dc.LineTo(point);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意CClientDC对象的声明方法：CClientDC dc(this)，获得客户区的dc，也就是视图的dc。<br>MoveTo , LineTo函数的参数既可以是CPoint也可以是两个int型变量。注意一定是int而不可以是double。</p>
+</blockquote>
+<p>最终的结果：</p>
+<p><img src="http://img.blog.csdn.net/20170419102918482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="哪啦"></p>
+<p>可以看出，CClientDC得到的是客户区。</p>
+<p>如果在上述代码中这样创建CClientDC：<code>CClientDC dc(GetParent());</code>得到的dc就应该是视图的父窗口（即边框窗口），最终结果是：</p>
+<p><img src="http://img.blog.csdn.net/20170419104210576?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里是MFC标准视图，对边框窗口就在那里，如果不清楚，可以看这个图：这是VS2008视图：<br>（编辑视图怎么回事，连截屏不都能，一刷新视图区的东西就都没了(创建延迟截图吧亲爱的）。另：继承于哪个视图基类可不是把例CEditView都改成CView就好了，它们的初始化过程狮虎是不一样的！！！）</p>
+<p><img src="http://img.blog.csdn.net/20170419112134349?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">CWindowDC <span class="title">dc</span><span class="params">(<span class="keyword">this</span>)</span></span>;</div><div class="line">dc.MoveTo(<span class="number">0</span>,<span class="number">0</span>);</div><div class="line">dc.LineTo(point);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意CWindowDC的对象创建：CWindowDC dc(this)</p>
+</blockquote>
+<p>this为参数得到的结果与ClientDC以this为参数得到的结果相同。</p>
+<p>以GetParent()为参数时，得到的结果是：</p>
+<p><img src="http://img.blog.csdn.net/20170419114057080?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>可以看到，这里的(0,0)似乎并不正确，其实，这里得到的dc是整个程序窗口的dc，即这里的(0,0)是你的主边框左上角：</p>
+<p><img src="http://img.blog.csdn.net/20170419220305121?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<blockquote>
+<p>即使这样，也应该说明：这里的dc绘图将会把传递进来的point当作为整个程序窗口的point坐标。但是OnLButtonDown传递进来的point是视图区的坐标。故这时线的另一端并不是在鼠标点击的位置。</p>
+</blockquote>
+<p>如果参数是：GetDesktopWindow()，得到的应该是整个电脑屏幕，这时的结果是：</p>
+<p><img src="http://img.blog.csdn.net/20170419221657238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<blockquote>
+<p>同理，这时线的另一端也不会是鼠标点击的位置。</p>
+</blockquote>
+<h1 id="二、绘图基本方法"><a href="#二、绘图基本方法" class="headerlink" title="二、绘图基本方法"></a>二、绘图基本方法</h1><p>首先应该使用上述方法取得设备环境类对象或者对象指针。</p>
+<h2 id="1-几个必要的类："><a href="#1-几个必要的类：" class="headerlink" title="1. 几个必要的类："></a>1. 几个必要的类：</h2><blockquote>
+<p>CPoint：封装了POINT结构，定义点的坐标。其中x,y都是int型的数据。<br>CRect：封装了RECT结构，定义一个矩形区域，其中有四个int成员：left , right , top , bottom .<br>CSize：封装了SIZE结构，定义了矩形区域的大小，成员有两个int型数据cx , cy .</p>
+<p>这三个类除了对应结构中仅有的成员变量以外，还有其他成员函数。</p>
+</blockquote>
+<h2 id="2-绘图工具："><a href="#2-绘图工具：" class="headerlink" title="2. 绘图工具："></a>2. 绘图工具：</h2><p>CDC提供了绘图的工具，比如CPen , CBrush , CFont 等，它们的基类是CGDIObject。默认的画笔是宽度为一个像素的黑色画笔，画刷是白色不透明全填充画刷。</p>
+<p>颜色值可由两种方式指定：</p>
+<ol>
+<li>是用RGB(Red,Green,Blue)，对应颜色的位置可以填上0-255包括两端的任一整数值用于指定颜色。其中0是最浅，255是最深。</li>
+<li>直接使用八位十六进制整数值：0x00FFFFFF。前两个0是固定值，紧接着两个F指蓝色的深度，之后是绿色，最低为两个指红色。其顺序与第一种方法正好相反。</li>
+</ol>
+<h3 id="系统内置"><a href="#系统内置" class="headerlink" title="系统内置"></a>系统内置</h3><p>下表列出一些预定义的画刷与画笔：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BLACK_BRISH</td>
+<td style="text-align:center">黑色画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">DKGRAY_BRUSH</td>
+<td style="text-align:center">深灰色画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">GRAY_BRUSH</td>
+<td style="text-align:center">灰色画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">LTGRAY_BRUSH</td>
+<td style="text-align:center">浅灰色画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">WHITE_BRUSH</td>
+<td style="text-align:center">白色画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">HOLLOW_BRUSH</td>
+<td style="text-align:center">透明画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">NULL_BRUSH</td>
+<td style="text-align:center">空画刷</td>
+</tr>
+<tr>
+<td style="text-align:center">BLACK_PEN</td>
+<td style="text-align:center">黑画笔</td>
+</tr>
+<tr>
+<td style="text-align:center">WHITE_PEN</td>
+<td style="text-align:center">白画笔</td>
+</tr>
+<tr>
+<td style="text-align:center">NULL_PEN</td>
+<td style="text-align:center">空画笔</td>
+</tr>
+</tbody>
+</table>
+<p><strong>可以使用SelectStockObject(TYPE)来选择画刷与画笔，注意一定在画图之前选择，一旦选择该画刷将起作用直到下一个选择画刷语句。</strong></p>
+<p>目前认为：空画刷与透明画刷是一样的，都是不会填充，只画边框。</p>
+<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><p>除了系统给的，还提供了函数允许用户自定义自己的画刷与画笔。</p>
+<h4 id="画笔"><a href="#画笔" class="headerlink" title="画笔"></a>画笔</h4><p>创建一个新的CPen对象：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CPen newpen(PS_SOLID,5,RGB(255,0,0));</div><div class="line"><span class="comment">//或是</span></div><div class="line">CPen newpen1;</div><div class="line">newpen1.CreatePen(PS_SOLID,<span class="number">5</span>,RGB(<span class="number">225</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line"><span class="comment">//或是</span></div><div class="line">CPen*newpen2=<span class="keyword">new</span> Cpen();<span class="comment">//一定要初始化！！！</span></div><div class="line">newpen2-&gt;CreatePen(PS_SOLID,<span class="number">5</span>,RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line"><span class="comment">//或是</span></div><div class="line">CPen*newpen3=<span class="keyword">new</span> CPen(PS_SOLID,<span class="number">5</span>,RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>CPen的构造函数有三个参数：画笔风格、画笔宽度、画笔颜色。</p>
+<p>自定义画笔选择不同于内置画笔，这里使用另一个函数:<strong>SelectObject()</strong>，具体参数应是：<code>pDC-&gt;SelectObject(&amp;newpen)</code>或<code>pDC-&gt;SelectObject(&amp;newpen1)</code>或<code>pDC-&gt;SelectObject(newpen2)</code>或<code>pDC-&gt;SelectObject(newpen3)</code>。</p>
+<p>上述的三种选择方式返回值是以前的画笔类型的指针。例如，当第二次选择时，返回的是第一次选择的画笔类型指针。</p>
+</blockquote>
+<p>一些画笔风格：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">风格</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PS_SOLID</td>
+<td style="text-align:center">实线</td>
+</tr>
+<tr>
+<td style="text-align:center">PS_DASH</td>
+<td style="text-align:center">虚线</td>
+</tr>
+<tr>
+<td style="text-align:center">PS_DASHDOT</td>
+<td style="text-align:center">点划线</td>
+</tr>
+<tr>
+<td style="text-align:center">PS_DASHDOTDOT</td>
+<td style="text-align:center">双点划线</td>
+</tr>
+<tr>
+<td style="text-align:center">PS_DOT</td>
+<td style="text-align:center">点线</td>
+</tr>
+<tr>
+<td style="text-align:center">PS_NULL</td>
+<td style="text-align:center">空画笔</td>
+</tr>
+</tbody>
+</table>
+<p>下面给出一个具体例子：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnDraw中</span></div><div class="line">CPen *NewPen = <span class="keyword">new</span> CPen();</div><div class="line">CPen *pOldPen;</div><div class="line">NewPen-&gt;CreatePen(PS_SOLID,<span class="number">1</span>,RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line">pOldPen=pDC-&gt;SelectObject(NewPen);</div><div class="line">pDC-&gt;Ellipse(<span class="number">150</span>,<span class="number">100</span>,<span class="number">250</span>,<span class="number">200</span>);</div><div class="line">pDC-&gt;SelectObject(pOldPen); </div><div class="line">pDC-&gt;MoveTo(<span class="number">150</span>,<span class="number">100</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">250</span>,<span class="number">200</span>);</div></pre></td></tr></table></figure></p>
+<p>最终还是将宽度改成了1.因为发现宽度较大的时候有的风格体现不出来。</p>
+<blockquote>
+<p>要说明的是返回值的问题，第一次选择的返回值是上一次的选择即默认画笔。<br>由于一旦选择了画笔/画刷，就会一直起作用，故一般会设置一个pOldPen的指针，用来保存默认画笔信息，在函数内容结束的最后一句话将画笔重新设置为默认画笔。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170419234810898?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>换一个类型，使用<strong>PS_DOT</strong>，并且去掉二次选择画笔的过程。<br><img src="http://img.blog.csdn.net/20170419234826039?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>PS_DASH：</strong><img src="http://img.blog.csdn.net/20170419235035854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>PS_DASHDOT：</strong><img src="http://img.blog.csdn.net/20170419235204371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>PS_DASHDOTDOT：</strong><img src="http://img.blog.csdn.net/20170419235515422?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>到了这里已经可以确定，DASH与DOT都是虚线，但是DASH较DOT每条联通线都更宽一点。DASHDOT是二者一比一的结合，DASHDOTDOT是一比二的结合。<br>空画笔就是….什么都没有。</p>
+<p>####画刷</p>
+<p>与画笔直接简单地确定风格不同，画笔的不同风格需要调用不同的函数：</p>
+<blockquote>
+<p>实心SOLID：<code>CreateSolidBrush(COLORREF crColor);</code><br>网格HATCHED：<code>CreateHatchBrush(int nIndex,COLORREF crColor);</code><br>模式PATTERNED：<code>CreatePatternBrush(CBitmap*pBitmap);</code></p>
+</blockquote>
+<p>这也意味着不能直接在声明CBrush对象的时候就创建一个自定义画刷。</p>
+<p>其中对于网格的第一个参数，nIndex是指填充的样式，内置的填充样式如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">样式</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HS_CROSS</td>
+<td style="text-align:center">十字线</td>
+</tr>
+<tr>
+<td style="text-align:center">HS_HORIZONTAL</td>
+<td style="text-align:center">水平线</td>
+</tr>
+<tr>
+<td style="text-align:center">HS_VERTICAL</td>
+<td style="text-align:center">垂直线</td>
+</tr>
+<tr>
+<td style="text-align:center">HS_FDIAGONAL</td>
+<td style="text-align:center">斜线</td>
+</tr>
+<tr>
+<td style="text-align:center">HS_BDIAGONAL</td>
+<td style="text-align:center">反斜线</td>
+</tr>
+<tr>
+<td style="text-align:center">HS_DIAGCROSS</td>
+<td style="text-align:center">斜十字线</td>
+</tr>
+</tbody>
+</table>
+<p>下面以一个具体例子来了解网格的不同风格：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CBrush brush;</div><div class="line">brush.CreateHatchBrush(HS_CROSS,RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line">pDC-&gt;SelectObject(&amp;newBrush);</div><div class="line">pDC-&gt;Rectangle(<span class="number">100</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">200</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在这里同样应在函数最后将画刷信息重置为默认。</p>
+</blockquote>
+<p><strong>HS_CROSS</strong><img src="http://img.blog.csdn.net/20170420092343122?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="cross"><br>当改变了画笔的宽度之后：<img src="http://img.blog.csdn.net/20170420092626164?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>内部网格线的宽度并没有变。也就是说：内部的填充样式是内置好的，不会随着画笔的变化而变化。</p>
+<p><strong>HS_FDIAGONAL</strong><img src="http://img.blog.csdn.net/20170420092859668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>HS_BDIAGONAL</strong><img src="http://img.blog.csdn.net/20170420093057985?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>HS_DIAGCROSS</strong><img src="http://img.blog.csdn.net/20170420093134000?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>对于SOLID填充，就是纯色填充，不再赘述。</p>
+<p>PATTERNED填充是位图填充：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CBitmap *bitmap=<span class="keyword">new</span> CBitmap();<span class="comment">//一定初始化！！！</span></div><div class="line">bitmap-&gt;LoadBitmapW(IDB_RIDDLE);</div><div class="line">CBrush newbrush;</div><div class="line">newbrush.CreatePatternBrush(bitmap);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>或者可以声明CBitmap bitmap，并在CreatePatternBrush函数中用参数&amp;bitmap。</p>
+</blockquote>
+<p>（我改变了Bitmap，怎么在运行的时候就是没办法载入新的bitmap呢！）</p>
+<p>结果：（最后那句是酷狗的桌面歌词啦）<br><img src="http://img.blog.csdn.net/20170420100502860?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="xiuzheng"><a href="#xiuzheng" class="headerlink" title="xiuzheng"></a>xiuzheng</h3><h2 id="3-绘图函数"><a href="#3-绘图函数" class="headerlink" title="3. 绘图函数"></a>3. 绘图函数</h2><h3 id="常用的绘图函数"><a href="#常用的绘图函数" class="headerlink" title="常用的绘图函数"></a>常用的绘图函数</h3><blockquote>
+<p>设置像素：SetPixel<br>改变当前位置：MoveTo<br>画直线：LineTo<br>画弧线：Arc<br>画矩形：Rectangle<br>圆角矩形：RoundRect<br>画椭圆：Ellipse<br>画饼图：Pie<br>画多边形：Polygon<br>不绘制边框，只用画刷填充矩形： FillRect<br>不填充内部，只用画刷绘制边框：FrameRect</p>
+</blockquote>
+<p>绘图函数中涉及到的坐标都是逻辑单位，默认左上角(0,0)，往右x++，往下y++。逻辑单位是像素。</p>
+<p>下面举例子具体说明函数参数与功能。</p>
+<h3 id="矩形与圆角矩形"><a href="#矩形与圆角矩形" class="headerlink" title="矩形与圆角矩形"></a>矩形与圆角矩形</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//矩形与圆角矩形</span></div><div class="line">pDC-&gt;Rectangle(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>);<span class="comment">//左上角点(100,100)，右下角点(300,200)</span></div><div class="line">pDC-&gt;RoundRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>,<span class="number">100</span>,<span class="number">40</span>);<span class="comment">//对应矩形的参数，往x方向延伸的长度，往y方向延伸的长度。</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这两个函数分别有另一种参数形式：<code>Rectangle(LPCRECT lpRect)</code>以及<code>RoundRect(LPCRECT lpRect,POINT point)</code>。<br>CRect封装了LPCRECT，第一个参数可以用CRect。<br>CPoint封装了POINT，第二个参数也可以用CPoint。</p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420103025515?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="线段与弧线与矩形"><a href="#线段与弧线与矩形" class="headerlink" title="线段与弧线与矩形"></a>线段与弧线与矩形</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">pDC-&gt;Rectangle(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>);</div><div class="line">pDC-&gt;MoveTo(<span class="number">200</span>,<span class="number">150</span>);<span class="comment">//确定矩形的中心点</span></div><div class="line">pDC-&gt;LineTo(<span class="number">300</span>,<span class="number">175</span>);<span class="comment">//截止直线所在线段终点</span></div><div class="line">pDC-&gt;MoveTo(<span class="number">200</span>,<span class="number">150</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">125</span>,<span class="number">125</span>);<span class="comment">//另一截止直线所在线段终点（不一定非在矩形边上）</span></div><div class="line">pDC-&gt;Arc(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">175</span>,<span class="number">125</span>,<span class="number">125</span>);<span class="comment">//外接矩形参数，两条截断线的终点</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>它们分别有另一种参数形式：<code>MoveTo(POINT point);</code> , <code>LineTo(POINT point);</code> , <code>Arc(LPCRECT lpRect,POINT ptstart,POINT ptend);</code><br>同理，可以使用CRect与CPoint。</p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420104746713?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="饼图与矩形"><a href="#饼图与矩形" class="headerlink" title="饼图与矩形"></a>饼图与矩形</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pDC-&gt;Rectangle(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>);</div><div class="line">pDC-&gt;Pie(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>);<span class="comment">//对应外接矩形参数，两个截断直线所在线段终点。（类似弧线）</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Pie也有另一种参数形式：<code>Pie(LPCRECT lpRect,POINT ptStart,POINT ptEnd);</code></p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420105532178?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a>多边形</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CPoint point[<span class="number">4</span>];<span class="comment">//4个顶点的对应坐标</span></div><div class="line">point[<span class="number">0</span>].x=<span class="number">100</span>;</div><div class="line">point[<span class="number">0</span>].y=<span class="number">100</span>;</div><div class="line">point[<span class="number">1</span>].x=<span class="number">200</span>;</div><div class="line">point[<span class="number">1</span>].y=<span class="number">200</span>;</div><div class="line">point[<span class="number">2</span>].x=<span class="number">200</span>;</div><div class="line">point[<span class="number">2</span>].y=<span class="number">100</span>;</div><div class="line">point[<span class="number">3</span>].x=<span class="number">100</span>;</div><div class="line">point[<span class="number">3</span>].y=<span class="number">200</span>;</div><div class="line">pDC-&gt;Polygon(point,<span class="number">4</span>);<span class="comment">//顶点，个数。按顺序连接。</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Polygon没有其他参数列表。但有必要说明一下，上述参数列表是：<code>const POINT *point,int nCount</code></p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420110049482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="polygon"></p>
+<h3 id="FillRect"><a href="#FillRect" class="headerlink" title="FillRect"></a>FillRect</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CBrush newbrush;</div><div class="line">newbrush.CreateHatchBrush(HS_FDIAGONAL,RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line">pDC-&gt;FillRect(CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>),&amp;newbrush);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>FillRect上述参数列表是：<code>LPCRECT lpRect,CBrush*pBrush</code>，它只有这一个参数列表。</p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420110920885?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="fillrect"></p>
+<h3 id="FrameRect"><a href="#FrameRect" class="headerlink" title="FrameRect"></a>FrameRect</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CBrush NewBrush;</div><div class="line">NewBrush.CreateSolidBrush(RGB(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line">pDC-&gt;FrameRect(CRect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">300</span>,<span class="number">200</span>), &amp;NewBrush);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>FrameRect只有这一个参数列表。它是：<code>LPCRECT lpRect,CBrush*pBrush</code></p>
+</blockquote>
+<p>结果：<img src="http://img.blog.csdn.net/20170420111428689?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="framerect"></p>
+<h2 id="4-绘图模式"><a href="#4-绘图模式" class="headerlink" title="4. 绘图模式"></a>4. 绘图模式</h2><p>绘图模式指定绘图工具的颜色和显示颜色的处理方式。<br><code>SetROP2(int nDrawMode);</code></p>
+<h3 id="常用绘图模式："><a href="#常用绘图模式：" class="headerlink" title="常用绘图模式："></a>常用绘图模式：</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">R2_COPYPEN</td>
+<td style="text-align:center">绘图工具颜色</td>
+</tr>
+<tr>
+<td style="text-align:center">R2_NOT</td>
+<td style="text-align:center">背景颜色取反</td>
+</tr>
+<tr>
+<td style="text-align:center">R2_XORPEN</td>
+<td style="text-align:center">背景与绘图工具颜色异或</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>R2_COPYPEN不理会背景颜色，Pen/Brush是什么颜色就画成什么颜色<br>R2_NOT不理会Pen/Brush本身的颜色，背景是什么颜色，就将颜色对应的二进制数按位取反，用这个新颜色。<br>R2_XORPEN将Pen/Brush的颜色与背景颜色对应的二进制数按位异或，得到的新颜色。<br>例如：黑色(0,0,0)取反是白色(255,255,255)，白色与蓝色(0,0,255)异或是黄色(255,255,0)。</p>
+</blockquote>
+<h3 id="CRgn与区域"><a href="#CRgn与区域" class="headerlink" title="CRgn与区域"></a>CRgn与区域</h3><p>CRgn类封装区域即绘图的范围，有：</p>
+<ol>
+<li>CreateRectRgn</li>
+<li>CreateEllipseRgn</li>
+<li>CreatePolygonRgn</li>
+<li>CombineRgn：将新的区域合并</li>
+</ol>
+<p>CDC中的函数：</p>
+<ol>
+<li>FillClipRgn</li>
+<li>PaintRgn这两者填充区域（yong是什么鬼）</li>
+<li>SelectClipRgn：设置剪裁区域</li>
+<li>SelectObject： 将区域选入设备文本</li>
+</ol>
+<p>下面以一个例子来具体说明某些函数的作用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">pDC-&gt;DrawFocusRect(CRect(<span class="number">10</span>,<span class="number">10</span>,<span class="number">200</span>,<span class="number">200</span>));</div><div class="line">CRgn NewRgn;</div><div class="line">NewRgn.CreateRectRgn(<span class="number">10</span>,<span class="number">10</span>,<span class="number">200</span>,<span class="number">200</span>);</div><div class="line">pDC-&gt;SelectObject(&amp;NewRgn);</div><div class="line">pDC-&gt;MoveTo(<span class="number">0</span>,<span class="number">100</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">300</span>,<span class="number">100</span>);</div><div class="line">pDC-&gt;MoveTo(<span class="number">100</span>,<span class="number">0</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">100</span>,<span class="number">300</span>);</div></pre></td></tr></table></figure>
+<p>这段代码得出：</p>
+<p><img src="http://img.blog.csdn.net/20170422152613716?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>外面的虚线是DrawFocusRect画出的线，SelectObject使得画布外面的线全部都消失不见了。SelectClipRect与SelectObject的效果一样。</p>
+<h3 id="映射模式"><a href="#映射模式" class="headerlink" title="映射模式"></a>映射模式</h3><p>绘图函数中的坐标是逻辑坐标而鼠标消息处理函数中的坐标是设备坐标，它们不同的时候就会使绘图的位置发生偏差。</p>
+<p>映射模式定义了逻辑坐标与设备坐标之间的单位关系，共有两种模式：比例因子固定的约束映射模式和比例因子以及轴向不固定的非约束映射模式。</p>
+<p>函数：<br><strong>SetMapMode：</strong>用来设置映射模式。</p>
+<ol>
+<li>MM_TEXT：默认映射模式，每个单位映射成一个像素。X向右，Y向下。</li>
+<li>MM_HIENGLISH：每个单位映射成0.001英寸，X向右，Y向上。</li>
+</ol>
+<p><strong>LPtoDP：</strong>逻辑坐标转化为设备坐标</p>
+<p><strong>DPtoLP：</strong>设备坐标转化为逻辑坐标</p>
+<p>举一个例子说明MM_HIENGLISH：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CRect rect;</div><div class="line">GetClientRect(&amp;rect);</div><div class="line">pDC-&gt;SetMapMode(MM_HIENGLISH);</div><div class="line">pDC-&gt;SetViewportOrg(rect.right/<span class="number">2</span>,rect.bottom/<span class="number">2</span>); <span class="comment">//设置坐标原点</span></div><div class="line">pDC-&gt;MoveTo(<span class="number">-20</span>,<span class="number">0</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">100</span>,<span class="number">0</span>); </div><div class="line">pDC-&gt;MoveTo(<span class="number">0</span>,<span class="number">-20</span>);</div><div class="line">pDC-&gt;LineTo(<span class="number">0</span>,<span class="number">100</span>); </div><div class="line"><span class="function">CPoint <span class="title">pt</span><span class="params">(<span class="number">100</span>,<span class="number">100</span>)</span></span>; </div><div class="line">pDC-&gt;Ellipse(pt.x<span class="number">-50</span>,pt.y<span class="number">-50</span>,pt.x+<span class="number">50</span>,pt.y+<span class="number">50</span>);</div></pre></td></tr></table></figure></p>
+<p>最终运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20170422154925941?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如果以默认的绘图模式，结果是：</p>
+<p><img src="http://img.blog.csdn.net/20170422155219005?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>则可以看到MM_HIENGLISH的绘图模式缩小了一个单位的距离，并且改变了Y轴的方向。</p>
+<h1 id="三、文本的绘图"><a href="#三、文本的绘图" class="headerlink" title="三、文本的绘图"></a>三、文本的绘图</h1><h2 id="文本处理函数"><a href="#文本处理函数" class="headerlink" title="文本处理函数"></a>文本处理函数</h2><p><strong>文本输出函数：</strong></p>
+<blockquote>
+<p>TextOutW：标准的文本输出<br>DrawTextW：格式化文本输出<br>ExtTextOutW：扩展的文本输出<br>TabbedTextOutW：带制表符的文本输出</p>
+</blockquote>
+<p><strong>文本属性设置函数：</strong></p>
+<blockquote>
+<p>SetBkMode：背景模式<br>SetBkColor： 背景颜色<br>SetTextColor：文本颜色<br>SetTextAlign：文本对齐方式<br>SetTextCharacterExtra：字符间隔值</p>
+</blockquote>
+<p>这里介绍的参数列表与作用都是在pDC-&gt;下。</p>
+<p><strong>TextOutW:</strong><br>两种参数列表：</p>
+<ol>
+<li>int x,int y,const CString &amp;str</li>
+<li>int x,int y,LPCTSTR lpszString,int nCount</li>
+</ol>
+<blockquote>
+<p>通常在MessageBox中写字符串的时候，总是在前面加上L，这个L就相当于是整个是LPCTSTR型变量。<br>nCount是指一共有nCount个空位置。如果给的串位数不够就补上（其实我不知道补的是什么），如果串多了就截取前nCount个字符显示。</p>
+</blockquote>
+<p>例如：<code>TextOutW(100,100,L&quot;hello world!&quot;);</code></p>
+<p><strong>DrawTextW:</strong><br>两种参数列表：</p>
+<ol>
+<li>const CString &amp;str,LPRECT lpRect,UINT nFormat</li>
+<li>LPCTSTR lpszString,int nCount,LPRECT lpRect,UINT nFormat</li>
+</ol>
+<blockquote>
+<p>lpRect指向rect结构体，指定了文本格式化的矩形区域。同样地，这里可以使用CRect的uFormat是格式化标记。<br>以下是一些格式化标记：<br>DT_CALCRECT：使DrawText函数计算出输出文本的尺寸。如果输出文本有多行，DrawText函数使用lpRect定义的矩形的宽度，扩展矩形的底部以容纳输出文本的最后一行。如果输出文本只有一行，矩形的右边界改变，以容纳下正文行的最后一个字符。出现上述任何一种情况，返回格式化文本的高度，而不是绘制文本。<br>DT_CENTER：使文本水平居中显示。<br>DT_VCENTER：使文本垂直居中显示。该标记只在单行文本输出时有效，所以它必须与DT_SINGLELINE结合使用：DT_VCENTER|DT_SINGLELINE<br>DT_SINGLELINE：单行显示文本，回车和换行符都不换行。</p>
+<p> 使用格式化标记的时候一定要小心，不然你都找不出来到底是哪里错了。比如我，应该是一直将字符输出到了视图之外，一直以为输不出…<br> example: <code>pDC-&gt;DrawTextW(L&quot;shen&quot;, rect, DT_SINGLELINE | DT_CENTER|DT_VCENTER);</code></p>
+</blockquote>
+<p><strong>SetBkMode:</strong><br>只有一种参数列表：int nBkMode</p>
+<blockquote>
+<p>nBkMode有两种取值：OPAQUE和TRANSPARENT。<br>OPAQUE的方式是用当前背景的画刷的颜色输出显示文字的背景<br>TRANSPARENT是使用透明的输出，也就是文字的背景不改变</p>
+</blockquote>
+<p><strong>SetBkColor:</strong><br>一种参数列表：COLORREF crColor</p>
+<p><strong>SetTextColor:</strong><br>COLORREF crColor</p>
+<p><strong>SetTextAlign:</strong><br>UINT nFlags</p>
+<blockquote>
+<p>以下是一些标志位：<br>TA_BASELINE：参考点将在文本的基础线。<br>TA_BOTTOM：参考点将在边界矩形的底部边缘。<br>TA_TOP：参考点将在边界矩形的顶边。<br>TA_CENTER：参考点将水平地的边界矩形的中心对齐。<br>TA_LEFT：参考点将在边界矩形的左边缘。<br>TA_RIGHT：参考点将在边界矩形的右边缘。<br>TA_NOUPDATECP：当前位置每个文本输出调用后没有更新。参考点被传递到文本输出功能。<br>TA_UPDATECP当前位置每个文本输出通话后更新。当前位置被用作参考点。<br>当当前字体具有垂直默认基线，与汉字，下面的值必须被用来代替TA_BASELINE和TA_CENTER。<br>VTA_BASELINE：参考点将在文本的基础线。<br>VTA_CENTER：参考点将垂直的边界矩形的中心对齐。</p>
+</blockquote>
+<p>默认值是TA_LEFT，TA_TOP和TA_NOUPDATECP</p>
+<p><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd145091%28v=vs.85%29.aspx%20%E8%BF%99%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9%E9%83%A8%E5%88%86%E6%91%98%E8%87%AA%E5%BE%AE%E8%BD%AFmdsn" target="_blank" rel="external">这部分部分摘自微软msdn文档</a></p>
+<p><strong>SetTextCharacterExtra:</strong><br>int nCharExtra</p>
+<p>上述的文本属性设置函数需要在文本输出函数之前进行调用，类似于笔刷画图。</p>
+<h2 id="字符属性"><a href="#字符属性" class="headerlink" title="字符属性"></a>字符属性</h2><p>字符属性(TEXTMETRIC)指字符大小与字符间距。<br>其声明：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tagTEXTMETRIC</span>&#123;</span></div><div class="line">   LONG tmHeight;<span class="comment">//字符高度</span></div><div class="line">   LONG tmAscent;<span class="comment">//字符上升高度（英文</span></div><div class="line">   LONG tmDescent;<span class="comment">//字符下降高度（英文</span></div><div class="line">   LONG tmExternalLeading;<span class="comment">//行间距</span></div><div class="line">   ...</div><div class="line">&#125;TEXTMETRIC;</div></pre></td></tr></table></figure></p>
+<p>可使用GetTextMetric来获得TEXTMETRIC的指针值。<br><code>pDC-&gt;GetTextMetric(&amp;tm);</code></p>
+<p>可使用GetTextExtent(const CString &amp;str)获得str的Size，Size中封装了str的宽度(cx)与高度(cy)。<br><code>CSize size=pDC-&gt;GetTextExtent(L&quot;halo&quot;);</code></p>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><h3 id="内置字体："><a href="#内置字体：" class="headerlink" title="内置字体："></a>内置字体：</h3><p>在MFC库中存有一些内置字体：<br>|字体类型|说明|<br>|:–:|:–:|<br>|SYSTEM_FONT|系统字体|<br>|SYSTEM_FIXED_FONT|固定宽度系统字体|<br>|ANSI_FIXED_FONT|ANSI固定宽度系统字体|<br>|ANSI_VAR_FONT|ANSI可变宽度系统字体|<br>|DEVICE_DEFAULT_FONT|设备缺省字体|<br>|OEM_FIXED_FONT|OEM固定宽度字体|</p>
+<p>内置字体对象的选择同样使用函数SelectStockObject()，其参数是字体类型。例：<code>pDC-&gt;SelectStockObject(SYSTEM_FONT);</code></p>
+<h3 id="自定义字体："><a href="#自定义字体：" class="headerlink" title="自定义字体："></a>自定义字体：</h3><p>自定义字体有两种方式：</p>
+<ol>
+<li>CreateFont函数</li>
+<li>CreateFontIndirect函数</li>
+</ol>
+<p>第一种方法是先自定义一个结构变量LOGFONT，使用它决定字体的参数，随后调用函数：<code>CreateFont(LOGFONT*lf);</code><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tagLOGFONT</span>&#123;</span></div><div class="line">LONG lfHeight;<span class="comment">//字体高度</span></div><div class="line">LONG lfWidth;<span class="comment">//字体宽度</span></div><div class="line">LONG lfEscapement;<span class="comment">//字体逆时针旋转角</span></div><div class="line">LONG lfOrientation;</div><div class="line">LONG lfWeight;<span class="comment">//字体粗细</span></div><div class="line">BYTE lfItalic;<span class="comment">//斜体</span></div><div class="line">BYTE lfUnderline;<span class="comment">//下划线</span></div><div class="line">BYTE lfStrikeOut;<span class="comment">//删除线</span></div><div class="line">BYTE lfCharSet;<span class="comment">//字符集，如：GB2313_CHARSET</span></div><div class="line">BYTE lfOutPrecision;</div><div class="line">BYTE lfClipPrecision;</div><div class="line">BYTE lfQuality;</div><div class="line">BYTE lfPitchAndFamily;<span class="comment">//字符间距</span></div><div class="line">TCHAR lfFaceName[LF_FACESIZE];<span class="comment">//所用字体名</span></div><div class="line">&#125;LOGFONT;</div></pre></td></tr></table></figure></p>
+<p>对于该结构体其他参数更为详尽的介绍，参照百度百科：<a href="http://baike.baidu.com/item/LOGFONT" target="_blank" rel="external">LOGFONT</a>。</p>
+<p>第二种方式是直接调用函数CreateFontIndirect，这个函数的参数共有14个，正好按顺序对应LOGFONT结构体中的变量。</p>
+<p>选择自定义字体使用函数SelectObject(CFont font);</p>
+<h1 id="四、位图的处理"><a href="#四、位图的处理" class="headerlink" title="四、位图的处理"></a>四、位图的处理</h1><p>BMP是与硬件无关的图像格式，采用位映射存储方式，除了图像深度可选以外，不使用其他压缩。图像深度包括：1位（单色），4位（16色），8位（256），24位（16M）。<br>BMP图像结构包括文件头（文件类型、文件大小、起始位置等），信息头（图像大小、压缩方法等）以及颜色表与位图数据。</p>
+<h2 id="1-位图填充："><a href="#1-位图填充：" class="headerlink" title="1. 位图填充："></a>1. 位图填充：</h2><p>使用位图首先应该使用函数<code>LoadBitmap(ID)</code>从资源装载位图。</p>
+<p>CDC提供了用于传递图像数据的函数</p>
+<ol>
+<li>PatBlt：用选定画刷填充一个矩形</li>
+<li>BitBlt：将图像输出到指定位置</li>
+<li>StretchBlt：可改变图像大小的BitBlt<br><strong>不能在OnDraw中写LoadBitmapW，会崩溃的。</strong></li>
+</ol>
+<p>对画刷填充矩形，有一些内置的模式：<br>|填充参数|说明|<br>|:–:|:-:|<br>|BLACKNESS|黑色填充目标区域|<br>|WHITENESS|白色填充目标区域|<br>|PATCOPY|画刷复制到目标区域|<br>|PATINVERT|画刷异或到目标区域|<br>|DSTINVERT|目标区域取反|</p>
+<p>下面是一个PalBlt的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CBitmap bm;</div><div class="line">bm.LoadBitmap(IDB_MYBITMAP);<span class="comment">//与对应位图相关联</span></div><div class="line">CBrush brush;</div><div class="line">brush.CreatePatternBrush(&amp;bm);</div><div class="line">pDC-&gt;SelectObject(brush);<span class="comment">//创建模式画刷并选择</span></div><div class="line">CRect rect;</div><div class="line">GetClientRect(&amp;rect);<span class="comment">//获得客户区</span></div><div class="line">pDC-&gt;PalBlt(<span class="number">0</span>,<span class="number">0</span>,rect.right,rect.bottom,PATCOPY);</div><div class="line">bm.DeleteObject();</div></pre></td></tr></table></figure>
+<p>代码运行后，将整个位图无变化地复制粘贴过来。如果触到边界，就截断，当把边界往后拉的时候，以后的图又会显现出来。再往后拉，是另一张图的复制粘贴。</p>
+<blockquote>
+<p>PalBlt(int x,int y,int nWidth,int nHeight,DWORD dwRop);x,y是填充矩形的起始坐标，nWidth是矩形向右延伸长度，nHeight是矩形向下延伸长度，这四个参数完成对矩形的选取。dwRop是填充参数，是两字节的整型。</p>
+<p>如果填充参数取BLACKNESS，就是满屏黑色，WHITENESS满屏白色。PATINVERT与DSTINVERT类似，将位图异或背景色/取反背景色再填充。</p>
+</blockquote>
+<p>BitBlt与ScretchBlt的填充模式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">填充参数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SRCCOPY</td>
+<td style="text-align:center">源区域直接填充目标区域</td>
+</tr>
+<tr>
+<td style="text-align:center">SRCAND</td>
+<td style="text-align:center">源区域与目标区域与</td>
+</tr>
+<tr>
+<td style="text-align:center">SRCPAINT</td>
+<td style="text-align:center">源区域与目标区域或</td>
+</tr>
+<tr>
+<td style="text-align:center">SRCINVERT</td>
+<td style="text-align:center">异或</td>
+</tr>
+</tbody>
+</table>
+<p>下面是BitBlt的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CBitmap bm;</div><div class="line">bm.LoadBitmap(IDB_MYBITMAP);<span class="comment">//Load位图</span></div><div class="line">CDC MemDC;</div><div class="line">MemDC.CreateCompatibleDC(pDC);<span class="comment">//一个具有指定设备兼容的存储器设备上下文</span></div><div class="line">MemDC.SelectObject(&amp;bm);</div><div class="line">BITMAP info;<span class="comment">//包含了位图数据的结构体</span></div><div class="line">bm.GetBitmap(&amp;info);</div><div class="line">pDC-&gt;BitBlt(<span class="number">0</span>,<span class="number">0</span>,info.bmWidth,info.bmHeight,&amp;MemDC,<span class="number">0</span>,<span class="number">0</span>,SRCCOPY);</div><div class="line">bm.DeleteObject();</div></pre></td></tr></table></figure>
+<p>更多关于CreateCompatibleDC的信息，访问<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd183489(v=vs.85" target="_blank" rel="external">Windows开发人员中心</a>.aspx)。</p>
+<p>最后的执行结果是将对应位图输出到指定位置。没有其他位图再出现。</p>
+<blockquote>
+<p>BitBlt(int x,int y,int nWidth,int nHeight,CDC*pSrcDC,int xSrc,int ySrc,DWORD dwRop);(为什么我的位图没办法编辑了？)与PalBit一样的参数意义也相同，xSrc,ySrc选择了位图的起始坐标，以此坐标作为新的位图的左上角坐标，pSrcDC指的就是与位图相关联的设备环境。</p>
+</blockquote>
+<p>下面是ScretchBlt例子：</p>
+<p>将上述代码中BitBlt句改为：<code>pDC-&gt;StretchBlt(0,0,info.bmWidth/2,info.bmHeight/2,&amp;MemDC,0,0,info.bmWidth,info.bmHeight,SRCCOPY);</code></p>
+<blockquote>
+<p>它比BitBlt多了两个参数。同样的，矩形选择、设备环境选择、左上角坐标选择，接下来多出的两个参数可以完成对位图的截取。</p>
+</blockquote>
+<p>这个例子输出来之后应该是在矩形(0,0,info.bmWidth/2,info.bmHeight/2)中输出完整的位图。</p>
+<h1 id="六、图标的处理"><a href="#六、图标的处理" class="headerlink" title="六、图标的处理"></a>六、图标的处理</h1><p>图标Icon是一种特殊的位图，与位图不同的是，图标的大小是固定的。CWinApp提供LoadStandardIcon加载系统预定义的图标，也提供LoadIcon加载用户自定义图标。</p>
+<p><strong>系统预定义图标：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">预定义图标宏</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IDI_APPLICATION</td>
+<td style="text-align:center">默认图标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDI_ASTERISK</td>
+<td style="text-align:center">信息图标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDI_EXCLAMATION</td>
+<td style="text-align:center">惊叹号图标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDI_HAND</td>
+<td style="text-align:center">严重警告图标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDI_QUESTION</td>
+<td style="text-align:center">问号</td>
+</tr>
+</tbody>
+</table>
+<p>一个显示图标的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">HICON icon1,icon2;</div><div class="line">icon1=AfxGetApp()-&gt;LoadStandardIcon(IDI_QUESTION);</div><div class="line">icon2=AfxGetApp()-&gt;LoadIcon(IDI_MYICON);</div><div class="line">CRect rect;</div><div class="line">GetClientRect(&amp;rect);</div><div class="line">pDC-&gt;DrawIcon(rect.right/<span class="number">2</span>,rect.bottom/<span class="number">2</span>,icon);<span class="comment">//画图标，比位图简单多了！</span></div></pre></td></tr></table></figure>
+<h1 id="七、光标操作"><a href="#七、光标操作" class="headerlink" title="七、光标操作"></a>七、光标操作</h1><p>光标cursor用于显示鼠标操作时鼠标的位置与显示形状，CWinapp提供了函数LoadStandardCursor用于加载系统预定义光标，也提供了LoadCursor用于加载用户自定义光标，SetCursor用于设置光标形状。</p>
+<p><strong>系统预定义的光标：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">光标类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IDC_ARROW</td>
+<td style="text-align:center">箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_CROSS</td>
+<td style="text-align:center">十字光标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_WAIT</td>
+<td style="text-align:center">沙漏光标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_IBEAM</td>
+<td style="text-align:center">输入光标</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZE</td>
+<td style="text-align:center">装入方框</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_ICON</td>
+<td style="text-align:center">空肖像</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_UPARROW</td>
+<td style="text-align:center">垂至箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZEALL</td>
+<td style="text-align:center">四向箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZENWSE</td>
+<td style="text-align:center">左上右下角双箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZENESW</td>
+<td style="text-align:center">右上左下角双箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZEWE</td>
+<td style="text-align:center">水平双箭头</td>
+</tr>
+<tr>
+<td style="text-align:center">IDC_SIZENS</td>
+<td style="text-align:center">垂直双箭头</td>
+</tr>
+</tbody>
+</table>
+<p>下面是一个光标操作的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnButtonDown消息函数中</span></div><div class="line">SetCapture();<span class="comment">//设置鼠标捕捉到属于当前线程指定的窗口。当鼠标被捕获，菜单热键和其他键盘快捷键不起作用。 </span></div><div class="line">HCURSOR cursor;</div><div class="line">cursor=AfxGetApp()-&gt;LoadStandardCursor(IDC_CROSS);</div><div class="line"><span class="comment">//cursor=AfxGetApp()-&gt;LoadCursor(IDC_MYCURSOR);</span></div><div class="line">SetCursor(cursor);<span class="comment">//设置光标</span></div><div class="line">CRect rect;</div><div class="line">GetClientDC(&amp;rect);</div><div class="line">ClientToScreen(&amp;rect);<span class="comment">//将客户区坐标转化为屏幕坐标。</span></div><div class="line">ClipCursor(&amp;rect);<span class="comment">//限制所述光标在屏幕上的矩形区域。</span></div></pre></td></tr></table></figure>
+<p>更多关于SetCapture的信息，访问<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646262(v=vs.85" target="_blank" rel="external">Windows开发人员中心SetCapture功能</a>.aspx)。</p>
+<p>更多关于ClipCursor的信息，访问<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms648383(v=vs.85" target="_blank" rel="external">Windows开发人员中心ClipCursor功能</a>.aspx)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnLButtonUp中</span></div><div class="line">ReleaseCapture();<span class="comment">//恢复鼠标的形状</span></div><div class="line">ClipCursor(<span class="literal">NULL</span>);<span class="comment">//放开抓捕，否则怎么也出不去客户区了</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>由于设置了新的鼠标样式，如果没有SetCapture，在移动后鼠标样式就会发生改变。<br>ClipCursor决定了是不是要把鼠标限制的某一个区域<br>SetCapture与ReleaseCapture决定是不是把鼠标改编成设定好的样式。</p>
+</blockquote>
+<h1 id="八、Examples"><a href="#八、Examples" class="headerlink" title="八、Examples"></a>八、Examples</h1><h2 id="1-鼠标画线"><a href="#1-鼠标画线" class="headerlink" title="1. 鼠标画线"></a>1. 鼠标画线</h2><p>这个例子允许用户从起点开始，画一条跟随鼠标移动直到其松开为终点的线段。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在C×View类定义中</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">   <span class="keyword">int</span> draw;</div><div class="line">   HCURSOR cursor;</div><div class="line">   CPoint old,origin;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在C×View构造函数中</span></div><div class="line">draw=<span class="number">0</span>;</div><div class="line">cursor=AfxGetApp()-&gt;LoadStandardCursor(IDC_CROSS);</div><div class="line">old=origin=CPoint(<span class="number">0</span>,<span class="number">0</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//OnLButtonDown中</span></div><div class="line">old=origin=point;<span class="comment">//保存按下鼠标的位置</span></div><div class="line">draw=<span class="number">1</span>;</div><div class="line">SetCapture();</div><div class="line">SetCursor(cursor);</div><div class="line">CRect rect;</div><div class="line">GetClientDC(&amp;rect);</div><div class="line">ClientToScreen(&amp;rect);</div><div class="line">ClipCursor(&amp;rect);</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnLButtonUp中</span></div><div class="line">draw=<span class="number">0</span>;</div><div class="line">ReleaseCapture();</div><div class="line">ClipCursor(<span class="literal">NULL</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnMouseMove中。--需要一直重绘</span></div><div class="line"><span class="function">CClientDC <span class="title">dc</span><span class="params">(<span class="keyword">this</span>)</span></span>;</div><div class="line">dc.SetROP2(R2_NOT);</div><div class="line"><span class="keyword">if</span>(draw==<span class="number">1</span>)&#123;</div><div class="line">    dc.MoveTo(origin);dc.LineTo(old);</div><div class="line">    dc.MoveTo(origin);dc.LineTo(point);</div><div class="line">    old=point;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果想看更详细的，点此<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645602(v=vs.85" target="_blank" rel="external">链接</a>.aspx#drawing_lines)。</p>
+<h2 id="2-背景与贴图"><a href="#2-背景与贴图" class="headerlink" title="2. 背景与贴图"></a>2. 背景与贴图</h2><p>贴图的例子与位图的例子很相似，不过耍了一点小手段。这个具体见例子4-17。</p>
+<h2 id="3-扇面效果"><a href="#3-扇面效果" class="headerlink" title="3. 扇面效果"></a>3. 扇面效果</h2><p>扇面效果就是1的降级版。</p>
+<h2 id="4-鼠标拖动圆"><a href="#4-鼠标拖动圆" class="headerlink" title="4. 鼠标拖动圆"></a>4. 鼠标拖动圆</h2><p><img src="D:\yayi\Pictures\鼠标拖动圆.png" alt="image"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    傻瓜日和
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/" title="绘图（4">http://yoursite.com/2017/05/27/MFC基础/MFC：绘图（4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MFC/" rel="tag"># MFC</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+        </div>
+      
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
+  
+</div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/MFC基础/第二章MFCsomething/" rel="next" title="MFC something（2">
+                <i class="fa fa-chevron-left"></i> MFC something（2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/21/算法与数据结构/miniumtree/" rel="prev" title="miniumtree">
+                miniumtree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="傻瓜日和" />
+            
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、设备环境类"><span class="nav-number">1.</span> <span class="nav-text">一、设备环境类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、绘图基本方法"><span class="nav-number">2.</span> <span class="nav-text">二、绘图基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-几个必要的类："><span class="nav-number">2.1.</span> <span class="nav-text">1. 几个必要的类：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-绘图工具："><span class="nav-number">2.2.</span> <span class="nav-text">2. 绘图工具：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统内置"><span class="nav-number">2.2.1.</span> <span class="nav-text">系统内置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义"><span class="nav-number">2.2.2.</span> <span class="nav-text">自定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#画笔"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">画笔</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xiuzheng"><span class="nav-number">2.2.3.</span> <span class="nav-text">xiuzheng</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-绘图函数"><span class="nav-number">2.3.</span> <span class="nav-text">3. 绘图函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的绘图函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">常用的绘图函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩形与圆角矩形"><span class="nav-number">2.3.2.</span> <span class="nav-text">矩形与圆角矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线段与弧线与矩形"><span class="nav-number">2.3.3.</span> <span class="nav-text">线段与弧线与矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#饼图与矩形"><span class="nav-number">2.3.4.</span> <span class="nav-text">饼图与矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多边形"><span class="nav-number">2.3.5.</span> <span class="nav-text">多边形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FillRect"><span class="nav-number">2.3.6.</span> <span class="nav-text">FillRect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FrameRect"><span class="nav-number">2.3.7.</span> <span class="nav-text">FrameRect</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-绘图模式"><span class="nav-number">2.4.</span> <span class="nav-text">4. 绘图模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用绘图模式："><span class="nav-number">2.4.1.</span> <span class="nav-text">常用绘图模式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRgn与区域"><span class="nav-number">2.4.2.</span> <span class="nav-text">CRgn与区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射模式"><span class="nav-number">2.4.3.</span> <span class="nav-text">映射模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、文本的绘图"><span class="nav-number">3.</span> <span class="nav-text">三、文本的绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理函数"><span class="nav-number">3.1.</span> <span class="nav-text">文本处理函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符属性"><span class="nav-number">3.2.</span> <span class="nav-text">字符属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体"><span class="nav-number">3.3.</span> <span class="nav-text">字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置字体："><span class="nav-number">3.3.1.</span> <span class="nav-text">内置字体：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义字体："><span class="nav-number">3.3.2.</span> <span class="nav-text">自定义字体：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、位图的处理"><span class="nav-number">4.</span> <span class="nav-text">四、位图的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-位图填充："><span class="nav-number">4.1.</span> <span class="nav-text">1. 位图填充：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、图标的处理"><span class="nav-number">5.</span> <span class="nav-text">六、图标的处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、光标操作"><span class="nav-number">6.</span> <span class="nav-text">七、光标操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八、Examples"><span class="nav-number">7.</span> <span class="nav-text">八、Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-鼠标画线"><span class="nav-number">7.1.</span> <span class="nav-text">1. 鼠标画线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-背景与贴图"><span class="nav-number">7.2.</span> <span class="nav-text">2. 背景与贴图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-扇面效果"><span class="nav-number">7.3.</span> <span class="nav-text">3. 扇面效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-鼠标拖动圆"><span class="nav-number">7.4.</span> <span class="nav-text">4. 鼠标拖动圆</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共112.1k字</span>
+</div>
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>

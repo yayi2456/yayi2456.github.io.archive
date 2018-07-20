@@ -362,10 +362,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/04/OS/串讲/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/16/月华/流光/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -381,7 +381,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/04/OS/串讲/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2017/12/16/月华/流光/" itemprop="url">流光</a></h1>
         
 
         <div class="post-meta">
@@ -393,8 +393,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T19:41:56+08:00">
-                2017-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T14:34:12+08:00">
+                2017-12-16
               </time>
             
 
@@ -403,6 +403,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/因寄所托/" itemprop="url" rel="index">
+                    <span itemprop="name">因寄所托</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -433,31 +455,384 @@
       
         
           
-            <h2 id="文件写入时发生了什么？"><a href="#文件写入时发生了什么？" class="headerlink" title="文件写入时发生了什么？"></a>文件写入时发生了什么？</h2><p>在内存中创建一个新的inode节点或者索引节点，如果存在，在文件系统中找到对应的inode。</p>
-<p>修改文件夹对应的数据节点。<br>最初只在内存中修改并标记这块数据已经被修改了，你记得帮我写回去。</p>
-<p>close并不能使数据立即回到硬盘上。pagebuffer可以被禁用。fsync可以强制立即写回磁盘。</p>
-<pre><code>//sqlite将收到文件系统缓存影响。
-</code></pre><p>先写数据还是先写索引？更偏向于先写数据，这样顶多修改内容存不上，如果先写索引，可能导致文件系统将无效数据误认为是文件数据。</p>
-<h2 id="文件删除时发生了什么"><a href="#文件删除时发生了什么" class="headerlink" title="文件删除时发生了什么"></a>文件删除时发生了什么</h2><p>找到对应的inode：这时在cache内存（pagecache）以及文件系统上都存有该文件的数据。</p>
-<p>在内存中删除inode，清除页面。<br>把硬盘中的inode清除，对应数据块清除，硬盘中的块标记为未使用，文件夹中的项删除。</p>
-<p>一个文件（夹）怎样叫做存在？1.在某一个文件夹下有她的树根的索引 2.在占用未占用位图中存在数据块占用标志。</p>
-<p>如何恢复一个被误删的文件？寻找树根。而树根是有特点的。一个文件恢复需要扫描位图中显示的未使用的数据块，找到树根，然后顺着树根找到所有文件。<br>所以，一旦误删，就不能再动硬盘了，再动硬盘可能会破坏原来的数据，导致文件直接找不到或者缺失或者？（不会乱码咩）</p>
-<p>怎样快速删除文件并且不可恢复？<br>删除与覆盖、与文件系统相关、把我的空lab5给他复制过去hhh。</p>
-<h2 id="关机时发生了什么？"><a href="#关机时发生了什么？" class="headerlink" title="关机时发生了什么？"></a>关机时发生了什么？</h2><p>init在接收到特定信号时发起关机</p>
-<p>使用SIGSTOP提示关机，使用SIGKILL强制关机</p>
-<p>各种内存数据回写。</p>
-<p>意外断电？<br>1.可能数据在内存中没有被回写 2.磁头正在飞行（可能会有保护机制） 3.磁头正在写入<br>如果搞坏了磁介质可能只是这个地方不能读写，但是<br>RAID1多地机房。</p>
-<p>意外断电防护：使用重力传感器，（磁头）失重时将会尽快写入数据。</p>
-<h2 id="开机时发生了什么"><a href="#开机时发生了什么" class="headerlink" title="开机时发生了什么"></a>开机时发生了什么</h2><p>跳转到指定地址取指令（0xfffff0或0x00000000（手机））：<br>bios中存在一些基本指令：兼容机的标准化使得BIOS可以适配大量硬件</p>
-<p>硬盘数据载入内存 这是因为硬盘的读取模式也兼容给bios的读写。</p>
-<p>格式化C盘再复制回去：NTLDR missing：NTFS系统自身的代码。VBR：ntfs文件系统的加载器，包含文件系统的读取方式与操作系统。使用vbr把文件load进来。</p>
-<p>操作系统接管运行，为进程准备环境。</p>
-<p>init进程创建用户交互进程。winlogon。init不做任何操作只等关机，其他任务都是init的子进程的工作。</p>
-<p>为什么不拷贝一份新的而是使用父进程的？子进程直接自己调用exec，直接调用（freertos）。拷贝执行？？？<br>子进程在出来之后就已经是一个完整的pcb了。</p>
-<p>父进程可以接收子进程的main函数的返回值。<br>父进程等待子进程退出，由父进程替子进程收拾残局：找到他分配的页面，转为可用页面。SIGCHILD。<br>如果一个进程的父进程先自己退出了，这个子进程的父进程就变成init。</p>
-<h2 id="exec时发生了什么？"><a href="#exec时发生了什么？" class="headerlink" title="exec时发生了什么？"></a>exec时发生了什么？</h2><p>在文件系统中找到文件，读取文件目录树</p>
-<p>将文件映射入内存</p>
-<p>程序执行</p>
+            <h1 id="生死桥"><a href="#生死桥" class="headerlink" title="生死桥"></a>生死桥</h1><p>怀玉心想，怎的每个人都要听他的心里话呢？到底心里有没有话？简简单单的一桩事儿，自家的事儿，哪有什么？世上各人都爱小事化大。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/OS/Lab4_Document/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/12/OS/Lab4_Document/" itemprop="url">Lab4_Document</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T21:08:40+08:00">
+                2017-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT Lab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1><h2 id="Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="Part A: Multiprocessor Support and Cooperative Multitasking"></a>Part A: Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统的初始化，随后，出于某种需要，BSP将会唤醒AP，AP也可以作为独立的CPU执行指令。</p>
+<p>在这种系统之中，每个CPU都有一个模块是<strong>LAPIC</strong>，它负责系统的中断传递，为每个CPU提供一个独特的编号。</p>
+<p>LAPIC是Local Advanced Programmable Interrupt Controller，local高级可编程中断控制器。LAPIC一般由中断信号、PRT、一组寄存器与其他一些部件组成，可以处理硬件的中断请求信息，并通知CPU进行处理。</p>
+<p>在本次实验中，我们将会用到LAPIC模块的如下功能函数：</p>
+<ol>
+<li>cpunum()：</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg" alt=""></p>
+<p>该函数中，通过访问lapic[ID]对应字段获得当前的cpu编号。</p>
+<ol>
+<li>lapic_startap():</li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96651596.jpg" alt=""></p>
+<p>这个函数中，BSP负责对尚未工作的AP进行初始化与唤醒操作。首先设置向量，然后发送INIT中断来重置其他CPU，最终发送STRARTUP信号与开始执行的位置，使一个CPU正式开始工作。</p>
+<ol>
+<li>lapic_init():</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">lapic_init(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (!lapicaddr) <span class="keyword">return</span>;</div><div class="line">	<span class="comment">// lapicaddr is the physical address of the LAPIC's 4K MMIO</span></div><div class="line">	<span class="comment">// region.  Map it in to virtual memory so we can access it.</span></div><div class="line">	<span class="comment">//lapiaddr是LAPIC的4K的MIMO区域的物理地址</span></div><div class="line">	<span class="comment">//把他映射到虚拟地址空间，就可以访问了</span></div><div class="line">	lapic = mmio_map_region(lapicaddr, <span class="number">4096</span>);</div><div class="line">	<span class="comment">//enable LAPIC；设置伪中断向量</span></div><div class="line">	<span class="comment">// Enable local APIC; set spurious interrupt vector.</span></div><div class="line">	<span class="comment">//#define SVR     (0x00F0/4)   // Spurious Interrupt Vector</span></div><div class="line">	<span class="comment">//#define ENABLE     0x00000100   // Unit Enable</span></div><div class="line"></div><div class="line">	<span class="comment">//in inc/trap.c</span></div><div class="line">	<span class="comment">//#define IRQ_OFFSET	32	// IRQ 0 corresponds to int IRQ_OFFSET</span></div><div class="line">	<span class="comment">//// Hardware IRQ numbers. We receive these as (IRQ_OFFSET+IRQ_WHATEVER)</span></div><div class="line">	<span class="comment">//#define IRQ_SPURIOUS     7</span></div><div class="line">	lapicw(SVR, ENABLE | (IRQ_OFFSET + IRQ_SPURIOUS));</div><div class="line"></div><div class="line">	<span class="comment">// The timer repeatedly counts down at bus frequency</span></div><div class="line">	<span class="comment">// from lapic[TICR] and then issues an interrupt.  </span></div><div class="line">	<span class="comment">//定时器重复从lapic [TICR]的总线频率倒计数，然后发出中断。</span></div><div class="line">	<span class="comment">// If we cared more about precise timekeeping,</span></div><div class="line">	<span class="comment">// TICR would be calibrated using an external time source.</span></div><div class="line">	<span class="comment">//如果我们更关心精确的计时，TICR将使用外部时间源进行校准。</span></div><div class="line">	lapicw(TDCR, X1);<span class="comment">//in this:向lapic数组写入东西lapic[TDCR]=X1;</span></div><div class="line">	lapicw(TIMER, PERIODIC | (IRQ_OFFSET + IRQ_TIMER));</div><div class="line">	lapicw(TICR, <span class="number">10000000</span>); </div><div class="line"></div><div class="line">	<span class="comment">// Leave LINT0 of the BSP enabled so that it can get</span></div><div class="line">	<span class="comment">// interrupts from the 8259A chip.</span></div><div class="line">	<span class="comment">//吧BSP的LINT0（向量表0）enable，这样就可以从8259A芯片得到中断</span></div><div class="line">	<span class="comment">// According to Intel MP Specification, the BIOS should initialize</span></div><div class="line">	<span class="comment">// BSP's local APIC in Virtual Wire Mode, in which 8259A's</span></div><div class="line">	<span class="comment">// INTR is virtually connected to BSP's LINTIN0. In this mode,</span></div><div class="line">	<span class="comment">// we do not need to program the IOAPIC.</span></div><div class="line">	<span class="comment">//根据英特尔MP规范，BIOS应在虚拟线路模式下初始化BSP的本地APIC，</span></div><div class="line">	<span class="comment">//其中8259A的INTR虚拟连接到BSP的LINTIN0。 </span></div><div class="line">	<span class="comment">//在这种模式下，我们不需要编程IOAPIC。</span></div><div class="line">	<span class="comment">//如果当前cpu不是启动cpu，它的中断表0 被mask</span></div><div class="line">	<span class="keyword">if</span> (thiscpu != bootcpu)</div><div class="line">		lapicw(LINT0, MASKED);</div><div class="line">	<span class="comment">// Disable NMI (LINT1) on all CPUs</span></div><div class="line">	<span class="comment">//中断表1都被mask</span></div><div class="line">	lapicw(LINT1, MASKED);</div><div class="line">	<span class="comment">// Disable performance counter overflow interrupts</span></div><div class="line">	<span class="comment">// on machines that provide that interrupt entry.</span></div><div class="line">	<span class="comment">//在一些特定的版本（提供了中断入口）的机器上，</span></div><div class="line">	<span class="comment">//disable PCINT（性能计数器溢出？？？）</span></div><div class="line">	<span class="keyword">if</span> (((lapic[VER]&gt;&gt;<span class="number">16</span>) &amp; <span class="number">0xFF</span>) &gt;= <span class="number">4</span>)</div><div class="line">		lapicw(PCINT, MASKED);</div><div class="line">	<span class="comment">// Map error interrupt to IRQ_ERROR.</span></div><div class="line">	lapicw(ERROR, IRQ_OFFSET + IRQ_ERROR);</div><div class="line"></div><div class="line">	<span class="comment">// Clear error status register (requires back-to-back writes).</span></div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Ack any outstanding interrupts.</span></div><div class="line">	lapicw(EOI, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Send an Init Level De-Assert to synchronize arbitration ID's.</span></div><div class="line">	<span class="comment">//#define ICRHI   (0x0310/4)   // Interrupt Command [63:32]</span></div><div class="line">	<span class="comment">//#define INIT       0x00000500   // INIT/RESET</span></div><div class="line">	<span class="comment">//#define DELIVS     0x00001000   // Delivery status</span></div><div class="line">	<span class="comment">//#define LEVEL      0x00008000   // Level triggered</span></div><div class="line">	<span class="comment">//#define BCAST      0x00080000   // Send to all APICs, including self.</span></div><div class="line">	lapicw(ICRHI, <span class="number">0</span>);</div><div class="line">	lapicw(ICRLO, BCAST | INIT | LEVEL);</div><div class="line">	<span class="keyword">while</span>(lapic[ICRLO] &amp; DELIVS) ;</div><div class="line">	<span class="comment">// Enable interrupts on the APIC (but not on the processor).</span></div><div class="line">	<span class="comment">//TPR 任务优先级</span></div><div class="line">	lapicw(TPR, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该函数初始化LAPIC。像其他结构一样，lapic被映射到固定的物理地址，随后进行各种中断向量的设置以及向量表的mask操作，设置错误状态寄存器的值，最后设置任务优先级。</p>
+<p>像VGA设备一样，物理地址空间上也为LAPIC设备留了一个洞，它将会被map到虚拟地址的MMIOBASE。这种访问方式使得CPU可以像访问内存一样访问设备。</p>
+<blockquote>
+<p><strong>Exercise 1</strong></p>
+<p>完成mmio_map_region函数，它将会完成把LAPIC设备所占据的物理地址map到预留的虚拟地址部分。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> *</div><div class="line">mmio_map_region(physaddr_t pa, size_t size)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// Where to start the next region.  Initially, this is the</span></div><div class="line">	<span class="comment">// beginning of the MMIO region.  Because this is static, its</span></div><div class="line">	<span class="comment">// value will be preserved between calls to mmio_map_region</span></div><div class="line">	<span class="comment">// (just like nextfree in boot_alloc).</span></div><div class="line">	<span class="comment">//这是mmio开始的地方</span></div><div class="line">	<span class="keyword">static</span> uintptr_t base = MMIOBASE;</div><div class="line">	<span class="comment">// Reserve size bytes of virtual memory starting at base and</span></div><div class="line">	<span class="comment">// map physical pages [pa,pa+size) to virtual addresses</span></div><div class="line">	<span class="comment">// [base,base+size).  Since this is device memory and not</span></div><div class="line">	<span class="comment">// regular DRAM, you'll have to tell the CPU that it isn't</span></div><div class="line">	<span class="comment">// safe to cache access to this memory.  Luckily, the page</span></div><div class="line">	<span class="comment">// tables provide bits for this purpose; simply create the</span></div><div class="line">	<span class="comment">// mapping with PTE_PCD|PTE_PWT (cache-disable and</span></div><div class="line">	<span class="comment">// write-through) in addition to PTE_W.  (If you're interested</span></div><div class="line">	<span class="comment">// in more details on this, see section 10.5 of IA32 volume</span></div><div class="line">	<span class="comment">// 3A.)</span></div><div class="line">	<span class="comment">//保留虚拟内存的的size字节，并把物理地址pa，pa+size给map到base,base+size，</span></div><div class="line">	<span class="comment">//由于这是设备的内存，并不是dram，需要告诉cpu缓存到这里的access是不安全的，</span></div><div class="line">	<span class="comment">//幸运的是，页表提供了这样的位</span></div><div class="line">	<span class="comment">//只需要使用PTE_PCD|PTE_PWT|PTE_W即可</span></div><div class="line">	<span class="comment">//如果你对这个很有兴趣，可以去看10.5节，IA32 卷3A</span></div><div class="line">	<span class="comment">// Be sure to round size up to a multiple of PGSIZE and to</span></div><div class="line">	<span class="comment">// handle if this reservation would overflow MMIOLIM (it's</span></div><div class="line">	<span class="comment">// okay to simply panic if this happens).</span></div><div class="line">	<span class="comment">//确保你roundsizeup</span></div><div class="line">	<span class="comment">//确保你检测是不是会超过MMIOLIM，如果超过了，panic</span></div><div class="line">	<span class="comment">// Hint: The staff solution uses boot_map_region.</span></div><div class="line">	<span class="comment">//使用boot_map_region</span></div><div class="line">	<span class="comment">// Your code here:</span></div><div class="line">	<span class="comment">//Note:pa=5 size=7 pgsize=10</span></div><div class="line">	<span class="comment">//actually endsp shall be 20</span></div><div class="line">	uint32_t endsp=ROUNDUP(size+pa,PGSIZE);</div><div class="line">	pa=ROUNDDOWN(pa,PGSIZE);</div><div class="line">	size=endsp-pa;</div><div class="line">	<span class="keyword">if</span>(base+size&gt;MMIOLIM)panic(<span class="string">"the reservation would overflow MMIOLIM"</span>);</div><div class="line">	boot_map_region(kern_pgdir,base,size,pa,PTE_PCD|PTE_PWT|PTE_W);</div><div class="line">	<span class="comment">//panic("mmio_map_region not implemented");</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	base+=size;</div><div class="line">	<span class="keyword">return</span> (<span class="keyword">void</span>*)(base-size);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>这里需要注意的是size与paddr的关系。由于最终覆盖到的地址应该在size+paddr，因此不能使用ROUNDDOWN(paddr)与ROUNDUP(size)直接做运算，否则可能会产生缺页的情况。</p>
+</blockquote>
+<h3 id="Application-Processor-Bootstrap"><a href="#Application-Processor-Bootstrap" class="headerlink" title="Application Processor Bootstrap"></a>Application Processor Bootstrap</h3><p>在<strong>i386_init</strong>函数中，本实验又增加了新的初始化过程：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96728212.jpg" alt=""></p>
+<p>在启动AP之前，BSP将会首先去获知多处理器的信息，比如CPU总数，他们各自的APIC编号以及LAPIC的MMIO地址。<strong>kern/mpconfig.c</strong>中的<strong>mp_init</strong>函数通过访问MP配置表来获知这些信息。随后，<strong>lapic_init</strong>初始化LAPIC设备，<strong>pic_init</strong>在更底层的部分初始化8259A的中断控制器。最后<strong>boot_aps</strong>函数(kern/init.c)将会启动各个AP，使他们从<strong>MPENTRY_PADDR</strong>开始运行。</p>
+<p><strong>boot_aps</strong>函数如下：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/39840649.jpg" alt=""></p>
+<p>可以看到，BSP首先将AP启动后执行的代码搬到AP的启动位置code，随后逐个唤醒AP。对每一个AP，将会告诉它它的内核栈的位置，随后调用<strong>lapic_statrap</strong>(kern/lapic.c)。lapic_startap的代码在上方已经贴出，它为CPU设置各种中断信息并最终给出STRATUP信号表明AP已经设置完成，随后AP开始从给定地址开始运行。进入<strong>mpentry.S</strong>的运行，设置initial页表并转入自己的内核栈，随后调用<strong>mp_main</strong>函数，设置页表，初始化LAPIC、GDT以及trap，随后告诉<strong>boot_aps</strong>这个CPU设置完毕，<strong>boot_aps</strong>接收到AP的信息之后，进入下一个AP的初始化。</p>
+<p>随后就像在Lab3中的那样，调用用户程序。</p>
+<blockquote>
+<p><strong>Exercise 2</strong></p>
+<p>修改<strong>page_init</strong>函数，不再将从MPENTRY_PADDR开始的虚拟地址添加到可用页上，给出更新后的函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29015296.jpg" alt=""></p>
+<p><strong>Question</strong></p>
+<ol>
+<li>Compare kern/mpentry.S side by side with boot/boot.S. Bearing in mind that kern/mpentry.S is compiled and linked to run above KERNBASE just like everything else in the kernel, what is the purpose of macro MPBOOTPHYS? Why is it necessary in kern/mpentry.S but not in boot/boot.S? In other words, what could go wrong if it were omitted in kern/mpentry.S? Hint: recall the differences between the link address and the load address that we have discussed in Lab 1. </li>
+</ol>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/70313494.jpg" alt=""><br>MPBOOTYPHYS的目的是计算应该访问的地址。<br>与boot.S不同，在mpentry.S中启动的AP，其load进的地址并不是像boot一样与假设自己被加载进来的地址相同，而是被BSP加载到MPENTRY_PADDR。为了访问到正确的物理地址，应该换算成希望加载进来的地址再进行对地址的操作。</p>
+</blockquote>
+<h3 id="Per-CPU-State-and-Initialization"><a href="#Per-CPU-State-and-Initialization" class="headerlink" title="Per-CPU State and Initialization"></a>Per-CPU State and Initialization</h3><p>在多CPU的系统中，需要明确每个CPU私有的状态以及共有的资源划分。在<strong>kern/cpu.h</strong>中定义的CpuInfo结构存储有大部分的私有信息。thiscpu指向当前cpu的CpuInfo结构。</p>
+<blockquote>
+<p><strong>Exercise 3</strong><br>修改<strong>mem_init_mp</strong>函数，为每个CPU map一个内核栈。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29300920.jpg" alt=""></p>
+<p>像在memlayout.h中定义的那样，补充后的代码是：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/92996124.jpg" alt=""></p>
+<p><strong>Exercise 4</strong></p>
+<p>修改<strong>trap_init_percpu</strong>使得在多CPU环境下可以运行</p>
+<p>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/58108225.jpg" alt=""></p>
+<p>这段代码中一共有四个需要修改的地方，一是所有的ts应该修改为thiscpu-&gt;ts，而是栈顶应该由KSTACKTOP-(KSTKSIZE + KSTKGAP)变为KSTACKTOP-i*(KSTKSIZE + KSTKGAP)，三是gdt中tss表项位置应该由[(GD_TSS0 &gt;&gt; 3)变为[(GD_TSS0 &gt;&gt; 3)+i，四是load选择子的时候应该修改为对应cpu的选择子ltr(GD_TSS0+i*8);。</p>
+</blockquote>
+<p>这样就完成了不同CPU的trap初始化。</p>
+<p>完成这里的操作之后，make qemu CPUS=4，可以看到所有函数检查通过，CPU信息输出。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/75077349.jpg" alt=""></p>
+<h3 id="Locking"><a href="#Locking" class="headerlink" title="Locking"></a>Locking</h3><p>上述完成之后，代码将会停在原地。为了使得AP能够进一步运行，需要首先解决多个CPU同时运行内核代码的竞争状况。为了解决这个问题，采用内核锁机制。当有进程在内核空间时，内核将会上一个锁，回到用户空间后，锁被释放。</p>
+<p>在<strong>kern/spinlock.h</strong>中定义了一个kernel_lock，提供了<strong>lock_kernel</strong>与<strong>unlock_kernel</strong>函数。需要我们自己来决定加锁解锁的位置。</p>
+<blockquote>
+<p><strong>Exercise 5</strong><br>加锁与解锁</p>
+<ol>
+<li><p>在i386_init中，在BSP唤醒其他CPU之前加锁：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/63950397.jpg" alt=""></p>
+</li>
+<li><p>在mp_main中，在AP初始化之后加锁，然后调用sched_yield来开始调度。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/24870973.jpg" alt=""></p>
+</li>
+<li><p>在trap中，如果是从用户模式来的trap，就获得锁。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/38167577.jpg" alt=""></p>
+</li>
+<li><p>在env_run中，在进入用户模式的时候释放锁<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/44217150.jpg" alt=""></p>
+</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>Question</p>
+<ol>
+<li>It seems that using the big kernel lock guarantees that only one CPU can run the kernel code at a time. Why do we still need separate kernel stacks for each CPU? Describe a scenario in which using a shared kernel stack will go wrong, even with the protection of the big kernel lock. </li>
+</ol>
+<p>这是因为在lab3中已经写过，当用户进程发生中断的时候，执行的代码中有：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/35810116.jpg" alt=""><br>这段代码是产生中断之后硬件自己就会执行的，在这个时候仍未调用trap，自然还没有为内核加锁。也就是说，如果使用同一个栈，当两个cpu同时发生中断的时候，这段代码很可能会被打断执行顺序，从而导致内核栈的混乱。</p>
+</blockquote>
+<h3 id="Round-Robin-Scheduling"><a href="#Round-Robin-Scheduling" class="headerlink" title="Round-Robin Scheduling"></a>Round-Robin Scheduling</h3><p>接下来，将会修改调度过程的代码，来为jos添加调度的功能。</p>
+<p>在这里，这个功能会被描述为：</p>
+<p>函数<strong>shced_yield</strong>负责选择一个新进程运行，它从当前运行进程的编号开始寻找，找第一个有着ENV_RUNNABLE的进程把运行权交付给它。如果没有其他进程是ENV_RUNNABLE状态而且现在的进程还可以运行，那就还让现在的进程运行。</p>
+<blockquote>
+<p><strong>Exercise 6</strong></p>
+<p>修改该sched_yield函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/8461936.jpg" alt=""></p>
+</blockquote>
+<p>需要注意的是，这时syscall函数仍未被完成，需要在此后陆续添加更多的SYS_*来允许用户空间的系统调用。</p>
+<p>随后可以测试，修改i386_init函数，创建3个进程：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/59214383.jpg" alt=""></p>
+<p>使用make qemu CPUS=2，可以得到结果：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/79530109.jpg" alt=""></p>
+<blockquote>
+<p>Question</p>
+<ol>
+<li>In your implementation of env_run() you should have called lcr3(). Before and after the call to lcr3(), your code makes references (at least it should) to the variable e, the argument to env_run. Upon loading the %cr3 register, the addressing context used by the MMU is instantly changed. But a virtual address (namely e) has meaning relative to a given address context–the address context specifies the physical address to which the virtual address maps. Why can the pointer e be dereferenced both before and after the addressing switch? </li>
+</ol>
+<p>e所指示的空间是在mem_init中被申请的物理空间，它并不会存在于每个进程的可用页表里供进程自己决定map的虚拟地址，而是对每个进程而言都是一样的。</p>
+<ol>
+<li>Whenever the kernel switches from one environment to another, it must ensure the old environment’s registers are saved so they can be restored properly later. Why? Where does this happen?</li>
+</ol>
+<p>只有这样做，才能保存上一个进程的运行状态信息，恢复进程运行时才不会出错。<br>这个操作发生在trap函数中，代码是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/86607615.jpg" alt=""><br>它保存了发生trap的进程的tf。<br>然而，进程之间切换由kernel决定。每次发生进程调度，都会发生trap（这里将syscall主动放弃cpu也通过trap完成）</p>
+</blockquote>
+<h3 id="System-Calls-for-Environment-Creation"><a href="#System-Calls-for-Environment-Creation" class="headerlink" title="System Calls for Environment Creation"></a>System Calls for Environment Creation</h3><p>下面将允许用户进程创建子进程并执行。</p>
+<p>在Unix中，fork函数可以用来创建子进程。这个子进程完全copy了父进程的地址空间，二者唯一不同的是在父进程中fork返回子进程的编号而在子进程中返回的是0。</p>
+<p>我们将实现一个更加原始的fork，首先需要完成一些系统调用函数。<br>在这些个函数之中，需要频繁用到函数envid2env来检查进程操作是否合法，首先来分析这个envid2env函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/74947768.jpg" alt=""></p>
+<p>如果envid是0，说明是当前进程希望获得自己的env结构，直接允许获得，返回curenv，函数成功。<br>如果给的envid不合法或者指定进程是free进程，无法得到进程结构，返回bad environment。<br>否则如果指定需要检查权限，那么给定的envid必须是当前进程的子进程，如果满足要求返回成功，否则返回失败：bad environment。</p>
+<blockquote>
+<p><strong>Exercise 7</strong>：</p>
+<p>只需要按照要求完成代码：</p>
+<p><strong>sys_exofork</strong>：创建一个新进程，其中，用户地址空间没有任何map，不可以运行。子进程将会拥有和父进程一样的寄存器状态值，该函数在子进程中返回0，在父进程中返回子进程的id。（由于子进程刚刚被创建的时候是没有执行能力的，因此实际上，在子进程中是无法返回的，直到其父进程用下面的函数将子进程标记为可运行）<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/70937828.jpg" alt=""></p>
+<p><strong>sys_env_set_status</strong>：设置一个进程的状态为ENV_RUNNABLE或者是ENV_NOT_RUNNABLE。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/20728662.jpg" alt=""></p>
+<p><strong>sys_page_alloc</strong>：申请一个物理页并把它map在给定进程的给定地址。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/47728587.jpg" alt=""></p>
+<p><strong>sys_page_map</strong>：把给定进程的某一个页的映射同样映射到另一个进程的给定地址，这样，这两个进程享有了共享的一个物理页。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/41333018.jpg" alt=""></p>
+<p><strong>sys_page_unmap</strong>：把某一个页从某一个进程的对应地址上unmap。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/27465683.jpg" alt=""></p>
+</blockquote>
+<p>完成这些之后，partA的dumbfork测试就可以通过了。</p>
+<h2 id="Part-B-Copy-on-Write-Fork"><a href="#Part-B-Copy-on-Write-Fork" class="headerlink" title="Part B: Copy-on-Write Fork"></a>Part B: Copy-on-Write Fork</h2><p>像在前面提到的一样，Unix提供了fork函数，这个函数将会复制整个父进程的地址空间。xv6 Unix的fork将会复制父进程的所有页到新的页，这也是在dumbfork里面做的。但是，这样的操作耗时而且通常都是无用功：创建出的子进程可能很快就会被父进程委派去做其他的工作，子进程的地址空间很快会被新的数据取代。</p>
+<p>出于这种考虑，现在来实现一种新的特性，子进程与父进程将享有同一套地址空间，直到有进程真的要去修改这块空间。这样的技术叫做<strong>copy-on-write</strong>。</p>
+<p>在这种特性之下，当创建子进程的时候，父进程仅仅将自己的映射关系给子进程，同时把自己共享出去的页都标记为只读。当有一方想要修改该虚拟地址空间时触发一个page fault，这时，内核才真正意识到需要一个新的页，这时才会去为发生错误的进程申请一个自己的页。这样的设计使得子进程在执行之前花费的代价很少，一般只会有一个栈的页。</p>
+<h3 id="User-level-page-fault-handling"><a href="#User-level-page-fault-handling" class="headerlink" title="User-level page fault handling"></a>User-level page fault handling</h3><p>用户层面的缺页异常有很多种引起的可能，cow只是其中的一种。内核必须能够决定为不同程序空间引起的缺页异常提供不一样的解决方式，比如，在栈中发生的缺页异常需要申请并map一个物理页，在bss区域引起的缺页中断会申请一个全0的物理页然后映射。</p>
+<p>对内核来说，有很多信息都可以作为判断依据，接下来，将完成我们的pgfault处理函数。</p>
+<h3 id="Setting-the-Page-Fault-Handler"><a href="#Setting-the-Page-Fault-Handler" class="headerlink" title="Setting the Page Fault Handler"></a>Setting the Page Fault Handler</h3><p>为了处理缺页中断，用户进程需要向内核注册并存储自己的缺页中断处理函数的入口点。为了实现这个功能，在Env结构中新加了成员<code>env_pgfault_upcall</code>。</p>
+<blockquote>
+<p><strong>Exercise 8</strong>：<br>完成函数<code>sys_env_set_pgfault_upcall</code>，确保进行了权限检查。</p>
+<p>根据提示，该函数为特定进程设置一个缺页中断处理函数。这个进程必须是自己或者是自己的子进程。<br>写出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/2663658.jpg" alt=""></p>
+</blockquote>
+<h3 id="Normal-and-Exception-Stacks-in-User-Environments"><a href="#Normal-and-Exception-Stacks-in-User-Environments" class="headerlink" title="Normal and Exception Stacks in User Environments"></a>Normal and Exception Stacks in User Environments</h3><p>在正常的执行中，用户进程将会在用户栈中执行，esp指向栈顶，当一个缺页中断发生的时候，内核将会使用户进程重新在另一个栈中运行缺页中断的处理函数。也就是，我们需要使内核能够自动换栈。</p>
+<p>异常栈有一个page大小，最顶端是UXSTACKTOP。因此，第一个中断发生后将会空间UXSTACKTOP-PGSIZE到UXSTACKTOP之间作为异常栈。在处理函数中可以通过各种调用恢复原进程的正确执行，随后该函数返回，回到上次发生中断的地方，重新执行出错代码。<br>每一个希望有用户层次的缺页中断处理函数的进程都必须支持申请新页来作为他自己的异常栈。</p>
+<h3 id="Invoking-the-User-Page-Fault-Handler"><a href="#Invoking-the-User-Page-Fault-Handler" class="headerlink" title="Invoking the User Page Fault Handler"></a>Invoking the User Page Fault Handler</h3><p>接下来我们要修改trap中的代码，使它有以下的功能。</p>
+<p>如果这个用户进程并没有自己的缺页中断处理函数，当他有缺页中断发生的时候，就销毁这个进程然后退出，否则。</p>
+<p>异常栈中的情况是这样的：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/95241296.jpg" alt=""></p>
+<p>UXSTTACKTOP是栈底，依次push进了许多变量，他们与结构<strong>UTrapframe</strong>吻合。函数执行结束后，需要从异常栈返回原本的用户栈。</p>
+<p>实际情况中可能更加复杂：缺页中断额处理函数本身还可能会发生中断，这时，继续往栈顶push数据，但是需要注意，由于一些原因，需要先push一个32bit的空位。这个将会在后面进行解释。如果tf-&gt;tf_esp在上述区域之中，那么就是在异常栈中发生的缺页中断，否则就是在原本的用户进程中发生的中断。</p>
+<blockquote>
+<p><strong>Exercise 9</strong></p>
+<p>完成函数<code>page_fault_handler</code>。他需要将用户空间的缺页中断给用户的处理函数。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/77522130.jpg" alt=""></p>
+<p>首先，只有有处理函数才能进行下一步的操作，否则将会free掉这个进程。<br>随后确定将要push的结构的首地址。如果当前进程可以访问这个地址，那么就把对应的地址写为对应的值，保存好之前执行状态的信息。保存完之后，将程序的下一个执行地址设置为函数的入口地址，将该进程的栈顶设置为异常栈的栈顶，运行。</p>
+</blockquote>
+<h3 id="User-mode-Page-Fault-Entrypoint"><a href="#User-mode-Page-Fault-Entrypoint" class="headerlink" title="User-mode Page Fault Entrypoint"></a>User-mode Page Fault Entrypoint</h3><p>接下来，需要我们完成执行C程序并且返回到原执行状态的汇编指令，该汇编指令是<code>sys_env_set_pgfault_upcall</code>的处理过程。</p>
+<blockquote>
+<p><strong>Exercise 10</strong>：<br>完成lib/pfentry.S中的<code>_pgfault_upcall</code>过程。</p>
+<p>只需要根据提示，结合上述的异常栈动作：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/27738708.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/86236764.jpg" alt=""></p>
+</blockquote>
+<p>最后，完成C程序库部分的缺页异常处理机制：</p>
+<blockquote>
+<p><strong>Exercise 11</strong>：<br>完成lib/pgfault.c中的<code>set_pgfault_handler</code>函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/14374721.jpg" alt=""></p>
+</blockquote>
+<h3 id="Implementing-Copy-on-Write-Fork"><a href="#Implementing-Copy-on-Write-Fork" class="headerlink" title="Implementing Copy-on-Write Fork"></a>Implementing Copy-on-Write Fork</h3><p>fork函数是一个cow的子进程创建函数，它的控制流程是这样的：</p>
+<ol>
+<li><p>使用<code>set_pgfault_handler</code>来确定中断处理函数C程序层面的入口</p>
+</li>
+<li><p>调用<code>sys_exofork</code>创建一个新进程</p>
+</li>
+<li><p>对每一个可写的或是cow的在UTOP之下的页，父进程为之调用<strong>duppage</strong>函数，这个函数将会把cow的页map到子进程地址空间，然后重新在自己的地址空间map这些页。</p>
+</li>
+<li><p>父进程为子进程设置缺页中断处理函数入口点</p>
+</li>
+<li><p>子进程可以运行了，父进程将其标志为RUNNABLE</p>
+</li>
+</ol>
+<p>之后，每次想要修改cow页面都会触发缺页中断，触发之后过程如下：</p>
+<ol>
+<li><p>kernel把pagefault告诉_pgfault_upcall，执行入口调用pgfault函数</p>
+</li>
+<li><p>pgfault检查错误是写错误而且页面是cow，否则panic</p>
+</li>
+<li><p>pgfault申请新的页，map到一个临时地址，把出错的页面信息copy到新的页面，随后把新页map到一个合适的地址。</p>
+</li>
+</ol>
+<p>kernle会把进程的页表都map到UVPT页目录map到UVPD，方便根据虚拟地址获取对应页的权限信息。首先我们先来看一看这个小技巧。</p>
+<p>在内核中可以使用函数<code>pgdir_walk</code>获得权限信息，但是在用户空间，虚拟地址的翻译决定了自身的页表与页目录是不可见的。为了方便的获取权限信息，我们向用户进程的页目录中插入一个特殊的entry。这个entry指向页目录的首部。</p>
+<p>这样，当我们访问一个PDX与PTX均是特定数值V的虚拟地址时，我们访问到了页目录。<br>这个地址作为指针数组的开头，使用某虚拟地址的PDX作为索引，使我们可以访问到页目录的各项。</p>
+<p>当我们访问一个PDX是V但是PTX不是V的虚拟地址时，我们访问到了页表。同样地我们可以访问到各个页表项。</p>
+<p>上述提到的两个虚拟地址分别是UVPD与UVPT。在memlayout.h中定义。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/57100150.jpg" alt=""></p>
+<blockquote>
+<p><strong>Exercise 12</strong>：<br>完成frok，duppage以及pgfault。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/99153651.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/36579327.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/42000412.jpg" alt=""></p>
+</blockquote>
+<p>partB到这里就结束了，在进入partC之前，首先来梳理一下从fork开始的整个运行过程。</p>
+<p>当一个用户进程调用fork函数创建子进程，在fork中将申请一个新的进程，复制父进程的地址空间映射给子进程并把二者空间中的对应页都标记为cow，随后父进程为子进程申请用户栈，设置缺页处理过程入口点，最终将子进程的状态标记为可运行。fork退出后将得到两个可运行的进程，在子进程中fork函数返回的是0，在父进程中返回的是子进程的进程id，随后二者可以区分开开始运行。</p>
+<p>子进程开始运行其他东西或是父进程需要写数据的时候，其中一个必然会触发一个cow的缺页中断。这个进程的缺页中断经过内核dispatch，将会执行我们在trap中完成的处理函数，假设它已经设置了自己的处理函数，那么就会创建一个异常栈，开始执行在pfentry.S中的汇编代码，执行完毕之后返回原来发生错误的执行位置，继续执行。</p>
+<h2 id="Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC"><a href="#Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC" class="headerlink" title="Part C: Preemptive Multitasking and Inter-Process communication (IPC)"></a>Part C: Preemptive Multitasking and Inter-Process communication (IPC)</h2><h3 id="Clock-Interrupts-and-Preemption"><a href="#Clock-Interrupts-and-Preemption" class="headerlink" title="Clock Interrupts and Preemption"></a>Clock Interrupts and Preemption</h3><p>在此之前，我们不同进程之间的调度都是自愿的。下面将通过引入时钟中断来强制进行调度。</p>
+<h3 id="Interrupt-discipline"><a href="#Interrupt-discipline" class="headerlink" title="Interrupt discipline"></a>Interrupt discipline</h3><p>外部中断在本实验中一共有16个，标号是32-47。在本实验中，内核中的外部中断被忽略，在用户空间中通过设置FL_IF来设置允许外部中断。</p>
+<blockquote>
+<p><strong>Exercise 13</strong>：<br>修改trapentry.S以及trap.c来初始化上述的中断，然后修改该env_alloc允许用户空间的外部中断</p>
+<p>像上一个实验一样即可：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/19942562.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/85310004.jpg" alt=""></p>
+<p>只需在指定的位置将新建的env的tf_eflags修改为FL_IF允许即可。</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/89863916.jpg" alt=""></p>
+</blockquote>
+<h3 id="Handling-Clock-Interrupts"><a href="#Handling-Clock-Interrupts" class="headerlink" title="Handling Clock Interrupts"></a>Handling Clock Interrupts</h3><p>在lapic_init以及pic_init中，已经设置好了产生时钟中断，下面需要处理时钟中断。</p>
+<blockquote>
+<p><strong>Exercise 14</strong>：<br>修改trap_dispatch，它调用sched_yield。<br>直接给出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/87756184.jpg" alt=""></p>
+</blockquote>
+<h3 id="Inter-Process-communication-IPC"><a href="#Inter-Process-communication-IPC" class="headerlink" title="Inter-Process communication (IPC)"></a>Inter-Process communication (IPC)</h3><p>进程间的通信有很多种模型，这里只实现简单的一种。</p>
+<h3 id="IPC-in-JOS"><a href="#IPC-in-JOS" class="headerlink" title="IPC in JOS"></a>IPC in JOS</h3><p>这里进程可以相互发送或接收的信息有：一个32bit的数据或是一整个页。整个页的发送是通过共享内存来实现的，这在下面将具体说明。</p>
+<h3 id="Sending-and-Receiving-Messages"><a href="#Sending-and-Receiving-Messages" class="headerlink" title="Sending and Receiving Messages"></a>Sending and Receiving Messages</h3><p>为了接收数据，进程将调用sys_ipc_recv。这个系统调用使这个进程不可运行，直到收到数据。当进程等待接收消息时，任何其他进程都可以向其发送消息不会检查权限。</p>
+<p>为了尝试发送一个值，一个环境调用sys_ipc_try_send与接收者的环境ID和要发送的值。如果指定的环境实际上正在接收（它已经调用sys_ipc_recv并且还没有获得值），则发送递送消息并返回0.否则发送返回-E_IPC_NOT_RECV以指示目标环境当前不期望接收值。</p>
+<h3 id="Transferring-Pages"><a href="#Transferring-Pages" class="headerlink" title="Transferring Pages"></a>Transferring Pages</h3><p>当进程使用小于UTOP的dstva调用sys_ipc_recv时，表明它愿意接收页面映射。如果发送者发送一个页面，那么该页面应该被映射到接收者地址空间中的dstva。如果接收者已经有了一个映射到dstva的页面，那么这个页面被unmap。</p>
+<p>当环境使用小于UTOP的srcva调用sys_ipc_try_send时，说明发送者想要发送当前映射到srcva（发送者）的页面到接收者，具有权限perm。在一个成功的IPC之后，发送者在srcva的地址空间保留其原始的映射，但是接收者也在接收者的地址空间中获得了原来由接收者指定的dstva的同一物理页面的映射。结果这个页面在发送者和接收者之间被共享。</p>
+<p>如果发送者或接收者不指示应该传送页面，则不传送页面。在任何IPC之后，内核将接收方的Env结构中的新字段env_ipc_perm设置为所接收页面的权限，如果没有收到页面，则为零。</p>
+<h3 id="Implementing-IPC"><a href="#Implementing-IPC" class="headerlink" title="Implementing IPC"></a>Implementing IPC</h3><blockquote>
+<p><strong>Exercise 15</strong>：<br>根据说明补充syscall与ipc中的函数：</p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/20379443.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/74580574.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/80248583.jpg" alt=""></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/16842939.jpg" alt=""></p>
+</blockquote>
+<p>本实验结束。</p>
 
           
         
@@ -512,7 +887,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/02/编译原理/我的编译器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -658,10 +1033,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/02/Untitled-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/02/琐碎/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -677,7 +1052,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/02/Untitled-1/" itemprop="url">琐碎</a></h1>
+                <a class="post-title-link" href="/2017/12/02/琐碎/" itemprop="url">琐碎</a></h1>
         
 
         <div class="post-meta">
@@ -751,7 +1126,8 @@
       
         
           
-            <p>git的beanch原来真的可以在本地也切换啊！<br>当我用git checkout lab3的时候，文件夹里的东西也会跟着变。<br>这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。</p>
+            <a id="more"></a>
+<p>git的beanch原来真的可以在本地也切换啊！<br>当我用git checkout lab3的时候，文件夹里的东西也会跟着变。<br>这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。</p>
 <h2 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h2><h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><table>
 <thead>
 <tr>
@@ -834,7 +1210,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1029,7 +1405,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/编译原理/语法制导翻译/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1175,182 +1551,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/OS/OS4+Memory and Process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/OS/OS4+Memory and Process/" itemprop="url">串讲复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T19:00:00+08:00">
-                2017-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT Lab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
-<ol>
-<li>在每一个像素有一种颜色</li>
-<li>文本模式</li>
-</ol>
-<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
-<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
-<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
-<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
-<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
-<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
-<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
-<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
-<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
-<p>由一个“可否使用cache”的位</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/OS/Lab3_Document/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1740,10 +1944,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/OS/串讲复习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/OS/串讲复习/" itemprop="url">串讲复习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T19:00:00+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
+                    <span itemprop="name">MIT Lab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
+<ol>
+<li>在每一个像素有一种颜色</li>
+<li>文本模式</li>
+</ol>
+<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
+<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
+<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
+<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
+<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
+<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
+<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
+<p>由一个“可否使用cache”的位.</p>
+<h2 id="文件写入时发生了什么？"><a href="#文件写入时发生了什么？" class="headerlink" title="文件写入时发生了什么？"></a>文件写入时发生了什么？</h2><p>在内存中创建一个新的inode节点或者索引节点，如果存在，在文件系统中找到对应的inode。</p>
+<p>修改文件夹对应的数据节点。<br>最初只在内存中修改并标记这块数据已经被修改了，你记得帮我写回去。</p>
+<p>close并不能使数据立即回到硬盘上。pagebuffer可以被禁用。fsync可以强制立即写回磁盘。</p>
+<pre><code>//sqlite将收到文件系统缓存影响。
+</code></pre><p>先写数据还是先写索引？更偏向于先写数据，这样顶多修改内容存不上，如果先写索引，可能导致文件系统将无效数据误认为是文件数据。</p>
+<h2 id="文件删除时发生了什么"><a href="#文件删除时发生了什么" class="headerlink" title="文件删除时发生了什么"></a>文件删除时发生了什么</h2><p>找到对应的inode：这时在cache内存（pagecache）以及文件系统上都存有该文件的数据。</p>
+<p>在内存中删除inode，清除页面。<br>把硬盘中的inode清除，对应数据块清除，硬盘中的块标记为未使用，文件夹中的项删除。</p>
+<p>一个文件（夹）怎样叫做存在？1.在某一个文件夹下有她的树根的索引 2.在占用未占用位图中存在数据块占用标志。</p>
+<p>如何恢复一个被误删的文件？寻找树根。而树根是有特点的。一个文件恢复需要扫描位图中显示的未使用的数据块，找到树根，然后顺着树根找到所有文件。<br>所以，一旦误删，就不能再动硬盘了，再动硬盘可能会破坏原来的数据，导致文件直接找不到或者缺失或者？（不会乱码咩）</p>
+<p>怎样快速删除文件并且不可恢复？<br>删除与覆盖、与文件系统相关、把我的空lab5给他复制过去hhh。</p>
+<h2 id="关机时发生了什么？"><a href="#关机时发生了什么？" class="headerlink" title="关机时发生了什么？"></a>关机时发生了什么？</h2><p>init在接收到特定信号时发起关机</p>
+<p>使用SIGSTOP提示关机，使用SIGKILL强制关机</p>
+<p>各种内存数据回写。</p>
+<p>意外断电？<br>1.可能数据在内存中没有被回写 2.磁头正在飞行（可能会有保护机制） 3.磁头正在写入<br>如果搞坏了磁介质可能只是这个地方不能读写，但是<br>RAID1多地机房。</p>
+<p>意外断电防护：使用重力传感器，（磁头）失重时将会尽快写入数据。</p>
+<h2 id="开机时发生了什么"><a href="#开机时发生了什么" class="headerlink" title="开机时发生了什么"></a>开机时发生了什么</h2><p>跳转到指定地址取指令（0xfffff0或0x00000000（手机））：<br>bios中存在一些基本指令：兼容机的标准化使得BIOS可以适配大量硬件</p>
+<p>硬盘数据载入内存 这是因为硬盘的读取模式也兼容给bios的读写。</p>
+<p>格式化C盘再复制回去：NTLDR missing：NTFS系统自身的代码。VBR：ntfs文件系统的加载器，包含文件系统的读取方式与操作系统。使用vbr把文件load进来。</p>
+<p>操作系统接管运行，为进程准备环境。</p>
+<p>init进程创建用户交互进程。winlogon。init不做任何操作只等关机，其他任务都是init的子进程的工作。</p>
+<p>为什么不拷贝一份新的而是使用父进程的？子进程直接自己调用exec，直接调用（freertos）。拷贝执行？？？<br>子进程在出来之后就已经是一个完整的pcb了。</p>
+<p>父进程可以接收子进程的main函数的返回值。<br>父进程等待子进程退出，由父进程替子进程收拾残局：找到他分配的页面，转为可用页面。SIGCHILD。<br>如果一个进程的父进程先自己退出了，这个子进程的父进程就变成init。</p>
+<h2 id="exec时发生了什么？"><a href="#exec时发生了什么？" class="headerlink" title="exec时发生了什么？"></a>exec时发生了什么？</h2><p>在文件系统中找到文件，读取文件目录树</p>
+<p>将文件映射入内存</p>
+<p>程序执行</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+<div>
+  
+</div>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1796,17 +2198,6 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/计算机网络/" itemprop="url" rel="index">
                     <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
                   </a>
                 </span>
 
@@ -1906,10 +2297,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/简单udp通信实现-java/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/计算机网络/简单udp通信实现-java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -1925,7 +2316,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/15/简单udp通信实现-java/" itemprop="url">网络编程一：UDP,CMD,TCP,WebServer</a></h1>
+                <a class="post-title-link" href="/2017/11/15/计算机网络/简单udp通信实现-java/" itemprop="url">网络编程一：UDP,CMD,TCP,WebServer</a></h1>
         
 
         <div class="post-meta">
@@ -1967,28 +2358,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/" itemprop="url" rel="index">
-                    <span itemprop="name">大三的课</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/大三的课/作业/" itemprop="url" rel="index">
-                    <span itemprop="name">作业</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -2020,256 +2389,14 @@
 
       
         
-          
-            <h1 id="UDP-CMD"><a href="#UDP-CMD" class="headerlink" title="UDP CMD"></a>UDP CMD</h1><p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
-<p>woaibianyi,bianyibangwojiejueledaiamdewenti.xieixeni.</p>
-<p>感觉像是…识别不出\n…行吧，myplace myrule，//必须以;结尾！</p>
-<h2 id="UDP介绍"><a href="#UDP介绍" class="headerlink" title="UDP介绍"></a>UDP介绍</h2><p>UDP通信使用两个类：<strong>DatagramPacket</strong>与<strong>DatagramSocket</strong>。前者是对UDP包的一个封装，后者是完成两端之间的交流。<br>在UDP里面Server与Client地位同等，彼此没有区分。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length,addr,port);<span class="comment">//发送包;</span></div><div class="line">DatagramPacket packet=<span class="keyword">new</span> DatagramPacket(buff,buff.length);<span class="comment">//接收包;</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(port);<span class="comment">//指定端口号的socket;</span></div><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();<span class="comment">//自动分配一个可用端口号;</span></div></pre></td></tr></table></figure>
-<p>不得不说端口号与进程、socket之间的关系：端口号与进程毛关系没有。一个udp socket只能绑一个端口，一个port只能被一个socket绑。这个原因是在多路复用与多路分解讲到的。否则不知道pck究竟该给谁。</p>
-<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><h3 id="Server的ip获取；获取client的ip与port"><a href="#Server的ip获取；获取client的ip与port" class="headerlink" title="Server的ip获取；获取client的ip与port"></a>Server的ip获取；获取client的ip与port</h3><p><strong>Server端获取Server的ip与port</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InetAddress.getLocalHost();<span class="comment">//ip获取;</span></div><div class="line">socket.getLocalPort();<span class="comment">//socket绑定的port获取;</span></div></pre></td></tr></table></figure>
-<p><strong>Server端获取Client的ip与port</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//pck是从client接收到的包;</span></div><div class="line">pck.getAddress();<span class="comment">//;</span></div><div class="line">pck.getPort();<span class="comment">//;</span></div></pre></td></tr></table></figure>
-<h3 id="时间获取"><a href="#时间获取" class="headerlink" title="时间获取"></a>时间获取</h3><ol>
-<li>定义：<code>Calendar cal;</code></li>
-<li>每次获取时间前都应执行：<code>cal= Calendar.getInstance();</code></li>
-<li>获取常用的数据：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> year = cal.get(Calendar.YEAR);</div><div class="line"><span class="keyword">int</span> month=cal.get(Calendar.MONTH)+<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> day=cal.get(Calendar.DATE);</div><div class="line"><span class="keyword">int</span> week = cal.get(Calendar.DAY_OF_WEEK)-<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> hour=cal.get(Calendar.HOUR_OF_DAY);</div><div class="line"><span class="keyword">int</span> minute=cal.get(Calendar.MINUTE);</div><div class="line"><span class="keyword">int</span> second=cal.get(Calendar.SECOND);</div></pre></td></tr></table></figure>
-<h3 id="使用其他类访问同一可视化界面"><a href="#使用其他类访问同一可视化界面" class="headerlink" title="使用其他类访问同一可视化界面"></a>使用其他类访问同一可视化界面</h3><p>以本程序为例，在主类中创建了一个可视化界面，希望在Time类访问可视化界面的一个label：</p>
-<p><strong>在Time类创建一个label，使用主类的label初始化这个label</strong>。</p>
-<h3 id="主方法：监听client请求"><a href="#主方法：监听client请求" class="headerlink" title="主方法：监听client请求"></a>主方法：监听client请求</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket(<span class="number">4444</span>);<span class="comment">//固定的一个socket，绑定固定的port;</span></div><div class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">    <span class="keyword">byte</span>[]buff=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">256</span>];<span class="comment">//输入缓冲区;</span></div><div class="line">    DatagramPacket pck=<span class="keyword">new</span> DatagramPacket(buff,buff.length);<span class="comment">//每次都新建一个包，否则会产生缓冲区不干净发送数据错误的问题;</span></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        server.log.setText(server.log.getText()+<span class="string">"\ni'm at "</span>+InetAddress.getLocalHost()+<span class="string">" "</span>+socket.getLocalPort()+<span class="string">" and listenning~\n"</span>);</div><div class="line">        server.log.setCaretPosition(server.log.getText().length());<span class="comment">//设置目前的光标位置，在可视化界面具体讲;</span></div><div class="line">        socket.receive(pck);<span class="comment">//接收数据包：阻塞方法;</span></div><div class="line">        server.log.setText(server.log.getText()+<span class="string">"i've get a request from "</span>+pck.getAddress()+<span class="string">" "</span>+pck.getPort()+<span class="string">" "</span>+<span class="keyword">new</span> String(pck.getData())+<span class="string">"\n"</span>);<span class="comment">//;</span></div><div class="line">        server.log.setCaretPosition(server.log.getText().length());</div><div class="line">        Server newserver=<span class="keyword">new</span> Server(<span class="keyword">new</span> String(pck.getData()),pck,server);<span class="comment">//新开一个线程，专门负责与这个client的通信;</span></div><div class="line">        <span class="keyword">new</span> Thread(newserver).start();<span class="comment">//新线程开始运行;</span></div><div class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            <span class="comment">// TODO Auto-generated catch block;</span></div><div class="line">         e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>pck.getData();</code>:获取pck包的data信息;<br><code>pck.getAddress();</code>获取包的源地址<br><code>pck.getPort();</code>获取包的源端口</p>
-<p><code>InetAddress.getLocalHost();</code>:获取本地ip，可能抛出异常，需要处理<br><code>socket.getLocalPort();</code>获取socket绑定的端口号</p>
-<p><code>socket.receive(pck);</code>:等待接收一个包<br><code>socket.send(pck);</code>:发送一个包</p>
-<h3 id="String与Unix时间戳之间的转换"><a href="#String与Unix时间戳之间的转换" class="headerlink" title="String与Unix时间戳之间的转换"></a>String与Unix时间戳之间的转换</h3><p>format函数之中是一个Date对象，这个Date对象由一个long构造：list[i]是File类型。也许会说“过时”，没关系，这一整句代码打上去就不会提示了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String dates=<span class="keyword">new</span> java.text.SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>).format(<span class="keyword">new</span> java.util.Date(list[i].lastModified()));</div></pre></td></tr></table></figure>
-<p>多说一句SimpleDateFormat：</p>
-<p> G 年代标志符<br>  y 年<br>  M 月<br>  d 日<br>  h 时 在上午或下午 (1~12)<br>  H 时 在一天中 (0~23)<br>  m 分<br>  s 秒<br>  S 毫秒<br>  E 星期<br>  D 一年中的第几天<br>  F 一月中第几个星期几<br>  w 一年中第几个星期<br>  W 一月中第几个星期<br>  a 上午 / 下午 标记符<br>  k 时 在一天中 (1~24)<br>  K 时 在上午或下午 (0~11)<br>  z 时区</p>
-<p>可以说是十分实用了。</p>
-<p>具体信息可以访问<a href="http://blog.csdn.net/gubaohua/article/details/575488" target="_blank" rel="external">这里：SimpleDateFormat使用详解</a></p>
-<h3 id="获取本地文件信息"><a href="#获取本地文件信息" class="headerlink" title="获取本地文件信息"></a>获取本地文件信息</h3><p><strong>注意</strong>：没有解决的一个问题：包最后一定会用ASCII为0的char填充满255个，注意！</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">File f=<span class="keyword">new</span> File(dirpath);</div><div class="line">File[] list=<span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span>(f.isDirectory())&#123;</div><div class="line">    list=f.listFiles();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>获取文件名信息：<code>list[0].getName();</code><br>是否文件？是否目录？:<code>list[0].isFile();list[0].isDirectory();</code><br>还有一系列方法：自己发现吧！</p>
-<p>Server的java代码<a href="http://note.youdao.com/noteshare?id=de6b0e25562da7949d1b1b8a51ae865c&amp;sub=E0E99B97DC7A4AAEB00CC82204E767BC" target="_blank" rel="external">看这里</a></p>
-<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><h3 id="client的ip获取"><a href="#client的ip获取" class="headerlink" title="client的ip获取"></a>client的ip获取</h3><p><code>InetAddress.getLocalHost();</code>与Server差不多</p>
-<h3 id="设置最大时延"><a href="#设置最大时延" class="headerlink" title="设置最大时延"></a>设置最大时延</h3><p>送出一个包：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DatagramSocket socket=<span class="keyword">new</span> DatagramSocket();</div><div class="line">socket.setSoTimeout(<span class="number">10000</span>);</div><div class="line">socket.send(pck);</div></pre></td></tr></table></figure>
-<p>新开一个线程中：等待接收一旦超时触发异常：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    socket.receive(pck);</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(SocketTimeoutException e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">    ori=ori+<span class="string">"timeout!:"</span>+socket.getInetAddress()+<span class="string">" for "</span>+pck.getData().toString()+<span class="string">" has no response . try again!\n"</span>;</div><div class="line">    clientthis.tf.setText(ori);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用String设置指定IP"><a href="#使用String设置指定IP" class="headerlink" title="使用String设置指定IP"></a>使用String设置指定IP</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">    <span class="keyword">int</span>[]ipaddr=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</div><div class="line">    String[] ipsplit=<span class="keyword">new</span> String[<span class="number">4</span>];</div><div class="line">    data=data.replace(<span class="string">'.'</span>, <span class="string">'-'</span>);</div><div class="line">    ipsplit=data.split(<span class="string">"-"</span>);<span class="comment">//这两步是当时不懂正则，使的一个小手段;</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</div><div class="line">        <span class="keyword">if</span>(ipsplit[i]!=<span class="keyword">null</span> &amp;&amp; ipsplit[i].isEmpty())&#123;</div><div class="line">        cmd.setText(cmd.getText()+<span class="string">"format of ip addr wrong!split by .\n&gt;"</span>);</div><div class="line">        rows++;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    ipaddr[i]=Integer.parseInt(ipsplit[i]);</div><div class="line">    &#125;<span class="comment">//前面是为了验证给定的string是符合要求的int.int.int.int形式;</span></div><div class="line">    <span class="comment">//得到正确的ip;</span></div><div class="line">   <span class="comment">//转化为byte流;</span></div><div class="line">    <span class="keyword">byte</span>[]byteaddr=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</div><div class="line">    byteaddr[<span class="number">0</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">0</span>];</div><div class="line">    byteaddr[<span class="number">1</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">1</span>];</div><div class="line">    byteaddr[<span class="number">2</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">2</span>];</div><div class="line">    byteaddr[<span class="number">3</span>]=(<span class="keyword">byte</span>)ipaddr[<span class="number">3</span>];</div><div class="line">    <span class="comment">//设置新ip;</span></div><div class="line">    addr=InetAddress.getByAddress(byteaddr);</div><div class="line">    System.out.println(data);</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">"&gt;"</span>);<span class="comment">//先忽略就好;</span></div><div class="line">&#125;<span class="keyword">catch</span>(NumberFormatException e)&#123;<span class="comment">//根本不符合格式;</span></div><div class="line">    e.printStackTrace();</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">" wrong:"</span>+command.substring(<span class="number">7</span>)+<span class="string">"wrong format of ip addr! split by . and only numbers are accept\n&gt;"</span>);</div><div class="line">    rows++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(UnknownHostException he)&#123;<span class="comment">//;</span></div><div class="line">    he.printStackTrace();</div><div class="line">    cmd.setText(cmd.getText()+<span class="string">"unknown host\n&gt;"</span>);</div><div class="line">    rows++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>client代码<a href="http://note.youdao.com/noteshare?id=45d994163c92b945960698ea27100a1b&amp;sub=3AE87C2D6AF44F2BA331DB9C7904A210" target="_blank" rel="external">看这里</a></p>
-<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>可视化部分也在上面的client代码里面。</p>
-<h1 id="TCP-WebServer"><a href="#TCP-WebServer" class="headerlink" title="TCP WebServer"></a>TCP WebServer</h1><p>这是第二次作业，使用TCP，利用http1.1，实现一个可以与浏览器进行交互的小型的WebServer。</p>
-<p>附加：tcp部分编码设置</p>
-<p>String code=”utf-8”;<br>        try {<br>            InputStream instream= new java.io.FileInputStream(file);<br>            byte[] b = new byte[3];<br>            instream.read(b);<br>            instream.close();<br>            if (b[0] == -17 &amp;&amp; b[1] == -69 &amp;&amp; b[2] == -65)code=”utf-8”;<br>            else code=”GBK”;<br>        } catch (IOException e) {<br>            // TODO Auto-generated catch block<br>            e.printStackTrace();<br>        }<br>        return code;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-<div>
-  
-</div>
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/OS/实验串讲/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日和">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/14/OS/实验串讲/" itemprop="url">OS-各实验初讲</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T22:05:33+08:00">
-                2017-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/MIT-Lab/" itemprop="url" rel="index">
-                    <span itemprop="name">MIT Lab</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
-<p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
-<p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
-<hr>
-<p><strong>iret</strong>：系统指令，从中断中返回。<br><strong>ret</strong>：从函数中返回<br><strong>retf</strong>：与ret基本一样，从函数中返回。（弹出栈，拿出返回地址（就是下一条语句）返回值，丢掉压栈参数）</p>
-<p>中断是一个硬件的事件，中断返回与函数返回不同。当一个中断来了，不管你当时在干嘛，就乖乖地保存一下现场去响应中断。这个<strong>保存现场</strong>，包括了硬件将会自动帮你保存的一些现场，比如CS、SS、Flag等等，这些是自动存下的，iret的作用就是自动地将这些东西都弹出。但是这些现场保存并不够，通用寄存器是不会帮你保存的。</p>
-<p>ret、iret等等在汇编之中可以随意调用，并不需要其他约束。如果当你在汇编中不是函数（中断）的里面调用了这些，它会干些什么呢？<br>他会把自己认为的自己保存进去的那些东西弹出来，一个是返回地址给PC，一个是返回值给保存返回值的东西。即使没有调用函数，ret的行为也是固定的：<strong>从栈顶弹出两个值，一个给PC，一个给存储返回值的东西</strong>，iret的行为也是固定的，就是从栈顶弹出东西给那些变量。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg" alt=""><br>这就是保护现场之后的栈。<br>ret是弹出到eip，retf弹出到CS，iret弹出到CS（代码段）、EFLAGS，根据是否改变特权等级，iret会连下面的SS以及esp一起弹出来。</p>
-<p>这样，如果一个程序在栈中事先在栈中存了一些数据，然后调用了iret，iret不管栈中究竟是什么，就会弹出5（3）个元素，给对应的寄存器。ret和retf也类似。因此，在汇编中ret们与高级语言的return们的作用不同，汇编中的ret们只是<strong>提供了一个批量修改寄存器的方法</strong>。</p>
-<p>系统中有两种中断。中断可能在任意时间发生。在用户模式下与在特权模式下中断发生后系统的动作是不相同的。</p>
-<p>在用户模式下，系统会保存这些东西：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg" alt=""><br>还记得在“内存管理”的lab里面讲过的<strong>段选择子</strong>，其中有两个bit标识自己处在什么特权模式下的特权位。这里面有两个段选择子，一个是栈的，一个是代码段的，由于在用户模式下，可以看到CS代码段选择子与SS栈选择子的特权位RPL都是3。</p>
-<p>在特权模式下，一旦发生中断：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/84089468.jpg" alt=""><br>这时保存的东西比较少。</p>
-<p>无论在哪种模式下一旦调用iret，就把这些东西（其实不一定是这些东西，只是对应栈顶的几个数据）弹出去给对应的寄存器。</p>
-<h3 id="正题：特权降级"><a href="#正题：特权降级" class="headerlink" title="正题：特权降级"></a>正题：特权降级</h3><p>考虑做完lab2，系统在特权级是0的模式下，这是需要现将自己降级成为特权3的模式，再去运行用户程序。怎么降？</p>
-<p>要伪造一个场景：刚刚一个用户程序产生了一个中断所以我升级了，现在我要中断返回。于是我去伪造了一个栈，在栈里头存上了iret希望的那5个数据，每一个是32位。然后调用iret，这些就会从栈中弹出来到达对应的寄存器，然后我就回到了用户模式，那两个段选择子的特权级值就被改为了3。<br>这里需要注意的是，系统原来使用的特权级是0的栈，iret之后这个栈空掉了，但是系统不再使用这个栈，而是重新为用户态开避了一个新的栈，这个栈不再是以前的那个栈了，这个栈放在用户空间的数据段里，它的权限也是3。</p>
-<blockquote>
-<p>为什么要这样设计呢？在特权模式下，系统并不想和特权级更低的用户态共用一个特权级更高的栈。另一个方面从安全考虑，为了防止用户态随意弹出数据随意插入数据破坏内核运行。</p>
-</blockquote>
-<p>从特权模式到达用户模式，新创建了一个栈给用户程序使用，这是在刚上电的时候，还没有用户程序运行。用户程序运行过程中可能会有系统调用回到特权模式下，这是将会使用前面提到的系统用的那个栈，系统调用完成之后，不会再为用户程序创建新的栈了，一是占空间，一是以前的运行态不能就这样丢掉。就还让它回到自己原来的栈。</p>
-<h2 id="特权级提升"><a href="#特权级提升" class="headerlink" title="特权级提升"></a>特权级提升</h2><p>中断、异常、系统调用：我需要更高特权的东西帮帮我。</p>
-<p>在80386中，系统调用就是一个中断。异常是需要紧急处理的中断。</p>
-<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>在32位机器上的中断是一个很复杂的机制，因为那时保护模式已经建立了起来，整个运行在虚拟地址空间上。所以当中段发生的时候，系统使用<strong>中断描述符表</strong>，写着自己所有的中断号。<br>中断描述符寄存器（IDTR）中存的就是中断描述符表（IDT）在内存中的位置以及大小。表按照中断号排序，每一个中断描述符在80386中被叫做一个门，<strong>中断门</strong>（中断），<strong>陷阱门</strong>（异常）。会根z中断发生的编号从表中取出对应的描述符（门），<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg" alt=""><br>取回的描述符是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg" alt=""><br>segment selector与offset用来描述在段机制下自己的中断响应函数的位置。segment selector负责在GDT里面找到对应的段，offset负责找对应的偏移量。找到函数之后，保存现场并执行响应函数。</p>
-<p>在终端发生的时候，系统将会看一下产生中断的程序的特权级，决定应该怎样保护现场。如果在特权状态，不用换栈，只需要保存更少的东西，而处于用户状态下的程序在执行完中断响应函数之后还要从（？）退回到自己的用户栈，保存了更多的东西。</p>
-<h3 id="正题：特权级提升"><a href="#正题：特权级提升" class="headerlink" title="正题：特权级提升"></a>正题：特权级提升</h3><p>从特权模式3切换到特权模式0，实际上就是响应一个中断，这就是上面图中的trap。</p>
-<p>对于用户程序，os并不信任。当trap发生时，当前用户程序的运行状态会被存入到<strong>内核栈</strong>中，而用户栈并没有变化。这也是中断与普通函数调用的不同。<br>现在已经进入了特权模式，如果不作任何操作，只是调用一个iret，前面讲到的CS，SS特权级3又会被写入到寄存器里面，就又回到了用户态。为了能留在特权模式下，对栈进行伪造，假装在进入终端之前就是一个特权模式：也就是把上面提到的用户态发生中断的栈信息修改成特权模式发生中断的栈信息。这时iret，就可以留在特权模式下。</p>
-<p>但是：在伪造的时候，SS被扔掉了。怎么回去呢？80386提供了一个<strong>TSS任务状态段</strong>，它几乎可以存下CPU上所有的寄存器的不止一份拷贝。TSS每个进程一个，会存下一个进程在切换特权状态的时候原特权状态下的SS的值。系统将会自己对TSS进行维护，以确保切换模式时栈的跳转。</p>
-<p>TSS存在于哪里呢？在GDT里面有一个TSS的描述符：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg" alt=""></p>
-<p>80386中有4个特权模式，目前在虚拟化技术下只是用了3个。</p>
-<p>有一个叫做TSR的寄存器，存着selector、base addr以及segment limit。便于直接找到TSS。</p>
-<p>如果想要回到用户模式，进入trap，伪造一个从用户态过来的栈，iret即可。</p>
-<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p>用户程序可以通过系统调用访问内核服务，这个过程需要指定中断号，使用tarp或者特殊指令（SYSENTER/SYSEXIT）实现。</p>
-<h2 id="关于这次实验"><a href="#关于这次实验" class="headerlink" title="关于这次实验"></a>关于这次实验</h2><p>这里的env就是课上讲的pcb。<br>父子进程的一个作用是父进程要为子进程收尸。</p>
-<p>elf格式：linux下的可执行。<br>创建进程并执行elf：没有文件系统怎么办？<br>把指定的文件链接进目标文件，骗bootloader把程序也搬进内存。</p>
-<p>-b binary path:-b帮我搬进来。binary这是个可执行程序。<br>然后重生成一个符号表。<br>把这个文件作为一个大数组缀到最后，然后直接使用这个数组。</p>
-<p>编码的时候，这个数组还没有，链接的时候才有，怎么办？定义一个外部变量extern。<br>只需知道生成符号表的规则，然后按规则命名即可。</p>
-<p>进来之后还只是一个大数组，还需要经过链接之后映射要对应的虚拟地址才能执行。</p>
-<h1 id="Lab4-Preemptive-Multitasking"><a href="#Lab4-Preemptive-Multitasking" class="headerlink" title="Lab4-Preemptive Multitasking"></a>Lab4-Preemptive Multitasking</h1><p>lab3做完之后，当一个进程结束之后，就退出。在这个实验中，主要完成的是</p>
-<p>本次实验主要是决定：在何时利用什么原则什么地方切换进程。<br>上下文怎么切换？其中一项：一定要把页表换掉，也就是把cr3中的页目录项换掉。之后，连接tlb也会失效，处理流水线，吧上一个进程的东西全部清理掉。</p>
-<p>本实验大部分代码都已经写完了，主要是读代码。</p>
-<p>如何实现更加有效的调度？更加频繁的调用schedule_yeid。</p>
-<p>时钟中断的作用：打断正在执行的程序，调用sched_yield进行进程轮转</p>
-<p>在本次实验中有一个时钟中断，你要做的就是在这个时钟中断的响应函数之中做一些事情，决定下一个进程怎么上去谁会上去（就是我们学习过的调度算法）</p>
-<h2 id="多核处理器"><a href="#多核处理器" class="headerlink" title="多核处理器"></a>多核处理器</h2><p>一开始是因为没有在一个进程运行的时候调用另一个进程的机制，本实验中的多核只是实验的设计者希望我们体验一下在系统中有多个进程活动是一个什么样的状态，因此鼓励你去多弄几个核心。<br>只要是单核，其实每一个时刻只能有一个进程运行。</p>
-<p>为什么会有多核处理器出现呢？在后摩尔时代，为了提升处理器的处理能力。</p>
-<p>主核会在系统上电之后接管机器，他们的地位并不是平等的。</p>
-<h3 id="现代处理器的休眠唤醒机制"><a href="#现代处理器的休眠唤醒机制" class="headerlink" title="现代处理器的休眠唤醒机制"></a>现代处理器的休眠唤醒机制</h3><p>现代处理器的模式一般有三种：active,idol,sleeping</p>
-<p>CPU在关闭的时候，内存并不会关闭。休眠时，找到一个调度点，这时不调度了，存好有用的东西，然后cpu耗电量就会变得非常低。有一个cpu中的寄存器会标志自己刚刚是休眠了还是关机了。如果是休眠，那么内存里面所有的东西都还在，只需要调到该去的地方，然后进行一轮新的调度；如果不是休眠而是关机了，内存中的东西就被清空了，就是上电启动过程。</p>
-<p>有时手机会坏掉，就是在锁屏（休眠）之后也会重新起动，这也就是cpu中的那个寄存器坏掉了。</p>
-<p>那么，如果帮一个休眠的cpu准备好了它的休眠位以及内存，就可以让它认为它是一个刚刚休眠的cpu。</p>
-<p>bsp是主核，在系统上电之后是只有主核启动，直到系统启动完之后，直到需要另外一个核心运行一个进程，bsp帮ap制造一个它刚刚在休眠的假象，然后唤醒它，这样这个ap就会认为自己是刚刚休眠的，然后继续执行。运行完之后，主核就会选择把这个核心给关掉，然后省电。</p>
-
-          
+          <p>今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/15/计算机网络/简单udp通信实现-java/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2310,7 +2437,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2347,9 +2474,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.gif"
-                alt="YaYi" />
+                alt="傻瓜日和" />
             
-              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
               <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
           </div>
 
@@ -2360,7 +2487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2371,7 +2498,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2382,7 +2509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2458,7 +2585,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">YaYi</span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
 
   
 </div>
@@ -2485,7 +2612,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.2k字</span>
+  <span class="post-count">博客全站共112.1k字</span>
 </div>
 
 

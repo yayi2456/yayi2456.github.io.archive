@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta name="description" content="Lab4-DocumentPart A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lab4_Document">
 <meta property="og:url" content="http://yoursite.com/2017/12/12/OS/Lab4_Document/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta property="og:description" content="Lab4-DocumentPart A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96651596.jpg">
@@ -153,10 +153,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/74580574.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/80248583.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-26/16842939.jpg">
-<meta property="og:updated_time" content="2018-01-14T19:25:12.789Z">
+<meta property="og:updated_time" content="2018-07-20T16:43:21.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lab4_Document">
-<meta name="twitter:description" content="Lab4-Document1511266 杨颖 Part A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电">
+<meta name="twitter:description" content="Lab4-DocumentPart A: Multiprocessor Support and Cooperative MultitaskingMultiprocessor Support在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg">
 
 
@@ -410,7 +410,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/OS/Lab4_Document/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -511,8 +511,8 @@
       
 
       
-        <h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1><p>1511266 杨颖</p>
-<h2 id="Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="Part A: Multiprocessor Support and Cooperative Multitasking"></a>Part A: Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统的初始化，随后，出于某种需要，BSP将会唤醒AP，AP也可以作为独立的CPU执行指令。</p>
+        <a id="more"></a>
+<h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1><h2 id="Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="Part A: Multiprocessor Support and Cooperative Multitasking"></a>Part A: Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统的初始化，随后，出于某种需要，BSP将会唤醒AP，AP也可以作为独立的CPU执行指令。</p>
 <p>在这种系统之中，每个CPU都有一个模块是<strong>LAPIC</strong>，它负责系统的中断传递，为每个CPU提供一个独特的编号。</p>
 <p>LAPIC是Local Advanced Programmable Interrupt Controller，local高级可编程中断控制器。LAPIC一般由中断信号、PRT、一组寄存器与其他一些部件组成，可以处理硬件的中断请求信息，并通知CPU进行处理。</p>
 <p>在本次实验中，我们将会用到LAPIC模块的如下功能函数：</p>
@@ -749,7 +749,7 @@
         <ul class="post-copyright">
   <li class="post-copyright-author">
     <strong>本文作者：</strong>
-    YaYi
+    傻瓜日和
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
@@ -790,8 +790,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/04/OS/串讲/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/12/02/编译原理/我的编译器/" rel="next" title="我的编译器">
+                <i class="fa fa-chevron-left"></i> 我的编译器
               </a>
             
           </div>
@@ -800,7 +800,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/16/流光/" rel="prev" title="流光">
+              <a href="/2017/12/16/月华/流光/" rel="prev" title="流光">
                 流光 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -868,9 +868,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.gif"
-                alt="YaYi" />
+                alt="傻瓜日和" />
             
-              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
               <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
           </div>
 
@@ -881,7 +881,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -892,7 +892,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -903,7 +903,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -995,7 +995,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">YaYi</span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
 
   
 </div>
@@ -1022,7 +1022,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.2k字</span>
+  <span class="post-count">博客全站共112.1k字</span>
 </div>
 
 

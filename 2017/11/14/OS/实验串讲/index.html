@@ -14,8 +14,8 @@
 
 <script>
     (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
+        if('yayi'){
+            if (prompt('请输入文章密码') !== 'yayi'){
                 alert('密码错误！');
                 history.back();
             }
@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
+<meta name="description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OS-各实验初讲">
+<meta property="og:title" content="实验串讲">
 <meta property="og:url" content="http://yoursite.com/2017/11/14/OS/实验串讲/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
+<meta property="og:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg">
-<meta property="og:updated_time" content="2017-12-11T08:46:54.251Z">
+<meta property="og:updated_time" content="2018-07-20T16:26:58.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OS-各实验初讲">
-<meta name="twitter:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的">
+<meta name="twitter:title" content="实验串讲">
+<meta name="twitter:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg">
 
 
@@ -156,7 +156,7 @@
 
 
 
-  <title>OS-各实验初讲 | 日和</title>
+  <title>实验串讲 | 日和</title>
   
 
 
@@ -373,7 +373,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/14/OS/实验串讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="YaYi">
+      <meta itemprop="name" content="傻瓜日和">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -387,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OS-各实验初讲</h1>
+          <h1 class="post-title" itemprop="name headline">实验串讲</h1>
         
 
         <div class="post-meta">
@@ -474,7 +474,8 @@
       
 
       
-        <h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
+        <a id="more"></a>
+<h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
 <p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
 <p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
 <hr>
@@ -539,11 +540,11 @@
         <ul class="post-copyright">
   <li class="post-copyright-author">
     <strong>本文作者：</strong>
-    YaYi
+    傻瓜日和
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2017/11/14/OS/实验串讲/" title="OS-各实验初讲">http://yoursite.com/2017/11/14/OS/实验串讲/</a>
+    <a href="http://yoursite.com/2017/11/14/OS/实验串讲/" title="实验串讲">http://yoursite.com/2017/11/14/OS/实验串讲/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -580,7 +581,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/12/哈希/" rel="next" title="哈希">
+              <a href="/2017/11/12/算法与数据结构/哈希/" rel="next" title="哈希">
                 <i class="fa fa-chevron-left"></i> 哈希
               </a>
             
@@ -590,7 +591,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/15/简单udp通信实现-java/" rel="prev" title="网络编程一：UDP,CMD,TCP,WebServer">
+              <a href="/2017/11/15/计算机网络/简单udp通信实现-java/" rel="prev" title="网络编程一：UDP,CMD,TCP,WebServer">
                 网络编程一：UDP,CMD,TCP,WebServer <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -658,9 +659,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.gif"
-                alt="YaYi" />
+                alt="傻瓜日和" />
             
-              <p class="site-author-name" itemprop="name">YaYi</p>
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
               <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
           </div>
 
@@ -671,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -682,7 +683,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -693,7 +694,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -785,7 +786,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">YaYi</span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
 
   
 </div>
@@ -812,7 +813,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共86.2k字</span>
+  <span class="post-count">博客全站共112.1k字</span>
 </div>
 
 

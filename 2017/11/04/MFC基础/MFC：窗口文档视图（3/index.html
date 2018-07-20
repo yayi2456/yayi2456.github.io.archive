@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if('yayi'){
+            if (prompt('请输入文章密码') !== 'yayi'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MFC,可视化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="麻蛋！这已经是第三次了！你妹的第三章！！！！！还好CSDN还有视图！只是又要自己动手麻了！！！">
+<meta name="keywords" content="MFC,可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="窗口文档试图（3">
+<meta property="og:url" content="http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/index.html">
+<meta property="og:site_name" content="日和">
+<meta property="og:description" content="麻蛋！这已经是第三次了！你妹的第三章！！！！！还好CSDN还有视图！只是又要自己动手麻了！！！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20170409001501368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170409001208379?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170409002016889?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410212825159?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410212259638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410213053582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410214156728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410223449255?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410225250495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170414203850636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170414222259230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170414222320768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170418225203762?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-07-20T17:30:21.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="窗口文档试图（3">
+<meta name="twitter:description" content="麻蛋！这已经是第三次了！你妹的第三章！！！！！还好CSDN还有视图！只是又要自己动手麻了！！！">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170409001501368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/"/>
+
+
+
+
+
+  <title>窗口文档试图（3 | 日和</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">日和</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">BE WITH ME</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			
+			<!--增加的代码 start-->
+
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">窗口文档试图（3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T01:17:56+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+<span>&nbsp; | &nbsp;
+<span id="busuanzi_value_page_pv" ></span>次阅读
+</span>    
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>麻蛋！这已经是第三次了！你妹的第三章！！！！！还好CSDN还有视图！只是又要自己动手麻了！！！</p>
+<a id="more"></a>
+<hr>
+<h2 id="一、边框窗口"><a href="#一、边框窗口" class="headerlink" title="一、边框窗口"></a>一、边框窗口</h2><p>窗口类CWnd提供了MFC中所有窗口类的基本功能。CWnd类和消息映射机制隐藏了窗口的回调函数WndProc。</p>
+<blockquote>
+<p>对WndProc：WndProc有四个参数，第一个是产生消息的窗口句柄，第二个是消息，第三第四分别是参数与长参数。当窗口产生一个消息时，消息被送到WndProc函数中，由这个函数判断产生消息的窗口与消息类型，然后将它送到对应的消息处理函数处理消息。WndProc在MFC中被封装。允许用户对其重写。</p>
+</blockquote>
+<p>创建Windows窗口要分为两步进行：</p>
+<ol>
+<li>引入构造函数，构造CWnd对象；</li>
+<li>调用Create函数建立Windows窗口并将它连接到创建的CWnd对象上。</li>
+</ol>
+<p>以CWnd作为基类，派生出了更具体的窗口类型：</p>
+<ol>
+<li>CFrameWnd：SDI程序主框架窗口的基类</li>
+<li>CMDIFrameWnd：MDI程序主框架窗口的基类</li>
+<li>CMDIChildWnd：MDI程序文档框架窗口的基类</li>
+<li>CDialog：对话框</li>
+</ol>
+<p>对话框CDialog作为对话框类的基类，又派生出更多的类：</p>
+<ol>
+<li>CFileDialog：提供打开或保存一个文件的标准对话框</li>
+<li>CColorDialog：提供选择一种颜色的标准对话框</li>
+<li>CFontDialog：提供选择一种字体的标准对话框</li>
+<li>CPrintDialog：提供打印一个文件的标准对话框</li>
+<li>CFindReplaceDialog：提供一次查找并替换操作的标准对话框</li>
+</ol>
+<p>除了这些子类，用户可以自己从CDialog派生类。</p>
+<p>对SDI产生的窗口，分成主边框窗口和视图窗口；MDI产生的窗口，分为主边框窗口、子边框窗口和视图窗口。</p>
+<p><strong>下面以一个小程序来加深了解：</strong></p>
+<ol>
+<li>主边框上创建一个button，看看它会在哪里：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在CMainFrame.h中</span></div><div class="line">CButton m_button;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//在CMainFrame::OnCreate()中</div><div class="line">m_button.Create(&quot;new button&quot;,WS_VISIBLE|BS_DEFPUSHBUTTON,CRect(0,0,100,50),this,0);</div></pre></td></tr></table></figure>
+<p>运行之后产生的界面：</p>
+<p><img src="http://img.blog.csdn.net/20170409001501368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>由于MainFrame已经是最外面的边框了，如果在Create函数中将参数this换做GetParent()，程序运行产生错误如图：</p>
+<p><img src="http://img.blog.csdn.net/20170409001208379?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<ol>
+<li>在视图中创建一个button:<br>只需将上述所提的MainFrame改为×View即可。<br>所得结果：</li>
+</ol>
+<p><img src="http://img.blog.csdn.net/20170409002016889?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><strong>说明一：</strong></p>
+<blockquote>
+<p>OnCreate函数的参数：LPCREATESTRUCT是一个指向结构体CREATESTRUCT的指针，其定义如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tagCREATESTRUCT</span> &#123;</span><span class="comment">// cs</span></div><div class="line">    LPVOID lpCreateParams; </div><div class="line">    HINSTANCE hInstance;<span class="comment">//应用程序的实例句柄</span></div><div class="line">    HMENU hMenu;<span class="comment">//窗口菜单句柄</span></div><div class="line">    HWND hwndParent;<span class="comment">//父窗口句柄</span></div><div class="line">    <span class="keyword">int</span> cy; <span class="comment">//指定新窗口的高度，以像素为单位</span></div><div class="line">    <span class="keyword">int</span> cx;<span class="comment">//指定新窗口的宽度，以像素为单位</span></div><div class="line">    <span class="keyword">int</span> y;<span class="comment">//指定新窗口的左上角y坐标</span></div><div class="line">    <span class="keyword">int</span> x;<span class="comment">//指定新窗口的左上角x坐标</span></div><div class="line">    LONG style;<span class="comment">//指定新窗口的类型(方式)</span></div><div class="line">    LPCTSTR lpszName;<span class="comment">//指定新窗口的名称</span></div><div class="line">    LPCTSTR lpszClass;<span class="comment">//指定新窗口类的名称</span></div><div class="line">    DWORD dwExStyle;<span class="comment">//指定新窗口扩展风格。</span></div><div class="line">　&#125; CREATESTRUCT;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong>说明二：</strong></p>
+<blockquote>
+<p>边框窗口的样式可以定制</p>
+<p> WS_SYSMENU </p>
+<p> WS_MAXIMIZEBOX：最大化按钮不可用 </p>
+<p> WS_MINIMIZEBOX：最小化按钮不可用</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在CMainFrame::PreCraeteWindow()中</span></div><div class="line">cs.cx=<span class="number">600</span>;</div><div class="line">cs.cy=<span class="number">460</span>;</div><div class="line">cs.x=<span class="number">0</span>;</div><div class="line">cs.y=<span class="number">100</span>;</div><div class="line">cs.style=~WS_MAXIMIZEBOX;</div></pre></td></tr></table></figure>
+<p>将这段代码运行，得到的结果：（为什么我的窗口没有被更改呢？</p>
+<h2 id="二、文档与视图"><a href="#二、文档与视图" class="headerlink" title="二、文档与视图"></a>二、文档与视图</h2><p>文档与视图是MFC最常用的类。文档类负责数据管理（存储、修改、读取等），视图类负责与用户进行交互，将文档数据在视图上显示出来。</p>
+<p>文档类的基类是CDocument，视图类的基类是CView。他们各自派生出了一些类。CDocument是CCmdTarget的派生类，而CView是CWnd的派生类。</p>
+<p><strong>串行化Serialize：</strong>文档对象管理来自数据源的数据，例如磁盘、串口、网卡等。</p>
+<p>串行化是指从对象写入字节流或者从字节流读到对象。</p>
+<blockquote>
+<p>operator&lt;&lt;:写字节流  AND  operator&gt;&gt;:读字节流</p>
+<p>IsStoring:写状态 AND  IsLoading:读状态</p>
+<p>WriteString:写字符串 AND ReadString:读字符串</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可以在×Doc::Serialize()中写内容来实现串行化输入输出:</span></div><div class="line"><span class="keyword">if</span>(ar.IsStoring())</div><div class="line">   a&lt;&lt;m_str;</div><div class="line"><span class="keyword">else</span></div><div class="line">   ar&gt;&gt;m_str;</div></pre></td></tr></table></figure>
+<p>当写了Serialize函数以后，便可以通过保存按钮将m_str保存到文件中，也可以再通过打开文件将文件中保存的数据还原到m_str变量之中，供程序使用。</p>
+<p>注意：当选择打开文件时，并不是将文件内容显示在视图上，而是执行读操作，将文件内容存到变量里面。如果想要将东西显示，需要自己编辑代码。</p>
+<p><strong>文档与视图之间建立联系：</strong></p>
+<p>CView通过GetDocument()可以获得CDocument对象的指针，通过这个指针可以访问CDocument的数据；</p>
+<p>CDocument通过函数UpdateAllViews()以消息形式通知视图数据变化，需要重新显示；<br>CDocument可以获得CView对象指针，直接访问视图类成员变量或调用类视图类成员函数。</p>
+<blockquote>
+<p>当文档被修改，调用UpdateAllViews函数，其声明：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">UpdateAllViews</span><span class="params">(CView*pSender,LPARAM lHint=<span class="number">0L</span>,CObject*pHint=<span class="literal">NULL</span>)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>参数说明：</p>
+<p>pSender：指向修改文档的视图，如果所有视图都被更新，设置为NULL，即，被这个参数指定的视图不会再次被通知更新。</p>
+<p>lHint：包含文档被修改的信息;</p>
+<p>pHint：指向一个储存修改信息的对象</p>
+<p>当调用UpdateAllViews时，与此程序相关的除了pSender以外的所有视图的UpdateView函数被调用。即：UpdateAllViews只起到通知作用，具体的绘画操作则由OnUpdate来决定。</p>
+<p>另外，UpdateAllViews并不会进入消息队列，而是直接立即重画。</p>
+</blockquote>
+<p><strong>Question</strong>:为什么我打开文件时有时候会重画有时候不会重画？？？</p>
+<h2 id="三、主框架菜单操作"><a href="#三、主框架菜单操作" class="headerlink" title="三、主框架菜单操作"></a>三、主框架菜单操作</h2><p>菜单操作有几个常用的函数，现列如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">GetMenu();<span class="comment">//获得菜单</span></div><div class="line">GetSubMenu(<span class="keyword">int</span> pos);<span class="comment">//获得子菜单</span></div><div class="line">CheckMenuItem(UINT nIDCheckItem, UINT nCheck);<span class="comment">//标记菜单</span></div><div class="line">SetDefaultItem(UINT uItem, BOOL fByPos= <span class="number">0</span>);<span class="comment">//设置默认菜单</span></div><div class="line">nableMenuItem((UINT nIDEnableItem, UINT nEnable);<span class="comment">//有效、无效化菜单</span></div><div class="line">SetMenuItemBitmaps(UINT nPosition,UINT nFlags,<span class="keyword">const</span> CBitmap* pBmpUnchecked,<span class="keyword">const</span> CBitmap* pBmpChecked);<span class="comment">//设置位图菜单</span></div><div class="line">SetMenu();<span class="comment">//设置菜单</span></div></pre></td></tr></table></figure></p>
+<h3 id="1-设置标记菜单"><a href="#1-设置标记菜单" class="headerlink" title="1.设置标记菜单"></a>1.设置标记菜单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//在CMainFrame::OnCreate()中</div><div class="line">GetMenu()-&gt;GetSubMenu(0)-&gt;CheckMenuItem(0,MF_BYPOSITION|MF_CHECKED);</div><div class="line">GetMenu()-&gt;GetSubMenu(0)-&gt;CheckMenuItem(ID_FILE_NEW,MF_BYCOMMAND|MF_CHECKED);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>GetMenu()返回一个CMenu指针指向主菜单，类似于数组名与数组的关系。</p>
+<p>GetSubMenu(int pos)被上述返回的主菜单指针调用。pos从0开始。返回一个子菜单项的指针。</p>
+<p>CheckMenuItem(UINT nIDCheckItem, UINT nCheck)。第一个参数指定位置第二个参数确定指定位置的方式以及标记方式。有两种指定位置的方式，使用pos（从0开始）并且使用MF_BYPOSITION或者使用item的ID指定并且使用MF_BYCOMMAND。</p>
+</blockquote>
+<p>需要注意的是：分隔符占据一个位置，即：</p>
+<p><img src="http://img.blog.csdn.net/20170410212825159?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>“编辑”是主菜单项的第1个子菜单项，“撤销”是“编辑”的第0个item，“剪切”是第2个item。 </p>
+<p>如果CheckMenuItem选中的位置是分隔符或者位置大于item最大编号，不会发生变化。</p>
+<p>最后的运行结果如下</p>
+<p><img src="http://img.blog.csdn.net/20170410212259638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h3 id="2-设置默认菜单"><a href="#2-设置默认菜单" class="headerlink" title="2.设置默认菜单"></a>2.设置默认菜单</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在CMainFrame::OnCreate()中</span></div><div class="line">GetMenu()-&gt;GetSubMenu(<span class="number">0</span>)-&gt;SetDefaultItem(<span class="number">1</span>,<span class="literal">true</span>);</div><div class="line">GetMenu()-&gt;GetSubMenu(<span class="number">0</span>)-&gt;SetDefaultItem (ID_FILE_OPEN);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>SetDefaultItem(UINT uItem, BOOL fByPos=0)。同样可以使用pos与ID两种方法。如果使用ID，只需一个实参，如果使用pos，由于默认值是0，所以必须在后面添加实参true，否则item不会产生变化。</p>
+</blockquote>
+<p>运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20170410213053582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h3 id="3-设置位图菜单"><a href="#3-设置位图菜单" class="headerlink" title="3.设置位图菜单"></a>3.设置位图菜单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//在MainFrame.h中</div><div class="line">CBitmap m_bitmap;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在CMainFrame::OnCreate()中</span></div><div class="line">m_bitmap.LoadBitmapW(IDB_MYBITMAP);</div><div class="line">GetMenu()-&gt;GetSubMenu(<span class="number">0</span>)-&gt;SetMenuItemBitmaps(<span class="number">3</span>,MF_BYPOSITION,m_bitmap,m_bitmap);</div><div class="line"></div><div class="line">CString str; </div><div class="line">str.Format(L”Menu Height=%d”,GetSystemMetrics (SM_CYMENUCHECK)); </div><div class="line">MessageBox(str);</div><div class="line"></div><div class="line">CDC* pDC=GetDC(); </div><div class="line">CString str;</div><div class="line">GetParent()-&gt;GetWindowText(str);</div><div class="line">pDC-&gt;TextOutW(<span class="number">0</span>,<span class="number">0</span>,str);</div><div class="line">ReleaseDC(pDC);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>LoadBitmapW(UINT nIDResource)加载位图，将自定义的一个位图与m_bitmap联系起来。</p>
+<p>SetMenuItemBItamps(UINT nPosition, UINT nFlags,const CBitmap<em> pBmpUnchecked, const CBitmap</em> pBmpChecked)。同样的，可以使用ID与pos确定位置的两种方法。第三个参数是该item未被选中时所显示的位图的指针，第四个参数是这个item被选中时显示的位图的指针。该例未作区分。</p>
+</blockquote>
+<p>注意：m_bitmap一定要定义在MainFrame.h中，否则由于函数执行完之后释放资源，m_bitmap就会被释放掉，导致无法正常显示位图。如果一定要在OnCreate中定义，可以尝试使用指针。如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">CBitmap*m_bitmap=<span class="keyword">new</span> CBitmap();</div><div class="line">m_bitmap-&gt;LoadBitmapW(IDB_MYBITMAP);</div><div class="line">GetMenu()-&gt;GetSubMenu(<span class="number">0</span>)-&gt;SetMenuItemBitmaps(<span class="number">3</span>,MF_BYPOSITION, m_bitmap,m_bitmap);</div></pre></td></tr></table></figure></p>
+<p>结果：</p>
+<p><img src="http://img.blog.csdn.net/20170410214156728?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h3 id="4-禁用、可用菜单项"><a href="#4-禁用、可用菜单项" class="headerlink" title="4.禁用、可用菜单项"></a>4.禁用、可用菜单项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//在CMainFrame的构造函数里</div><div class="line">m_bAutoMenuEnable=false;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>m_bAutoMenuEnable是定义在CFrameWnd中的一个BOOL值，他决定了item是否会自动变为可用。其默认值为true。只有当它的值是false时，我们对其DISABLED生效。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//在CMainFrame::OnCraete()中</div><div class="line">GetMenu()-&gt;GetSubMenu(0)-&gt;EnableMenuItem (2,MF_BYPOSITION|MF_DISABLED|MF_GRAYED);</div><div class="line">GetMenu()-&gt;GetSubMenu(0)-&gt;EnableMenuItem (ID_FILE_SAVE_AS,MF_BYCOMMAND|MF_ENABLED);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>EnableMenuItem(UINT nIDEnableItem, UINT  nEnable)。同样的，两种确定位置的方法。</p>
+<p>MF_GRAYED是使item变灰并且不可用，MF_DISABLED使item不可用。MF_ENABLED是使item可用。</p>
+</blockquote>
+<h2 id="四、浮动菜单"><a href="#四、浮动菜单" class="headerlink" title="四、浮动菜单"></a>四、浮动菜单</h2><p>用户点击鼠标右键时，弹出浮动菜单，又称弹出菜单、快捷菜单等。<br>点击右键时，窗口发出菜单消息WM_CONTEXTMENU，其对应处理函数是OnContextMenu(CWnd* pWnd, CPoint point)，其中的point是屏幕坐标，并非窗口坐标。</p>
+<h3 id="隐式菜单创建"><a href="#隐式菜单创建" class="headerlink" title="隐式菜单创建"></a>隐式菜单创建</h3><ol>
+<li>在资源视图中创建菜单IDR_POPMENU</li>
+<li>创建二级菜单Line，其ID是ID_POPUP_LINE</li>
+<li>创建二级菜单Circle，其ID是ID_POPUP_CIRCLE</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//在C×View::OnContextMenu()中</div><div class="line">CMenu menu;</div><div class="line">menu.LoadMenu(IDR_POPMENU);</div><div class="line">CMenu*pMenu=menu.GetSubMenu(0);</div><div class="line">pMenu-&gt;TrackPopupMenu(TPM_LEFTALIGN,point .x,point.y,this);</div></pre></td></tr></table></figure>
+<p>首先提一个问题：为什么这里可以不用指针啊？？？？</p>
+<p>即使POPMENU只有一个子菜单项，也必须做GetSubMenu，道理就如只有一个元素的数组名a与a[0]一样不同。</p>
+<blockquote>
+<p>TrackPopupMenu(UINT nFlags, int x, int y,CWnd* pWnd, LPCRECT lpRect = 0)。第一个参数决定对齐方式，TPM_LEFTALIGN代表菜单跳在鼠标右边，TPM_RIGHTALIGN代表菜单跳出在鼠标左边。此外还有其他方式，不再叙述。x与y决定了跳出位置，这个位置是屏幕位置。最后一个参数决定？？？？？</p>
+<p>这种创建方式很像位图菜单的添加方式。先Load，然后Set/Track。</p>
+</blockquote>
+<p>接下来，便可以像对普通的菜单消息那样处理浮动菜单消息了。</p>
+<h3 id="非隐式浮动菜单创建（鼠标右键消息）"><a href="#非隐式浮动菜单创建（鼠标右键消息）" class="headerlink" title="非隐式浮动菜单创建（鼠标右键消息）"></a>非隐式浮动菜单创建（鼠标右键消息）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//在C×View::OnRbuttonDown()中。</div><div class="line">CMenu menu;</div><div class="line">menu.CreatePopupMenu();</div><div class="line">menu.AppendMenu(MF_ENABLED,ID_LINE,L&quot;Line&quot;);</div><div class="line">menu.AppendMenu(MF_ENABLED,ID_CIRCLE,L&quot;Circle&quot;);</div><div class="line">Cpoint pt;</div><div class="line">GetCursorPos(&amp;pt);//获得当前鼠标所在的屏幕坐标</div><div class="line">menu.TrackPopupMenu(TPM_LEFTALIGN,pt.x,pt.y,this);</div></pre></td></tr></table></figure>
+<p>与隐式浮动菜单创建所用方式比较，这种方式将LoadMenu的工作自己完成了一遍：CreatePopupMenu、AppendMenu。</p>
+<p>但是实际上，这并不是隐式与非隐式的区别，只是两种不同的方法而已。将这种方法写在OnContextMenu()中也可以，把OnContextMenu()中的方法用到这里也没问题。</p>
+<p>此外，由于这个处理函数得到的Cpoint是窗口的坐标，而TrackpopupMenu需要窗口坐标。故不可以直接用参数。而是获得当前鼠标光标在窗口上的位置。</p>
+<p>运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20170410223449255?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h2 id="五、派生视图类"><a href="#五、派生视图类" class="headerlink" title="五、派生视图类"></a>五、派生视图类</h2><p>在CWnd下派生出的CView类作为视图类的基类，有派生出其他视图类。</p>
+<ol>
+<li>CCtrlView：可编辑、列表框、树状控件</li>
+<li>CScrollView：视图滚动、缩放显示</li>
+</ol>
+<p>以这两者为例。</p>
+<p><img src="http://img.blog.csdn.net/20170410225250495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h3 id="编辑视图："><a href="#编辑视图：" class="headerlink" title="编辑视图："></a>编辑视图：</h3><p>使用编辑视图需要在创建新项目时将C×View的基类设置为CEditView：</p>
+<p><img src="http://img.blog.csdn.net/20170414203850636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<blockquote>
+<p>这样直接生成的project即可以将视图作为文本界面进行输出，而且这样生成的project直接具有保存打开功能，即这时的Serialize函数已经做了一些必要的实现。</p>
+</blockquote>
+<hr>
+<p>以下是一个小例子：</p>
+<ol>
+<li>添加菜单项ID_TEST。</li>
+</ol>
+<blockquote>
+<p>对在IDR_MAINFRAME中新添加的菜单项，默认弹出项是true，这时不可以编辑ID。如果想以之为功能菜单，需要在“属性”-&gt;“外观”-&gt;”popup“一项设置为false。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170414222259230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20170414222320768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//在C×View::OnTest()中</div><div class="line">CDC*pDC=GetDC();</div><div class="line">CString str;</div><div class="line">GetParent()-&gt;GetWindowText(str);//获得窗口的标题</div><div class="line">pDC-&gt;TextOutW(0,0,str);</div><div class="line">ReleaseDC(pDC);</div></pre></td></tr></table></figure></p>
+<p>这段代码完成获得窗口标题并将标题画在视图区。但是这种方法画出的标题很脆弱，只要一个字符的输入，就会使它们消失（重画了视图）。</p>
+<p>还可以设置窗口标题，下面一段代码完成了取得窗口标题并将它逆序重新设置的工作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//在C×View::OnText()中</div><div class="line">CString str1,str2;</div><div class="line">GetParent()-&gt;GetWindowText(str1);</div><div class="line">str2.Empty();</div><div class="line"></div><div class="line">for(int i=str1.GetLength()-1;i&gt;=0;i--)&#123;</div><div class="line">   if(str1.GetAt(i)==&apos;\0&apos;)&#123;</div><div class="line">      str2+=&apos;\0&apos;;</div><div class="line">      i--;</div><div class="line">   &#125;</div><div class="line">   else str2-=str1.GetAt(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">GetParent()-&gt;SetWindowText(str2);//设置窗口标题</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>str.GetLength()函数返回字符串的长度（不带’\0’）</p>
+<p>str.GetAt(i)函数返回str第i位的字符值（从0开始）</p>
+<p>SetWindowText(str)函数可以设置调用对象的标题值。</p>
+</blockquote>
+<h3 id="滚动显示"><a href="#滚动显示" class="headerlink" title="滚动显示"></a>滚动显示</h3><p>滚动显示允许浏览比视图窗口更大的文档，需要从CScollView类派生。</p>
+<p>在创建滚动视图时，需要重载CView成员函数OnInitialUpdate()，调用SetScrollSizes()计算视图大小</p>
+<p>OnInitialUpdate()是虚函数，用户选择File-&gt;New或Open后调用，初始化试图对象，调用OnUpdate函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在C×View::OnInitialUpdate()中</span></div><div class="line">CSize sizeTotal;</div><div class="line">sizeTotal.cx=sizeTotal.cy=<span class="number">300</span>;</div><div class="line"><span class="comment">//修改这个常数值可以确定屏幕何时产生滚动条</span></div><div class="line">SetScrollSizes(MM_TEXT,sizeTotal);</div><div class="line"><span class="comment">//没有这句话程序将会出现运行错误。</span></div></pre></td></tr></table></figure>
+<h3 id="缩放显示"><a href="#缩放显示" class="headerlink" title="缩放显示"></a>缩放显示</h3><p>同样需要从CScrollView派生。不同的是视图会自动适应边框的大小，当改变窗口的大小时绘图自动适应视图区的大小，不会产生滚动条。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在OnInitalUpdate中</span></div><div class="line">CSize sizeTotal;</div><div class="line">sizeTotal.cx = sizeTotal.cy = <span class="number">300</span>;<span class="comment">//决定缩放比例</span></div><div class="line">SetScaleToFitSize(sizeTotal);<span class="comment">//</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>缩放公式：</p>
+<p>显示x=实际x*ViewWidth/sizeTotal.cx（横向）</p>
+<p>显示y=实际y*ViewLength/sizeTotal.cy（纵向）</p>
+</blockquote>
+<h3 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h3><p>同样的，视图类需要从CScrollView派生。分割窗口是指把一个窗口分为多个独立视图，这种分割可以分为两类：动态分割和静态分割。动态分割产生的视图使用同一个视图类，使用的是<code>CSplitterWnd::Create()</code>，静态分割产生的视图使用的是不同的视图类，使用<code>CSplitterWnd::CreateStatic()</code>。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在MainFrm.h中</span></div><div class="line">CSplitterWnd m_splitter;</div></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在CMainFrame::OnCreateClient()中</span></div><div class="line"><span class="keyword">return</span> m_splitter.Create(<span class="keyword">this</span>,<span class="number">2</span>,<span class="number">2</span>,CSize(<span class="number">20</span>,<span class="number">20</span>),pContext);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>pContext是OnCreateClient中带的参数。2,2分别是横向分两部分与纵向分两部分。this是要分割的窗口的父框架窗口，pContext是切分窗口的ID。</p>
+<p>动态创建的分割窗口的窗格数目不能超过2x2。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170418225203762?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h2 id="六、多文档窗口实例"><a href="#六、多文档窗口实例" class="headerlink" title="六、多文档窗口实例"></a>六、多文档窗口实例</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    傻瓜日和
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/" title="窗口文档试图（3">http://yoursite.com/2017/11/04/MFC基础/MFC：窗口文档视图（3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MFC/" rel="tag"># MFC</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+        </div>
+      
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
+    
+</div>
+  
+</div>
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/03/月华/覆千秋1/" rel="next" title="覆千秋1">
+                <i class="fa fa-chevron-left"></i> 覆千秋1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/04/计算机网络/计算机网络应用层番外二/" rel="prev" title="计算机网络应用层之番外二">
+                计算机网络应用层之番外二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="傻瓜日和" />
+            
+              <p class="site-author-name" itemprop="name">傻瓜日和</p>
+              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                    
+                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、边框窗口"><span class="nav-number">1.</span> <span class="nav-text">一、边框窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、文档与视图"><span class="nav-number">2.</span> <span class="nav-text">二、文档与视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、主框架菜单操作"><span class="nav-number">3.</span> <span class="nav-text">三、主框架菜单操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-设置标记菜单"><span class="nav-number">3.1.</span> <span class="nav-text">1.设置标记菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-设置默认菜单"><span class="nav-number">3.2.</span> <span class="nav-text">2.设置默认菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设置位图菜单"><span class="nav-number">3.3.</span> <span class="nav-text">3.设置位图菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-禁用、可用菜单项"><span class="nav-number">3.4.</span> <span class="nav-text">4.禁用、可用菜单项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、浮动菜单"><span class="nav-number">4.</span> <span class="nav-text">四、浮动菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式菜单创建"><span class="nav-number">4.1.</span> <span class="nav-text">隐式菜单创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非隐式浮动菜单创建（鼠标右键消息）"><span class="nav-number">4.2.</span> <span class="nav-text">非隐式浮动菜单创建（鼠标右键消息）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、派生视图类"><span class="nav-number">5.</span> <span class="nav-text">五、派生视图类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑视图："><span class="nav-number">5.1.</span> <span class="nav-text">编辑视图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动显示"><span class="nav-number">5.2.</span> <span class="nav-text">滚动显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缩放显示"><span class="nav-number">5.3.</span> <span class="nav-text">缩放显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割窗口"><span class="nav-number">5.4.</span> <span class="nav-text">分割窗口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、多文档窗口实例"><span class="nav-number">6.</span> <span class="nav-text">六、多文档窗口实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共112.1k字</span>
+</div>
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64002140";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>

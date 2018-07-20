@@ -6,22 +6,43 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-17T16:21:06.698Z</updated>
+  <updated>2018-07-20T17:30:21.138Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>YaYi</name>
+    <name>傻瓜日和</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>标准日本语初级(上)第一课</title>
-    <link href="http://yoursite.com/2018/05/17/%E6%97%A5%E8%AF%AD%E7%99%BD%E7%99%BD/%E6%A0%87%E5%87%86%E6%97%A5%E6%9C%AC%E8%AF%AD%E4%B8%8A1/"/>
-    <id>http://yoursite.com/2018/05/17/日语白白/标准日本语上1/</id>
-    <published>2018-05-17T15:26:18.430Z</published>
-    <updated>2018-05-17T16:21:06.698Z</updated>
+    <title>对话框（5</title>
+    <link href="http://yoursite.com/2018/05/26/MFC%E5%9F%BA%E7%A1%80/MFC%EF%BC%9A%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%885/"/>
+    <id>http://yoursite.com/2018/05/26/MFC基础/MFC：对话框（5/</id>
+    <published>2018-05-25T17:17:47.000Z</published>
+    <updated>2018-07-20T17:30:21.138Z</updated>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;这是第五章了…话说我第三章还没写完…不过既然今天讲了第五章，而且昨天又为了作业了解了一些对话框的知识，横竖就先写第五章吧。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="MFC" scheme="http://yoursite.com/tags/MFC/"/>
+    
+      <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vim命令</title>
+    <link href="http://yoursite.com/2018/05/23/LINUX%E5%9F%BA%E7%A1%80/Vim%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2018/05/23/LINUX基础/Vim命令/</id>
+    <published>2018-05-23T10:58:27.180Z</published>
+    <updated>2018-07-20T17:35:37.220Z</updated>
     
     <summary type="html">
     
@@ -29,7 +50,35 @@
       
         
         
-          &lt;h1 id=&quot;单词&quot;&gt;&lt;a href=&quot;#单词&quot; class=&quot;headerlink&quot;
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;vim编辑器用法命令&quot;&gt;&lt;a href=&quot;#vim编辑器用法命令&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>标准日本语初级(上)第一课</title>
+    <link href="http://yoursite.com/2018/05/17/%E6%97%A5%E8%AF%AD%E7%99%BD%E7%99%BD/%E6%A0%87%E5%87%86%E6%97%A5%E6%9C%AC%E8%AF%AD%E4%B8%8A1/"/>
+    <id>http://yoursite.com/2018/05/17/日语白白/标准日本语上1/</id>
+    <published>2018-05-17T15:26:18.430Z</published>
+    <updated>2018-07-20T16:43:21.747Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;单词&quot;&gt;&lt;a href=&quot;#单词&quot; class=&quot;headerlink&quot;
         
       
     
@@ -44,10 +93,10 @@
   
   <entry>
     <title>ubuntu-windows 共享文件夹</title>
-    <link href="http://yoursite.com/2018/05/17/ubuntu-windows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
-    <id>http://yoursite.com/2018/05/17/ubuntu-windows共享文件夹/</id>
+    <link href="http://yoursite.com/2018/05/17/LINUX%E5%9F%BA%E7%A1%80/ubuntu-windows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
+    <id>http://yoursite.com/2018/05/17/LINUX基础/ubuntu-windows共享文件夹/</id>
     <published>2018-05-17T09:13:40.612Z</published>
-    <updated>2018-05-19T07:47:50.062Z</updated>
+    <updated>2018-07-20T17:35:37.222Z</updated>
     
     <summary type="html">
     
@@ -55,7 +104,7 @@
     
     </summary>
     
-      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
@@ -64,10 +113,10 @@
   
   <entry>
     <title>记一次linux server版本的get桌面</title>
-    <link href="http://yoursite.com/2018/04/27/%E8%AE%B0%E4%B8%80%E6%AC%A1linux-server%E7%89%88%E6%9C%AC%E7%9A%84get%E6%A1%8C%E9%9D%A2/"/>
-    <id>http://yoursite.com/2018/04/27/记一次linux-server版本的get桌面/</id>
+    <link href="http://yoursite.com/2018/04/27/LINUX%E5%9F%BA%E7%A1%80/%E8%AE%B0%E4%B8%80%E6%AC%A1linux-server%E7%89%88%E6%9C%AC%E7%9A%84get%E6%A1%8C%E9%9D%A2/"/>
+    <id>http://yoursite.com/2018/04/27/LINUX基础/记一次linux-server版本的get桌面/</id>
     <published>2018-04-27T04:22:00.000Z</published>
-    <updated>2018-05-15T06:57:04.404Z</updated>
+    <updated>2018-07-20T16:44:18.742Z</updated>
     
     <summary type="html">
     
@@ -87,7 +136,7 @@
     <link href="http://yoursite.com/2018/04/08/Python/numpy_not_found/"/>
     <id>http://yoursite.com/2018/04/08/Python/numpy_not_found/</id>
     <published>2018-04-08T12:37:00.000Z</published>
-    <updated>2018-04-26T13:03:10.259Z</updated>
+    <updated>2018-07-20T16:43:21.747Z</updated>
     
     <summary type="html">
     
@@ -104,10 +153,10 @@
   
   <entry>
     <title>matlab notes</title>
-    <link href="http://yoursite.com/2018/02/26/matlab_notes/"/>
-    <id>http://yoursite.com/2018/02/26/matlab_notes/</id>
+    <link href="http://yoursite.com/2018/02/26/MATLAB/matlab_notes/"/>
+    <id>http://yoursite.com/2018/02/26/MATLAB/matlab_notes/</id>
     <published>2018-02-26T06:27:50.037Z</published>
-    <updated>2018-05-21T07:32:30.293Z</updated>
+    <updated>2018-07-20T15:50:32.425Z</updated>
     
     <summary type="html">
     
@@ -184,9 +233,9 @@
       <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
     
     
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
@@ -195,7 +244,7 @@
     <link href="http://yoursite.com/2018/01/16/OS/chap6-%E6%AD%BB%E9%94%81/"/>
     <id>http://yoursite.com/2018/01/16/OS/chap6-死锁/</id>
     <published>2018-01-16T13:39:37.000Z</published>
-    <updated>2018-01-16T15:04:39.687Z</updated>
+    <updated>2018-07-20T16:43:21.744Z</updated>
     
     <summary type="html">
     
@@ -203,7 +252,8 @@
       
         
         
-          &lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot;
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;死锁&quot;&gt;&lt;a href=&quot;#死锁&quot; class=&quot;headerlink&quot; title=&quot;死锁&quot;&gt;&lt;/a&gt;死锁&lt;/h1&gt;&lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot;
         
       
     
@@ -214,18 +264,18 @@
       <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
     
     
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
   <entry>
     <title>流光</title>
-    <link href="http://yoursite.com/2017/12/16/%E6%B5%81%E5%85%89/"/>
-    <id>http://yoursite.com/2017/12/16/流光/</id>
+    <link href="http://yoursite.com/2017/12/16/%E6%9C%88%E5%8D%8E/%E6%B5%81%E5%85%89/"/>
+    <id>http://yoursite.com/2017/12/16/月华/流光/</id>
     <published>2017-12-16T06:34:12.000Z</published>
-    <updated>2017-12-16T06:38:29.332Z</updated>
+    <updated>2018-07-20T16:42:38.887Z</updated>
     
     <summary type="html">
     
@@ -249,7 +299,7 @@
     <link href="http://yoursite.com/2017/12/12/OS/Lab4_Document/"/>
     <id>http://yoursite.com/2017/12/12/OS/Lab4_Document/</id>
     <published>2017-12-12T13:08:40.000Z</published>
-    <updated>2018-01-14T19:25:12.789Z</updated>
+    <updated>2018-07-20T16:43:21.745Z</updated>
     
     <summary type="html">
     
@@ -257,8 +307,8 @@
       
         
         
-          &lt;h1 id=&quot;Lab4-Document&quot;&gt;&lt;a href=&quot;#Lab4-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab4-Document&quot;&gt;&lt;/a&gt;Lab4-Document&lt;/h1&gt;&lt;p&gt;1511266 杨颖&lt;/p&gt;
-&lt;h2
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;Lab4-Document&quot;&gt;&lt;a href=&quot;#Lab4-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab4-Document&quot;&gt;&lt;/a&gt;Lab4-Document&lt;/h1&gt;&lt;h2
         
       
     
@@ -270,28 +320,6 @@
     
     
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/12/04/OS/%E4%B8%B2%E8%AE%B2/"/>
-    <id>http://yoursite.com/2017/12/04/OS/串讲/</id>
-    <published>2017-12-04T11:41:56.599Z</published>
-    <updated>2017-12-04T13:27:25.278Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;文件写入时发生了什么？&quot;&gt;&lt;a href=&quot;#文件写入时发生了什么？&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
     
   </entry>
   
@@ -317,10 +345,10 @@
   
   <entry>
     <title>琐碎</title>
-    <link href="http://yoursite.com/2017/12/02/Untitled-1/"/>
-    <id>http://yoursite.com/2017/12/02/Untitled-1/</id>
+    <link href="http://yoursite.com/2017/12/02/%E7%90%90%E7%A2%8E/"/>
+    <id>http://yoursite.com/2017/12/02/琐碎/</id>
     <published>2017-12-02T03:16:13.000Z</published>
-    <updated>2017-12-02T08:45:47.039Z</updated>
+    <updated>2018-07-20T16:39:39.431Z</updated>
     
     <summary type="html">
     
@@ -328,7 +356,8 @@
       
         
         
-          &lt;p&gt;git的beanch原来真的可以在本地也切换啊！&lt;br&gt;当我用git checkout
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;git的beanch原来真的可以在本地也切换啊！&lt;br&gt;当我用git checkout
         
       
     
@@ -389,39 +418,11 @@
   </entry>
   
   <entry>
-    <title>串讲复习</title>
-    <link href="http://yoursite.com/2017/11/27/OS/OS4+Memory%20and%20Process/"/>
-    <id>http://yoursite.com/2017/11/27/OS/OS4+Memory and Process/</id>
-    <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2018-01-14T19:23:51.107Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;系统调用&quot;&gt;&lt;a href=&quot;#系统调用&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Lab3_Document</title>
     <link href="http://yoursite.com/2017/11/27/OS/Lab3_Document/"/>
     <id>http://yoursite.com/2017/11/27/OS/Lab3_Document/</id>
     <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2017-11-28T16:17:10.630Z</updated>
+    <updated>2018-07-20T16:43:21.744Z</updated>
     
     <summary type="html">
     
@@ -445,11 +446,40 @@
   </entry>
   
   <entry>
+    <title>串讲复习</title>
+    <link href="http://yoursite.com/2017/11/27/OS/%E4%B8%B2%E8%AE%B2%E5%A4%8D%E4%B9%A0/"/>
+    <id>http://yoursite.com/2017/11/27/OS/串讲复习/</id>
+    <published>2017-11-27T11:00:00.000Z</published>
+    <updated>2018-07-20T16:26:11.359Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;系统调用&quot;&gt;&lt;a href=&quot;#系统调用&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
+    
+    
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>计算机网络概述</title>
     <link href="http://yoursite.com/2017/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
     <id>http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/</id>
     <published>2017-11-21T13:51:40.000Z</published>
-    <updated>2017-11-22T09:46:38.055Z</updated>
+    <updated>2018-07-20T16:14:00.457Z</updated>
     
     <summary type="html">
     
@@ -467,8 +497,6 @@
     
       <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
-    
     
       <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
     
@@ -476,61 +504,23 @@
   
   <entry>
     <title>网络编程一：UDP,CMD,TCP,WebServer</title>
-    <link href="http://yoursite.com/2017/11/15/%E7%AE%80%E5%8D%95udp%E9%80%9A%E4%BF%A1%E5%AE%9E%E7%8E%B0-java/"/>
-    <id>http://yoursite.com/2017/11/15/简单udp通信实现-java/</id>
+    <link href="http://yoursite.com/2017/11/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%AE%80%E5%8D%95udp%E9%80%9A%E4%BF%A1%E5%AE%9E%E7%8E%B0-java/"/>
+    <id>http://yoursite.com/2017/11/15/计算机网络/简单udp通信实现-java/</id>
     <published>2017-11-15T14:12:40.000Z</published>
-    <updated>2017-11-20T15:47:24.899Z</updated>
+    <updated>2018-07-20T15:58:52.428Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;UDP-CMD&quot;&gt;&lt;a href=&quot;#UDP-CMD&quot; class=&quot;headerlink&quot; title=&quot;UDP CMD&quot;&gt;&lt;/a&gt;UDP
-        
-      
+      &lt;p&gt;今天写webserver的时候发现需要用到以前写的一些程序的知识。所以觉得最好总结一下。&lt;/p&gt;
     
     </summary>
     
       <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="大三的课" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/"/>
-    
-      <category term="作业" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%A4%A7%E4%B8%89%E7%9A%84%E8%AF%BE/%E4%BD%9C%E4%B8%9A/"/>
-    
     
       <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
     
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OS-各实验初讲</title>
-    <link href="http://yoursite.com/2017/11/14/OS/%E5%AE%9E%E9%AA%8C%E4%B8%B2%E8%AE%B2/"/>
-    <id>http://yoursite.com/2017/11/14/OS/实验串讲/</id>
-    <published>2017-11-14T14:05:33.000Z</published>
-    <updated>2017-12-11T08:46:54.251Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Lab3：User-Environment&quot;&gt;&lt;a href=&quot;#Lab3：User-Environment&quot; class=&quot;headerlink&quot; title=&quot;Lab3：User Environment&quot;&gt;&lt;/a&gt;Lab3：User
-        
-      
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
