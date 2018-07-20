@@ -110,16 +110,16 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="在介绍区间调度问题之前，首先要对贪心算法做一个简单的介绍。贪心算法产生的解每前进一步，都做得至少与其他其他解一样好。如果某一个问题可以用贪心算法得到解决，那么这个问题中一定存在一个局部判断规则可以用来构造问题的最优解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20170331201420175?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170331202142075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170331203209997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170331210359807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/13847489.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/29960405.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/49293152.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/13187438.jpg">
 <meta property="og:image" content="http://note.youdao.com/yws/public/resource/c075574f612d384feddbf490b48bfefc/xmlnote/7BFDB486B6A845FC9C71E70D9A654EE3/197">
-<meta property="og:updated_time" content="2018-07-20T17:37:28.308Z">
+<meta property="og:updated_time" content="2018-07-20T17:56:10.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区间调度：贪心算法与动态规划">
 <meta name="twitter:description" content="在介绍区间调度问题之前，首先要对贪心算法做一个简单的介绍。贪心算法产生的解每前进一步，都做得至少与其他其他解一样好。如果某一个问题可以用贪心算法得到解决，那么这个问题中一定存在一个局部判断规则可以用来构造问题的最优解。">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170331201420175?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/13847489.jpg">
 
 
 
@@ -480,18 +480,18 @@
 </ul>
 <p>下面对着四种方案进行一一讨论：</p>
 <p>第一种方案：<br>假如我们尽可能地接受更早开始的申请，我们可以更早的开始使用我们的资源，但是这种方式显然不能得到最大相容类，任举一反例如下：</p>
-<p><img src="http://img.blog.csdn.net/20170331201420175?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="反例1"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/13847489.jpg" alt=""></p>
 <p>从这张图我们可以清楚地看到，即使黄色申请开始时间比蓝色申请更早，但我们更倾向于接受三个蓝色的申请，它们构成了一个最大相容类。<br>故：不可以以开始时间更早作为接受或拒绝申请的标准，这种方案是不行的。</p>
 <p>第二种方案：<br>假如我们要尽可能接受时间需求更小的申请，我们可以缩减每个申请需要的时间，似乎可以增加容纳申请的个数。<br>但是，这种方案仍然易于给出反例：</p>
-<p><img src="http://img.blog.csdn.net/20170331202142075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="反例2"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/29960405.jpg" alt=""></p>
 <p>显而易见的，蓝色申请占据时间更小，但是我们仍然希望接受两个粉色的申请，它们构成了最大相容类。<br>即：这种方案被否定。</p>
 <p>第三种方案：<br>如果我们尽可能接受拥有更小不相容申请的申请，可能可以塞下更多的申请，但是真的是如此吗？<br>一个反例如下：</p>
-<p><img src="http://img.blog.csdn.net/20170331203209997?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="反例3"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/49293152.jpg" alt=""></p>
 <p>即使黄色申请更符合该方案的条件，但我们并不想选择黄色申请。<br>在这个反例里面我们可以看到：正确结果里被选中的申请可能会与大量彼此重叠的申请重叠，从而使不相容申请的个数增加，但是这些重叠的数目对问题的求解并没有什么贡献。<br>故：这种方案被否定。</p>
 <p>第四种方案：<br>在这种方案的设定下，最先结束的申请被优先通过，可以使资源更早地被释放，更好的安排后面的需求。<br>这其实是一种贪心算法，它的具体步骤可以描述为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">初始时R时所有申请的集合，A是一个空集合;</div><div class="line">while(R非空):</div><div class="line">   选择一个最早结束的申请i属于R;</div><div class="line">   把i添加到A里;</div><div class="line">   删除R里所有与i不相容的申请;</div><div class="line">endwhile;</div><div class="line">return A;</div></pre></td></tr></table></figure>
 <p>在未能举出反例的情况下，我们尝试证明这种方案的正确性：<br>令B是一个最优的选择的申请的集合，下面将证明|A|=|B|。<br>贪心算法保证：A中的每个区间结束得至少与B中对应区间一样早。对A中的申请i，在B中对应申请j，它们同处于区间r，则有：F(ir)&lt;=F(jr)。<br>归纳法：当r=1时，显然论断是真；假设r-1的时候论断为真而r时论断为假，即：F(ir-1)&lt;=F(jr-1)且F(ir)&gt;F(jr)。情况即如下图：</p>
-<p><img src="http://img.blog.csdn.net/20170331210359807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图形"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/13187438.jpg" alt=""></p>
 <p>从上图可以看出，假如r-1时满足条件，则贪心算法将会把jr选入集合A而不是把ir选入，产生矛盾！<br>经过简单的证明，我们相信：选择最早结束的申请可以令我们得到一个申请的最大相容类。</p>
 <hr>
 <p>下面我们考虑这个算法的时间代价：</p>
@@ -509,8 +509,8 @@
 <p>定义p(j)，它的值是i，i是使得i与j不相交的i&lt;j的最大区间编号。如果j左边没有相容区间，p(j)=0。</p>
 <p>对一个区间集合的最优解O的求解变成：</p>
 <ol>
-<li>如果区间<code>$n\in O$</code>,那么O一定包含对区间集{1,..p(n)}求出的的最优解。</li>
-<li>如果区间<code>$n\notin O$</code>，那么O就包含对区间集{1,…n-1}求解最优解。</li>
+<li>如果区间$n\in O$,那么O一定包含对区间集{1,..p(n)}求出的的最优解。</li>
+<li>如果区间$n\notin O$，那么O就包含对区间集{1,…n-1}求解最优解。</li>
 </ol>
 
       
@@ -579,7 +579,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/21/算法与数据结构/贪心算法：图的最短路径/" rel="prev" title="分段的最小二乘问题">
+              <a href="/2017/07/21/算法与数据结构/分段的最小二乘问题/" rel="prev" title="分段的最小二乘问题">
                 分段的最小二乘问题 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -651,7 +651,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -662,7 +662,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -776,7 +776,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 

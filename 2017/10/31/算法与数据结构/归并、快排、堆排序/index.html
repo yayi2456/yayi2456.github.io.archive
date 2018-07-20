@@ -110,16 +110,16 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-07-20T17:19:45.733Z">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/69414927.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/3938009.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/7294164.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/96829654.jpg">
+<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/88344706.jpg">
+<meta property="og:updated_time" content="2018-07-20T18:07:05.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="归并、快排、堆排序">
 <meta name="twitter:description" content="归并排序算法是分治策略的一种体现。所谓分治策略就是把一个大问题分解成几个较小的部分，通过递归分别解决几个小问题，然后再在线性时间内将几个小问题的解合并成一个完整的解。">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-7-21/69414927.jpg">
 
 
 
@@ -450,14 +450,14 @@
 <li>将两个有序列合并成一整列</li>
 </ol>
 <p>归并排序在做串的切分时不考虑大小因素，只从中间切分。于是在合并时便需要对两个有序串做一定处理才能保证结果串的有序性。<br>为此，一个容易想到的方法是创建一个临时的数组存储有序列。如图：</p>
-<p><img src="http://img.blog.csdn.net/20170409215800372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/69414927.jpg" alt=""></p>
 <p>每次都比较1串与2串当前位置元素大小，将较小的那一个输出到TMP数组中当前位置并加一，将输出串的当前位置加一。直到两个串都输出完毕。<br>这种方式所用的额外空间是O(n)，只需要O(n)次比较。</p>
 <p>实际上，归并排序一般是递归进行一直到每个串的长度是1，主要运算过程全部落在合并上面。下面由递归式分析归并排序算法的时间复杂度。</p>
 <p><strong>归并时间空间复杂度分析：</strong></p>
 <p>设T(n)表示该算法在规模为n的输入实例上最坏的运行时间，假设n是2的整数次幂，可以得到递推公式如下：</p>
-<p><img src="http://img.blog.csdn.net/20170409221537744?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="公式"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/3938009.jpg" alt=""></p>
 <p>则有递推关系：</p>
-<p><img src="http://img.blog.csdn.net/20170409222307354?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/7294164.jpg" alt=""></p>
 <p>将这些时间都加在一起即为nlog2N。即归并的时间复杂度是O(nlogn)级别。</p>
 <p>下面将严格证明这个命题：</p>
 <p>——————这个过程线省略————</p>
@@ -470,7 +470,7 @@
 <li>合并</li>
 </ol>
 <p>与归并相似的一点是，二者都采用递归方法解决问题，但是归并的排序工作都留在了合并过程中完成，而快排正与之相反，排序工作都在分割的过程中完成。</p>
-<p><img src="http://img.blog.csdn.net/20170409232255961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="KP"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/96829654.jpg" alt=""></p>
 <p>从图中可以明显看出，快排最终得到的串就是一个有序的串。</p>
 <p><strong>快排时间空间复杂度：</strong></p>
 <p>快排算法依赖于枢轴PIVOT的选择。当选择的枢轴越接近中间值，树越接近于完全树的树高，算法效率越高，最好可达到O(nlogn)。糟糕的枢轴选择将会使效率急速下降，甚至达到O(n*n)的级别。<br>于是，当一个串越是接近于无序，快排的效率越高。快排的平均时间复杂度是O(nlogn)，是所有排序算法中平均时间复杂度最好的算法。<br>快排需要栈的辅助，其空间复杂度是O(logn)。</p>
@@ -487,7 +487,7 @@
 <li>迭代地取根进入有序队列并调整堆直到堆为有序序列</li>
 </ol>
 <p>堆的产生过程其实就是一个调整过程，下面给出堆的调整过程（以大根堆为例）：</p>
-<p><img src="http://img.blog.csdn.net/20170410000407454?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXVndXN0eV8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-7-21/88344706.jpg" alt=""></p>
 <p>最终取出数字的顺序即为最终顺序。</p>
 <p>堆排序适合于结点数较多情况下的要求前几个结点。当记录数较少时，不推荐使用堆排序。</p>
 <p>hash表+堆排序是处理海量数据的绝佳组合。</p>
@@ -557,8 +557,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/算法与数据结构/序列比较/" rel="next" title="序列比较">
-                <i class="fa fa-chevron-left"></i> 序列比较
+              <a href="/2017/10/31/OS/OS-Lab12/" rel="next" title="OS Lab1">
+                <i class="fa fa-chevron-left"></i> OS Lab1
               </a>
             
           </div>
@@ -567,8 +567,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/往事不堪回首烟雨中/树莓派解析域名失败导致apt-get update不可用/" rel="prev" title="树莓派解析域名失败导致apt-get update不可用">
-                树莓派解析域名失败导致apt-get update不可用 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/31/LINUX基础/linux常用命令/" rel="prev" title="Linux、Vim、Git常用命令——简明扼要版">
+                Linux、Vim、Git常用命令——简明扼要版 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +648,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -659,7 +659,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -789,7 +789,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 

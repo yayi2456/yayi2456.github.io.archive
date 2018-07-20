@@ -465,70 +465,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>死锁</strong>：如果一个进程集合中的每个进程都在等待只能由该进程集合中的其他进程才能引发的事件，该进程集合是死锁的。</p>
-<p>大多数情况下，都是在等另外的进程放弃所占的资源，但是由于所有的进程都不能运行，他们永远也等不到自己需要的资源</p>
-<p><strong>死锁产生条件</strong>：</p>
-<ol>
-<li>互斥条件：每个资源要么已经分配了一个进程，要么就是可用的</li>
-<li>占有和等待条件：已经得到了某个资源的进程可以请求新的资源</li>
-<li>不可抢占条件：已经分配给一个进程的资源不能强制性被抢占，只能被占有它的进程显式释放</li>
-<li>环路等待条件：死锁发生时，系统中一定有两个或者两个以上的进程组成的一条环路，该换路中的每一个进程都在等待下一个进程占有的资源。</li>
-</ol>
-<p><strong>死锁的危害</strong>：死锁进程永远不能活动，被持有的资源永远不可以访问<br>-&gt;不合理的资源获取可能会产生死锁（闭环，像数据库一样）</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
-<li><p>破坏4个条件，阻碍死锁发生</p>
-</li>
-<li><p>避免死锁发生</p>
-</li>
-<li><p>死锁检测与恢复</p>
-</li>
-<li><p>鸵鸟</p>
-</li>
-</ol>
-<h3 id="prevention"><a href="#prevention" class="headerlink" title="prevention"></a>prevention</h3><p>破坏四个条件</p>
-<ol>
-<li>互斥条件：虚拟共享资源<br> 避免分配那些不是绝对必须的资源，尽量做到尽可能少的进程可以真正请求资源<br> eg：使用打印机守护进程以及假脱打印机技术</li>
-<li>占有和等待条件：禁止已持有资源的进程等待其他资源<br> 在一次分配中满足一个进程的所有资源需求，否则进程将被阻塞，直到所有需要的资源都可用</li>
-<li>不可抢占条件：夺取死锁进程的资源并给其他进程<br> 避免引发混乱，使用虚拟化技术</li>
-<li>环路等待条件：为每种资源分配类型标识，进程必须按照升序/降序来请求资源。<br> 一种变体是不需要一定升序，但是需要不允许进程请求比当前所占有资源编号低的资源。</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg" alt=""></p>
-<h3 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h3><p>preventation不合理。</p>
-<p>系统必须判断这次请求资源是不是安全的，并且只能在安全的情况下得到资源。</p>
-<p><strong>安全状态</strong>：存在一个合理的资源分配序列<br><strong>不安全状态</strong>：不存在可以避免死锁的资源分配序列</p>
-<p>避免死锁的机制：os只在安全的情况下分配资源。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/33686334.jpg" alt=""></p>
-<p>阴影部分不能进。</p>
-<h3 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h3><h4 id="单资源"><a href="#单资源" class="headerlink" title="单资源"></a>单资源</h4><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/66291438.jpg" alt=""></p>
-<p>查看是否有进程还需要的资源数小于系统剩余的资源数，如果有，就分给他，如果没有，会产生死锁。</p>
-<p>也可以这样说：如果一个进程请求资源，检查是不是可以给他。</p>
-<h4 id="多资源"><a href="#多资源" class="headerlink" title="多资源"></a>多资源</h4><p>与单资源差不多，但是需要每一个还需要的资源数都是小于剩余的资源数，如果存在，就给，然后收回这个已经完成的资源，如果没有，就不可能成功了。</p>
-<h3 id="安全状态与死锁"><a href="#安全状态与死锁" class="headerlink" title="安全状态与死锁"></a>安全状态与死锁</h3><p>系统安全-&gt;没有死锁<br>没有死锁不一定是系统安全。但是只要确保系统是安全的，就一定不会死锁。</p>
-<h3 id="死锁检测与恢复"><a href="#死锁检测与恢复" class="headerlink" title="死锁检测与恢复"></a>死锁检测与恢复</h3><p>守护进程判断运行状态，长时间不运行则认为进入思索。</p>
-<p>可以使用图、集合、向量、矩阵等记录资源分配状态，试图找到环路。</p>
-<p>请求矩阵中的向量定义成qij，表示进程i请求类型j的资源量，代表当前进程产生的资源请求<br>初始态所有进程无标记，通过算法标记进程<br>最后查看：若有无标记的进程，则说明有死锁现 象存在</p>
-<p><strong>算法</strong>：<br>1）在分配矩阵中标记一行全为0的进程<br>2）向量W初始化成可用向量Available<br>3）按下标i查找，进程i未标记并且该进程的请求向量小于等于W，就进行标记；若找不到这样的行，算法终止。<br>4）若找到这样的行，标记进程i后，再把分配矩阵中的相应行加到W中，返回步骤3。</p>
-<p>其实就是银行家算法</p>
-<p><strong>恢复</strong>：</p>
-<ol>
-<li>抢占</li>
-<li>Backdating：设置检查点在进程中，当检测到死锁时，进程将返回到检查点。</li>
-<li>进程查杀：直接杀死进程。</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/76831176.jpg" alt=""></p>
-<h2 id="非资源死锁"><a href="#非资源死锁" class="headerlink" title="非资源死锁"></a>非资源死锁</h2><ol>
-<li><p>两阶段加锁<br>对需要修改的数据：先请求加锁，再修改数据；若有一个数据已加锁，进程则释放所有加锁的记录。（像csmaca一样</p>
-</li>
-<li><p>通信死锁<br>通信中多个进程发送信息，但需要阻塞当前进程等待对方回复。若发送信息丢失，则死锁。<br>解决办法：超时中断；</p>
-</li>
-<li><p>活锁<br>所谓活锁既是：进程没有死锁，但却无法运行下去，只是在不断的重复尝试，如冲突检测。</p>
-</li>
-<li><p>进程饿死<br>由于条件限制使有些进程请求永远无法得到服务，进程被饿死。从饿死进程角度看，像是发生了死锁。</p>
-</li>
-</ol>
-
-          
+          <p>死锁：银行家/鸵鸟嘻嘻。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/16/OS/chap6-死锁/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -632,7 +576,18 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/因寄所托/" itemprop="url" rel="index">
+                  <a href="/categories/我的故事/" itemprop="url" rel="index">
+                    <span itemprop="name">我的故事</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/我的故事/因寄所托/" itemprop="url" rel="index">
                     <span itemprop="name">因寄所托</span>
                   </a>
                 </span>
@@ -671,7 +626,7 @@
       
         
           
-            <h1 id="生死桥"><a href="#生死桥" class="headerlink" title="生死桥"></a>生死桥</h1><p>怀玉心想，怎的每个人都要听他的心里话呢？到底心里有没有话？简简单单的一桩事儿，自家的事儿，哪有什么？世上各人都爱小事化大。</p>
+            <p>怀玉心想，怎的每个人都要听他的心里话呢？到底心里有没有话？简简单单的一桩事儿，自家的事儿，哪有什么？世上各人都爱小事化大。《生死桥》</p>
 
           
         
@@ -826,231 +781,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1><h2 id="Part-A-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#Part-A-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="Part A: Multiprocessor Support and Cooperative Multitasking"></a>Part A: Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>在本实验的开始部分，首先将为jos添加多核支持。在多核模式下，所有CPU地位平等，有相同的系统资源与IO总线访问权。但是，在系统启动时，多CPU可以被分为两类：BSP与AP。BSP在系统上电时接管机器，完成系统的初始化，随后，出于某种需要，BSP将会唤醒AP，AP也可以作为独立的CPU执行指令。</p>
-<p>在这种系统之中，每个CPU都有一个模块是<strong>LAPIC</strong>，它负责系统的中断传递，为每个CPU提供一个独特的编号。</p>
-<p>LAPIC是Local Advanced Programmable Interrupt Controller，local高级可编程中断控制器。LAPIC一般由中断信号、PRT、一组寄存器与其他一些部件组成，可以处理硬件的中断请求信息，并通知CPU进行处理。</p>
-<p>在本次实验中，我们将会用到LAPIC模块的如下功能函数：</p>
-<ol>
-<li>cpunum()：</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/87627035.jpg" alt=""></p>
-<p>该函数中，通过访问lapic[ID]对应字段获得当前的cpu编号。</p>
-<ol>
-<li>lapic_startap():</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96651596.jpg" alt=""></p>
-<p>这个函数中，BSP负责对尚未工作的AP进行初始化与唤醒操作。首先设置向量，然后发送INIT中断来重置其他CPU，最终发送STRARTUP信号与开始执行的位置，使一个CPU正式开始工作。</p>
-<ol>
-<li>lapic_init():</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">lapic_init(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (!lapicaddr) <span class="keyword">return</span>;</div><div class="line">	<span class="comment">// lapicaddr is the physical address of the LAPIC's 4K MMIO</span></div><div class="line">	<span class="comment">// region.  Map it in to virtual memory so we can access it.</span></div><div class="line">	<span class="comment">//lapiaddr是LAPIC的4K的MIMO区域的物理地址</span></div><div class="line">	<span class="comment">//把他映射到虚拟地址空间，就可以访问了</span></div><div class="line">	lapic = mmio_map_region(lapicaddr, <span class="number">4096</span>);</div><div class="line">	<span class="comment">//enable LAPIC；设置伪中断向量</span></div><div class="line">	<span class="comment">// Enable local APIC; set spurious interrupt vector.</span></div><div class="line">	<span class="comment">//#define SVR     (0x00F0/4)   // Spurious Interrupt Vector</span></div><div class="line">	<span class="comment">//#define ENABLE     0x00000100   // Unit Enable</span></div><div class="line"></div><div class="line">	<span class="comment">//in inc/trap.c</span></div><div class="line">	<span class="comment">//#define IRQ_OFFSET	32	// IRQ 0 corresponds to int IRQ_OFFSET</span></div><div class="line">	<span class="comment">//// Hardware IRQ numbers. We receive these as (IRQ_OFFSET+IRQ_WHATEVER)</span></div><div class="line">	<span class="comment">//#define IRQ_SPURIOUS     7</span></div><div class="line">	lapicw(SVR, ENABLE | (IRQ_OFFSET + IRQ_SPURIOUS));</div><div class="line"></div><div class="line">	<span class="comment">// The timer repeatedly counts down at bus frequency</span></div><div class="line">	<span class="comment">// from lapic[TICR] and then issues an interrupt.  </span></div><div class="line">	<span class="comment">//定时器重复从lapic [TICR]的总线频率倒计数，然后发出中断。</span></div><div class="line">	<span class="comment">// If we cared more about precise timekeeping,</span></div><div class="line">	<span class="comment">// TICR would be calibrated using an external time source.</span></div><div class="line">	<span class="comment">//如果我们更关心精确的计时，TICR将使用外部时间源进行校准。</span></div><div class="line">	lapicw(TDCR, X1);<span class="comment">//in this:向lapic数组写入东西lapic[TDCR]=X1;</span></div><div class="line">	lapicw(TIMER, PERIODIC | (IRQ_OFFSET + IRQ_TIMER));</div><div class="line">	lapicw(TICR, <span class="number">10000000</span>); </div><div class="line"></div><div class="line">	<span class="comment">// Leave LINT0 of the BSP enabled so that it can get</span></div><div class="line">	<span class="comment">// interrupts from the 8259A chip.</span></div><div class="line">	<span class="comment">//吧BSP的LINT0（向量表0）enable，这样就可以从8259A芯片得到中断</span></div><div class="line">	<span class="comment">// According to Intel MP Specification, the BIOS should initialize</span></div><div class="line">	<span class="comment">// BSP's local APIC in Virtual Wire Mode, in which 8259A's</span></div><div class="line">	<span class="comment">// INTR is virtually connected to BSP's LINTIN0. In this mode,</span></div><div class="line">	<span class="comment">// we do not need to program the IOAPIC.</span></div><div class="line">	<span class="comment">//根据英特尔MP规范，BIOS应在虚拟线路模式下初始化BSP的本地APIC，</span></div><div class="line">	<span class="comment">//其中8259A的INTR虚拟连接到BSP的LINTIN0。 </span></div><div class="line">	<span class="comment">//在这种模式下，我们不需要编程IOAPIC。</span></div><div class="line">	<span class="comment">//如果当前cpu不是启动cpu，它的中断表0 被mask</span></div><div class="line">	<span class="keyword">if</span> (thiscpu != bootcpu)</div><div class="line">		lapicw(LINT0, MASKED);</div><div class="line">	<span class="comment">// Disable NMI (LINT1) on all CPUs</span></div><div class="line">	<span class="comment">//中断表1都被mask</span></div><div class="line">	lapicw(LINT1, MASKED);</div><div class="line">	<span class="comment">// Disable performance counter overflow interrupts</span></div><div class="line">	<span class="comment">// on machines that provide that interrupt entry.</span></div><div class="line">	<span class="comment">//在一些特定的版本（提供了中断入口）的机器上，</span></div><div class="line">	<span class="comment">//disable PCINT（性能计数器溢出？？？）</span></div><div class="line">	<span class="keyword">if</span> (((lapic[VER]&gt;&gt;<span class="number">16</span>) &amp; <span class="number">0xFF</span>) &gt;= <span class="number">4</span>)</div><div class="line">		lapicw(PCINT, MASKED);</div><div class="line">	<span class="comment">// Map error interrupt to IRQ_ERROR.</span></div><div class="line">	lapicw(ERROR, IRQ_OFFSET + IRQ_ERROR);</div><div class="line"></div><div class="line">	<span class="comment">// Clear error status register (requires back-to-back writes).</span></div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	lapicw(ESR, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Ack any outstanding interrupts.</span></div><div class="line">	lapicw(EOI, <span class="number">0</span>);</div><div class="line">	<span class="comment">// Send an Init Level De-Assert to synchronize arbitration ID's.</span></div><div class="line">	<span class="comment">//#define ICRHI   (0x0310/4)   // Interrupt Command [63:32]</span></div><div class="line">	<span class="comment">//#define INIT       0x00000500   // INIT/RESET</span></div><div class="line">	<span class="comment">//#define DELIVS     0x00001000   // Delivery status</span></div><div class="line">	<span class="comment">//#define LEVEL      0x00008000   // Level triggered</span></div><div class="line">	<span class="comment">//#define BCAST      0x00080000   // Send to all APICs, including self.</span></div><div class="line">	lapicw(ICRHI, <span class="number">0</span>);</div><div class="line">	lapicw(ICRLO, BCAST | INIT | LEVEL);</div><div class="line">	<span class="keyword">while</span>(lapic[ICRLO] &amp; DELIVS) ;</div><div class="line">	<span class="comment">// Enable interrupts on the APIC (but not on the processor).</span></div><div class="line">	<span class="comment">//TPR 任务优先级</span></div><div class="line">	lapicw(TPR, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该函数初始化LAPIC。像其他结构一样，lapic被映射到固定的物理地址，随后进行各种中断向量的设置以及向量表的mask操作，设置错误状态寄存器的值，最后设置任务优先级。</p>
-<p>像VGA设备一样，物理地址空间上也为LAPIC设备留了一个洞，它将会被map到虚拟地址的MMIOBASE。这种访问方式使得CPU可以像访问内存一样访问设备。</p>
-<blockquote>
-<p><strong>Exercise 1</strong></p>
-<p>完成mmio_map_region函数，它将会完成把LAPIC设备所占据的物理地址map到预留的虚拟地址部分。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> *</div><div class="line">mmio_map_region(physaddr_t pa, size_t size)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// Where to start the next region.  Initially, this is the</span></div><div class="line">	<span class="comment">// beginning of the MMIO region.  Because this is static, its</span></div><div class="line">	<span class="comment">// value will be preserved between calls to mmio_map_region</span></div><div class="line">	<span class="comment">// (just like nextfree in boot_alloc).</span></div><div class="line">	<span class="comment">//这是mmio开始的地方</span></div><div class="line">	<span class="keyword">static</span> uintptr_t base = MMIOBASE;</div><div class="line">	<span class="comment">// Reserve size bytes of virtual memory starting at base and</span></div><div class="line">	<span class="comment">// map physical pages [pa,pa+size) to virtual addresses</span></div><div class="line">	<span class="comment">// [base,base+size).  Since this is device memory and not</span></div><div class="line">	<span class="comment">// regular DRAM, you'll have to tell the CPU that it isn't</span></div><div class="line">	<span class="comment">// safe to cache access to this memory.  Luckily, the page</span></div><div class="line">	<span class="comment">// tables provide bits for this purpose; simply create the</span></div><div class="line">	<span class="comment">// mapping with PTE_PCD|PTE_PWT (cache-disable and</span></div><div class="line">	<span class="comment">// write-through) in addition to PTE_W.  (If you're interested</span></div><div class="line">	<span class="comment">// in more details on this, see section 10.5 of IA32 volume</span></div><div class="line">	<span class="comment">// 3A.)</span></div><div class="line">	<span class="comment">//保留虚拟内存的的size字节，并把物理地址pa，pa+size给map到base,base+size，</span></div><div class="line">	<span class="comment">//由于这是设备的内存，并不是dram，需要告诉cpu缓存到这里的access是不安全的，</span></div><div class="line">	<span class="comment">//幸运的是，页表提供了这样的位</span></div><div class="line">	<span class="comment">//只需要使用PTE_PCD|PTE_PWT|PTE_W即可</span></div><div class="line">	<span class="comment">//如果你对这个很有兴趣，可以去看10.5节，IA32 卷3A</span></div><div class="line">	<span class="comment">// Be sure to round size up to a multiple of PGSIZE and to</span></div><div class="line">	<span class="comment">// handle if this reservation would overflow MMIOLIM (it's</span></div><div class="line">	<span class="comment">// okay to simply panic if this happens).</span></div><div class="line">	<span class="comment">//确保你roundsizeup</span></div><div class="line">	<span class="comment">//确保你检测是不是会超过MMIOLIM，如果超过了，panic</span></div><div class="line">	<span class="comment">// Hint: The staff solution uses boot_map_region.</span></div><div class="line">	<span class="comment">//使用boot_map_region</span></div><div class="line">	<span class="comment">// Your code here:</span></div><div class="line">	<span class="comment">//Note:pa=5 size=7 pgsize=10</span></div><div class="line">	<span class="comment">//actually endsp shall be 20</span></div><div class="line">	uint32_t endsp=ROUNDUP(size+pa,PGSIZE);</div><div class="line">	pa=ROUNDDOWN(pa,PGSIZE);</div><div class="line">	size=endsp-pa;</div><div class="line">	<span class="keyword">if</span>(base+size&gt;MMIOLIM)panic(<span class="string">"the reservation would overflow MMIOLIM"</span>);</div><div class="line">	boot_map_region(kern_pgdir,base,size,pa,PTE_PCD|PTE_PWT|PTE_W);</div><div class="line">	<span class="comment">//panic("mmio_map_region not implemented");</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	base+=size;</div><div class="line">	<span class="keyword">return</span> (<span class="keyword">void</span>*)(base-size);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>这里需要注意的是size与paddr的关系。由于最终覆盖到的地址应该在size+paddr，因此不能使用ROUNDDOWN(paddr)与ROUNDUP(size)直接做运算，否则可能会产生缺页的情况。</p>
-</blockquote>
-<h3 id="Application-Processor-Bootstrap"><a href="#Application-Processor-Bootstrap" class="headerlink" title="Application Processor Bootstrap"></a>Application Processor Bootstrap</h3><p>在<strong>i386_init</strong>函数中，本实验又增加了新的初始化过程：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/96728212.jpg" alt=""></p>
-<p>在启动AP之前，BSP将会首先去获知多处理器的信息，比如CPU总数，他们各自的APIC编号以及LAPIC的MMIO地址。<strong>kern/mpconfig.c</strong>中的<strong>mp_init</strong>函数通过访问MP配置表来获知这些信息。随后，<strong>lapic_init</strong>初始化LAPIC设备，<strong>pic_init</strong>在更底层的部分初始化8259A的中断控制器。最后<strong>boot_aps</strong>函数(kern/init.c)将会启动各个AP，使他们从<strong>MPENTRY_PADDR</strong>开始运行。</p>
-<p><strong>boot_aps</strong>函数如下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/39840649.jpg" alt=""></p>
-<p>可以看到，BSP首先将AP启动后执行的代码搬到AP的启动位置code，随后逐个唤醒AP。对每一个AP，将会告诉它它的内核栈的位置，随后调用<strong>lapic_statrap</strong>(kern/lapic.c)。lapic_startap的代码在上方已经贴出，它为CPU设置各种中断信息并最终给出STRATUP信号表明AP已经设置完成，随后AP开始从给定地址开始运行。进入<strong>mpentry.S</strong>的运行，设置initial页表并转入自己的内核栈，随后调用<strong>mp_main</strong>函数，设置页表，初始化LAPIC、GDT以及trap，随后告诉<strong>boot_aps</strong>这个CPU设置完毕，<strong>boot_aps</strong>接收到AP的信息之后，进入下一个AP的初始化。</p>
-<p>随后就像在Lab3中的那样，调用用户程序。</p>
-<blockquote>
-<p><strong>Exercise 2</strong></p>
-<p>修改<strong>page_init</strong>函数，不再将从MPENTRY_PADDR开始的虚拟地址添加到可用页上，给出更新后的函数：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29015296.jpg" alt=""></p>
-<p><strong>Question</strong></p>
-<ol>
-<li>Compare kern/mpentry.S side by side with boot/boot.S. Bearing in mind that kern/mpentry.S is compiled and linked to run above KERNBASE just like everything else in the kernel, what is the purpose of macro MPBOOTPHYS? Why is it necessary in kern/mpentry.S but not in boot/boot.S? In other words, what could go wrong if it were omitted in kern/mpentry.S? Hint: recall the differences between the link address and the load address that we have discussed in Lab 1. </li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/70313494.jpg" alt=""><br>MPBOOTYPHYS的目的是计算应该访问的地址。<br>与boot.S不同，在mpentry.S中启动的AP，其load进的地址并不是像boot一样与假设自己被加载进来的地址相同，而是被BSP加载到MPENTRY_PADDR。为了访问到正确的物理地址，应该换算成希望加载进来的地址再进行对地址的操作。</p>
-</blockquote>
-<h3 id="Per-CPU-State-and-Initialization"><a href="#Per-CPU-State-and-Initialization" class="headerlink" title="Per-CPU State and Initialization"></a>Per-CPU State and Initialization</h3><p>在多CPU的系统中，需要明确每个CPU私有的状态以及共有的资源划分。在<strong>kern/cpu.h</strong>中定义的CpuInfo结构存储有大部分的私有信息。thiscpu指向当前cpu的CpuInfo结构。</p>
-<blockquote>
-<p><strong>Exercise 3</strong><br>修改<strong>mem_init_mp</strong>函数，为每个CPU map一个内核栈。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/29300920.jpg" alt=""></p>
-<p>像在memlayout.h中定义的那样，补充后的代码是：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/92996124.jpg" alt=""></p>
-<p><strong>Exercise 4</strong></p>
-<p>修改<strong>trap_init_percpu</strong>使得在多CPU环境下可以运行</p>
-<p>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/58108225.jpg" alt=""></p>
-<p>这段代码中一共有四个需要修改的地方，一是所有的ts应该修改为thiscpu-&gt;ts，而是栈顶应该由KSTACKTOP-(KSTKSIZE + KSTKGAP)变为KSTACKTOP-i*(KSTKSIZE + KSTKGAP)，三是gdt中tss表项位置应该由[(GD_TSS0 &gt;&gt; 3)变为[(GD_TSS0 &gt;&gt; 3)+i，四是load选择子的时候应该修改为对应cpu的选择子ltr(GD_TSS0+i*8);。</p>
-</blockquote>
-<p>这样就完成了不同CPU的trap初始化。</p>
-<p>完成这里的操作之后，make qemu CPUS=4，可以看到所有函数检查通过，CPU信息输出。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/75077349.jpg" alt=""></p>
-<h3 id="Locking"><a href="#Locking" class="headerlink" title="Locking"></a>Locking</h3><p>上述完成之后，代码将会停在原地。为了使得AP能够进一步运行，需要首先解决多个CPU同时运行内核代码的竞争状况。为了解决这个问题，采用内核锁机制。当有进程在内核空间时，内核将会上一个锁，回到用户空间后，锁被释放。</p>
-<p>在<strong>kern/spinlock.h</strong>中定义了一个kernel_lock，提供了<strong>lock_kernel</strong>与<strong>unlock_kernel</strong>函数。需要我们自己来决定加锁解锁的位置。</p>
-<blockquote>
-<p><strong>Exercise 5</strong><br>加锁与解锁</p>
-<ol>
-<li><p>在i386_init中，在BSP唤醒其他CPU之前加锁：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/63950397.jpg" alt=""></p>
-</li>
-<li><p>在mp_main中，在AP初始化之后加锁，然后调用sched_yield来开始调度。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/24870973.jpg" alt=""></p>
-</li>
-<li><p>在trap中，如果是从用户模式来的trap，就获得锁。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/38167577.jpg" alt=""></p>
-</li>
-<li><p>在env_run中，在进入用户模式的时候释放锁<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/44217150.jpg" alt=""></p>
-</li>
-</ol>
-</blockquote>
-<hr>
-<blockquote>
-<p>Question</p>
-<ol>
-<li>It seems that using the big kernel lock guarantees that only one CPU can run the kernel code at a time. Why do we still need separate kernel stacks for each CPU? Describe a scenario in which using a shared kernel stack will go wrong, even with the protection of the big kernel lock. </li>
-</ol>
-<p>这是因为在lab3中已经写过，当用户进程发生中断的时候，执行的代码中有：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/35810116.jpg" alt=""><br>这段代码是产生中断之后硬件自己就会执行的，在这个时候仍未调用trap，自然还没有为内核加锁。也就是说，如果使用同一个栈，当两个cpu同时发生中断的时候，这段代码很可能会被打断执行顺序，从而导致内核栈的混乱。</p>
-</blockquote>
-<h3 id="Round-Robin-Scheduling"><a href="#Round-Robin-Scheduling" class="headerlink" title="Round-Robin Scheduling"></a>Round-Robin Scheduling</h3><p>接下来，将会修改调度过程的代码，来为jos添加调度的功能。</p>
-<p>在这里，这个功能会被描述为：</p>
-<p>函数<strong>shced_yield</strong>负责选择一个新进程运行，它从当前运行进程的编号开始寻找，找第一个有着ENV_RUNNABLE的进程把运行权交付给它。如果没有其他进程是ENV_RUNNABLE状态而且现在的进程还可以运行，那就还让现在的进程运行。</p>
-<blockquote>
-<p><strong>Exercise 6</strong></p>
-<p>修改该sched_yield函数：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/8461936.jpg" alt=""></p>
-</blockquote>
-<p>需要注意的是，这时syscall函数仍未被完成，需要在此后陆续添加更多的SYS_*来允许用户空间的系统调用。</p>
-<p>随后可以测试，修改i386_init函数，创建3个进程：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/59214383.jpg" alt=""></p>
-<p>使用make qemu CPUS=2，可以得到结果：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/79530109.jpg" alt=""></p>
-<blockquote>
-<p>Question</p>
-<ol>
-<li>In your implementation of env_run() you should have called lcr3(). Before and after the call to lcr3(), your code makes references (at least it should) to the variable e, the argument to env_run. Upon loading the %cr3 register, the addressing context used by the MMU is instantly changed. But a virtual address (namely e) has meaning relative to a given address context–the address context specifies the physical address to which the virtual address maps. Why can the pointer e be dereferenced both before and after the addressing switch? </li>
-</ol>
-<p>e所指示的空间是在mem_init中被申请的物理空间，它并不会存在于每个进程的可用页表里供进程自己决定map的虚拟地址，而是对每个进程而言都是一样的。</p>
-<ol>
-<li>Whenever the kernel switches from one environment to another, it must ensure the old environment’s registers are saved so they can be restored properly later. Why? Where does this happen?</li>
-</ol>
-<p>只有这样做，才能保存上一个进程的运行状态信息，恢复进程运行时才不会出错。<br>这个操作发生在trap函数中，代码是这样的：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/86607615.jpg" alt=""><br>它保存了发生trap的进程的tf。<br>然而，进程之间切换由kernel决定。每次发生进程调度，都会发生trap（这里将syscall主动放弃cpu也通过trap完成）</p>
-</blockquote>
-<h3 id="System-Calls-for-Environment-Creation"><a href="#System-Calls-for-Environment-Creation" class="headerlink" title="System Calls for Environment Creation"></a>System Calls for Environment Creation</h3><p>下面将允许用户进程创建子进程并执行。</p>
-<p>在Unix中，fork函数可以用来创建子进程。这个子进程完全copy了父进程的地址空间，二者唯一不同的是在父进程中fork返回子进程的编号而在子进程中返回的是0。</p>
-<p>我们将实现一个更加原始的fork，首先需要完成一些系统调用函数。<br>在这些个函数之中，需要频繁用到函数envid2env来检查进程操作是否合法，首先来分析这个envid2env函数：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/74947768.jpg" alt=""></p>
-<p>如果envid是0，说明是当前进程希望获得自己的env结构，直接允许获得，返回curenv，函数成功。<br>如果给的envid不合法或者指定进程是free进程，无法得到进程结构，返回bad environment。<br>否则如果指定需要检查权限，那么给定的envid必须是当前进程的子进程，如果满足要求返回成功，否则返回失败：bad environment。</p>
-<blockquote>
-<p><strong>Exercise 7</strong>：</p>
-<p>只需要按照要求完成代码：</p>
-<p><strong>sys_exofork</strong>：创建一个新进程，其中，用户地址空间没有任何map，不可以运行。子进程将会拥有和父进程一样的寄存器状态值，该函数在子进程中返回0，在父进程中返回子进程的id。（由于子进程刚刚被创建的时候是没有执行能力的，因此实际上，在子进程中是无法返回的，直到其父进程用下面的函数将子进程标记为可运行）<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/70937828.jpg" alt=""></p>
-<p><strong>sys_env_set_status</strong>：设置一个进程的状态为ENV_RUNNABLE或者是ENV_NOT_RUNNABLE。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/20728662.jpg" alt=""></p>
-<p><strong>sys_page_alloc</strong>：申请一个物理页并把它map在给定进程的给定地址。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/47728587.jpg" alt=""></p>
-<p><strong>sys_page_map</strong>：把给定进程的某一个页的映射同样映射到另一个进程的给定地址，这样，这两个进程享有了共享的一个物理页。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/41333018.jpg" alt=""></p>
-<p><strong>sys_page_unmap</strong>：把某一个页从某一个进程的对应地址上unmap。<br>代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-25/27465683.jpg" alt=""></p>
-</blockquote>
-<p>完成这些之后，partA的dumbfork测试就可以通过了。</p>
-<h2 id="Part-B-Copy-on-Write-Fork"><a href="#Part-B-Copy-on-Write-Fork" class="headerlink" title="Part B: Copy-on-Write Fork"></a>Part B: Copy-on-Write Fork</h2><p>像在前面提到的一样，Unix提供了fork函数，这个函数将会复制整个父进程的地址空间。xv6 Unix的fork将会复制父进程的所有页到新的页，这也是在dumbfork里面做的。但是，这样的操作耗时而且通常都是无用功：创建出的子进程可能很快就会被父进程委派去做其他的工作，子进程的地址空间很快会被新的数据取代。</p>
-<p>出于这种考虑，现在来实现一种新的特性，子进程与父进程将享有同一套地址空间，直到有进程真的要去修改这块空间。这样的技术叫做<strong>copy-on-write</strong>。</p>
-<p>在这种特性之下，当创建子进程的时候，父进程仅仅将自己的映射关系给子进程，同时把自己共享出去的页都标记为只读。当有一方想要修改该虚拟地址空间时触发一个page fault，这时，内核才真正意识到需要一个新的页，这时才会去为发生错误的进程申请一个自己的页。这样的设计使得子进程在执行之前花费的代价很少，一般只会有一个栈的页。</p>
-<h3 id="User-level-page-fault-handling"><a href="#User-level-page-fault-handling" class="headerlink" title="User-level page fault handling"></a>User-level page fault handling</h3><p>用户层面的缺页异常有很多种引起的可能，cow只是其中的一种。内核必须能够决定为不同程序空间引起的缺页异常提供不一样的解决方式，比如，在栈中发生的缺页异常需要申请并map一个物理页，在bss区域引起的缺页中断会申请一个全0的物理页然后映射。</p>
-<p>对内核来说，有很多信息都可以作为判断依据，接下来，将完成我们的pgfault处理函数。</p>
-<h3 id="Setting-the-Page-Fault-Handler"><a href="#Setting-the-Page-Fault-Handler" class="headerlink" title="Setting the Page Fault Handler"></a>Setting the Page Fault Handler</h3><p>为了处理缺页中断，用户进程需要向内核注册并存储自己的缺页中断处理函数的入口点。为了实现这个功能，在Env结构中新加了成员<code>env_pgfault_upcall</code>。</p>
-<blockquote>
-<p><strong>Exercise 8</strong>：<br>完成函数<code>sys_env_set_pgfault_upcall</code>，确保进行了权限检查。</p>
-<p>根据提示，该函数为特定进程设置一个缺页中断处理函数。这个进程必须是自己或者是自己的子进程。<br>写出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/2663658.jpg" alt=""></p>
-</blockquote>
-<h3 id="Normal-and-Exception-Stacks-in-User-Environments"><a href="#Normal-and-Exception-Stacks-in-User-Environments" class="headerlink" title="Normal and Exception Stacks in User Environments"></a>Normal and Exception Stacks in User Environments</h3><p>在正常的执行中，用户进程将会在用户栈中执行，esp指向栈顶，当一个缺页中断发生的时候，内核将会使用户进程重新在另一个栈中运行缺页中断的处理函数。也就是，我们需要使内核能够自动换栈。</p>
-<p>异常栈有一个page大小，最顶端是UXSTACKTOP。因此，第一个中断发生后将会空间UXSTACKTOP-PGSIZE到UXSTACKTOP之间作为异常栈。在处理函数中可以通过各种调用恢复原进程的正确执行，随后该函数返回，回到上次发生中断的地方，重新执行出错代码。<br>每一个希望有用户层次的缺页中断处理函数的进程都必须支持申请新页来作为他自己的异常栈。</p>
-<h3 id="Invoking-the-User-Page-Fault-Handler"><a href="#Invoking-the-User-Page-Fault-Handler" class="headerlink" title="Invoking the User Page Fault Handler"></a>Invoking the User Page Fault Handler</h3><p>接下来我们要修改trap中的代码，使它有以下的功能。</p>
-<p>如果这个用户进程并没有自己的缺页中断处理函数，当他有缺页中断发生的时候，就销毁这个进程然后退出，否则。</p>
-<p>异常栈中的情况是这样的：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/95241296.jpg" alt=""></p>
-<p>UXSTTACKTOP是栈底，依次push进了许多变量，他们与结构<strong>UTrapframe</strong>吻合。函数执行结束后，需要从异常栈返回原本的用户栈。</p>
-<p>实际情况中可能更加复杂：缺页中断额处理函数本身还可能会发生中断，这时，继续往栈顶push数据，但是需要注意，由于一些原因，需要先push一个32bit的空位。这个将会在后面进行解释。如果tf-&gt;tf_esp在上述区域之中，那么就是在异常栈中发生的缺页中断，否则就是在原本的用户进程中发生的中断。</p>
-<blockquote>
-<p><strong>Exercise 9</strong></p>
-<p>完成函数<code>page_fault_handler</code>。他需要将用户空间的缺页中断给用户的处理函数。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/77522130.jpg" alt=""></p>
-<p>首先，只有有处理函数才能进行下一步的操作，否则将会free掉这个进程。<br>随后确定将要push的结构的首地址。如果当前进程可以访问这个地址，那么就把对应的地址写为对应的值，保存好之前执行状态的信息。保存完之后，将程序的下一个执行地址设置为函数的入口地址，将该进程的栈顶设置为异常栈的栈顶，运行。</p>
-</blockquote>
-<h3 id="User-mode-Page-Fault-Entrypoint"><a href="#User-mode-Page-Fault-Entrypoint" class="headerlink" title="User-mode Page Fault Entrypoint"></a>User-mode Page Fault Entrypoint</h3><p>接下来，需要我们完成执行C程序并且返回到原执行状态的汇编指令，该汇编指令是<code>sys_env_set_pgfault_upcall</code>的处理过程。</p>
-<blockquote>
-<p><strong>Exercise 10</strong>：<br>完成lib/pfentry.S中的<code>_pgfault_upcall</code>过程。</p>
-<p>只需要根据提示，结合上述的异常栈动作：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/27738708.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/86236764.jpg" alt=""></p>
-</blockquote>
-<p>最后，完成C程序库部分的缺页异常处理机制：</p>
-<blockquote>
-<p><strong>Exercise 11</strong>：<br>完成lib/pgfault.c中的<code>set_pgfault_handler</code>函数：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/14374721.jpg" alt=""></p>
-</blockquote>
-<h3 id="Implementing-Copy-on-Write-Fork"><a href="#Implementing-Copy-on-Write-Fork" class="headerlink" title="Implementing Copy-on-Write Fork"></a>Implementing Copy-on-Write Fork</h3><p>fork函数是一个cow的子进程创建函数，它的控制流程是这样的：</p>
-<ol>
-<li><p>使用<code>set_pgfault_handler</code>来确定中断处理函数C程序层面的入口</p>
-</li>
-<li><p>调用<code>sys_exofork</code>创建一个新进程</p>
-</li>
-<li><p>对每一个可写的或是cow的在UTOP之下的页，父进程为之调用<strong>duppage</strong>函数，这个函数将会把cow的页map到子进程地址空间，然后重新在自己的地址空间map这些页。</p>
-</li>
-<li><p>父进程为子进程设置缺页中断处理函数入口点</p>
-</li>
-<li><p>子进程可以运行了，父进程将其标志为RUNNABLE</p>
-</li>
-</ol>
-<p>之后，每次想要修改cow页面都会触发缺页中断，触发之后过程如下：</p>
-<ol>
-<li><p>kernel把pagefault告诉_pgfault_upcall，执行入口调用pgfault函数</p>
-</li>
-<li><p>pgfault检查错误是写错误而且页面是cow，否则panic</p>
-</li>
-<li><p>pgfault申请新的页，map到一个临时地址，把出错的页面信息copy到新的页面，随后把新页map到一个合适的地址。</p>
-</li>
-</ol>
-<p>kernle会把进程的页表都map到UVPT页目录map到UVPD，方便根据虚拟地址获取对应页的权限信息。首先我们先来看一看这个小技巧。</p>
-<p>在内核中可以使用函数<code>pgdir_walk</code>获得权限信息，但是在用户空间，虚拟地址的翻译决定了自身的页表与页目录是不可见的。为了方便的获取权限信息，我们向用户进程的页目录中插入一个特殊的entry。这个entry指向页目录的首部。</p>
-<p>这样，当我们访问一个PDX与PTX均是特定数值V的虚拟地址时，我们访问到了页目录。<br>这个地址作为指针数组的开头，使用某虚拟地址的PDX作为索引，使我们可以访问到页目录的各项。</p>
-<p>当我们访问一个PDX是V但是PTX不是V的虚拟地址时，我们访问到了页表。同样地我们可以访问到各个页表项。</p>
-<p>上述提到的两个虚拟地址分别是UVPD与UVPT。在memlayout.h中定义。<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/57100150.jpg" alt=""></p>
-<blockquote>
-<p><strong>Exercise 12</strong>：<br>完成frok，duppage以及pgfault。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/99153651.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/36579327.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/42000412.jpg" alt=""></p>
-</blockquote>
-<p>partB到这里就结束了，在进入partC之前，首先来梳理一下从fork开始的整个运行过程。</p>
-<p>当一个用户进程调用fork函数创建子进程，在fork中将申请一个新的进程，复制父进程的地址空间映射给子进程并把二者空间中的对应页都标记为cow，随后父进程为子进程申请用户栈，设置缺页处理过程入口点，最终将子进程的状态标记为可运行。fork退出后将得到两个可运行的进程，在子进程中fork函数返回的是0，在父进程中返回的是子进程的进程id，随后二者可以区分开开始运行。</p>
-<p>子进程开始运行其他东西或是父进程需要写数据的时候，其中一个必然会触发一个cow的缺页中断。这个进程的缺页中断经过内核dispatch，将会执行我们在trap中完成的处理函数，假设它已经设置了自己的处理函数，那么就会创建一个异常栈，开始执行在pfentry.S中的汇编代码，执行完毕之后返回原来发生错误的执行位置，继续执行。</p>
-<h2 id="Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC"><a href="#Part-C-Preemptive-Multitasking-and-Inter-Process-communication-IPC" class="headerlink" title="Part C: Preemptive Multitasking and Inter-Process communication (IPC)"></a>Part C: Preemptive Multitasking and Inter-Process communication (IPC)</h2><h3 id="Clock-Interrupts-and-Preemption"><a href="#Clock-Interrupts-and-Preemption" class="headerlink" title="Clock Interrupts and Preemption"></a>Clock Interrupts and Preemption</h3><p>在此之前，我们不同进程之间的调度都是自愿的。下面将通过引入时钟中断来强制进行调度。</p>
-<h3 id="Interrupt-discipline"><a href="#Interrupt-discipline" class="headerlink" title="Interrupt discipline"></a>Interrupt discipline</h3><p>外部中断在本实验中一共有16个，标号是32-47。在本实验中，内核中的外部中断被忽略，在用户空间中通过设置FL_IF来设置允许外部中断。</p>
-<blockquote>
-<p><strong>Exercise 13</strong>：<br>修改trapentry.S以及trap.c来初始化上述的中断，然后修改该env_alloc允许用户空间的外部中断</p>
-<p>像上一个实验一样即可：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/19942562.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/85310004.jpg" alt=""></p>
-<p>只需在指定的位置将新建的env的tf_eflags修改为FL_IF允许即可。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/89863916.jpg" alt=""></p>
-</blockquote>
-<h3 id="Handling-Clock-Interrupts"><a href="#Handling-Clock-Interrupts" class="headerlink" title="Handling Clock Interrupts"></a>Handling Clock Interrupts</h3><p>在lapic_init以及pic_init中，已经设置好了产生时钟中断，下面需要处理时钟中断。</p>
-<blockquote>
-<p><strong>Exercise 14</strong>：<br>修改trap_dispatch，它调用sched_yield。<br>直接给出代码：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/87756184.jpg" alt=""></p>
-</blockquote>
-<h3 id="Inter-Process-communication-IPC"><a href="#Inter-Process-communication-IPC" class="headerlink" title="Inter-Process communication (IPC)"></a>Inter-Process communication (IPC)</h3><p>进程间的通信有很多种模型，这里只实现简单的一种。</p>
-<h3 id="IPC-in-JOS"><a href="#IPC-in-JOS" class="headerlink" title="IPC in JOS"></a>IPC in JOS</h3><p>这里进程可以相互发送或接收的信息有：一个32bit的数据或是一整个页。整个页的发送是通过共享内存来实现的，这在下面将具体说明。</p>
-<h3 id="Sending-and-Receiving-Messages"><a href="#Sending-and-Receiving-Messages" class="headerlink" title="Sending and Receiving Messages"></a>Sending and Receiving Messages</h3><p>为了接收数据，进程将调用sys_ipc_recv。这个系统调用使这个进程不可运行，直到收到数据。当进程等待接收消息时，任何其他进程都可以向其发送消息不会检查权限。</p>
-<p>为了尝试发送一个值，一个环境调用sys_ipc_try_send与接收者的环境ID和要发送的值。如果指定的环境实际上正在接收（它已经调用sys_ipc_recv并且还没有获得值），则发送递送消息并返回0.否则发送返回-E_IPC_NOT_RECV以指示目标环境当前不期望接收值。</p>
-<h3 id="Transferring-Pages"><a href="#Transferring-Pages" class="headerlink" title="Transferring Pages"></a>Transferring Pages</h3><p>当进程使用小于UTOP的dstva调用sys_ipc_recv时，表明它愿意接收页面映射。如果发送者发送一个页面，那么该页面应该被映射到接收者地址空间中的dstva。如果接收者已经有了一个映射到dstva的页面，那么这个页面被unmap。</p>
-<p>当环境使用小于UTOP的srcva调用sys_ipc_try_send时，说明发送者想要发送当前映射到srcva（发送者）的页面到接收者，具有权限perm。在一个成功的IPC之后，发送者在srcva的地址空间保留其原始的映射，但是接收者也在接收者的地址空间中获得了原来由接收者指定的dstva的同一物理页面的映射。结果这个页面在发送者和接收者之间被共享。</p>
-<p>如果发送者或接收者不指示应该传送页面，则不传送页面。在任何IPC之后，内核将接收方的Env结构中的新字段env_ipc_perm设置为所接收页面的权限，如果没有收到页面，则为零。</p>
-<h3 id="Implementing-IPC"><a href="#Implementing-IPC" class="headerlink" title="Implementing IPC"></a>Implementing IPC</h3><blockquote>
-<p><strong>Exercise 15</strong>：<br>根据说明补充syscall与ipc中的函数：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/20379443.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/74580574.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/80248583.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-12-26/16842939.jpg" alt=""></p>
-</blockquote>
-<p>本实验结束。</p>
-
-          
+          <h1 id="Lab4-Document"><a href="#Lab4-Document" class="headerlink" title="Lab4-Document"></a>Lab4-Document</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/12/OS/Lab4_Document/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1870,247 +1608,14 @@
 
       
         
-          
-            <h1 id="Lab3-Document"><a href="#Lab3-Document" class="headerlink" title="Lab3 Document"></a>Lab3 Document</h1><h2 id="Part-A：User-Enviornments-and-Exception-Handling"><a href="#Part-A：User-Enviornments-and-Exception-Handling" class="headerlink" title="Part A：User Enviornments and Exception Handling"></a>Part A：User Enviornments and Exception Handling</h2><p>在这一部分，首先需要了解关于在本实验中env（进程）的相关定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in inc/env.h</span></div><div class="line"><span class="keyword">enum</span> &#123;</div><div class="line">    ENV_FREE = <span class="number">0</span>,</div><div class="line">    ENV_DYING,</div><div class="line">    ENV_RUNNABLE,</div><div class="line">    ENV_RUNNING,</div><div class="line">    ENV_NOT_RUNNABLE</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>这是在本实验中定义的进程状态，在实验中，仅用到了ENV_FREE、ENV_RUNNABLE、以及ENV_RUNNING。</p>
-<p>类似于课上讲的pcb，在本实验中对一个进程的描述定义如下：</p>
-<p><code>//in inc/env.c</code></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/83894027.jpg" alt=""></p>
-<p>第一个变量env_tf是当中断或异常或系统调用发生的时候，该进程需要保存的寄存器的值；最后一个变量指明了该进程的地址空间。</p>
-<p>在kern/env.c中可以看到，关于进程，有三个全局的变量：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">envs</span> = <span class="title">NULL</span>;</span><span class="comment">// All environments</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">curenv</span> = <span class="title">NULL</span>;</span><span class="comment">// The current env</span></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">env_free_list</span>;</span><span class="comment">// Free environment list</span></div></pre></td></tr></table></figure>
-<p>在马上进行的初始化之后，在envs所标识的物理地址开始，一直到<code>NENV\*(struct Env)</code>结束，是所有可以被使用的进程描述结构占用的空间，每一个(struct Env)大小都是一个可用的Env描述。curenv被指示为是当前正在运行的进程。env_free_list指向第一个可以使用的进程描述结构，这样的设计使得进程描述结构的申请与销毁都变得很容易，而且由于该链表中存储的是处于ENV_FREE状态的进程，很少需要有添加删除的过程。</p>
-<h3 id="Allocating-the-Environments-Array"><a href="#Allocating-the-Environments-Array" class="headerlink" title="Allocating the Environments Array"></a>Allocating the Environments Array</h3><p>就像在实验二中那样，在这里需要修改<code>pmap.c</code>中的代码，为envs映射空间。仿照在lab2中的写法，修改程序如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in kern/pmap.c the first LAB3: Your code here</span></div><div class="line">envs=(struct Env\*)(boot\_alloc(NENV\*<span class="keyword">sizeof</span>(struct Env)));<span class="comment">//为Env结构申请空间</span></div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in kern/pmap.c the second LAB3: Your code here</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ROUNDUP(NENV\*<span class="keyword">sizeof</span>(struct Env),PGSIZE);i+=PGSIZE)&#123;</div><div class="line">        page_insert(kern_pgdir,(struct PageInfo\*)pa2page(PADDR(envs)+i),(<span class="keyword">void</span>\*)(UENVS+i),PTE_U);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>像在lab2中做过的那样，<code>boot\_map\_region</code>使得从PADDR(envs)开始，连续PTSIZE的物理空间映射到从UENVS开始的虚拟地址空间上。</p>
-<p>做到这里尝试<code>make qemu</code>的时候，发现失败了。</p>
-<p><strong>注意</strong>：回想在lab2中所做的工作，在<code>page_init</code>函数中曾经为没有用的页面加入freelist。查看当时的代码发现，那时计算剩余空间的时候，是从为npages分配空间呢的后一页开始计算的。在<code>mem_init</code>中修改了之后的映射之后，这时的freelist应该从envs占用所有空间之后的第一页进行添加，于是修改代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> begin=(<span class="keyword">int</span>)ROUNDUP(((<span class="keyword">char</span>*)envs) + (<span class="keyword">sizeof</span>(struct Env) * NENV) - <span class="number">0xf0000000</span>, PGSIZE);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (i=begin/PGSIZE;i&lt;npages;i++)&#123;</div><div class="line">    pages[i].pp_ref=<span class="number">0</span>;</div><div class="line">    pages[i].pp_link=page_free_list;</div><div class="line">    page_free_list=&amp;pages[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再次<code>make qemu</code>，得到结果如下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/91108119.jpg" alt=""></p>
-<h3 id="Creating-and-Running-Environments"><a href="#Creating-and-Running-Environments" class="headerlink" title="Creating and Running Environments"></a>Creating and Running Environments</h3><p>在这一部分，将会完善<code>kern/env.c</code>中的内容，来建立起一个进程操作的雏形。</p>
-<p>由于还没有文件系统，这时我们用一个技巧来骗过boot loader，使得bootloader加载kernel的时候也把我们需要的用户程序加载进来。这些用户程序在<code>user</code>文件夹下。</p>
-<p>首先， -b binary option告诉编译器只需要将程序编译成二进制文件，而不需要生成.o文件，随后把这个文件作为一个较大的数组放在最后，同时在真正应该被搬进内存的文件中声明extern变量，告诉编译器在链接之前先不要管这个。随后，在链接阶段，大数组已经被load进来，与其他代码一同进行地址映射。最终这里的代码可以被执行。</p>
-<p>查看<code>kern/init.c</code>文件，发现在所有初始化之后有这样的语句：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(TEST)</span></div><div class="line">    <span class="comment">// Don't touch -- used by grading script!</span></div><div class="line">    ENV_CREATE(TEST, ENV_TYPE_USER);</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">    <span class="comment">// Touch all you want.</span></div><div class="line">    ENV_CREATE(user_testbss, ENV_TYPE_USER);</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>这是告诉编译器：如果用户采用<code>make qemu</code>的方式运行，那么就创建一个user_testbss这样的用户进程，实际上就是执行testbss.c文件生成的那个binary。</p>
-<p>在env完成之后对这里进行更深一步的讨论。</p>
-<p>接下来需要写出下面几个函数的代码：</p>
-<ol>
-<li>env_init</li>
-<li>env_setup_vm</li>
-<li>region_alloc</li>
-<li>load_icode</li>
-<li>env_create</li>
-<li>env_run</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Mark all environments in 'envs' as free, set their env_ids to 0,</span></div><div class="line"><span class="comment">// and insert them into the env_free_list.</span></div><div class="line"><span class="comment">//把所有的envs设置成free的，他们的id都是0，然后插入freelist</span></div><div class="line"><span class="comment">// Make sure the environments are in the free list in the same order</span></div><div class="line"><span class="comment">// they are in the envs array (i.e., so that the first call to</span></div><div class="line"><span class="comment">// env_alloc() returns envs[0]).</span></div><div class="line"><span class="comment">//需要保证所有在freelist里面的env的顺序与在数组中的env相同？？？</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//本函数：初始化所有在env数组中的的env结构，把它们加到freelist里面，要求如上。</span></div><div class="line"><span class="comment">//在meminit之后执行。</span></div><div class="line"><span class="comment">//env数组：*envs，当前：*curenv，freelist：*env_free_list</span></div><div class="line"><span class="keyword">void</span></div><div class="line">env_init(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    struct Env*current=NULL;</div><div class="line">    <span class="keyword">int</span> i=NENV-<span class="number">1</span>;</div><div class="line">    <span class="comment">//一共NENV个env</span></div><div class="line">    <span class="keyword">while</span>(i&gt;=<span class="number">0</span>)&#123;</div><div class="line">    <span class="comment">//NENV is defined in inc/env.h</span></div><div class="line">    <span class="comment">//current-&gt;env_tf=3;</span></div><div class="line">    envs[i].env_id=<span class="number">0</span>;</div><div class="line">    envs[i].env_runs=<span class="number">0</span>;</div><div class="line"><span class="comment">//  current-&gt;env_pgdir=NULL;</span></div><div class="line">    envs[i].env_link=env_free_list;</div><div class="line">    env_free_list=&amp;envs[i];</div><div class="line">    i--;</div><div class="line">&#125;</div><div class="line">    <span class="comment">// Per-CPU part of the initialization</span></div><div class="line">    env_init_percpu();</div><div class="line">    cprintf(<span class="string">"envinit done!\n"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个函数比较简单，需要注意的一点是要求倒着添加到链表里面。其他只是按照要求写的代码。</p>
-<p>这个函数在最后执行了一个已经完成的函数：<code>env_init_percpu</code>，如下图：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/83957122.jpg" alt=""></p>
-<p>该函数完成对各个段寄存器的设置。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为进程e初始化内核虚拟空间</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">int</span></div><div class="line">env_setup_vm(struct Env *e)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	struct PageInfo *p = NULL;</div><div class="line">	<span class="comment">// Allocate a page for the page directory</span></div><div class="line">	<span class="keyword">if</span> (!(p = page_alloc(ALLOC_ZERO)))</div><div class="line">		<span class="keyword">return</span> -E_NO_MEM;</div><div class="line">	<span class="comment">// Now, set e-&gt;env_pgdir and initialize the page directory.</span></div><div class="line">	<span class="comment">//初始化pagedir？</span></div><div class="line">	<span class="comment">// Hint:</span></div><div class="line">	<span class="comment">//    - The VA space of all envs is identical above UTOP</span></div><div class="line">	<span class="comment">//	(except at UVPT, which we've set below).</span></div><div class="line">	<span class="comment">//	See inc/memlayout.h for permissions and layout.</span></div><div class="line">	<span class="comment">//	Can you use kern_pgdir as a template?  Hint: Yes.</span></div><div class="line">	<span class="comment">//	(Make sure you got the permissions right in Lab 2.)</span></div><div class="line">	<span class="comment">//所有envs的虚拟地址空间都在UTOP之上</span></div><div class="line">	<span class="comment">//查看inc/memlayout.h看许可以及布局</span></div><div class="line">	<span class="comment">//可以使用kern_pgdir作为一个模板</span></div><div class="line">    <span class="comment">//    - The initial VA below UTOP is empty.</span></div><div class="line">	<span class="comment">//    - You do not need to make any more calls to page_alloc.</span></div><div class="line">	<span class="comment">//    - Note: In general, pp_ref is not maintained for</span></div><div class="line">	<span class="comment">//	physical pages mapped only above UTOP, but env_pgdir</span></div><div class="line">	<span class="comment">//	is an exception -- you need to increment env_pgdir's</span></div><div class="line">	<span class="comment">//	pp_ref for env_free to work correctly.</span></div><div class="line">	<span class="comment">//    - The functions in kern/pmap.h are handy.</span></div><div class="line">	<span class="comment">// LAB 3: Your code here.</span></div><div class="line">	e-&gt;env_pgdir=(pde_t*)page2kva(p);<span class="comment">//page2kva in pmap.c</span></div><div class="line">	p-&gt;pp_ref++;</div><div class="line">	memcpy(e-&gt;env_pgdir,kern_pgdir,PGSIZE);<span class="comment">//kernel's e is the kernel's e</span></div><div class="line">	<span class="comment">//permission:RR</span></div><div class="line">	<span class="comment">//p[PDX(UTOP)] = PADDR(p) | PTE_U | PTE_P;</span></div><div class="line">	<span class="comment">// UVPT maps the env's own page table read-only.</span></div><div class="line">	<span class="comment">// Permissions: kernel R, user R</span></div><div class="line">	e-&gt;env_pgdir[PDX(UVPT)] = PADDR(e-&gt;env_pgdir) | PTE_P | PTE_U;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为进程申请len字节的物理地址空间，然后把它map到va</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span></div><div class="line">region_alloc(struct Env *e, <span class="keyword">void</span> *va, size_t len)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// LAB 3: Your code here.</span></div><div class="line">	<span class="comment">// (But only if you need it for load_icode.)</span></div><div class="line">	<span class="comment">//</span></div><div class="line">	<span class="comment">// Hint: It is easier to use region_alloc if the caller can pass</span></div><div class="line">	<span class="comment">//   'va' and 'len' values that are not page-aligned.</span></div><div class="line">	<span class="comment">//如果允许传入不是页对齐的va（虚拟地址）和len（长度）的话会更好一些</span></div><div class="line">	<span class="comment">//   You should round va down, and round (va + len) up.</span></div><div class="line">	<span class="comment">//   (Watch out for corner-cases!)</span></div><div class="line">	<span class="comment">//什么叫corner-cases</span></div><div class="line">	<span class="comment">//获取首地址</span></div><div class="line">	<span class="comment">//只是申请了页面，其实没有真正的物理空间</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=(uint32_t)ROUNDDOWN(va,PGSIZE);i&lt;(uint32_t)ROUNDUP(va+len,PGSIZE);i+=PGSIZE)&#123;</div><div class="line">		struct PageInfo*pa=page_alloc(<span class="number">0</span>);</div><div class="line">		<span class="keyword">if</span>(pa==NULL)panic(<span class="string">"fail to alloc !in region_alloc!"</span>);</div><div class="line">		page_insert(e-&gt;env_pgdir,pa,(<span class="keyword">void</span>*)i,PTE_U|PTE_W);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该函数指定进程申请从指定虚拟地址开始的len字节空间。由于vs与va+len可能不是页面对齐的，因此真正在分配页面的时候，需要做操作ROUNDOWN与ROUNDUP来进行页面的对齐。当申请页面失败时，panic，否则就将页面插入到当前进程的pgdir中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span></div><div class="line">load_icode(struct Env *e, uint8_t *binary)<span class="comment">//binary：ELF</span></div><div class="line">&#123;<span class="comment">//注意，对应的用户数据已经在内存中了</span></div><div class="line">	struct Elf*elf=(struct Elf*)binary;<span class="comment">//给定的ELF文件头结构（更详细的，查看inc/elf.h）</span></div><div class="line">	struct Proghdr *ph, *eph;<span class="comment">//ELF文件指定程序段的程序头</span></div><div class="line">		<span class="comment">// is this a valid ELF?</span></div><div class="line">	<span class="keyword">if</span> (elf-&gt;e_magic != ELF_MAGIC)</div><div class="line">		panic(<span class="string">"not a elf!"</span>);</div><div class="line">	ph = (struct Proghdr *) ((uint8_t *) elf + elf-&gt;e_phoff);<span class="comment">//第一个程序头开始</span></div><div class="line">	eph = ph + elf-&gt;e_phnum;<span class="comment">//最后一个不是程序头结构开始的位置</span></div><div class="line">	lcr3(PADDR(e-&gt;env_pgdir));<span class="comment">//将CR3中装载进去这次的页目录</span></div><div class="line">	<span class="keyword">for</span> (; ph &lt; eph; ph++)&#123;</div><div class="line">		<span class="keyword">if</span>(ph-&gt;p_type==ELF_PROG_LOAD)&#123;</div><div class="line">		region_alloc(e,(<span class="keyword">void</span>*)ph-&gt;p_va,ph-&gt;p_memsz);</div><div class="line">        <span class="comment">//申请从ph-&gt;p_va程序假设自己所在的虚拟地址开始，到va+memsz结束的空间</span></div><div class="line">		memmove((<span class="keyword">void</span>*)ph-&gt;p_va,binary+ph-&gt;p_offset,ph-&gt;p_filesz);</div><div class="line">    <span class="comment">//  The ph-&gt;p_filesz bytes from the ELF binary, starting at</span></div><div class="line">	<span class="comment">//  'binary + ph-&gt;p_offset', should be copied to virtual address</span></div><div class="line">	<span class="comment">//  ph-&gt;p_va.  Any remaining memory bytes should be cleared to zero.</span></div><div class="line">	<span class="comment">//  (The ELF header should have ph-&gt;p_filesz &lt;= ph-&gt;p_memsz.)</span></div><div class="line">	<span class="comment">//  Use functions from the previous lab to allocate and map pages.</span></div><div class="line">	<span class="comment">//在ELF中的ph-&gt;p_filesz字节的，从binary+ph-&gt;p_offset都应该被copy到虚拟地址空间ph-&gt;p_va</span></div><div class="line">	<span class="comment">//任何剩余的空间被清零</span></div><div class="line">		memset((<span class="keyword">void</span>*)(ph-&gt;p_va+ph-&gt;p_filesz),<span class="number">0</span>,ph-&gt;p_memsz-ph-&gt;p_filesz);<span class="comment">//eme2file</span></div><div class="line">		<span class="comment">//memcpy((void*)ph-&gt;p_va,binary+ph-&gt;p_offset,ph-&gt;p_filesz);</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"><span class="comment">//after modification , everything is OK!</span></div><div class="line">	<span class="comment">// call the entry point from the ELF header</span></div><div class="line">	<span class="comment">// note: does not return!</span></div><div class="line">	<span class="comment">//((void (*)(void)) (ELFHDR-&gt;e_entry))();</span></div><div class="line">	e-&gt;env_tf.tf_eip=elf-&gt;e_entry;</div><div class="line">	<span class="comment">// Now map one page for the program's initial stack</span></div><div class="line">	<span class="comment">// at virtual address USTACKTOP - PGSIZE.</span></div><div class="line">	<span class="comment">// LAB 3: Your code here.</span></div><div class="line">	region_alloc(e,(<span class="keyword">void</span>*)(USTACKTOP-PGSIZE),PGSIZE);</div><div class="line">	lcr3(PADDR(kern_pgdir));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该函数负责把已经装入内存的binary文件重新装载到ELF文件头中指定的位置，并为用户进程创建一个栈。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">env_create(uint8_t *binary, <span class="keyword">enum</span> EnvType type)</div><div class="line">&#123;</div><div class="line">	<span class="comment">// LAB 3: Your code here.</span></div><div class="line">	struct Env *newenv_store;</div><div class="line">	<span class="keyword">int</span> result=env_alloc(&amp;newenv_store,<span class="number">0</span>);</div><div class="line">	<span class="keyword">if</span>(result&lt;<span class="number">0</span>)panic(<span class="string">"env_alloc: %e"</span>, result); ;</div><div class="line">	<span class="keyword">if</span>(result==<span class="number">0</span>)&#123;</div><div class="line">		newenv_store-&gt;env_type=type;</div><div class="line">		load_icode(newenv_store,binary);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里使用到了已经定义好的函数：<code>env_alloc</code>。<code>env_create</code>本身比较简单，我们来看一下<code>env_alloc</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span></div><div class="line">env_alloc(struct Env **newenv_store, envid_t parent_id)</div><div class="line">&#123;</div><div class="line">	int32_t generation;</div><div class="line">	<span class="keyword">int</span> r;</div><div class="line">	struct Env *e;</div><div class="line">	<span class="comment">//没有新的可以用了</span></div><div class="line">	<span class="keyword">if</span> (!(e = env_free_list))</div><div class="line">		<span class="keyword">return</span> -E_NO_FREE_ENV;</div><div class="line">	<span class="comment">// Allocate and set up the page directory for this environment.</span></div><div class="line">	<span class="keyword">if</span> ((r = env_setup_vm(e)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> r;</div><div class="line">	<span class="comment">// Generate an env_id for this environment.</span></div><div class="line">	generation = (e-&gt;env_id + (<span class="number">1</span> &lt;&lt; ENVGENSHIFT)) &amp; ~(NENV - <span class="number">1</span>);</div><div class="line">	<span class="keyword">if</span> (generation &lt;= <span class="number">0</span>)	<span class="comment">// Don't create a negative env_id.</span></div><div class="line">		generation = <span class="number">1</span> &lt;&lt; ENVGENSHIFT;</div><div class="line">	e-&gt;env_id = generation | (e - envs);</div><div class="line">	<span class="comment">// Set the basic status variables.</span></div><div class="line">	e-&gt;env_parent_id = parent_id;</div><div class="line">	e-&gt;env_type = ENV_TYPE_USER;</div><div class="line">	e-&gt;env_status = ENV_RUNNABLE;</div><div class="line">	e-&gt;env_runs = <span class="number">0</span>;</div><div class="line">	<span class="comment">// Clear out all the saved register state,</span></div><div class="line">	<span class="comment">// to prevent the register values</span></div><div class="line">	<span class="comment">// of a prior environment inhabiting this Env structure</span></div><div class="line">	<span class="comment">// from "leaking" into our new environment.</span></div><div class="line">	memset(&amp;e-&gt;env_tf, <span class="number">0</span>, sizeof(e-&gt;env_tf));</div><div class="line">	<span class="comment">// Set up appropriate initial values for the segment registers.</span></div><div class="line">	<span class="comment">// GD_UD is the user data segment selector in the GDT, and</span></div><div class="line">	<span class="comment">// GD_UT is the user text segment selector (see inc/memlayout.h).</span></div><div class="line">	<span class="comment">// The low 2 bits of each segment register contains the</span></div><div class="line">	<span class="comment">// Requestor Privilege Level (RPL); 3 means user mode.  When</span></div><div class="line">	<span class="comment">// we switch privilege levels, the hardware does various</span></div><div class="line">	<span class="comment">// checks involving the RPL and the Descriptor Privilege Level</span></div><div class="line">	<span class="comment">// (DPL) stored in the descriptors themselves.</span></div><div class="line">	e-&gt;env_tf.tf_ds = GD_UD | <span class="number">3</span>;</div><div class="line">	e-&gt;env_tf.tf_es = GD_UD | <span class="number">3</span>;</div><div class="line">	e-&gt;env_tf.tf_ss = GD_UD | <span class="number">3</span>;</div><div class="line">	e-&gt;env_tf.tf_esp = USTACKTOP;</div><div class="line">	e-&gt;env_tf.tf_cs = GD_UT | <span class="number">3</span>;</div><div class="line">	<span class="comment">// You will set e-&gt;env_tf.tf_eip later.</span></div><div class="line">	<span class="comment">// commit the allocation</span></div><div class="line">	env_free_list = e-&gt;env_link;</div><div class="line">	*newenv_store = e;</div><div class="line">	cprintf(<span class="string">"[%08x] new env %08x\n"</span>, curenv ? curenv-&gt;env_id : <span class="number">0</span>, e-&gt;env_id);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该函数完成一系列的初始化操作，申请新进程，地址空间申请，一些属性的设置（这也是在env_init中不是做设置的原因），寄存器值的清理与设置等等。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">env_run(struct Env *e)</div><div class="line">&#123;</div><div class="line">		<span class="keyword">if</span> (curenv != e) &#123;</div><div class="line">		<span class="comment">// if (curenv-&gt;env_status == ENV_RUNNING)</span></div><div class="line">		<span class="comment">// 	curenv-&gt;env_status = ENV_RUNNABLE;</span></div><div class="line">		curenv = e;</div><div class="line">		e-&gt;env_status = ENV_RUNNING;</div><div class="line">		e-&gt;env_runs++;</div><div class="line">		lcr3(PADDR(e-&gt;env_pgdir));<span class="comment">//将当前的地址空间设置为当前进程的地址空间</span></div><div class="line">	&#125;</div><div class="line">	env_pop_tf(&amp;e-&gt;env_tf);</div><div class="line"></div><div class="line">	<span class="comment">//panic("env_run not yet implemented");</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该函数只需要根据提示即可写出，看一下<code>env_pop_tf</code>的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span></div><div class="line">env_pop_tf(struct Trapframe *tf)</div><div class="line">&#123;</div><div class="line">	<span class="function">__asm <span class="title">__volatile</span><span class="params">(<span class="string">"movl %0,%%esp\n"</span></span></span></div><div class="line"><span class="function"><span class="params">		<span class="string">"\tpopal\n"</span></span></span></div><div class="line"><span class="function"><span class="params">		<span class="string">"\tpopl %%es\n"</span></span></span></div><div class="line"><span class="function"><span class="params">		<span class="string">"\tpopl %%ds\n"</span></span></span></div><div class="line"><span class="function"><span class="params">		<span class="string">"\taddl $0x8,%%esp\n"</span> <span class="comment">/* skip tf_trapno and tf_errcode */</span></span></span></div><div class="line"><span class="function"><span class="params">		<span class="string">"\tiret"</span></span></span></div><div class="line"><span class="function"><span class="params">		: : <span class="string">"g"</span> (tf)</span> : "memory")</span>;</div><div class="line">	<span class="comment">//对应的汇编代码：</span></div><div class="line">	<span class="comment">/*</span></div><div class="line"><span class="comment">	mov tf,eax</span></div><div class="line"><span class="comment">	movl eax,esp</span></div><div class="line"><span class="comment">	popal</span></div><div class="line"><span class="comment">	popl es</span></div><div class="line"><span class="comment">	popl ds</span></div><div class="line"><span class="comment">	addl $0x8,esp</span></div><div class="line"><span class="comment">	iret</span></div><div class="line"><span class="comment">	*/</span></div><div class="line">	<span class="comment">//从这里开始，真正退出了内核态，进入用户态</span></div><div class="line">	panic(<span class="string">"iret failed"</span>);  <span class="comment">/* mostly to placate the compiler */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>真正开始运行时，是需要trap伪装栈内容之后才能调用该函数，进入用户态的。trap的内容将在PartB讨论。届时还会需要用到该函数的内容。</p>
-<p>按照文档的说明，使用<code>b env_pop_tf</code>打断点，查看内容，在经过若干次执行之后：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/74775132.jpg" alt=""></p>
-<p>iret将进行退栈操作，此处暂未涉及。</p>
-<p>这里写完之后，就可以梳理一下在进入用户态之前都发生了什么：(in kern/init.c)</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/30532.jpg" alt=""></p>
-<p>首先，清理bss。这将保证所有未初始化的都是0，在testbss中将会有体现。然后初始化控制台，进行内存的初始化，进程初始化，trap的初始化。随后创建一个env，开始执行。</p>
-<p>现在，我们可以讨论在上面提到过的<code>ENV_CREATE</code>。</p>
-<p><code>ENV_CREATE</code>在<code>kern/env.c</code>中被定义：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/30871223.jpg" alt=""></p>
-<p>首先可以看到本文件对那些骗boot loader装载进来的用户程序的外部定义，随后调用env_create函数，以<code>ENV_PASTE3(_binary_obj_, x, _start)</code>作为传入的ELF文件头结构，以type作为类型被创建。</p>
-<p>随后，在create之后，执行load_icode，将对应内存的文件搬运到指定内存，并设置进程的入口点为函数的入口点，为用户进程初始化map一个页空间的栈，准备开始执行。</p>
-<p>随后，调用了env_run函数，执行这个已经准备好的用户程序。但是在这个阶段，这个程序实际上还不能被真正执行。</p>
-<h3 id="Handling-Interrupts-and-Exceptions"><a href="#Handling-Interrupts-and-Exceptions" class="headerlink" title="Handling Interrupts and Exceptions"></a>Handling Interrupts and Exceptions</h3><p>中断与异常都将会打断原有程序的执行，转而执行其他程序。他们的区别就在于，中断用于处理那些处理器外部的异步事件，而异常处理被处理器在执行指令时发现的错误情况。</p>
-<p>中断会被INTR引起，异常会被INT引起。这也确定了breakpoint应该是一个异常而不是中断。</p>
-<h3 id="Basics-of-Protected-Control-Transfer"><a href="#Basics-of-Protected-Control-Transfer" class="headerlink" title="Basics of Protected Control Transfer"></a>Basics of Protected Control Transfer</h3><p>中断和异常都可能完成这个转化，完成特权级的转化需要两个东西：<strong>IDT</strong>与<strong>TSS</strong>。</p>
-<p><strong>IDT</strong>：IDT确保了用户程序切换到内核态的情况只有已经由kernel定义的几种，保证切换过程中的安全性。 x86允许256个不同的中断或异常，他们有着不一样的<strong>中断向量</strong>，CPU利用中断向量来确定这个中断的中断向量表，进而找到处理中断的入口，执行处理程序。<br>找到中断向量的描述符之后，EIP中装载的将会是中断处理程序的入口地址，CS中装载的是运行优先级。不一样的运行优先级设置带来不一样的结果，在接下来的实验中将会被讨论到。</p>
-<p>一个IDT Gate是这样的：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/79807638.jpg" alt=""></p>
-<p>segment selector与offset用来描述在段机制下自己的中断响应函数的位置。segment selector负责在GDT里面找到对应的段，offset负责找对应的偏移量。找到函数之后，保存现场并执行响应函数。</p>
-<p><strong>TSS</strong>：处理器需要空间来存储旧的寄存器中的值，这样从中断或异常中返回的时候，用户程序才能够接着执行。因此，在从用户态切换到内核态的时候，需要换一个栈进行操作。这时就需要TSS来确定段寄存器来确定这个栈到底在哪里。<br>从用户态切换到内核态时，首先在栈中push一些寄存器值：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg" alt=""></p>
-<p>然后加载中断描述符中的值，然后把ESP和SS置为指向新栈的值。</p>
-<p>尽管TSS可能会很复杂，但是在这个实验中只是用到了指向内核栈的部分。</p>
-<p>在中断发生的时候，系统将会看一下产生中断的程序的特权级，决定应该怎样保护现场。如果在特权状态，不用换栈，只需要保存更少的东西，而处于用户状态下的程序在执行完中断响应函数之后还要从内核栈退回到自己的用户栈，保存了更多的东西。</p>
-<p>iret：系统指令，从中断中返回。<br>ret：从函数中返回<br>retf：与ret基本一样，从函数中返回。（弹出栈，拿出返回地址（就是下一条语句）返回值，丢掉压栈参数）</p>
-<h3 id="Types-of-Exceptions-and-Interrupts"><a href="#Types-of-Exceptions-and-Interrupts" class="headerlink" title="Types of Exceptions and Interrupts"></a>Types of Exceptions and Interrupts</h3><p>当一个进程在User Environment运行时，忽然遇到了一个中断：</p>
-<ol>
-<li>进程切换到被TSS定义的那个栈，在JOS中SS0是GD_KD（GDT中的kernel code），ESP0是KSTACKTOP。</li>
-<li>进程把一些值push到这个kernel栈里面。</li>
-<li>找到IDT entry，开始执行函数</li>
-</ol>
-<p>需要注意的是，就像上面已经讨论过的，有些中断/异常会push error code，而有的不会。</p>
-<p>如果是在内核态发生了中断，就不需要进行换栈操作，这时旧的SS与ESP不会被保存。</p>
-<p>怎么从内核态切换到用户态呢，其实方法是相似的。新开一个用户栈，存上中断以为的数据，随后iret，这样就降到了用户模式。</p>
-<h3 id="Setting-Up-the-IDT"><a href="#Setting-Up-the-IDT" class="headerlink" title="Setting Up the IDT"></a>Setting Up the IDT</h3><p>现在来查看本实验中关于中断/trap的内容。</p>
-<p>在<code>inc/trap.h</code>中定义了许多中断号，PushRegs结构以及TrapFrame结构。</p>
-<p>TrapFrame结构中定义了trapnumer、es、ds等在值，这些值在特权级发生改变的时候会被压栈出栈保存，在后面还会用到。</p>
-<p>为了完成Exercise4，首先分析trap.c以及trapentry.S中的代码：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/27936694.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/10236379.jpg" alt=""></p>
-<p>这两个macro将会帮我们进行trapno的压栈操作，函数名的定义。第一个用于自动压栈errorcode的，后一个处理不自动压栈errorcode的。<br>找到每个中断类型的压栈方式：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/2785767.jpg" alt=""></p>
-<p>这时应该明确，这时仍处于原来的特权级。</p>
-<p>于是，使用上述两个macro来为trap添加一个入口点，这部分的代码：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/63275240.jpg" alt=""></p>
-<p>然后考虑<code>/kern/trap.c</code>中的内容，在这之前，首先查看macro SETGATE的作用：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//in inc\mmu.h</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SETGATE(gate, istrap, sel, off, dpl)			\</span></div><div class="line">&#123;								\</div><div class="line">	(gate).gd_off_15_0 = (<span class="keyword">uint32_t</span>) (off) &amp; <span class="number">0xffff</span>;		\</div><div class="line">	(gate).gd_sel = (sel);					\</div><div class="line">	(gate).gd_args = <span class="number">0</span>;					\</div><div class="line">	(gate).gd_rsv1 = <span class="number">0</span>;					\</div><div class="line">	(gate).gd_type = (istrap) ? STS_TG32 : STS_IG32;	\</div><div class="line">	(gate).gd_s = <span class="number">0</span>;					\</div><div class="line">	(gate).gd_dpl = (dpl);					\</div><div class="line">	(gate).gd_p = <span class="number">1</span>;					\</div><div class="line">	(gate).gd_off_31_16 = (<span class="keyword">uint32_t</span>) (off) &gt;&gt; <span class="number">16</span>;		\</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个macro帮我们设置了IDT的Gate。</p>
-<p>于是，根据前面对TRAPHANDLER_NOEC与TRAPHANDLER的描述以及SETGATE，写trap_init如下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/96169964.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/5194488.jpg" alt=""></p>
-<p>接下来考虑_alltraps。根据提示，写出如下代码：</p>
-<p>提示信息：</p>
-<p>Your _alltraps should: </p>
-<pre><code>1. push values to make the stack look like a struct Trapframe
-2. load GD_KD into %ds and %es
-3. pushl %esp to pass a pointer to the Trapframe as an argument to trap()
-4. call trap (can trap ever return?)
-</code></pre><p>Consider using the pushal instruction; it fits nicely with the layout of the struct Trapframe. </p>
-<p>代码：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/93817695.jpg" alt=""></p>
-<p>进行makegrade检测：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/34710148.jpg" alt=""></p>
-<p>Answer the following questions in your answers-lab3.txt: </p>
-<pre><code>1. What is the purpose of having an individual handler function for each exception/interrupt? (i.e., if all exceptions/interrupts were delivered to the same handler, what feature that exists in the current implementation could not be provided?)
-
-2. Did you have to do anything to make the user/softint program behave correctly? The grade script expects it to produce a general protection fault (trap 13), but softint&apos;s code says int $14. Why should this produce interrupt vector 13? What happens if the kernel actually allows softint&apos;s int $14 instruction to invoke the kernel&apos;s page fault handler (which is interrupt vector 14)?
-</code></pre><p>回答：</p>
-<ol>
-<li><p>如果所有的中断都是一个响应函数，那么首先需要统一是不是要自动压栈errorcode，其次在SETGATE时就无法指定特权级，就不能为内核中断提供不同的保护。比如syscall允许用户程序产生，但是诸如divideerror等只可以由硬件产生，如果所有都是用同一个优先级，很容易被别有用心的用户程序取得内核权限。</p>
-</li>
-<li><p>pagefault14不允许用户程序直接发起，必须经由硬件产生。这种机制可以更好地保护内存。假如允许用户程序自己产生int14，则每引发一个缺页中断系统就需要分配一个虚拟页，可能会被恶意程序利用，使得内存崩溃。而int13则是general protection interrupt，保护自己不去管那些不允许用户自己产生的中断。<br>如果希望int14可以正常被用户程序直接产生，应该将其特权级设置为3.</p>
-</li>
-</ol>
-<h2 id="Page-Faults-Breakpoints-Exceptions-and-System-Calls"><a href="#Page-Faults-Breakpoints-Exceptions-and-System-Calls" class="headerlink" title="Page Faults, Breakpoints Exceptions, and System Calls"></a>Page Faults, Breakpoints Exceptions, and System Calls</h2><h3 id="Handling-Page-Faults"><a href="#Handling-Page-Faults" class="headerlink" title="Handling Page Faults"></a>Handling Page Faults</h3><p>page fault是14号中断。当处理器捕获到14号中断的时候，它会在CR2中存储一个引起pagefault的线性地址。下面来处理这个中断。</p>
-<p>在上一步分析到，在把es与ds分别都设置为GD_KD之后，这时调用trap函数，我们先来分析trap函数。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/42158612.jpg" alt=""></p>
-<p>FL_IF是在inc/mmu.h中定义的中断标志。如果寄存器eflage中中断标志没有被置位，则不是一个中断。</p>
-<p>在tf结构tf_cs的低位存储着优先级，假如优先级是3，则是在用户态。这时是无权处理中断函数的，应该<strong>首先升级成为内核态</strong>，然后再处理。<br>然后调用trap_diapatch，来分发处理各种不同的trap，处理完毕回来之后，如果没有什么异常就可以接着运行。</p>
-<p>在trap_dispatch中添加下面的代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(tf-&gt;tf_trapno==T_PGFLT)&#123;</div><div class="line">        page_fault_handler(tf);<span class="comment">//此时该函数尚未完成</span></div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这时去查看page_fault_handle，此函数尚未完成，但是对于用户态的trap已经给出了解决，可以看到一句代码<code>fault_va = rcr2();</code>。这就是前面提到的在CR2中储存引起pagefault的线性地址，随后的打印操作即可以打印出这事的信息。</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/48273990.jpg" alt=""></p>
-<h3 id="The-Breakpoint-Exception"><a href="#The-Breakpoint-Exception" class="headerlink" title="The Breakpoint Exception"></a>The Breakpoint Exception</h3><p>其实，breakpoint也只是一个异常，函数入口点的相关代码在前面都已经写出来了。<br>需要说的是，在我最早使用breakpoint作为该函数的名字时，运行<code>make run-breakpoint</code>一直不成功。如果breakpoint还有其他用处，希望可以发现。目前暂时搁置这个问题。</p>
-<p>这里需要做的只是补充trap_dipatch，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (tf-&gt;tf_trapno == T_BRKPT) &#123;</div><div class="line">    monitor(tf);</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Questions</p>
-<pre><code>1. The break point test case will either generate a break point exception or a general protection fault depending on how you initialized the break point entry in the IDT (i.e., your call to SETGATE from trap_init). Why? How do you need to set it up in order to get the breakpoint exception to work as specified above and what incorrect setup would cause it to trigger a general protection fault?
-
-2. What do you think is the point of these mechanisms, particularly in light of what the user/softint test program does?
-</code></pre><p>回答：</p>
-<ol>
-<li><p>这个问题的答案与上一个相似。当特权级设置为0的时候，只允许硬件产生中断而不会允许用户自己去调用。</p>
-</li>
-<li><p>更好的保护机制。</p>
-</li>
-</ol>
-<p>makegrade信息将在最后一同贴出。</p>
-<h3 id="System-calls"><a href="#System-calls" class="headerlink" title="System calls"></a>System calls</h3><p>在JOS中，系统调用定义的中断号是48号，系统调用不能由硬件产生，因此需要允许用户程序来生成系统调用。这也是在SETGATE中最后一个参数是3的原因。system call在初步判断时与trap处理相同，但是处理过程更加复杂。应用程序将会把系统调用的号码以及参数放在寄存器里面，这样内核将不需要在用户环境的堆栈或指令流中找数据。sysno将会在寄存器eax之中，其他参数将会在edx , ecx , ebx , edi , esi之中。返回时的返回值将会存在eax之中。</p>
-<p>首先查看<code>lib/syscall.c</code>，syscall的代码以及对应的汇编代码如下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/41487023.jpg" alt=""></p>
-<p>补充<code>kern/syscall.c</code>以及<code>kern/trap.c</code>，代码如下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/24297553.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/69032262.jpg" alt=""></p>
-<p>这里需要提出的是，在<code>kern/syscall.c</code>中有另一个未完成的函数<code>sys_cput</code>，这个函数要求检查内存是否可以被访问，而在后面的练习中有相关函数的补充，在这里先不贴出代码。</p>
-<h3 id="User-mode-startup"><a href="#User-mode-startup" class="headerlink" title="User-mode startup"></a>User-mode startup</h3><p>用户程序开始运行时是在<code>lib/entry.S</code>，随后在<code>lib/libmain.c</code>中call libmain()。<br>在<code>lib/entry.S</code>中可以看到：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/45324538.jpg" alt=""></p>
-<p>envs已经被定义了，因此下面进入<code>lib/libmain.c</code>来初始化thisenv。根据提示，查看<code>inc/env.h</code>中的ENVX，其定义如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ENVX(envid)     ((envid) &amp; (NENV - 1))</span></div></pre></td></tr></table></figure>
-<p>为了得到当前的进程号，可以调用在<code>kern/syscall.c</code>中的<code>sys_getenvid</code>函数，该函数如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">envid_t</span></div><div class="line">sys_getenvid(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> curenv-&gt;env_id;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是，根据<code>inc/env.h</code>，env_id并不是一个完全的envs中的序号，</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/22708337.jpg" alt=""></p>
-<p>根据注释，ENVX(eid)才是真正在envs中的偏移，于是，在libmain中的代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thisenv = envs+ENVX(sys_getenvid());</div></pre></td></tr></table></figure>
-<p>其实，只有在这部分完成之后，才能正确的调用用户函数。这是因为在退出时需要访问thisenv-&gt;env_id，而先前这个变量并没有值。</p>
-<p>在用户程序执行完成之后，就会调用<code>sys_env_destory</code>来退出自己。</p>
-<h3 id="Page-faults-and-memory-protection"><a href="#Page-faults-and-memory-protection" class="headerlink" title="Page faults and memory protection"></a>Page faults and memory protection</h3><p>内存保护是操作系统的一个重要特性，确保一个程序中的错误不会破坏其他程序或破坏OS本身。OS通常依赖于硬件来保护自己，他知道哪块虚拟地址可用，哪块不可用，如果一个程序想要访问他没有权限访问的地址，会引发错误。如果这个错误可以被解决，OS会试图解决，如果不能解决，犯错的进程就不可以再运行了。</p>
-<p>系统调用为内存保护提出了一个有趣的问题。大多数系统调用接口让用户程序将指针传递给内核。这些指针指向要读取或写入的用户缓冲区。内核然后在执行系统调用的时候去引用这些指针。这有两个问题：</p>
-<p>1.内核中的页面错误可能比用户程序中的页面错误严重得多。如果内核页面在处理自己的数据结构的时候出错，这是一个内核错误，而且错误处理程序应该让内核（也就是整个系统）崩溃。但是当内核解引用用户程序给它的指针时，它需要一种方法来记住任何页面错误，这些解除引用实际上是代表用户程序。</p>
-<p>2.内核通常拥有比用户程序更多的内存权限。用户程序可能会传递一个指向系统调用的指针，指向内核可以读或写的内存，但是程序不能。内核必须小心，不要被欺骗引用这样一个指针，因为这可能会泄露私有信息或破坏内核的完整性。</p>
-<p>下面将处理对用户读写指针的访问权限处理，如果用户想要读写的地方表示允许，就允许，否则不允许。而内核，如果出现了page fault，立即崩溃。</p>
-<p>在<code>kern/trap.c</code>中添加对内核发生了pagefault的处理，这也是上面提到的尚未完成的操作。<br>根据提示，由于tf_cs中的低位代表特权级，直接查看特权级：如果不是在用户态发生的，就直接panic。<br>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ((tf-&gt;tf_cs&amp;<span class="number">3</span>) == <span class="number">0</span>)</div><div class="line">    panic(<span class="string">"Kernel page fault!"</span>);</div></pre></td></tr></table></figure>
-<p>接下来对<code>kern/pmap.c</code>中的<code>user_mem_check</code>以及<code>user_mem_assert</code>进行操作：</p>
-<p>只需要按照说明检查内存中位置以及PTE_P和PTE_U等即可，直接贴出代码：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/79810310.jpg" alt=""></p>
-<p>下面是<code>user_mem_assert</code>的代码。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//检查进程env是不是允许访问这个区域</span></div><div class="line"><span class="comment">//如果可以就return</span></div><div class="line"><span class="comment">//不行的话env就死了，如果env是当前运行进程，就不返回了</span></div><div class="line"><span class="comment">//user_mem_check</span></div><div class="line"><span class="keyword">void</span></div><div class="line">user_mem_assert(struct Env *env, <span class="keyword">const</span> <span class="keyword">void</span> *va, <span class="keyword">size_t</span> len, <span class="keyword">int</span> perm)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (user_mem_check(env, va, len, perm | PTE_U) &lt; <span class="number">0</span>) &#123;</div><div class="line">		cprintf(<span class="string">"[%08x] user_mem_check assertion failure for "</span></div><div class="line">			<span class="string">"va %08x\n"</span>, env-&gt;env_id, user_mem_check_addr);</div><div class="line">		env_destroy(env);	<span class="comment">// may not return</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后，对在实验1中写过的debuginfo_eip进行更改，使得backtrace可以使用。<br>将代码贴出：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/326256.jpg" alt=""></p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/93317967.jpg" alt=""></p>
-<p>本实验的基础部分到这里结束。</p>
-<p>最终的makegrade：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/36947975.jpg" alt=""></p>
-<p>CHALLENGE：</p>
-<p>完成了单步执行的challenge。</p>
-<p>根据提示，查找EFLAGS信息，得到这样的信息：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/4368506.jpg" alt=""></p>
-<p>于是为了能够单步执行，z在monitor中修改如下部分：</p>
-<ol>
-<li>添加指令si</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/34291928.jpg" alt=""></p>
-<ol>
-<li>写函数mon_si并在.h中声明（声明略去）</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/78360085.jpg" alt=""></p>
-<ol>
-<li>修改kern/trap.c，使得能够处理debug的中断信息</li>
-</ol>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/25025088.jpg" alt=""></p>
-<p>运行：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/52901081.jpg" alt=""></p>
-<p>类似的，就可以加上c指令使继续运行到下一个breakpoint。</p>
-<ol>
-<li><p>添加指令c </p>
-</li>
-<li><p>写函数mon_c</p>
-</li>
-</ol>
-<p>只是，这时需要将TF位置为0。</p>
-<p>结果：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/25564738.jpg" alt=""></p>
-<p>为了更好地查看si与c的结果，我将breakpoint.c修改为下：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/1130654.jpg" alt=""></p>
-<p>最后，再次运行make grade：</p>
-<p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-28/12202433.jpg" alt=""></p>
-<p>本实验完成。代码已经提交到git.mobisys.cc。</p>
-<p><a href="https://note.youdao.com/share/?id=940fc869a8dc1daa06e9e955495a80c6&amp;type=notebook#/EE533F3CCE0E4E579776693DB25883E1" target="_blank" rel="external">点击链接预览lab3工程代码~</a></p>
-<p><a href="https://pan.baidu.com/s/1bppVmR9" target="_blank" rel="external">如果想要直接下载的话就点这个（这是百度的网盘）</a></p>
-<p>yayi2456  &lt;(￣︶￣)↗[GO!]&gt;</p>
-<p>最后，列出那些给过我帮助的网站！谢谢！（也便于我以后找到！</p>
-<p><a href="https://github.com/Clann24/jos/" target="_blank" rel="external">一个学霸的自我修养 clann24</a></p>
-<p>clann的实际代码与README代码不一样啊，而且明明clann的自己可以运行，加到我的代码上却不能运行了。<br>对clann的load_icode存疑。</p>
-<p><a href="http://blog.csdn.net/woxiaohahaa/article/details/50550208" target="_blank" rel="external">朴实中透露着惊喜 mick_seu</a></p>
-<p>可以说是很厉害了。代码简单易懂，正确率超高，超适用。</p>
-<p><a href="https://www.kancloud.cn/wizardforcel/jos-lab/97520" target="_blank" rel="external">学习并快乐着 飞龙</a></p>
-<p>飞龙的代码也很简单易懂！而且一看就是自己写的，与网上主流的都不一样。</p>
-<p><a href="http://blog.163.com/tianhail@126/blog/static/140395915201021643354880/" target="_blank" rel="external">X86 CPU的EFLAGS寄存器各个标识位  伊凡</a></p>
-<p><a href="https://stackoverflow.com/questions/1406783/how-to-read-and-write-x86-flags-registers-directly" target="_blank" rel="external">How to read and write x86 flags registers directly? stackoverflow</a></p>
-<p>我需要BB一句。到了OS课的该是大三了。stackoverflow这个社区真的是强推，无数问题都是在这个社区找到的回答。嗯，强推。</p>
-<p><a href="https://markdowntohtml.com/" target="_blank" rel="external">markdown to html md转html在线</a></p>
-<p>emm其实效果一般…很不好….但是，毕竟在线，不想用的话，自己安装pandoc，费劲费空间。</p>
-<p><a href="http://www.atool.org/html2markdown.php" target="_blank" rel="external">另外一个html与md</a></p>
-<p><a href="http://www.oschina.net/question/100267_75314" target="_blank" rel="external">markdown的chrome插件</a></p>
-
-          
+          <h1 id="Lab3-Document"><a href="#Lab3-Document" class="headerlink" title="Lab3 Document"></a>Lab3 Document</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/OS/Lab3_Document/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2263,52 +1768,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><p><strong>例：STL的实现</strong><br>printf：<br>对屏幕：</p>
-<ol>
-<li>在每一个像素有一种颜色</li>
-<li>文本模式</li>
-</ol>
-<h2 id="系统调用与函数调用"><a href="#系统调用与函数调用" class="headerlink" title="系统调用与函数调用"></a>系统调用与函数调用</h2><p>系统调用是中断，相当于在用户程序执行的过程中嵌入一段由OS完成的代码，完成后再返回用户程序。其中，包括特权级的升降。在进行系统调用的过程中，进入之后首先会检查用户传参是否有危险，随后再执行系统调用。这将在一个新的页完成，存在于<strong>内核态独立地址空间</strong>，将会带来包括TLB，Cache等的一系列问题。因此，系统调用的代价比函数调用的代价大得多。</p>
-<h1 id="进程间的通信"><a href="#进程间的通信" class="headerlink" title="进程间的通信"></a>进程间的通信</h1><h2 id="直接通信与间接通信"><a href="#直接通信与间接通信" class="headerlink" title="直接通信与间接通信"></a>直接通信与间接通信</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">send(A,)</div></pre></td></tr></table></figure>
-<h2 id="阻塞通信与非阻塞通信"><a href="#阻塞通信与非阻塞通信" class="headerlink" title="阻塞通信与非阻塞通信"></a>阻塞通信与非阻塞通信</h2><p>像网络中那样，阻塞通信就是//</p>
-<h2 id="通信链路缓冲"><a href="#通信链路缓冲" class="headerlink" title="通信链路缓冲"></a>通信链路缓冲</h2><p><strong>0容量</strong>：发送方需要等待接收方<br><strong>有限容量</strong>：<br><strong>无限容量</strong>：</p>
-<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号类似于中段，</p>
-<p>是最原始、最简单的一个进程间交互的模式。在关机时，系统将会用这种方式通知各各进程。</p>
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>父子之间传递信息</p>
-<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>类似于电子邮件系统。</p>
-<p>得到一个队列，使用队列号来标识。此后消息的send与recv都通过这个队列。</p>
-<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>创建共享段<code>shmget(key,size,flags)</code>。其中key是其他人希望与你共享内存的话必须知道的值。<code>shmat(shmid,*shmaddr,flags)</code>把共享段映射到进程地址空间。</p>
-<p>在这里，将又会遇到在“哲学家就餐”那部分的问题。另外，还将会有在cache还是内存的问题。cache作为在读写操作时第一个碰到的硬件，是否可以保证进程A写的时候吧东西写进了共享区的物理内存？在B不能使用的时候它的Cache的正确性哈能不能保证？—？</p>
-<p>由一个“可否使用cache”的位.</p>
-<h2 id="文件写入时发生了什么？"><a href="#文件写入时发生了什么？" class="headerlink" title="文件写入时发生了什么？"></a>文件写入时发生了什么？</h2><p>在内存中创建一个新的inode节点或者索引节点，如果存在，在文件系统中找到对应的inode。</p>
-<p>修改文件夹对应的数据节点。<br>最初只在内存中修改并标记这块数据已经被修改了，你记得帮我写回去。</p>
-<p>close并不能使数据立即回到硬盘上。pagebuffer可以被禁用。fsync可以强制立即写回磁盘。</p>
-<pre><code>//sqlite将收到文件系统缓存影响。
-</code></pre><p>先写数据还是先写索引？更偏向于先写数据，这样顶多修改内容存不上，如果先写索引，可能导致文件系统将无效数据误认为是文件数据。</p>
-<h2 id="文件删除时发生了什么"><a href="#文件删除时发生了什么" class="headerlink" title="文件删除时发生了什么"></a>文件删除时发生了什么</h2><p>找到对应的inode：这时在cache内存（pagecache）以及文件系统上都存有该文件的数据。</p>
-<p>在内存中删除inode，清除页面。<br>把硬盘中的inode清除，对应数据块清除，硬盘中的块标记为未使用，文件夹中的项删除。</p>
-<p>一个文件（夹）怎样叫做存在？1.在某一个文件夹下有她的树根的索引 2.在占用未占用位图中存在数据块占用标志。</p>
-<p>如何恢复一个被误删的文件？寻找树根。而树根是有特点的。一个文件恢复需要扫描位图中显示的未使用的数据块，找到树根，然后顺着树根找到所有文件。<br>所以，一旦误删，就不能再动硬盘了，再动硬盘可能会破坏原来的数据，导致文件直接找不到或者缺失或者？（不会乱码咩）</p>
-<p>怎样快速删除文件并且不可恢复？<br>删除与覆盖、与文件系统相关、把我的空lab5给他复制过去hhh。</p>
-<h2 id="关机时发生了什么？"><a href="#关机时发生了什么？" class="headerlink" title="关机时发生了什么？"></a>关机时发生了什么？</h2><p>init在接收到特定信号时发起关机</p>
-<p>使用SIGSTOP提示关机，使用SIGKILL强制关机</p>
-<p>各种内存数据回写。</p>
-<p>意外断电？<br>1.可能数据在内存中没有被回写 2.磁头正在飞行（可能会有保护机制） 3.磁头正在写入<br>如果搞坏了磁介质可能只是这个地方不能读写，但是<br>RAID1多地机房。</p>
-<p>意外断电防护：使用重力传感器，（磁头）失重时将会尽快写入数据。</p>
-<h2 id="开机时发生了什么"><a href="#开机时发生了什么" class="headerlink" title="开机时发生了什么"></a>开机时发生了什么</h2><p>跳转到指定地址取指令（0xfffff0或0x00000000（手机））：<br>bios中存在一些基本指令：兼容机的标准化使得BIOS可以适配大量硬件</p>
-<p>硬盘数据载入内存 这是因为硬盘的读取模式也兼容给bios的读写。</p>
-<p>格式化C盘再复制回去：NTLDR missing：NTFS系统自身的代码。VBR：ntfs文件系统的加载器，包含文件系统的读取方式与操作系统。使用vbr把文件load进来。</p>
-<p>操作系统接管运行，为进程准备环境。</p>
-<p>init进程创建用户交互进程。winlogon。init不做任何操作只等关机，其他任务都是init的子进程的工作。</p>
-<p>为什么不拷贝一份新的而是使用父进程的？子进程直接自己调用exec，直接调用（freertos）。拷贝执行？？？<br>子进程在出来之后就已经是一个完整的pcb了。</p>
-<p>父进程可以接收子进程的main函数的返回值。<br>父进程等待子进程退出，由父进程替子进程收拾残局：找到他分配的页面，转为可用页面。SIGCHILD。<br>如果一个进程的父进程先自己退出了，这个子进程的父进程就变成init。</p>
-<h2 id="exec时发生了什么？"><a href="#exec时发生了什么？" class="headerlink" title="exec时发生了什么？"></a>exec时发生了什么？</h2><p>在文件系统中找到文件，读取文件目录树</p>
-<p>将文件映射入内存</p>
-<p>程序执行</p>
-
-          
+          <h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/OS/串讲复习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2554,7 +2021,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2565,7 +2032,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2679,7 +2146,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 

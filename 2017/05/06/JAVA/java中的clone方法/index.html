@@ -102,18 +102,18 @@
 
 
 
-<meta name="description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。 首先是我发现问题的地方。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
+<meta name="description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。">
 <meta name="keywords" content="JAVA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java:clone">
 <meta property="og:url" content="http://yoursite.com/2017/05/06/JAVA/java中的clone方法/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。 首先是我发现问题的地方。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
+<meta property="og:description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-20T17:35:37.206Z">
+<meta property="og:updated_time" content="2018-07-20T18:07:05.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java:clone">
-<meta name="twitter:description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。 首先是我发现问题的地方。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
+<meta name="twitter:description" content="JAVA中的clone()方法 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。">
 
 
 
@@ -434,8 +434,8 @@
       
 
       
-        <a id="more"></a>
-<h2 id="JAVA中的clone-方法"><a href="#JAVA中的clone-方法" class="headerlink" title="JAVA中的clone()方法"></a>JAVA中的clone()方法</h2><p> 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。</p>
+        <h2 id="JAVA中的clone-方法"><a href="#JAVA中的clone-方法" class="headerlink" title="JAVA中的clone()方法"></a>JAVA中的clone()方法</h2><p> 今天破天荒的准备用整个晚自习的时间学习JAVA。本来是准备写GUI那边的作业的，看了看clone()那边的作业发现还是有很多问题，决定还是花时间整理一下。</p>
+<a id="more"></a>
 <p>首先是我发现问题的地方。代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">package toybattery;</div><div class="line">class Battery implements Cloneable&#123;</div><div class="line">	int batnum;</div><div class="line">	Battery(int p)&#123;</div><div class="line">		batnum=p;</div><div class="line">	&#125;</div><div class="line">	public String toString()&#123;//can not reduce the visibility of the inherited method from Object</div><div class="line">		String s=new String(Integer.toString(batnum));</div><div class="line">		return s;</div><div class="line">	&#125;</div><div class="line">	/***</div><div class="line">	 * Battery中的克隆函数。</div><div class="line">	 */</div><div class="line">	public Object clone()&#123;</div><div class="line">		Object o=null;</div><div class="line">		try&#123;</div><div class="line">			o=super.clone();</div><div class="line">		&#125;catch(CloneNotSupportedException e)&#123;</div><div class="line">			System.err.println(&quot;Battery can not be cloned!&quot;);</div><div class="line">		&#125;</div><div class="line">//		((Battery)o).batnum=0;</div><div class="line">		return o;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">public class Toy implements Cloneable&#123;</div><div class="line">	Battery[] mybat=new Battery[10];</div><div class="line">	/***</div><div class="line">	 * 将mybat中所存的所有int转为String并用逗号分隔。</div><div class="line">	 */</div><div class="line">	public String toString()&#123;</div><div class="line">		int i=0;</div><div class="line">		String s=new String(&quot;&quot;);</div><div class="line">		while((i&lt;10)&amp;&amp;mybat[i]!=null)&#123;</div><div class="line">			s+=mybat[i];</div><div class="line">			if(i&lt;9)&#123;s+=&quot;,&quot;;&#125;</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		return s;</div><div class="line">	&#125;</div><div class="line">	/***</div><div class="line">	 * Toy的克隆函数</div><div class="line">	 */</div><div class="line">	public Object clone()&#123;</div><div class="line">		Toy o=new Toy();//=null;</div><div class="line">/*		try&#123;</div><div class="line">			o=(Toy)super.clone();</div><div class="line">		&#125;catch(CloneNotSupportedException e)&#123;</div><div class="line">			System.err.println(&quot;Toy can not be cloned!&quot;);</div><div class="line">		&#125;*/</div><div class="line">		int i=0;</div><div class="line">		while((i&lt;10)&amp;&amp;(mybat[i]!=null))&#123;</div><div class="line">			o.mybat[i]=(Battery)mybat[i].clone();</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		return o;</div><div class="line">	&#125;</div><div class="line">	public static void main(String argc[])&#123;</div><div class="line">		Toy mytoy=new Toy();</div><div class="line">		for(int i=0;i&lt;10;i++)&#123;</div><div class="line">			mytoy.mybat[i]=new Battery(i+1);</div><div class="line">		&#125;</div><div class="line">		System.out.println(mytoy);</div><div class="line">		Toy mytoy2=(Toy)mytoy.clone();</div><div class="line">		System.out.println(&quot;orignal:&quot;+mytoy);</div><div class="line">		System.out.println(&quot;clone:&quot;+mytoy2);</div><div class="line">		mytoy.mybat[4].batnum=55;</div><div class="line">		mytoy2.mybat[3].batnum=44;</div><div class="line">		System.out.println(&quot;after changed orignal:&quot;+mytoy);</div><div class="line">		System.out.println(&quot;after changed clone:&quot;+mytoy2);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在这段代码中，明明在Toy类里面对o的成员mybat对象数组的每一个对象都调用了相应的clone()方法，却还是没能实现深层克隆。<br>于是我测试了Battery类里面的clone()方法，发现这个方法实现的确实是深层克隆，而且在这个方法里仅仅调用了super.clone()，说明对于仅含有基本类型成员变量的类的对象，Object中的clone()方法足以。<br>然后我又尝试在Toy类中增加了成员变量Battery mb;，经测试，发现mb经克隆之后可以实现深层克隆。<br>然后我又在Battery中加了int[]，以同样的方法，无法实现深克隆。<br>直接对int[]克隆，深克隆。<br>直接对int[][]克隆，浅克隆。<br>于是结论就是，JAVA的clone()方法在对对象数组进行克隆时，有我不知道的地方。</p>
@@ -615,7 +615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -626,7 +626,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -756,7 +756,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 

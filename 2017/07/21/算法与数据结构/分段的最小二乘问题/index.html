@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="终于不是在网上发表，可以直接用截图了！哈！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-20T17:37:28.321Z">
+<meta property="og:updated_time" content="2018-07-20T18:07:05.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分段的最小二乘问题">
 <meta name="twitter:description" content="终于不是在网上发表，可以直接用截图了！哈！">
@@ -461,7 +461,9 @@
 <a id="more"></a>
 <hr>
 <p>在平面上有n个点，他们是$(x_1,y_1),…(x_n,y<em>n)$且x1&lt;…&lt;xn。现用一条直线L:y=ax+b来对他们进行拟合。对误差这样定义：$SSE=\sum</em>{i=1}^n\ (y_i-ax_i-b)^2$</p>
-<p>SSE是关于a、b的函数，分别对a、b求偏导，可得出当SSE最小时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a=\frac&#123;n\sum_i\ x_iy_i-(\sum_i\ x_i)(\sum_i\ y_i)&#125;&#123;n\sum_i\ x_i^2-(\sum_i\ x_i)^2&#125;</div><div class="line"></div><div class="line">b=\frac&#123;\sum_i\ y_i-a\sum_i\ x_i&#125;n</div></pre></td></tr></table></figure></p>
+<p>SSE是关于a、b的函数，分别对a、b求偏导，可得出当SSE最小时：</p>
+<p>$$a=\frac{n\sum_i\ x_iy_i-(\sum_i\ x_i)(\sum_i\ y_i)}{n\sum_i\ x_i^2-(\sum_i\ x_i)^2}$$</p>
+<p>$$b=\frac{\sum_i\ y_i-a\sum_i\ x_i}n$$</p>
 <p>实际上，对于一批点，可以以很多条线段进行拟合，通常使用<strong>罚分度量函数</strong> $E+cL(c&gt;0)$ 来在所有直线上的平方误差之和E与直线数目L之间找到一个平衡。</p>
 
       
@@ -520,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/21/算法与数据结构/贪心算法：图的最短路径/" rel="next" title="分段的最小二乘问题">
-                <i class="fa fa-chevron-left"></i> 分段的最小二乘问题
+              <a href="/2017/07/21/算法与数据结构/区间调度：贪心算法与动态规划/" rel="next" title="区间调度：贪心算法与动态规划">
+                <i class="fa fa-chevron-left"></i> 区间调度：贪心算法与动态规划
               </a>
             
           </div>
@@ -530,8 +532,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/21/算法与数据结构/分治算法：计数逆序/" rel="prev" title="计数逆序">
-                计数逆序 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/21/算法与数据结构/贪心算法：图的最短路径/" rel="prev" title="分段的最小二乘问题">
+                分段的最小二乘问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -602,7 +604,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +615,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -727,7 +729,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 

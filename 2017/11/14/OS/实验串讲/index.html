@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
+<meta name="description" content="Lab3：User Environment">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实验串讲">
 <meta property="og:url" content="http://yoursite.com/2017/11/14/OS/实验串讲/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
+<meta property="og:description" content="Lab3：User Environment">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/4474675.jpg">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/43120327.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/96785647.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-15/80552651.jpg">
-<meta property="og:updated_time" content="2018-07-20T16:26:58.458Z">
+<meta property="og:updated_time" content="2018-07-20T18:04:45.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实验串讲">
-<meta name="twitter:description" content="Lab3：User EnvironmentPre：实验准备知识GCC内联汇编特权降级基础知识准备切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。 系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有">
+<meta name="twitter:description" content="Lab3：User Environment">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-14/87170051.jpg">
 
 
@@ -474,8 +474,8 @@
       
 
       
-        <a id="more"></a>
-<h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
+        <h1 id="Lab3：User-Environment"><a href="#Lab3：User-Environment" class="headerlink" title="Lab3：User Environment"></a>Lab3：User Environment</h1><a id="more"></a>
+<h2 id="Pre：实验准备知识"><a href="#Pre：实验准备知识" class="headerlink" title="Pre：实验准备知识"></a>Pre：实验准备知识</h2><h3 id="GCC内联汇编"><a href="#GCC内联汇编" class="headerlink" title="GCC内联汇编"></a>GCC内联汇编</h3><h3 id="特权降级"><a href="#特权降级" class="headerlink" title="特权降级"></a>特权降级</h3><h4 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h4><p>切换到保护模式之后就会有不同的特权等级，这时默认在最高的特权等级上。这个时候为内核建立了页表结构，接下来将会跳转到用户程序。进行跳转的时候，应该注意：不可以再留着这个高级的运行权限了，因此需要进行特权级的降级。</p>
 <p>系统在以上电时，各个资源管理都还没有建立，这个时候处于特权管理模式，在特权模式建立完毕所有的资源映射之后，再降级到通用模式，运行。</p>
 <p>因此，一上电运行的指令一旦被不安全的程序接管，将不会降级，保护措施将形同虚设。因此，在智能手机等终端上都有一个叫做trustdo(?)的硬件，它是一个加密的模块，这个模块是系统上电之后运行的第一段代码，作用是验证将要运行的这段代码是不是被授权的，数字签名是否通过，若通过才会运行。trustdo会被做到CPU的芯片中，保证了即使上电后处于特权模式的代码是安全可靠的。</p>
 <hr>
@@ -672,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -683,7 +683,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -813,7 +813,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
+  <span class="post-count">博客全站共125.2k字</span>
 </div>
 
 
