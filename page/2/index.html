@@ -930,7 +930,7 @@
 
       
         
-          <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1><p>password: password<br>
+          <h1 id="我的编译器"><a href="#我的编译器" class="headerlink" title="我的编译器"></a>我的编译器</h1>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/02/编译原理/我的编译器/#more" rel="contents">
@@ -1079,39 +1079,14 @@
 
       
         
-          
-            <a id="more"></a>
-<p>git的beanch原来真的可以在本地也切换啊！<br>当我用git checkout lab3的时候，文件夹里的东西也会跟着变。<br>这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。</p>
-<h2 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h2><h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">干什么</th>
-<th style="text-align:center">句子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">删除本地的一个分支</td>
-<td style="text-align:center">git branch -d <branch name=""></branch></td>
-</tr>
-<tr>
-<td style="text-align:center">新增加一个分支</td>
-<td style="text-align:center">git checkout -b <branchname><branchremote></branchremote></branchname></td>
-</tr>
-<tr>
-<td style="text-align:center">删除远程分支</td>
-<td style="text-align:center">git push <remotename> -delete <branchname></branchname></remotename></td>
-</tr>
-</tbody>
-</table>
-<h3 id="我见过的错误解决方法"><a href="#我见过的错误解决方法" class="headerlink" title="我见过的错误解决方法"></a>我见过的错误解决方法</h3><ol>
-<li>在 git merge lab3之后产生冲突，人为解决之后再次merge无法merge：<br>只需根据提示：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m &quot;mesage&quot;</div><div class="line">git merge lab3</div></pre></td></tr></table></figure>
-<h2 id="VS"><a href="#VS" class="headerlink" title="VS"></a>VS</h2><h3 id="cmd运行完之后闪退"><a href="#cmd运行完之后闪退" class="headerlink" title="cmd运行完之后闪退"></a>cmd运行完之后闪退</h3><p>可以通过更改属性的方式解决。什么system(“pause”)啊也行吧，但是我觉得没有属性来的方便永久。</p>
-<p>“配置属性”–&gt;“链接器”–&gt;“系统”，然后在右侧的列表中，在第一项”子系统“的值中选择”控制台（/SUBSUSTEM:CONSOLE）“。</p>
-
-          
+          <p>git的beanch原来真的可以在本地也切换啊！<br>当我用git checkout lab3的时候，文件夹里的东西也会跟着变。<br>这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/02/琐碎/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1917,20 +1892,14 @@
 
       
         
-          
-            <p>这是第一次课！时隔许久，也算是复习啦~</p>
-<p>#</p>
-<h1 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h1><h1 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h1><h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><p>在各种网络之中，端对端之间互相传送<strong>报文</strong>。为了从源系统项目地端系统发送报文，源端系统将报文分成若干的小数据块，成为<strong>分组</strong>。每个分组都通过源端系统与目的端系统之间的<strong>分组交换机</strong>（主要是<strong>路由器</strong>以及<strong>链路交换机</strong>）传送。分组以等于链路最大传输速率的速度通过通信链路，因此如果传输速度是R比特/s，那么传输L比特分组的时间是L/R比特/s。</p>
-<h3 id="存储转发传输"><a href="#存储转发传输" class="headerlink" title="存储转发传输"></a>存储转发传输</h3><p>多数分组交换机在链路的输入端使用<strong>存储转发传输</strong>机制，它是指在交换机开始发送第一个比特之前，必须接收到整个分组。</p>
-<p>我们看一个例子：<br><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-22/26732713.jpg" alt=""></p>
-<p>如果发送方要传送长是L的报文，两条链路传输速率都是Rbit/s，那么到达路由器之前不能转发，首先浪费了L/R s，这时全部到达了，然后转发出去，一共花费了2L/R。（没有考虑线路长度）</p>
-<p>而如果数据一旦到达路由器就转发而不用等到全部到达，只需要L/R的时间。</p>
-<p>现在计算发送三个分组，从源发送第一个分组到达目的地接收到全部三个分组的时间：<br>在L/R，第一个分组被转发出去，这时源也开始发出第二个分组，2L/R，第一个已经被路由器转发完毕，目的端收到，路由器开始接收第三个分组，源开始发送第三个分组，3L/R，路由器接收第三个分组完成，第二个分组已经送出去被目的接收到，源端发送完毕，4L/R第三个分组完全传送出去，目的端接收到第三个分组。一共4L/R时间。</p>
-<p>考虑N条速率均为R的链路（所以一共有N-1个路由器），发送一个分组所需时间是$t=N*\frac{L}{R}$。</p>
-<p>如果像上面一样分组发送：</p>
-<p>一个长度L的包一次发出去，时间是$t=N*\frac{L}{R}$，如果分成c组，时间为：$t`=(c+N-1)*\frac{L}{c*R}$！！</p>
-
-          
+          <p>这是第一次课！时隔许久，也算是复习啦~</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/21/计算机网络/计算机网络概述/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -102,13 +102,13 @@
 
 
 
-<meta name="description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。  概述与运输层服务运输层的协议提供的是逻辑通信，并不是直接相连的。 现在我们聊的是对等层通信，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。 实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为报文段。">
+<meta name="description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。">
 <meta name="keywords" content="网络课">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络运输层">
 <meta property="og:url" content="http://yoursite.com/2017/11/02/计算机网络/计算机网络运输层/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。  概述与运输层服务运输层的协议提供的是逻辑通信，并不是直接相连的。 现在我们聊的是对等层通信，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。 实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为报文段。">
+<meta property="og:description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43018259.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-4/79842537.jpg">
@@ -149,10 +149,10 @@
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-22/38232100.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-22/74575292.jpg">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-4/88853868.jpg">
-<meta property="og:updated_time" content="2018-07-20T16:14:03.598Z">
+<meta property="og:updated_time" content="2018-07-20T18:15:11.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络运输层">
-<meta name="twitter:description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。  概述与运输层服务运输层的协议提供的是逻辑通信，并不是直接相连的。 现在我们聊的是对等层通信，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。 实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为报文段。">
+<meta name="twitter:description" content="这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-4/43018259.jpg">
 
 
@@ -499,6 +499,7 @@
         <blockquote>
 <p>这些东西是很简单，可是想来想去还是决定记录一下，以免以后遇到像C++语法不知道一样的尴尬。</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="概述与运输层服务"><a href="#概述与运输层服务" class="headerlink" title="概述与运输层服务"></a>概述与运输层服务</h1><p>运输层的协议提供的是<strong>逻辑通信</strong>，并不是直接相连的。</p>
 <p>现在我们聊的是<strong>对等层通信</strong>，本机的运输层发数据给其他机器的运输层。运输层协议在端系统里面，并不是在路由器里。</p>
 <p>实际上，当应用程序希望能与其他设备进行通信，调用运输层，给运输层一堆信息。运输层可能会把这些信息分段，然后加上头部信息成为<strong>报文段</strong>。报文段交给网络层，网络层再封装成<strong>数据报</strong>再向目的地发送。到了目的地之后做一个相反的动作，送给应用层使用。需要区分清楚的是，制定目的地、决定报文段怎么产生、决定报文段如何合并都是运输层的工作，网络层相当于送信的邮差，只负责传输。但是话又说回来了，网络层更加底层，网络层提供了怎样的服务、有多大的带宽都限制了运输层的服务。</p>

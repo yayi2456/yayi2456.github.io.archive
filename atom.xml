@@ -182,20 +182,11 @@
     <link href="http://yoursite.com/2018/01/17/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%A4%8D%E4%B9%A0%E8%AF%BE/"/>
     <id>http://yoursite.com/2018/01/17/编译原理/编译复习课/</id>
     <published>2018-01-17T09:04:37.000Z</published>
-    <updated>2018-01-18T05:18:39.393Z</updated>
+    <updated>2018-07-20T18:14:06.509Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;词法分析语法分析语义分析：分析阶段&lt;br&gt;中间…综合阶段&lt;/p&gt;
-&lt;p&gt;使用算法构造对应模块程序&lt;/p&gt;
-&lt;p&gt;各个阶段做什么事？&lt;br&gt;通常倒过来问：某个事情在哪个阶段做？&lt;/p&gt;
-&lt;p&gt;词法：将字符流切成单词流&lt;br&gt;语法：将单词流构建语法树&lt;br&gt;语义：类型检查、变量
-        
-      
+      &lt;p&gt;词法分析语法分析语义分析：分析阶段&lt;br&gt;中间…综合阶段&lt;/p&gt;
     
     </summary>
     
@@ -308,11 +299,11 @@
     <link href="http://yoursite.com/2017/12/02/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%88%91%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8/"/>
     <id>http://yoursite.com/2017/12/02/编译原理/我的编译器/</id>
     <published>2017-12-02T07:28:47.000Z</published>
-    <updated>2017-12-05T13:11:41.174Z</updated>
+    <updated>2018-07-20T18:15:11.256Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;我的编译器&quot;&gt;&lt;a href=&quot;#我的编译器&quot; class=&quot;headerlink&quot; title=&quot;我的编译器&quot;&gt;&lt;/a&gt;我的编译器&lt;/h1&gt;&lt;p&gt;password: password&lt;br&gt;
+      &lt;h1 id=&quot;我的编译器&quot;&gt;&lt;a href=&quot;#我的编译器&quot; class=&quot;headerlink&quot; title=&quot;我的编译器&quot;&gt;&lt;/a&gt;我的编译器&lt;/h1&gt;
     
     </summary>
     
@@ -328,18 +319,11 @@
     <link href="http://yoursite.com/2017/12/02/%E7%90%90%E7%A2%8E/"/>
     <id>http://yoursite.com/2017/12/02/琐碎/</id>
     <published>2017-12-02T03:16:13.000Z</published>
-    <updated>2018-07-20T16:39:39.431Z</updated>
+    <updated>2018-07-20T18:14:55.538Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;git的beanch原来真的可以在本地也切换啊！&lt;br&gt;当我用git checkout
-        
-      
+      &lt;p&gt;git的beanch原来真的可以在本地也切换啊！&lt;br&gt;当我用git checkout lab3的时候，文件夹里的东西也会跟着变。&lt;br&gt;这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。&lt;/p&gt;
     
     </summary>
     
@@ -446,19 +430,11 @@
     <link href="http://yoursite.com/2017/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
     <id>http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/</id>
     <published>2017-11-21T13:51:40.000Z</published>
-    <updated>2018-07-20T16:14:00.457Z</updated>
+    <updated>2018-07-20T18:15:11.255Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;这是第一次课！时隔许久，也算是复习啦~&lt;/p&gt;
-&lt;p&gt;#&lt;/p&gt;
-&lt;h1 id=&quot;网络边缘&quot;&gt;&lt;a href=&quot;#网络边缘&quot; class=&quot;headerlink&quot; title=&quot;网络边缘&quot;&gt;&lt;/a&gt;网络边缘&lt;/h1&gt;&lt;h1 id=&quot;网络核心&quot;&gt;&lt;a
-        
-      
+      &lt;p&gt;这是第一次课！时隔许久，也算是复习啦~&lt;/p&gt;
     
     </summary>
     
