@@ -102,19 +102,19 @@
 
 
 
-<meta name="description" content="语法分析终于开始语法分析的复习了！ 上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3. 检错机制加入（其他就不行？） 语法分析器的位置（等待加图） 通用的语法分析器几乎是不可能保证效率的（目前有通用的语法分析器，Cocke-Younger-Kasami），目前有两种算法，自底向上（对应最左推导LL），自顶向下（对应最右推导LR）。 语法错误处理在编程中可能会发生不同的错误，在词法（">
+<meta name="description" content="语法分析终于开始语法分析的复习了！">
 <meta name="keywords" content="编译原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编译原理——语法分析">
 <meta property="og:url" content="http://yoursite.com/2017/11/29/编译原理/语法分析/index.html">
 <meta property="og:site_name" content="日和">
-<meta property="og:description" content="语法分析终于开始语法分析的复习了！ 上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3. 检错机制加入（其他就不行？） 语法分析器的位置（等待加图） 通用的语法分析器几乎是不可能保证效率的（目前有通用的语法分析器，Cocke-Younger-Kasami），目前有两种算法，自底向上（对应最左推导LL），自顶向下（对应最右推导LR）。 语法错误处理在编程中可能会发生不同的错误，在词法（">
+<meta property="og:description" content="语法分析终于开始语法分析的复习了！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-29/75004681.jpg">
-<meta property="og:updated_time" content="2017-12-03T15:39:40.290Z">
+<meta property="og:updated_time" content="2018-07-22T17:29:11.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译原理——语法分析">
-<meta name="twitter:description" content="语法分析终于开始语法分析的复习了！ 上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3. 检错机制加入（其他就不行？） 语法分析器的位置（等待加图） 通用的语法分析器几乎是不可能保证效率的（目前有通用的语法分析器，Cocke-Younger-Kasami），目前有两种算法，自底向上（对应最左推导LL），自顶向下（对应最右推导LR）。 语法错误处理在编程中可能会发生不同的错误，在词法（">
+<meta name="twitter:description" content="语法分析终于开始语法分析的复习了！">
 <meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-29/75004681.jpg">
 
 
@@ -459,6 +459,7 @@
 
       
         <h1 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h1><p>终于开始语法分析的复习了！</p>
+<a id="more"></a>
 <p>上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3. 检错机制加入（其他就不行？）</p>
 <p>语法分析器的位置（等待加图）</p>
 <p>通用的语法分析器几乎是不可能保证效率的（目前有通用的语法分析器，Cocke-Younger-Kasami），目前有两种算法，<strong>自底向上</strong>（对应最左推导LL），<strong>自顶向下</strong>（对应最右推导LR）。</p>
@@ -478,11 +479,13 @@
 <p><strong>错误产生式</strong>：描述错误模式。</p>
 <p>可以更好的进行修正，检测错误信息。</p>
 <p><strong>全局修正</strong>：x</p>
-<h2 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h2><h3 id="正式定义"><a href="#正式定义" class="headerlink" title="正式定义"></a>正式定义</h3><p>一个上下文无关文法由<strong>终结符</strong>、<strong>非终结符</strong>、<strong>一个开始符号</strong>、<strong>一组产生式</strong>组成。使用符号描述是：$(V<em>{T} , V</em>{N} , S , p)$</p>
+<h2 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h2><h3 id="正式定义"><a href="#正式定义" class="headerlink" title="正式定义"></a>正式定义</h3><p>一个上下文无关文法由<strong>终结符</strong>、<strong>非终结符</strong>、<strong>一个开始符号</strong>、<strong>一组产生式</strong>组成。使用符号描述是:$(V_{T},V_{N},S,p)$</p>
 <p>在文法中有一些约定的命名方式（待补充）</p>
 <h3 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h3><p>实际上是语法等价的一个替换过程。使用右部替换左部。</p>
-<p><strong>形式化定义</strong>：<br>$$\alphaA\beta \Rightarrow \alpha\gama\beta 当且仅当存在 A \rightarrow \gama$$</p>
-<p>$$  $$</p>
+<p><strong>形式化定义</strong>：</p>
+<p>$$\alpha A \beta \Rightarrow \alpha \gamma \beta$$</p>
+<p> 当且仅当存在 </p>
+<p> $$A \rightarrow \gamma$$</p>
 <h3 id="推导与语言"><a href="#推导与语言" class="headerlink" title="推导与语言"></a>推导与语言</h3><p><strong>最左推导</strong>：总是替换最左边的非终结符</p>
 <p><strong>最右推导</strong>：总是替换最右边的非终结符</p>
 <p><strong>形式化定义</strong>：</p>
@@ -566,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/27/OS/Lab3_Document/" rel="next" title="Lab3_Document">
-                <i class="fa fa-chevron-left"></i> Lab3_Document
+              <a href="/2017/11/27/OS/串讲复习/" rel="next" title="串讲复习">
+                <i class="fa fa-chevron-left"></i> 串讲复习
               </a>
             
           </div>
@@ -657,7 +660,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -798,7 +801,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共125.2k字</span>
+  <span class="post-count">博客全站共126.3k字</span>
 </div>
 
 

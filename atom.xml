@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-20T18:07:05.913Z</updated>
+  <updated>2018-07-22T17:18:29.482Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Studio从安装到使用</title>
+    <link href="http://yoursite.com/2018/07/22/Android/Android%20Studio%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2018/07/22/Android/Android Studio从安装到使用/</id>
+    <published>2018-07-22T15:28:07.000Z</published>
+    <updated>2018-07-22T17:18:29.482Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android开发真的费劲，这个时候就会不喜欢那堵墙。这篇就记一下遇到过的那些坑。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>matlab notes</title>
@@ -359,18 +375,11 @@
     <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2017/11/29/编译原理/语法分析/</id>
     <published>2017-11-29T09:05:47.000Z</published>
-    <updated>2017-12-03T15:39:40.290Z</updated>
+    <updated>2018-07-22T17:29:11.383Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;语法分析&quot;&gt;&lt;a href=&quot;#语法分析&quot; class=&quot;headerlink&quot; title=&quot;语法分析&quot;&gt;&lt;/a&gt;语法分析&lt;/h1&gt;&lt;p&gt;终于开始语法分析的复习了！&lt;/p&gt;
-&lt;p&gt;上下文无关文法：1. 便于扩充语言特性 2. 语法容易被理解 3.
-        
-      
+      &lt;h1 id=&quot;语法分析&quot;&gt;&lt;a href=&quot;#语法分析&quot; class=&quot;headerlink&quot; title=&quot;语法分析&quot;&gt;&lt;/a&gt;语法分析&lt;/h1&gt;&lt;p&gt;终于开始语法分析的复习了！&lt;/p&gt;
     
     </summary>
     
@@ -378,28 +387,6 @@
     
     
       <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab3_Document</title>
-    <link href="http://yoursite.com/2017/11/27/OS/Lab3_Document/"/>
-    <id>http://yoursite.com/2017/11/27/OS/Lab3_Document/</id>
-    <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2018-07-20T18:07:05.899Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Lab3-Document&quot;&gt;&lt;a href=&quot;#Lab3-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab3 Document&quot;&gt;&lt;/a&gt;Lab3 Document&lt;/h1&gt;
-    
-    </summary>
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
@@ -426,22 +413,24 @@
   </entry>
   
   <entry>
-    <title>计算机网络概述</title>
-    <link href="http://yoursite.com/2017/11/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
-    <id>http://yoursite.com/2017/11/21/计算机网络/计算机网络概述/</id>
-    <published>2017-11-21T13:51:40.000Z</published>
-    <updated>2018-07-20T18:15:11.255Z</updated>
+    <title>Lab3_Document</title>
+    <link href="http://yoursite.com/2017/11/27/OS/Lab3_Document/"/>
+    <id>http://yoursite.com/2017/11/27/OS/Lab3_Document/</id>
+    <published>2017-11-27T11:00:00.000Z</published>
+    <updated>2018-07-20T18:07:05.899Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;这是第一次课！时隔许久，也算是复习啦~&lt;/p&gt;
+      &lt;h1 id=&quot;Lab3-Document&quot;&gt;&lt;a href=&quot;#Lab3-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab3 Document&quot;&gt;&lt;/a&gt;Lab3 Document&lt;/h1&gt;
     
     </summary>
     
-      <category term="计算机网络" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
+    
+      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
     
     
-      <category term="网络课" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%BE/"/>
+      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   
