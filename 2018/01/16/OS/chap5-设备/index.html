@@ -2,163 +2,94 @@
 
 
 
-  
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml">
 
-<script>
-    (function(){
-        if(''){
-            if (prompt('请输入文章密码') !== ''){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
 
 
-  
-  
-    
-    
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-  
-  
-  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Linux,OS," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="设备。">
-<meta name="keywords" content="Linux,OS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="chap5-设备">
-<meta property="og:url" content="http://yoursite.com/2018/01/16/OS/chap5-设备/index.html">
-<meta property="og:site_name" content="日和">
-<meta property="og:description" content="设备。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/15945208.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/31066338.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/93569841.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/96816977.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/68828231.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/8186980.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/71738832.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/49382128.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg">
-<meta property="og:updated_time" content="2018-07-20T18:07:05.911Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="chap5-设备">
-<meta name="twitter:description" content="设备。">
-<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '5.1.3',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
       indexName: 'yayiblogsearch',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
   };
 </script>
 
+  <meta name="description" content="设备。">
+<meta name="keywords" content="OS,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chap5-设备">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;01&#x2F;16&#x2F;OS&#x2F;chap5-%E8%AE%BE%E5%A4%87&#x2F;index.html">
+<meta property="og:site_name" content="日和">
+<meta property="og:description" content="设备。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;95853200.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;15945208.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;31066338.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;93569841.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-17&#x2F;96816977.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-17&#x2F;68828231.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-17&#x2F;8186980.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-17&#x2F;71738832.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;49382128.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-17&#x2F;5015339.jpg">
+<meta property="og:updated_time" content="2018-07-20T18:07:05.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;18-1-16&#x2F;95853200.jpg">
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/OS/chap5-%E8%AE%BE%E5%A4%87/">
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/16/OS/chap5-设备/"/>
-
-
-
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
 
   <title>chap5-设备 | 日和</title>
   
@@ -167,263 +98,197 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">日和</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
         <p class="site-subtitle">BE WITH ME</p>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
+
 
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
       
+      
+        
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
-            
-            日程表
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益404
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-			
-			<!--增加的代码 start-->
-
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
 
-  
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
-  
-  
-  
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap5-设备/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/OS/chap5-%E8%AE%BE%E5%A4%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="傻瓜日和">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="来如春梦不多时 去似朝云无觅处">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日和">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            chap5-设备
+            
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">chap5-设备</h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">发表于</span>
+                
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T23:25:37+08:00">
-                2018-01-16
-              </time>
-            
 
-            
-
-            
-          </span>
-
+              <time title="创建时间：2018-01-16 23:25:37" itemprop="dateCreated datePublished" datetime="2018-01-16T23:25:37+08:00">2018-01-16</time>
+            </span>
           
-            <span class="post-category" >
             
-              <span class="post-meta-divider">|</span>
+
             
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-07-21 02:07:05" itemprop="dateModified" datetime="2018-07-21T02:07:05+08:00">2018-07-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/OS/" itemprop="url" rel="index">
@@ -433,11 +298,11 @@
 
                 
                 
-                  ， 
+                  ，
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/课/" itemprop="url" rel="index">
+                  <a href="/categories/OS/%E8%AF%BE/" itemprop="url" rel="index">
                     <span itemprop="name">课</span>
                   </a>
                 </span>
@@ -449,37 +314,19 @@
           
 
           
-            
-          
-
-<span>&nbsp; | &nbsp;
-<span id="busuanzi_value_page_pv" ></span>次阅读
-</span>    
-
-          
-          
-
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
     
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
+    <div class="post-body" itemprop="articleBody">
 
       
         <p>设备。</p>
 <a id="more"></a>
+
 <h1 id="设备基础"><a href="#设备基础" class="headerlink" title="设备基础"></a>设备基础</h1><p><strong>设备类型</strong></p>
 <p>按功能分类</p>
 <ol>
@@ -569,7 +416,7 @@
 </ol>
 </li>
 </ol>
-<ol>
+<ol start="2">
 <li>内存映射I / O<ol>
 <li>所有器件的寄存器都映射到内存空间</li>
 <li>每个寄存器都分配一个唯一的内存地址</li>
@@ -585,7 +432,7 @@
 </ul>
 </blockquote>
 <p>实际上存在混合编址方案：设备的数据缓存被map到内存，寄存器由io端口指定。</p>
-<ol>
+<ol start="3">
 <li>总线：与前面的并不是并列关系</li>
 </ol>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/95853200.jpg" alt=""><br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-16/15945208.jpg" alt=""></p>
@@ -602,14 +449,7 @@
 <li>多路径：多套寄存器，可同时控制多个I / O设备</li>
 <li>DMA调度：在多个通道之间切换</li>
 </ol>
-<p>DMA的工作模式：</p>
-<pre><code>1. 数据传输模式：一次一个字VS块模式
-</code></pre><ol>
-<li>周期窃取：DMA请求一个字的总线并得到它</li>
-<li>突发模式：DMA获取总线并启动一系列的数据传输</li>
-<li>Fly-by模式：DMA告诉设备控制器直接将数据发送到内存</li>
-<li>设备到设备和存储器到存储器：DMA从设备/存储器获取字并将其发送到目标地址</li>
-</ol>
+<p>DMA的工作模式：<br>    1. 数据传输模式：一次一个字VS块模式<br>2. 周期窃取：DMA请求一个字的总线并得到它<br>3. 突发模式：DMA获取总线并启动一系列的数据传输<br>4. Fly-by模式：DMA告诉设备控制器直接将数据发送到内存<br>5. 设备到设备和存储器到存储器：DMA从设备/存储器获取字并将其发送到目标地址</p>
 <p>DMA中使用的地址：</p>
 <ol>
 <li>物理地址：MMU位于CPU中，CPU将对应内存的虚拟地址转换以后给DMA地址寄存器</li>
@@ -622,8 +462,7 @@
 </blockquote>
 <p>DMA是必需的吗？</p>
 <h3 id="IO通道"><a href="#IO通道" class="headerlink" title="IO通道"></a>IO通道</h3><p>DMA的缺点<br>    缓慢而简单，不能支持复杂的I / O编程<br>I / O通道简介<br>    特殊芯片（PU）用于管理I / O设备<br>    字符复用信道，选择复用信道，组复用信道<br>    I / O通道与CPU共享内存，并与CPU分别工作<br>I / O通道的结构<br>    CAW：地址寄存器，将I / O通道程序的地址存储在内存中<br>    CCW：命令寄存器，存储当前的I / O命令<br>    CSW：状态寄存器，用于存储I / O操作结果的状态<br>    CDW：数据寄存器，数据缓冲区</p>
-<pre><code>![](http://oysmkdi7t.bkt.clouddn.com/18-1-17/67957883.jpg)
-</code></pre><h2 id="IO软件"><a href="#IO软件" class="headerlink" title="IO软件"></a>IO软件</h2><p>同步阻塞VS异步传输<br>    阻塞：用户程序将暂停（挂起），直到I / O操作完成<br>    数据传输：中断到来之前，CPU正在异步工作（对程序来说是阻塞）<br>错误处理<br>    硬件级错误处理：由设备执行（尽量在底层执行）<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理<br>统一命名：一个文件或一个设备的名字应该是一个简单的字符串或是一个整数，不应依赖于设备：<br>    设备独立的概念：<strong>访问任意IO设备而无须事先制定设备</strong><br>    使用I / O设备地址映射名称<br>缓冲<br>    如何根据缓冲区维护数据缓冲区和控制数据传输：数据离开设备通常不会直接到达目的地。（实时约束）<br>设备的分配和释放<br>    如何实现I / O设备共享？<br>    如何避免死锁？</p>
+<pre><code>![](http://oysmkdi7t.bkt.clouddn.com/18-1-17/67957883.jpg)</code></pre><h2 id="IO软件"><a href="#IO软件" class="headerlink" title="IO软件"></a>IO软件</h2><p>同步阻塞VS异步传输<br>    阻塞：用户程序将暂停（挂起），直到I / O操作完成<br>    数据传输：中断到来之前，CPU正在异步工作（对程序来说是阻塞）<br>错误处理<br>    硬件级错误处理：由设备执行（尽量在底层执行）<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理<br>统一命名：一个文件或一个设备的名字应该是一个简单的字符串或是一个整数，不应依赖于设备：<br>    设备独立的概念：<strong>访问任意IO设备而无须事先制定设备</strong><br>    使用I / O设备地址映射名称<br>缓冲<br>    如何根据缓冲区维护数据缓冲区和控制数据传输：数据离开设备通常不会直接到达目的地。（实时约束）<br>设备的分配和释放<br>    如何实现I / O设备共享？<br>    如何避免死锁？</p>
 <h3 id="IO软件层次"><a href="#IO软件层次" class="headerlink" title="IO软件层次"></a>IO软件层次</h3><p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/68828231.jpg" alt=""></p>
 <h4 id="中断-1"><a href="#中断-1" class="headerlink" title="中断"></a>中断</h4><p>如何由用户控制I / O设备？<br>    用户进程请求I / O并被阻止<br>    设备驱动程序启动I / O操作并被阻止<br>    I / O设备完成操作并发送中断<br>    设备驱动程序完成并且用户进程被唤醒<br>中断的工作流程<br>    硬件级错误处理：由设备执行<br>    高级错误处理：将状态返回到更高级别并由内核/用户程序处理</p>
 <p><strong>在终端形成之后，在软中断中</strong>：<br>保存没被硬件保存的所有寄存器<br>为中断服务程序设置上下文（运行环境）<br>为中断服务程序设置栈<br>应答中断控制器, 再次开放中断<br>寄存器从被保存的地方复制到进程表中<br>运行中断服务程序<br>为下次要运行进程设置ＭＭＵ上下文<br>装载新的进程寄存器<br>开始运行新进程</p>
@@ -631,8 +470,7 @@
 <p>对设备执行操作进行控制的代码是设备驱动程序</p>
 <p>设备驱动程序的逻辑位置被指明<br>驱动程序与设备控制器之间通过总线完成通信</p>
 <p>设备驱动程序介绍<br>    控制设备控制器的说明：更上层，忽视了设备之间的区别<br>    设备驱动程序始终视为内核进程：这样才能访问设备控制的寄存器（可以作为用户进程，需要系统调用，消除系统崩溃的一个源头）<br>    OS为抽象驱动程序提供统一的接口：如上图<br>    设备驱动程序：静态库或动态库（目前主流是动态）<br>设备驱动程序的工作流程<br>    接收并检查高级进程发送的参数<br>    检查设备并启动设备（当前是不是在使用？初始化设备，电源需求，日志等）<br>    配置设备的寄存器（将向设备发送的指令存进设备控制器的控制寄存器，检查控制器是不是已经接收命令并准备接受下一个命令，直到所有命令都送出）<br>    接收I / O操作的状态<br>设备驱动程序的重要问题<br>    同步阻塞VS无延迟运行（需要长时间处理，设备驱动程序进程阻塞自己，直到中断到来唤醒；不需要长时间，完成后应检查错误。随后可能会将数据发给某个设备无关软件，返回一个信息。如果还有命令就执行，没有的话就阻塞自己）<br>    可重入：驱动程序的复杂性（第一次调用完成之前第二次到来<br>    可热插拔的系统和内存请求：传送必须被终止，请求应该被抹去。有时候新设备的到来可能夺走旧设备的资源</p>
-<pre><code>设备驱动程序以阿布年不允许系统调用，但是可以调用内核的某些过程。比如DMA、定时器、分配释放硬接线的内存页面等。
-</code></pre><h3 id="与设备无关的io软件"><a href="#与设备无关的io软件" class="headerlink" title="与设备无关的io软件"></a>与设备无关的io软件</h3><ol>
+<pre><code>设备驱动程序以阿布年不允许系统调用，但是可以调用内核的某些过程。比如DMA、定时器、分配释放硬接线的内存页面等。</code></pre><h3 id="与设备无关的io软件"><a href="#与设备无关的io软件" class="headerlink" title="与设备无关的io软件"></a>与设备无关的io软件</h3><ol>
 <li><p>设备驱动程序的统一接口</p>
 </li>
 <li><p>引入缓冲的方式</p>
@@ -640,11 +478,11 @@
 </ol>
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/71738832.jpg" alt=""></p>
 <p>(a) 无缓冲输入<br>(b) 缓冲区放在用户空间<br>(c) 缓冲区在核心空间，然后被复制到用户空间<br>(d) 在内核空间有双缓冲区</p>
-<ol>
+<ol start="3">
 <li>适当的使用缓冲</li>
 </ol>
 <p>缓冲技术在io中很普遍，但是数据传递中太多的缓冲会影响系统性能</p>
-<ol>
+<ol start="4">
 <li><p>IO中错误报告：</p>
 <ol>
 <li>建立io的错误处理机制，尽量在底层处理错误</li>
@@ -668,324 +506,219 @@
 4.可刻录／可重写ＣＤ
 5.ＤＶＤ
 6. 磁盘格式化问题
-7.磁盘访问调度策略
-</code></pre><p>柱面定位时间：磁头移动到指定柱面的机械运动时间；<br>旋转延迟时间：磁盘旋转到指定扇区的机械运动时间；它与磁盘转速相关，如：软盘转速可为600r/m(每分钟转速)，硬盘可为10000r/m。<br>数据传送时间：从指定扇区读写数据的时间。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg" alt=""></p>
-<pre><code>柱面定位（寻道）时间在访问时间中是主项，合理组织磁盘数据的存储位置可提高磁盘I/O性能。
-</code></pre><p>例：读一个128KB大小的文件：<br>(1)文件若由8个连续磁道(每磁道32个扇区)上的256个扇区构成：<br>        20ms+(8.3ms+16.7ms)<em>8=220ms;<br>其中，柱面定位时间为20ms，旋转延迟时间为8.3ms，32扇区数据传送时间为16.7ms；<br>(2)文件若由256个随机分布的扇区构成：<br>        (20ms+8.3ms+0.5ms)</em>256=7373ms;<br>其中，1扇区数据传送时间为0.5ms；<br>随机分布时的访问时间为连续分布时的33.5倍。</p>
+7.磁盘访问调度策略</code></pre><p>柱面定位时间：磁头移动到指定柱面的机械运动时间；<br>旋转延迟时间：磁盘旋转到指定扇区的机械运动时间；它与磁盘转速相关，如：软盘转速可为600r/m(每分钟转速)，硬盘可为10000r/m。<br>数据传送时间：从指定扇区读写数据的时间。<br><img src="http://oysmkdi7t.bkt.clouddn.com/18-1-17/5015339.jpg" alt=""></p>
+<pre><code>柱面定位（寻道）时间在访问时间中是主项，合理组织磁盘数据的存储位置可提高磁盘I/O性能。</code></pre><p>例：读一个128KB大小的文件：<br>(1)文件若由8个连续磁道(每磁道32个扇区)上的256个扇区构成：<br>        20ms+(8.3ms+16.7ms)<em>8=220ms;<br>其中，柱面定位时间为20ms，旋转延迟时间为8.3ms，32扇区数据传送时间为16.7ms；<br>(2)文件若由256个随机分布的扇区构成：<br>        (20ms+8.3ms+0.5ms)</em>256=7373ms;<br>其中，1扇区数据传送时间为0.5ms；<br>随机分布时的访问时间为连续分布时的33.5倍。</p>
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>短查找时间优先算法（SSTF）：按磁头臂移动最小距离优先分配磁盘。磁盘使用率高，分配快。</p>
 <p>扫描(SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，然后反方向移动再进行分配。保证队列中不出现饿死情况。（或称电梯法）</p>
 <p>循环扫描(C-SCAN)算法：磁头沿一个方向移动，并为请求进程分配磁盘，到头后返回重新移动。可减少等待时间。</p>
 <p> N步扫描(N-step-SCAN)算法：把磁盘I/O请求队列分成长度为N的段，每次使用扫描算法处理这N个请求。当N=1时，该算法退化为FIFO算法。</p>
 <p> 双队列扫描(FSCAN)算法：请求队列分成两个，一个用做处理，一个用做存放新到请求。</p>
 
-      
     </div>
-    
-    
-    
 
     
-
     
-
     
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者：</strong>
-    傻瓜日和
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/01/16/OS/chap5-设备/" title="chap5-设备">http://yoursite.com/2018/01/16/OS/chap5-设备/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>
-    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+        
+      
 
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/OS/" rel="tag"># OS</a>
+            
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/01/16/OS/chap6-%E6%AD%BB%E9%94%81/" rel="next" title="chap6-死锁">
+                  <i class="fa fa-chevron-left"></i> chap6-死锁
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/01/17/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%A4%8D%E4%B9%A0%E8%AF%BE/" rel="prev" title="编译复习课">
+                  编译复习课 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设备基础"><span class="nav-number">1.</span> <span class="nav-text">设备基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件介绍"><span class="nav-number">1.1.</span> <span class="nav-text">硬件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备的工作流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">设备的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何访问设备？"><span class="nav-number">1.1.2.</span> <span class="nav-text">如何访问设备？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备工作模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">设备工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#忙等待"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">忙等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中断"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DMA"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">DMA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO通道"><span class="nav-number">1.1.4.</span> <span class="nav-text">IO通道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO软件"><span class="nav-number">1.2.</span> <span class="nav-text">IO软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO软件层次"><span class="nav-number">1.2.1.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断-1"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">设备驱动程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与设备无关的io软件"><span class="nav-number">1.2.2.</span> <span class="nav-text">与设备无关的io软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户空间的IO"><span class="nav-number">1.2.3.</span> <span class="nav-text">用户空间的IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spooling"><span class="nav-number">1.2.4.</span> <span class="nav-text">spooling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘管理"><span class="nav-number">2.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">2.1.</span> <span class="nav-text">算法</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="傻瓜日和">
+  <p class="site-author-name" itemprop="name">傻瓜日和</p>
+  <div class="site-description" itemprop="description">来如春梦不多时 去似朝云无觅处</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
       </div>
     
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/OS/" rel="tag"># OS</a>
-          
-        </div>
-      
-<div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
-    
-</div>
-  
-</div>
-
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/16/OS/chap6-死锁/" rel="next" title="chap6-死锁">
-                <i class="fa fa-chevron-left"></i> chap6-死锁
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/17/编译原理/编译复习课/" rel="prev" title="编译复习课">
-                编译复习课 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  
-
-
-        </div>
+      <div class="site-state-item site-state-categories">
         
           
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yayi2456" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;yayi2456" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:yangying2456@gmail.com" title="E-Mail &amp;rarr; mailto:yangying2456@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
 
-      
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="傻瓜日和" />
-            
-              <p class="site-author-name" itemprop="name">傻瓜日和</p>
-              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">58</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          <div class="links-of-author motion-element">
-            
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
-                    
-                      <i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
-                    
-                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
-                    
-                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
-                    
-                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
-                </span>
-              
-            
-          </div>
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设备基础"><span class="nav-number">1.</span> <span class="nav-text">设备基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件介绍"><span class="nav-number">1.1.</span> <span class="nav-text">硬件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备的工作流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">设备的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何访问设备？"><span class="nav-number">1.1.2.</span> <span class="nav-text">如何访问设备？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备工作模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">设备工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#忙等待"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">忙等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中断"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DMA"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">DMA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO通道"><span class="nav-number">1.1.4.</span> <span class="nav-text">IO通道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO软件"><span class="nav-number">1.2.</span> <span class="nav-text">IO软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO软件层次"><span class="nav-number">1.2.1.</span> <span class="nav-text">IO软件层次</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断-1"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备驱动程序"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">设备驱动程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与设备无关的io软件"><span class="nav-number">1.2.2.</span> <span class="nav-text">与设备无关的io软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户空间的IO"><span class="nav-number">1.2.3.</span> <span class="nav-text">用户空间的IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spooling"><span class="nav-number">1.2.4.</span> <span class="nav-text">spooling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘管理"><span class="nav-number">2.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">2.1.</span> <span class="nav-text">算法</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
-
-  
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
   <span class="post-meta-divider">|</span>
-
-
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
-
-
-	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
-您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
-
-
-
-<div class="theme-info">
-  <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
-</div>
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  </div>
 
         
 
 
 
 
-  <script type="text/javascript">
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//tajs.qq.com/stats?sId=64002140";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
 
 
 
@@ -993,29 +726,16 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/pisces.js?v=7.4.2"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
+<script src="/js/next-boot.js?v=7.4.2"></script>
 
 
 
@@ -1028,456 +748,32 @@
 
 
 
+  <script src="/js/local-search.js?v=7.4.2"></script>
 
 
 
 
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
 </script>
 
 
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
 
 
   
@@ -1485,34 +781,8 @@
   
 
   
-  
-<div id="hexo-helper-live2d">
-  <canvas id="live2dcanvas" width="150" height="300"></canvas>
-</div>
-<style>
-  #live2dcanvas{
-    position: fixed;
-    width: 150px;
-    height: 300px;
-    opacity:0.7;
-    right: 0px;
-    z-index: 999;
-    pointer-events: none;
-    bottom: -20px;
-  }
-</style>
-<script type="text/javascript" src="/live2d/device.min.js"></script>
-<script type="text/javascript">
-const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
-(function(){
-  if((typeof(device) != 'undefined') && (device.mobile())){
-    document.getElementById("live2dcanvas").style.width = '75px';
-    document.getElementById("live2dcanvas").style.height = '150px';
-  }else
-    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
-})();
-</script>
 
-</body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"hijiki","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-22T17:18:29.482Z</updated>
+  <updated>2019-10-26T11:10:34.856Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,79 +17,183 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Android Studio从安装到使用</title>
-    <link href="http://yoursite.com/2018/07/22/Android/Android%20Studio%E4%BB%8E%E5%AE%89%E8%A3%85%E5%88%B0%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2018/07/22/Android/Android Studio从安装到使用/</id>
-    <published>2018-07-22T15:28:07.000Z</published>
-    <updated>2018-07-22T17:18:29.482Z</updated>
+    <title>模式识别-绪论</title>
+    <link href="http://yoursite.com/2019/10/22/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-1/"/>
+    <id>http://yoursite.com/2019/10/22/模式识别课程/模式识别-1/</id>
+    <published>2019-10-22T02:04:22.123Z</published>
+    <updated>2019-10-26T11:10:34.856Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;Android开发真的费劲，这个时候就会不喜欢那堵墙。这篇就记一下遇到过的那些坑。&lt;/p&gt;
+      &lt;h2 id=&quot;本章指南&quot;&gt;&lt;a href=&quot;#本章指南&quot; class=&quot;headerlink&quot; title=&quot;本章指南&quot;&gt;&lt;/a&gt;本章指南&lt;/h2&gt;&lt;h3 id=&quot;重点&quot;&gt;&lt;a href=&quot;#重点&quot; class=&quot;headerlink&quot; title=&quot;重点&quot;&gt;&lt;/a&gt;重点&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;什么是模式识别？什么是模式？模式识别可以解决什么问题？&lt;/li&gt;
+&lt;li&gt;模式的描述方法？&lt;/li&gt;
+&lt;li&gt;模式识别系统的组成？&lt;/li&gt;
+&lt;li&gt;模式识别利用训练样本&lt;strong&gt;设计分类器的原理&lt;/strong&gt;是什么？两种最基本分类方法？它们的原理？&lt;/li&gt;
+&lt;li&gt;为什么要用分界面来实现机器自动识别与分类？&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
+    
+    
+      <category term="模式识别" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/"/>
     
   </entry>
   
   <entry>
-    <title>matlab notes</title>
-    <link href="http://yoursite.com/2018/05/29/MATLAB/matlab%E5%A4%8D%E4%B9%A0/"/>
-    <id>http://yoursite.com/2018/05/29/MATLAB/matlab复习/</id>
-    <published>2018-05-29T08:55:39.779Z</published>
-    <updated>2018-07-20T18:07:05.913Z</updated>
+    <title>Range Proof【未完</title>
+    <link href="http://yoursite.com/2019/10/16/%E7%AE%97%E6%B3%95%E5%8D%8F%E8%AE%AE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/rangeproof/"/>
+    <id>http://yoursite.com/2019/10/16/算法协议系统设计/rangeproof/</id>
+    <published>2019-10-16T05:32:40.000Z</published>
+    <updated>2019-10-16T05:36:37.789Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;fx.&lt;/p&gt;
+      &lt;p&gt;提起range proof，另外两个概念也会被经常提及，一个是&lt;strong&gt;Commitment&lt;/strong&gt;，另一个是&lt;strong&gt;ZeroKnowledge Proof&lt;/strong&gt;。&lt;br&gt;提起commitment，是因为这些proof一般需要通过commitment实现，提及zeroKnowledge，是因为证明往往需要“零知识”。commitment是手段，而range proof的一个特点便是zeroKnowledge proof（不然直接揭示结果好了，干嘛用这么麻烦的range proof），需要使用zeroKnowledge Proof的方法。&lt;/p&gt;
     
     </summary>
     
-      <category term="matlab" scheme="http://yoursite.com/categories/matlab/"/>
+    
+      <category term="算法协议系统设计" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%8D%8F%E8%AE%AE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"/>
     
     
-      <category term="matlab" scheme="http://yoursite.com/tags/matlab/"/>
+      <category term="RP" scheme="http://yoursite.com/tags/RP/"/>
     
   </entry>
   
   <entry>
-    <title>对话框（5</title>
-    <link href="http://yoursite.com/2018/05/26/MFC%E5%9F%BA%E7%A1%80/MFC%EF%BC%9A%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%885/"/>
-    <id>http://yoursite.com/2018/05/26/MFC基础/MFC：对话框（5/</id>
-    <published>2018-05-25T17:17:47.000Z</published>
-    <updated>2018-07-20T17:30:21.138Z</updated>
+    <title>拜占庭协议——236357byzantine generals</title>
+    <link href="http://yoursite.com/2019/10/16/%E7%AE%97%E6%B3%95%E5%8D%8F%E8%AE%AE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/%E6%8B%9C%E5%8D%A0%E5%BA%AD236357/"/>
+    <id>http://yoursite.com/2019/10/16/算法协议系统设计/拜占庭236357/</id>
+    <published>2019-10-16T05:27:36.000Z</published>
+    <updated>2019-10-16T05:36:37.851Z</updated>
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;p&gt;这是第五章了…话说我第三章还没写完…不过既然今天讲了第五章，而且昨天又为了作业了解了一些对话框的知识，横竖就先写第五章吧。&lt;/p&gt;
+      &lt;p&gt;本文是236357Distributed Algorithms-The byzantine generals文档的总结。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img2018.cnblogs.com/blog/1781858/201909/1781858-20190902153812814-1203709140.png&quot; alt=&quot;236357头图&quot;&gt;&lt;/p&gt;
     
     </summary>
     
     
-      <category term="MFC" scheme="http://yoursite.com/tags/MFC/"/>
+      <category term="算法协议系统设计" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%8D%8F%E8%AE%AE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"/>
     
-      <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+      <category term="BFTP" scheme="http://yoursite.com/tags/BFTP/"/>
     
   </entry>
   
   <entry>
-    <title>Vim命令</title>
-    <link href="http://yoursite.com/2018/05/23/LINUX%E5%9F%BA%E7%A1%80/Vim%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2018/05/23/LINUX基础/Vim命令/</id>
-    <published>2018-05-23T10:58:27.180Z</published>
-    <updated>2018-07-20T18:07:05.892Z</updated>
+    <title>VMware中宿主机与虚拟机之间共享剪切板失效问题</title>
+    <link href="http://yoursite.com/2019/10/16/%E6%97%A5%E5%B8%B8%E7%90%90%E7%A2%8E/Vmware%E5%85%B1%E4%BA%AB%E5%89%AA%E5%88%87%E6%9D%BF%E5%A4%B1%E6%95%88/"/>
+    <id>http://yoursite.com/2019/10/16/日常琐碎/Vmware共享剪切板失效/</id>
+    <published>2019-10-16T05:26:05.000Z</published>
+    <updated>2019-10-16T05:36:37.790Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;简单的Vim。&lt;/p&gt;
+      &lt;p&gt;直接导致无法复制文件、复制文本等。而虚拟机开个VS code就够慢了，实在是需要与宿主机更好的交互。&lt;/p&gt;
     
     </summary>
     
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+      <category term="日常琐碎" scheme="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8%E7%90%90%E7%A2%8E/"/>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="日常琐碎" scheme="http://yoursite.com/tags/%E6%97%A5%E5%B8%B8%E7%90%90%E7%A2%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>shadow</title>
+    <link href="http://yoursite.com/2019/10/16/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/shadow/"/>
+    <id>http://yoursite.com/2019/10/16/效率工具/shadow/</id>
+    <published>2019-10-16T05:24:21.000Z</published>
+    <updated>2019-10-16T05:36:37.789Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;shadow，一款开源的网络模拟器。似乎只是作者的个人项目，坑有点多，记录一下安装过程，踩到的坑，也有一些新的学到的东西。&lt;/p&gt;
+&lt;p&gt;shadow的维护感觉不太好，很多wiki教程不太清楚，很多包太吃版本。&lt;/p&gt;
+&lt;p&gt;首先po出项目地址：&lt;a href=&quot;https://github.com/shadow/shadow&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;shadow/shadow&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="效率工具" scheme="http://yoursite.com/categories/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="效率工具" scheme="http://yoursite.com/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅处理多参数返回/无参数返回——std::optional</title>
+    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E/"/>
+    <id>http://yoursite.com/2019/10/16/语言学习/C++/多参返回与无参返回/</id>
+    <published>2019-10-16T05:20:18.000Z</published>
+    <updated>2019-10-16T05:36:37.747Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是std-optional？&quot;&gt;&lt;a href=&quot;#什么是std-optional？&quot; class=&quot;headerlink&quot; title=&quot;什么是std::optional？&quot;&gt;&lt;/a&gt;什么是std::optional？&lt;/h2&gt;&lt;p&gt;C++17中新引入了&lt;code&gt;std::optional&amp;lt;T&amp;gt;&lt;/code&gt;。类模板&lt;code&gt;std::optional&lt;/code&gt;管理一个&lt;strong&gt;可选&lt;/strong&gt;的容纳值。简单说来，&lt;code&gt;std::optional&lt;/code&gt;就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="语言学习" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>size_t——为什么支持size_t，何时使用size_t？</title>
+    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/size_t/"/>
+    <id>http://yoursite.com/2019/10/16/语言学习/C++/size_t/</id>
+    <published>2019-10-16T05:20:18.000Z</published>
+    <updated>2019-10-16T05:37:11.636Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;为什么会有-”size-t为何要存在”-的疑问？&quot;&gt;&lt;a href=&quot;#为什么会有-”size-t为何要存在”-的疑问？&quot; class=&quot;headerlink&quot; title=&quot;为什么会有 ”size_t为何要存在” 的疑问？&quot;&gt;&lt;/a&gt;为什么会有 ”size_t为何要存在” 的疑问？&lt;/h2&gt;&lt;p&gt;许多C/C++文件中都会出现类型&lt;code&gt;size_t&lt;/code&gt;，比如在bitcoin源码中，有这样的一个函数：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="语言学习" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go Tour</title>
+    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/Go/GoTour/"/>
+    <id>http://yoursite.com/2019/10/16/语言学习/Go/GoTour/</id>
+    <published>2019-10-16T05:20:12.000Z</published>
+    <updated>2019-10-16T05:36:37.747Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本篇内容多数来自于Go语言之旅中文教程。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="语言学习" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Go" scheme="http://yoursite.com/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/Go/"/>
+    
+    
+      <category term="Go" scheme="http://yoursite.com/tags/Go/"/>
     
   </entry>
   
@@ -106,50 +210,11 @@
     
     </summary>
     
+    
       <category term="日本語" scheme="http://yoursite.com/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
     
     
       <category term="日本語" scheme="http://yoursite.com/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu-windows 共享文件夹</title>
-    <link href="http://yoursite.com/2018/05/17/LINUX%E5%9F%BA%E7%A1%80/ubuntu-windows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/"/>
-    <id>http://yoursite.com/2018/05/17/LINUX基础/ubuntu-windows共享文件夹/</id>
-    <published>2018-05-17T09:13:40.612Z</published>
-    <updated>2018-07-20T17:35:37.222Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;实际写的时间应该是2017年9-26。最初写在了CSDN。因为要放弃CSDN了，就挪过来。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
-    
-    
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>记一次linux server版本的get桌面</title>
-    <link href="http://yoursite.com/2018/04/27/LINUX%E5%9F%BA%E7%A1%80/%E8%AE%B0%E4%B8%80%E6%AC%A1linux-server%E7%89%88%E6%9C%AC%E7%9A%84get%E6%A1%8C%E9%9D%A2/"/>
-    <id>http://yoursite.com/2018/04/27/LINUX基础/记一次linux-server版本的get桌面/</id>
-    <published>2018-04-27T04:22:00.000Z</published>
-    <updated>2018-07-20T16:44:18.742Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;流水账，顺便带一点操作方法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -166,6 +231,7 @@
     
     </summary>
     
+    
       <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
     
     
@@ -174,37 +240,18 @@
   </entry>
   
   <entry>
-    <title>matlab notes</title>
-    <link href="http://yoursite.com/2018/02/26/MATLAB/matlab_notes/"/>
-    <id>http://yoursite.com/2018/02/26/MATLAB/matlab_notes/</id>
-    <published>2018-02-26T06:27:50.037Z</published>
-    <updated>2018-07-20T18:07:05.893Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上课时候的笔记。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="matlab" scheme="http://yoursite.com/categories/matlab/"/>
-    
-    
-      <category term="matlab" scheme="http://yoursite.com/tags/matlab/"/>
-    
-  </entry>
-  
-  <entry>
     <title>编译复习课</title>
     <link href="http://yoursite.com/2018/01/17/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%A4%8D%E4%B9%A0%E8%AF%BE/"/>
     <id>http://yoursite.com/2018/01/17/编译原理/编译复习课/</id>
     <published>2018-01-17T09:04:37.000Z</published>
-    <updated>2018-07-20T18:14:06.509Z</updated>
+    <updated>2018-07-20T18:18:39.575Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;词法分析语法分析语义分析：分析阶段&lt;br&gt;中间…综合阶段&lt;/p&gt;
     
     </summary>
+    
     
       <category term="编译" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91/"/>
     
@@ -226,14 +273,15 @@
     
     </summary>
     
+    
       <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
     
       <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -250,14 +298,15 @@
     
     </summary>
     
+    
       <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
     
       <category term="课" scheme="http://yoursite.com/categories/OS/%E8%AF%BE/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -281,6 +330,7 @@
     
     </summary>
     
+    
       <category term="我的故事" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/"/>
     
       <category term="因寄所托" scheme="http://yoursite.com/categories/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/%E5%9B%A0%E5%AF%84%E6%89%80%E6%89%98/"/>
@@ -300,6 +350,7 @@
       &lt;h1 id=&quot;Lab4-Document&quot;&gt;&lt;a href=&quot;#Lab4-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab4-Document&quot;&gt;&lt;/a&gt;Lab4-Document&lt;/h1&gt;
     
     </summary>
+    
     
       <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
     
@@ -323,6 +374,7 @@
     
     </summary>
     
+    
       <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
     
@@ -335,13 +387,14 @@
     <link href="http://yoursite.com/2017/12/02/%E7%90%90%E7%A2%8E/"/>
     <id>http://yoursite.com/2017/12/02/琐碎/</id>
     <published>2017-12-02T03:16:13.000Z</published>
-    <updated>2018-07-20T18:14:55.538Z</updated>
+    <updated>2018-07-23T05:29:30.600Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;git的beanch原来真的可以在本地也切换啊！&lt;br&gt;当我用git checkout lab3的时候，文件夹里的东西也会跟着变。&lt;br&gt;这也就解释了，为什么我明明从写好的lab3复制文件到lab4的lab3却没反应，因为我根本就没有复制到la4文件夹的lab3分支！首先进入lab3再复制，最后进入lab4分支，指定merge lab3分支，成功！。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="琐碎" scheme="http://yoursite.com/categories/%E7%90%90%E7%A2%8E/"/>
     
@@ -359,9 +412,10 @@
     
     <summary type="html">
     
-      &lt;p&gt;Tiny C中的语法树：节点分为两类 语句 表达式&lt;br&gt;
+      &lt;p&gt;Tiny C中的语法树：节点分为两类 语句 表达式&lt;/p&gt;
     
     </summary>
+    
     
       <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
@@ -383,6 +437,7 @@
     
     </summary>
     
+    
       <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
     
@@ -403,27 +458,6 @@
     
     </summary>
     
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab3_Document</title>
-    <link href="http://yoursite.com/2017/11/27/OS/Lab3_Document/"/>
-    <id>http://yoursite.com/2017/11/27/OS/Lab3_Document/</id>
-    <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2018-07-20T18:07:05.899Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Lab3-Document&quot;&gt;&lt;a href=&quot;#Lab3-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab3 Document&quot;&gt;&lt;/a&gt;Lab3 Document&lt;/h1&gt;
-    
-    </summary>
     
       <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
     

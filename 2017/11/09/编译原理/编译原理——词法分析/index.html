@@ -2,163 +2,94 @@
 
 
 
-  
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml">
 
-<script>
-    (function(){
-        if('yayi'){
-            if (prompt('请输入文章密码') !== 'yayi'){
-                alert('密码错误！');
-                history.back();
-            }
-        }
-    })();
-</script>
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
 
 
-  
-  
-    
-    
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-
-
-  
-  
-  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="编译原理," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty">
-<meta name="keywords" content="编译原理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="编译原理——词法分析">
-<meta property="og:url" content="http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/index.html">
-<meta property="og:site_name" content="日和">
-<meta property="og:description" content="我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-12/6339247.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-12/3363060.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-9/60487283.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/65136532.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/4345780.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/17062978.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/80510309.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/99180281.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/86068172.jpg">
-<meta property="og:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-10/70925658.jpg">
-<meta property="og:updated_time" content="2018-07-20T17:10:19.167Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编译原理——词法分析">
-<meta name="twitter:description" content="我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty">
-<meta name="twitter:image" content="http://oysmkdi7t.bkt.clouddn.com/17-11-12/6339247.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    version: '5.1.3',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
     algolia: {
-      applicationID: '',
+      appID: '',
       apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
       indexName: 'yayiblogsearch',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
   };
 </script>
 
+  <meta name="description" content="我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty">
+<meta name="keywords" content="编译原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理——词法分析">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2017&#x2F;11&#x2F;09&#x2F;%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86&#x2F;%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="日和">
+<meta property="og:description" content="我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-12&#x2F;6339247.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-12&#x2F;3363060.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-9&#x2F;60487283.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;65136532.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;4345780.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;17062978.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;80510309.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;99180281.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;86068172.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-10&#x2F;70925658.jpg">
+<meta property="og:updated_time" content="2018-07-20T17:10:19.167Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;oysmkdi7t.bkt.clouddn.com&#x2F;17-11-12&#x2F;6339247.jpg">
+  <link rel="canonical" href="http://yoursite.com/2017/11/09/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/"/>
-
-
-
-
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
 
   <title>编译原理——词法分析 | 日和</title>
   
@@ -167,266 +98,200 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?8214766f6334490a524e10cda5fd72cf";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">日和</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
         <p class="site-subtitle">BE WITH ME</p>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
+
 
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
+  <ul id="menu" class="menu">
       
+      
+        
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
-            
-            日程表
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益404
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-			
-			<!--增加的代码 start-->
-
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
 
-  
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
-  
-  
-  
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="傻瓜日和">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="来如春梦不多时 去似朝云无觅处">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日和">
     </span>
-
-    
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            编译原理——词法分析
+            
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">编译原理——词法分析</h1>
-        
+          
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
+
               
-                <span class="post-meta-item-text">发表于</span>
+                
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T00:44:47+08:00">
-                2017-11-09
-              </time>
-            
 
-            
-
-            
-          </span>
-
+              <time title="创建时间：2017-11-09 00:44:47" itemprop="dateCreated datePublished" datetime="2017-11-09T00:44:47+08:00">2017-11-09</time>
+            </span>
           
-            <span class="post-category" >
             
-              <span class="post-meta-divider">|</span>
+
             
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-07-21 01:10:19" itemprop="dateModified" datetime="2018-07-21T01:10:19+08:00">2018-07-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编译原理/" itemprop="url" rel="index">
+                  <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
                     <span itemprop="name">编译原理</span>
                   </a>
                 </span>
@@ -438,39 +303,23 @@
           
 
           
-            
-          
-
-<span>&nbsp; | &nbsp;
-<span id="busuanzi_value_page_pv" ></span>次阅读
-</span>    
-
-          
-          
-
-          
-
-          
-
-          
 
         </div>
       </header>
-    
 
     
     
     
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
+    <div class="post-body" itemprop="articleBody">
 
       
         <p>我有罪….我先是用学编译的时间逛了淘宝….然后又用学编译的时间逛了六维…..我有罪….\infty</p>
 <a id="more"></a>
+
 <blockquote>
 <p>时间：1012cp3 3:15开始 词法分析器介绍</p>
+</blockquote>
+<blockquote>
 <p>编译并不是一件轻松的事情，对于较大的系统，编译的速度并不理想，这也是为什么我们需要优化编译技术。</p>
 </blockquote>
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><strong>词法单元（单词）</strong>：由一个词法单元名以及一个可选的属性值组成。名即是语法分析器的输入符号token。<br><strong>模式</strong>：一个词法单元的词素可能具有的形式。一个词素不能与两个或多个词法单元进行匹配（二义性）。<br><strong>词素</strong>：源程序中的字符序列，是程序中实际出现的字符串。</p>
@@ -498,29 +347,27 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:center">运算</th>
-<th style="text-align:center">定义</th>
+<th align="center">运算</th>
+<th align="center">定义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">并</td>
-<td style="text-align:center">$L\cup M={ s \ s\in L 或 s\in M} $</td>
+<tbody><tr>
+<td align="center">并</td>
+<td align="center">$L\cup M={ s \ s\in L 或 s\in M} $</td>
 </tr>
 <tr>
-<td style="text-align:center">交</td>
-<td style="text-align:center">$LM={ st \ s\in L 且 t\in M} $</td>
+<td align="center">交</td>
+<td align="center">$LM={ st \ s\in L 且 t\in M} $</td>
 </tr>
 <tr>
-<td style="text-align:center">Kleen闭包</td>
-<td style="text-align:center">$L^*=\cup_{i=0}^\infty L^i$</td>
+<td align="center">Kleen闭包</td>
+<td align="center">$L^*=\cup_{i=0}^\infty L^i$</td>
 </tr>
 <tr>
-<td style="text-align:center">正则闭包</td>
-<td style="text-align:center">$L^*=\cup_{i=1}^\infty L^i$</td>
+<td align="center">正则闭包</td>
+<td align="center">$L^*=\cup_{i=1}^\infty L^i$</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>$$\color{red}{正则表达式&lt;-&gt;语言运算的简洁描述}$$</p>
 <h2 id="正则表达式定义"><a href="#正则表达式定义" class="headerlink" title="正则表达式定义"></a>正则表达式定义</h2><p>字母表$\sum$上的正规式r的定义规则，以及r所表示语言L(r)定义：</p>
 <ol>
@@ -543,12 +390,12 @@
 <p>可以像产生式那样，为正规式指定名字：</p>
 <blockquote>
 <p>num -&gt; r1<br>其实，上下文无关文法的描述能力包含了正则表达式的描述能力。所有可以被正则表达式描述的都可以被上下文无关文法描述，但是正则表达式并不能描述某些上下文无关文法可以描述的东西。<br>那么为什么需要正则表达式来实现词法分析器？</p>
+</blockquote>
 <ol>
 <li>简化编译器的设计：使每一阶段需要做的事情更加简单清晰</li>
 <li>提高编译器的效率：使用专门的字符缓冲技术提高编译速度</li>
 <li>增强编译器的可移植性：输入设备相关的特殊性被限制在词法阶段</li>
 </ol>
-</blockquote>
 <p>下面举一个例子：</p>
 <blockquote>
 <p>无符号整数：<br>digit -&gt; 0|1|2|…|9<br>digits -&gt; digit digit*  其实也可以是$digit^+$<br>optional_fraction -&gt; .digits | $\epsilon$<br>optional_exponent -&gt; (E(+|-|$\epsilon$)digits)|$\epsilon<br>num -&gt; digits optional_fraction optional_exponent</p>
@@ -556,14 +403,14 @@
 <p><strong>符号简写：</strong></p>
 <p><strong>+</strong>:一个或多个实例<br><strong>?</strong>:0或1个实例：$r?=r|\epsilon$$\rightarrow$$L(r)\cup {\epsilon}$<br><strong>[]字符集</strong>:[abc]=&gt;a|b|c、[a-z0-9]=&gt;a|b|..|z|0|1..|9</p>
 <h2 id="非正规集"><a href="#非正规集" class="headerlink" title="非正规集"></a>非正规集</h2><p><strong>正规式无法描述的语言</strong>：{wcw|w是a、b组成的字符串}正规式无法描述平衡或嵌套的结构<br><strong>正规式只能表示</strong>：有限的重复、一个给定结构的无限重复</p>
-<p>关于正规式的练习，参考<a href="http://blank" target="_blank" rel="external">第三章练习</a></p>
+<p>关于正规式的练习，参考<a href="http://blank" target="_blank" rel="noopener">第三章练习</a></p>
 <h1 id="Lex"><a href="#Lex" class="headerlink" title="Lex"></a>Lex</h1><p>使用流程与yacc类似。</p>
 <p>$\color{red}{ATTENTION!</p>
 <p>在使用project wizard建立lex的时候你写的那个词法分析器的名字就是那个名字，</p>
 <p>你最好别自己再修改，否则在VS里面运行不出来！！！}$</p>
 <p>给的是字符流，出来的是单词流。</p>
 <p>规则段放正则表达式与语义动作。</p>
-<p>第四次作业词法分析器设计将会上传。<a href="http://blank" target="_blank" rel="external">click here to get</a></p>
+<p>第四次作业词法分析器设计将会上传。<a href="http://blank" target="_blank" rel="noopener">click here to get</a></p>
 <h1 id="有限自动机"><a href="#有限自动机" class="headerlink" title="有限自动机"></a>有限自动机</h1><p>有限自动机可以直接转换成程序。</p>
 <h2 id="NFA"><a href="#NFA" class="headerlink" title="NFA"></a>NFA</h2><h1 id="从正则表达式到自动机"><a href="#从正则表达式到自动机" class="headerlink" title="从正则表达式到自动机"></a>从正则表达式到自动机</h1><p>从这之后，正是lex所做的事情。</p>
 <p>在这一节里，将介绍两个过程：一个是正则表达式到NFA，另一个是NFA到DFA。之所以让NFA做一个过渡，是因为正则表达式直接到DFA的算法很复杂。本次更新掠过。</p>
@@ -590,6 +437,8 @@
 <p><strong>算法描述：</strong>首先使用$\epsilon$区分终态与非终态，将它们分为两个集合。随后，像子集构造法那样，有顺序地枚举输入字符串，将那些经过状态迁移能到达终态（不同集合）的状态剔除出去组成一个新的集合（如果两者到达同一个集合，这两者是不能区分的，应该在同一个集合），对于那些含有多个元素的集合，如果经过一系列不同的状态迁移到达不同的集合，仍需要继续分开。直到不再产生新的集合。</p>
 <blockquote>
 <p>仍然使用上面的例子，进行分裂的过程：</p>
+</blockquote>
+<blockquote>
 <ol>
 <li>$\epsilon$ -&gt; {A,B,C,D}、{E}</li>
 <li>a -&gt; {A,B,C,D}  ({B,B,B,B})-&gt;全部一样，以a打头的不用再试</li>
@@ -601,7 +450,7 @@
 <p><img src="http://oysmkdi7t.bkt.clouddn.com/17-11-10/4345780.jpg" alt=""></p>
 </blockquote>
 <p>最后使用新的状态进行迁移的时候，一定不会出现问题。</p>
-<h1 id="补充：从自动机到正则表达式"><a href="#补充：从自动机到正则表达式" class="headerlink" title="补充：从自动机到正则表达式"></a>补充：从自动机到正则表达式</h1><p>可以从一个DFA或NFA得到对应的正则表达式。但是这种方式并不是总是简单的，他只是提供了一个模糊的思路，当一个DFA很复杂的时候，还是需要有聪明才智才行。<br>这里只是简单的给出这个方法，具体可查看<a href="http://note.youdao.com/noteshare?id=9fa52c6fcb1a6637fbdb36f669852abe&amp;sub=9A6AEF1D34C044E68D8BD1AD2057996E" target="_blank" rel="external">这个文件</a>。</p>
+<h1 id="补充：从自动机到正则表达式"><a href="#补充：从自动机到正则表达式" class="headerlink" title="补充：从自动机到正则表达式"></a>补充：从自动机到正则表达式</h1><p>可以从一个DFA或NFA得到对应的正则表达式。但是这种方式并不是总是简单的，他只是提供了一个模糊的思路，当一个DFA很复杂的时候，还是需要有聪明才智才行。<br>这里只是简单的给出这个方法，具体可查看<a href="http://note.youdao.com/noteshare?id=9fa52c6fcb1a6637fbdb36f669852abe&sub=9A6AEF1D34C044E68D8BD1AD2057996E" target="_blank" rel="noopener">这个文件</a>。</p>
 <p>为了使讨论更加简单，我们强制一个DFA/NFA应该有下列特性：</p>
 <ol>
 <li>初态可以到达任意其他状态，没有状态可以通过状态迁移到达初态</li>
@@ -626,312 +475,209 @@
 </li>
 </ol>
 
-      
     </div>
-    
-    
-    
 
     
-
     
-
     
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者：</strong>
-    傻瓜日和
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/" title="编译原理——词法分析">http://yoursite.com/2017/11/09/编译原理/编译原理——词法分析/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>
-    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
+        
+      
 
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag"># 编译原理</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/11/06/OS/chap2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" rel="next" title="chap2-进程与线程">
+                  <i class="fa fa-chevron-left"></i> chap2-进程与线程
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/11/12/%E8%AF%AD%E8%A8%80%E4%BB%AC%E7%9A%84%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6/" rel="prev" title="语言们的输出格式控制">
+                  语言们的输出格式控制 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器要干些什么？"><span class="nav-number">1.1.</span> <span class="nav-text">词法分析器要干些什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式（正规表达式、正规式）"><span class="nav-number">2.</span> <span class="nav-text">正则表达式（正规表达式、正规式）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算"><span class="nav-number">2.2.</span> <span class="nav-text">运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号串的运算"><span class="nav-number">2.2.1.</span> <span class="nav-text">符号串的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言的运算"><span class="nav-number">2.2.2.</span> <span class="nav-text">语言的运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式定义"><span class="nav-number">2.3.</span> <span class="nav-text">正则表达式定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非正规集"><span class="nav-number">2.4.</span> <span class="nav-text">非正规集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lex"><span class="nav-number">3.</span> <span class="nav-text">Lex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有限自动机"><span class="nav-number">4.</span> <span class="nav-text">有限自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NFA"><span class="nav-number">4.1.</span> <span class="nav-text">NFA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从正则表达式到自动机"><span class="nav-number">5.</span> <span class="nav-text">从正则表达式到自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则-gt-NFA"><span class="nav-number">5.1.</span> <span class="nav-text">正则 -&gt; NFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动机运转"><span class="nav-number">5.2.</span> <span class="nav-text">自动机运转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DFA优化"><span class="nav-number">6.</span> <span class="nav-text">DFA优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：从自动机到正则表达式"><span class="nav-number">7.</span> <span class="nav-text">补充：从自动机到正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#能不能与好不好"><span class="nav-number">8.</span> <span class="nav-text">能不能与好不好</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="傻瓜日和">
+  <p class="site-author-name" itemprop="name">傻瓜日和</p>
+  <div class="site-description" itemprop="description">来如春梦不多时 去似朝云无觅处</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
       </div>
     
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/编译原理/" rel="tag"># 编译原理</a>
-          
-        </div>
-      
-<div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------结束啦 <i class="fa fa-paw"></i> 留下你的爪印叭~-------------</div>
-    
-</div>
-  
-</div>
-
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/06/OS/chap2-进程与线程/" rel="next" title="chap2-进程与线程">
-                <i class="fa fa-chevron-left"></i> chap2-进程与线程
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/12/语言们的输出格式控制/" rel="prev" title="语言们的输出格式控制">
-                语言们的输出格式控制 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  
-
-
-        </div>
+      <div class="site-state-item site-state-categories">
         
           
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yayi2456" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;yayi2456" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:yangying2456@gmail.com" title="E-Mail &amp;rarr; mailto:yangying2456@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
 
-      
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
-                alt="傻瓜日和" />
-            
-              <p class="site-author-name" itemprop="name">傻瓜日和</p>
-              <p class="site-description motion-element" itemprop="description">来如春梦不多时 去似朝云无觅处</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">58</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          <div class="links-of-author motion-element">
-            
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/yayi2456" target="_blank" title="GitHub">
-                    
-                      <i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
-                    
-                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
-                    
-                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://weibo.com/2723381840/" target="_blank" title="Weibo">
-                    
-                      <i class="fa fa-fw fa-weibo"></i>Weibo</a>
-                </span>
-              
-            
-          </div>
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器要干些什么？"><span class="nav-number">1.1.</span> <span class="nav-text">词法分析器要干些什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式（正规表达式、正规式）"><span class="nav-number">2.</span> <span class="nav-text">正则表达式（正规表达式、正规式）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算"><span class="nav-number">2.2.</span> <span class="nav-text">运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号串的运算"><span class="nav-number">2.2.1.</span> <span class="nav-text">符号串的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言的运算"><span class="nav-number">2.2.2.</span> <span class="nav-text">语言的运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式定义"><span class="nav-number">2.3.</span> <span class="nav-text">正则表达式定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非正规集"><span class="nav-number">2.4.</span> <span class="nav-text">非正规集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lex"><span class="nav-number">3.</span> <span class="nav-text">Lex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有限自动机"><span class="nav-number">4.</span> <span class="nav-text">有限自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NFA"><span class="nav-number">4.1.</span> <span class="nav-text">NFA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从正则表达式到自动机"><span class="nav-number">5.</span> <span class="nav-text">从正则表达式到自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则-gt-NFA"><span class="nav-number">5.1.</span> <span class="nav-text">正则 -> NFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动机运转"><span class="nav-number">5.2.</span> <span class="nav-text">自动机运转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DFA优化"><span class="nav-number">6.</span> <span class="nav-text">DFA优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充：从自动机到正则表达式"><span class="nav-number">7.</span> <span class="nav-text">补充：从自动机到正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#能不能与好不好"><span class="nav-number">8.</span> <span class="nav-text">能不能与好不好</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
-
-  
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
   <span class="post-meta-divider">|</span>
-
-
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
-
-
-	<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
-您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
-
-
-
-<div class="theme-info">
-  <div class="powered-by"></div>
-  <span class="post-count">博客全站共126.3k字</span>
-</div>
-
-
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  </div>
 
         
 
 
 
 
-  <script type="text/javascript">
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//tajs.qq.com/stats?sId=64002140";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+
+
+
 
 
 
@@ -939,29 +685,16 @@
         
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/pisces.js?v=7.4.2"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
+<script src="/js/next-boot.js?v=7.4.2"></script>
 
 
 
@@ -974,456 +707,32 @@
 
 
 
+  <script src="/js/local-search.js?v=7.4.2"></script>
 
 
 
 
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
 <script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
 </script>
 
 
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
 
 
   
@@ -1431,34 +740,8 @@
   
 
   
-  
-<div id="hexo-helper-live2d">
-  <canvas id="live2dcanvas" width="150" height="300"></canvas>
-</div>
-<style>
-  #live2dcanvas{
-    position: fixed;
-    width: 150px;
-    height: 300px;
-    opacity:0.7;
-    right: 0px;
-    z-index: 999;
-    pointer-events: none;
-    bottom: -20px;
-  }
-</style>
-<script type="text/javascript" src="/live2d/device.min.js"></script>
-<script type="text/javascript">
-const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
-(function(){
-  if((typeof(device) != 'undefined') && (device.mobile())){
-    document.getElementById("live2dcanvas").style.width = '75px';
-    document.getElementById("live2dcanvas").style.height = '150px';
-  }else
-    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
-})();
-</script>
 
-</body>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"hijiki","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

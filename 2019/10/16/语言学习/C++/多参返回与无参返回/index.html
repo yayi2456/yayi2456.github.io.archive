@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+  <link rel="alternate" href="/atom.xml" title="日和" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '61a4cd7c1bed364065c7fe56474ba5df',
+      indexName: 'yayiblogsearch',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="什么是std::optional？C++17中新引入了std::optional&amp;lt;T&amp;gt;。类模板std::optional管理一个可选的容纳值。简单说来，std::optional就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅处理多参数返回&#x2F;无参数返回——std::optional">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;16&#x2F;%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0&#x2F;C++&#x2F;%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E&#x2F;index.html">
+<meta property="og:site_name" content="日和">
+<meta property="og:description" content="什么是std::optional？C++17中新引入了std::optional&amp;lt;T&amp;gt;。类模板std::optional管理一个可选的容纳值。简单说来，std::optional就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-16T05:36:37.747Z">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>如何优雅处理多参数返回/无参数返回——std::optional | 日和</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">日和</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">BE WITH ME</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻瓜日和">
+      <meta itemprop="description" content="来如春梦不多时 去似朝云无觅处">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日和">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            如何优雅处理多参数返回/无参数返回——std::optional
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-16 13:20:18 / 修改时间：13:36:37" itemprop="dateCreated datePublished" datetime="2019-10-16T13:20:18+08:00">2019-10-16</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">语言学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是std-optional？"><a href="#什么是std-optional？" class="headerlink" title="什么是std::optional？"></a>什么是std::optional？</h2><p>C++17中新引入了<code>std::optional&lt;T&gt;</code>。类模板<code>std::optional</code>管理一个<strong>可选</strong>的容纳值。简单说来，<code>std::optional</code>就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。</p>
+<a id="more"></a>
+<h2 id="如何处理无参返回？"><a href="#如何处理无参返回？" class="headerlink" title="如何处理无参返回？"></a>如何处理无参返回？</h2><p>此前处理无参返回的函数一般有两种方式。</p>
+<h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> param1, <span class="keyword">int</span>*param2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>返回参数作为引用/指针型输入参数而存在，传入地址，在执行完毕后访问指定地址得到返回值，而使用真正的返回值来作为函数是否成功的返回。<br>这种方式可以实现需求。<br>缺点是：</p>
+<ol>
+<li>浪费存储空间——无论是否返回值，都需要做好有值的准备，<code>param2</code>的空间需要事先分配</li>
+<li>可读性/可用性差——同为参数，有的是输入参，有的是输出参，即使以名字取分，使用的时候也比较困难。</li>
+</ol>
+<h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::pair&lt;T,<span class="keyword">bool</span>&gt;foo(<span class="keyword">int</span> param1);</span><br></pre></td></tr></table></figure>
+<p>这是比较常用的方式，解决了问题2——每次使用都知道返回值是<code>pair</code>的第一个值，第二个值专门用于成功与否的判断。<br>不过<code>std::optional</code>继续优化了处理方式。</p>
+<p>正如前述，<code>std::optional</code>管理的是<strong>可选的</strong>容纳值。如果函数成功执行，则实例含值，如果执行失败，实例不含值。</p>
+<h2 id="如何处理多参返回？"><a href="#如何处理多参返回？" class="headerlink" title="如何处理多参返回？"></a>如何处理多参返回？</h2><p>这都不是个问题，<code>class</code>，<code>struct</code>，哪个都比直接放在一个<code>tuple</code>里面或者更过分的直接列在函数参数里面好。</p>
+<h2 id="使用std-optional"><a href="#使用std-optional" class="headerlink" title="使用std::optional"></a>使用std::optional<T></h2><ul>
+<li>定义位置：<code>&lt;optional&gt;</code></li>
+<li>T：一个满足<strong>可析构</strong>的类型</li>
+<li>初始化：<ul>
+<li>使用<code>=</code>用另一个<code>T</code>类型含值<code>std::optional</code>初始化</li>
+<li>使用构造函数初始化：以<code>nullopt_t</code>类型值或是<code>T</code>类型值</li>
+<li>默认构造函数</li>
+</ul>
+</li>
+<li>是否含值：<ul>
+<li>使用<code>bool hasValue=temp.has_value()</code>检查是否含值</li>
+</ul>
+</li>
+<li>取值：<ul>
+<li>使用<code>（*temp）</code>取<code>T</code>，<em>即默认为<code>T</code>的指针</em></li>
+<li>使用<code>temp.value()</code>获取<code>T</code>值</li>
+<li>使用<code>temp.value_or()</code>获取值（存在值）或者其他（不存在值）</li>
+</ul>
+</li>
+<li>返回：<ul>
+<li>一个<code>T</code>对象（非指针）</li>
+<li><code>nullopt</code></li>
+<li><code>{}</code></li>
+<li><strong>…</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="一个实例："><a href="#一个实例：" class="headerlink" title="一个实例："></a>一个实例：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个可析构类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> num1;</span><br><span class="line">    <span class="keyword">int</span> num2;</span><br><span class="line">    Test(<span class="keyword">int</span> n1,<span class="keyword">int</span> n2)&#123;</span><br><span class="line">        num1=n1;</span><br><span class="line">        num2=n2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isOK</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num1+num2&gt;=<span class="number">0</span>?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个可能执行失败的函数【有点草率，看看语法就好</span></span><br><span class="line"><span class="built_in">std</span>::optional&lt;Test&gt;foo(<span class="keyword">int</span> num)&#123;</span><br><span class="line">    <span class="function">Test <span class="title">t</span><span class="params">(num,num)</span></span>;</span><br><span class="line">    <span class="keyword">if</span>(t.isOK())&#123;</span><br><span class="line">        <span class="comment">//返回正常对象</span></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回空值</span></span><br><span class="line">    <span class="keyword">return</span> nullopt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> myAge=<span class="number">20</span>;</span><br><span class="line">    <span class="comment">//一种赋值方式</span></span><br><span class="line">    <span class="built_in">std</span>::optional&lt;Test&gt;opt=foo(myAge);</span><br><span class="line">    <span class="comment">//一种判断是否含值的方式</span></span><br><span class="line">    <span class="keyword">if</span>(opt.has_value())&#123;</span><br><span class="line">        <span class="comment">//foo函数成功执行</span></span><br><span class="line">        <span class="comment">//一种取值方式</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;(opt.value()).num1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://zh.cppreference.com/w/cpp/utility/optional" target="_blank" rel="noopener">cppreference-std::optional <strong>更多特性/支持的操作请访问</strong></a><br><a href="https://zhuanlan.zhihu.com/p/64985296" target="_blank" rel="noopener">C++17 新特性之 std::optional（上）<strong>更好地理解为何使用std::optional请访问</strong></a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/C/" rel="tag"># C++</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/size_t/" rel="next" title="size_t——为什么支持size_t，何时使用size_t？">
+                  <i class="fa fa-chevron-left"></i> size_t——为什么支持size_t，何时使用size_t？
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/16/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/shadow/" rel="prev" title="shadow">
+                  shadow <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是std-optional？"><span class="nav-number">1.</span> <span class="nav-text">什么是std::optional？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理无参返回？"><span class="nav-number">2.</span> <span class="nav-text">如何处理无参返回？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种："><span class="nav-number">2.1.</span> <span class="nav-text">第一种：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种："><span class="nav-number">2.2.</span> <span class="nav-text">第二种：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理多参返回？"><span class="nav-number">3.</span> <span class="nav-text">如何处理多参返回？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用std-optional"><span class="nav-number">4.</span> <span class="nav-text">使用std::optional</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个实例："><span class="nav-number">4.1.</span> <span class="nav-text">一个实例：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="傻瓜日和">
+  <p class="site-author-name" itemprop="name">傻瓜日和</p>
+  <div class="site-description" itemprop="description">来如春梦不多时 去似朝云无觅处</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yayi2456" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;yayi2456" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:yangying2456@gmail.com" title="E-Mail &amp;rarr; mailto:yangying2456@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻瓜日和</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/pisces.js?v=7.4.2"></script>
+
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.2"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":"hijiki","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
