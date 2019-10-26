@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="本章指南重点 什么是模式识别？什么是模式？模式识别可以解决什么问题？ 模式的描述方法？ 模式识别系统的组成？ 模式识别利用训练样本设计分类器的原理是什么？两种最基本分类方法？它们的原理？ 为什么要用分界面来实现机器自动识别与分类？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-26T11:10:34.856Z">
+<meta property="og:updated_time" content="2019-10-26T11:55:07.512Z">
 <meta name="twitter:card" content="summary">
   <link rel="canonical" href="http://yoursite.com/2019/10/22/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-1/">
 
@@ -269,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-26 19:10:34" itemprop="dateModified" datetime="2019-10-26T19:10:34+08:00">2019-10-26</time>
+                <time title="修改时间：2019-10-26 19:55:07" itemprop="dateModified" datetime="2019-10-26T19:55:07+08:00">2019-10-26</time>
               </span>
             
           
@@ -316,8 +316,14 @@
 <blockquote>
 <p>与人辨别事物相比，机器识别事物的方法是很不同的，在目前也是很简单与低级的，因此机器识别事物的能力还很差。这主要的原因是人们在学习与认识事物中会总结出规律，并把这些规律性的东西抽象成“概念”。人之所以能“抽象出概念”，关键能分析事物中哪些是本质，哪些是表面现象，或由偶然因素引起的。但机器目前的抽象能力是很差的。</p>
 </blockquote>
-<p>让机器辨别事物的最基本方法是计算，原则上讲是对计算机要分析的事物与作为标准的称之为“模板”的相似程度进行计算。譬如说脑子里有没有瘤，就要与标准的脑图像以及有瘤图像做比较，看跟哪个更相似。要识别一个具体数字，就要将它与从0到9的样板做比较，看跟哪个模板最相似，或最接近。因此首先要能从度量中看出不同事物之间的差异，才能分辨当前要识别的事物(称为测试样本)跟哪类事物更接近。因此==找到有效地度量不同类事物的差异的方法是最关键的==。</p>
+<p>让机器辨别事物的最基本方法是计算，原则上讲是对计算机要分析的事物与作为标准的称之为“模板”的相似程度进行计算。譬如说脑子里有没有瘤，就要与标准的脑图像以及有瘤图像做比较，看跟哪个更相似。要识别一个具体数字，就要将它与从0到9的样板做比较，看跟哪个模板最相似，或最接近。因此首先要能从度量中看出不同事物之间的差异，才能分辨当前要识别的事物(称为测试样本)跟哪类事物更接近。因此<strong>找到有效地度量不同类事物的差异的方法是最关键的</strong>。</p>
 <h3 id="模式的描述方法"><a href="#模式的描述方法" class="headerlink" title="模式的描述方法"></a>模式的描述方法</h3><p>用来决策事物类别的特点或属性称为事物的特征，模式由一个或多个特征描述。<br>模式的描述方法可以分为两类，一种是对事物的属性进行度量，属于定量的表示方法；另一种是对事物包含的成分进行度量，属于定性的描述，或是结构性描述。</p>
+<p>定性是指特征的有无，比如小汽车和坦克都有驾驶装置，这不能作为区分它们的依据，但是坦克有炮，小汽车没有炮，有没有炮可以成为区分它们的特征；<br>定量是指特征取值的不同，比如癌细胞与正常细胞有同样的特征类别，但是这些特征取值在使用检测条件下呈现不同的值，可以通过不同的取值范围来区分癌细胞与正常细胞。在这种情况下，模式的特征集表示，又可写成处于同一个特征空间的特征向量表示。待识别的不同类模式都在同一特征空间中考察，不同类物体由于性质上的不同，它们在各特征取值范围上有所不同，因而在特征空间的不同区域中出现。<br><strong>小结</strong>：</p>
+<pre class="mermaid">graph LR
+A[特征]-->|表示|B[模式]
+B-->C[定性: 特征的有无]
+B-->D[定量: 特征的取值]</pre>
+
 
     </div>
 
@@ -560,7 +566,7 @@
 
 <script>
 if (document.querySelectorAll('pre.mermaid').length) {
-  NexT.utils.getScript('cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
     mermaid.initialize({
       theme: 'forest',
       logLevel: 3,
