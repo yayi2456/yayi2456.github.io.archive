@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-26T11:55:07.512Z</updated>
+  <updated>2019-12-05T15:45:24.374Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>琐碎的区块</title>
+    <link href="http://yoursite.com/2019/12/05/%E5%8C%BA%E5%9D%97%E9%93%BE%E9%A1%B9%E7%9B%AE/%E7%90%90%E7%A2%8E/"/>
+    <id>http://yoursite.com/2019/12/05/区块链项目/琐碎/</id>
+    <published>2019-12-05T12:29:05.000Z</published>
+    <updated>2019-12-05T15:45:24.374Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;搞了这么久区块链，这几天看一个项目，发现有一些系统运行上的问题不太懂。想来最近过度专注于共识这一个小块，却忽略了整体的细节。&lt;br&gt;这一个文档用来整理这些被忽略的地方，大多是小知识点。&lt;br&gt;最后等待整合。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="区块链" scheme="http://yoursite.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+      <category term="工程研究" scheme="http://yoursite.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%B7%A5%E7%A8%8B%E7%A0%94%E7%A9%B6/"/>
+    
+    
+      <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>贝叶斯决策理论与统计判别方法</title>
+    <link href="http://yoursite.com/2019/10/28/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-2/"/>
+    <id>http://yoursite.com/2019/10/28/模式识别课程/模式识别-2/</id>
+    <published>2019-10-28T12:29:59.090Z</published>
+    <updated>2019-11-19T12:00:05.964Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;本章指南&quot;&gt;&lt;a href=&quot;#本章指南&quot; class=&quot;headerlink&quot; title=&quot;本章指南&quot;&gt;&lt;/a&gt;本章指南&lt;/h2&gt;&lt;p&gt;本章说明为何会有错分类，什么情况下会出现错分类，有多大的可能性出现错分类。&lt;br&gt;另一方面，错分类有不同情况，把A错分成B和把B错分为A是不同的，它们造成的危害程度不尽相同，因此引入&lt;strong&gt;风险&lt;/strong&gt;与&lt;strong&gt;损失&lt;/strong&gt;的概念。&lt;br&gt;理解这一章的关键是理解&lt;strong&gt;先验概率&lt;/strong&gt;、&lt;strong&gt;类概率密度函数&lt;/strong&gt;以及&lt;strong&gt;后验概率&lt;/strong&gt;。他们三者的关系体现在贝叶斯（Bayes）公式中。&lt;br&gt;本章的讨论代表了基于&lt;strong&gt;统计参数&lt;/strong&gt;来设计分类器的方法的基础。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="模式识别" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>模式识别-绪论</title>
     <link href="http://yoursite.com/2019/10/22/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-1/"/>
     <id>http://yoursite.com/2019/10/22/模式识别课程/模式识别-1/</id>
     <published>2019-10-22T02:04:22.123Z</published>
-    <updated>2019-10-26T11:55:07.512Z</updated>
+    <updated>2019-10-29T02:51:11.915Z</updated>
     
     <summary type="html">
     
@@ -129,15 +171,15 @@
   </entry>
   
   <entry>
-    <title>size_t——为什么支持size_t，何时使用size_t？</title>
-    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/size_t/"/>
-    <id>http://yoursite.com/2019/10/16/语言学习/C++/size_t/</id>
+    <title>如何优雅处理多参数返回/无参数返回——std::optional</title>
+    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E/"/>
+    <id>http://yoursite.com/2019/10/16/语言学习/C++/多参返回与无参返回/</id>
     <published>2019-10-16T05:20:18.000Z</published>
-    <updated>2019-10-16T05:37:11.636Z</updated>
+    <updated>2019-10-16T05:36:37.747Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;为什么会有-”size-t为何要存在”-的疑问？&quot;&gt;&lt;a href=&quot;#为什么会有-”size-t为何要存在”-的疑问？&quot; class=&quot;headerlink&quot; title=&quot;为什么会有 ”size_t为何要存在” 的疑问？&quot;&gt;&lt;/a&gt;为什么会有 ”size_t为何要存在” 的疑问？&lt;/h2&gt;&lt;p&gt;许多C/C++文件中都会出现类型&lt;code&gt;size_t&lt;/code&gt;，比如在bitcoin源码中，有这样的一个函数：&lt;/p&gt;
+      &lt;h2 id=&quot;什么是std-optional？&quot;&gt;&lt;a href=&quot;#什么是std-optional？&quot; class=&quot;headerlink&quot; title=&quot;什么是std::optional？&quot;&gt;&lt;/a&gt;什么是std::optional？&lt;/h2&gt;&lt;p&gt;C++17中新引入了&lt;code&gt;std::optional&amp;lt;T&amp;gt;&lt;/code&gt;。类模板&lt;code&gt;std::optional&lt;/code&gt;管理一个&lt;strong&gt;可选&lt;/strong&gt;的容纳值。简单说来，&lt;code&gt;std::optional&lt;/code&gt;就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。&lt;/p&gt;
     
     </summary>
     
@@ -152,15 +194,15 @@
   </entry>
   
   <entry>
-    <title>如何优雅处理多参数返回/无参数返回——std::optional</title>
-    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/%E5%A4%9A%E5%8F%82%E8%BF%94%E5%9B%9E%E4%B8%8E%E6%97%A0%E5%8F%82%E8%BF%94%E5%9B%9E/"/>
-    <id>http://yoursite.com/2019/10/16/语言学习/C++/多参返回与无参返回/</id>
+    <title>size_t——为什么支持size_t，何时使用size_t？</title>
+    <link href="http://yoursite.com/2019/10/16/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/C++/size_t/"/>
+    <id>http://yoursite.com/2019/10/16/语言学习/C++/size_t/</id>
     <published>2019-10-16T05:20:18.000Z</published>
-    <updated>2019-10-16T05:36:37.747Z</updated>
+    <updated>2019-10-16T05:37:11.636Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;什么是std-optional？&quot;&gt;&lt;a href=&quot;#什么是std-optional？&quot; class=&quot;headerlink&quot; title=&quot;什么是std::optional？&quot;&gt;&lt;/a&gt;什么是std::optional？&lt;/h2&gt;&lt;p&gt;C++17中新引入了&lt;code&gt;std::optional&amp;lt;T&amp;gt;&lt;/code&gt;。类模板&lt;code&gt;std::optional&lt;/code&gt;管理一个&lt;strong&gt;可选&lt;/strong&gt;的容纳值。简单说来，&lt;code&gt;std::optional&lt;/code&gt;就是一个和类型，常见的用处就是作为函数返回值来处理一个可能失败的函数。&lt;/p&gt;
+      &lt;h2 id=&quot;为什么会有-”size-t为何要存在”-的疑问？&quot;&gt;&lt;a href=&quot;#为什么会有-”size-t为何要存在”-的疑问？&quot; class=&quot;headerlink&quot; title=&quot;为什么会有 ”size_t为何要存在” 的疑问？&quot;&gt;&lt;/a&gt;为什么会有 ”size_t为何要存在” 的疑问？&lt;/h2&gt;&lt;p&gt;许多C/C++文件中都会出现类型&lt;code&gt;size_t&lt;/code&gt;，比如在bitcoin源码中，有这样的一个函数：&lt;/p&gt;
     
     </summary>
     
@@ -405,27 +447,6 @@
   
   <entry>
     <title>编译原理——语法分析</title>
-    <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2017/11/29/编译原理/语法分析/</id>
-    <published>2017-11-29T09:05:47.000Z</published>
-    <updated>2018-07-22T17:29:11.383Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;语法分析&quot;&gt;&lt;a href=&quot;#语法分析&quot; class=&quot;headerlink&quot; title=&quot;语法分析&quot;&gt;&lt;/a&gt;语法分析&lt;/h1&gt;&lt;p&gt;终于开始语法分析的复习了！&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编译原理" scheme="http://yoursite.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编译原理——语法分析</title>
     <link href="http://yoursite.com/2017/11/29/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%B6%E5%AF%BC%E7%BF%BB%E8%AF%91/"/>
     <id>http://yoursite.com/2017/11/29/编译原理/语法制导翻译/</id>
     <published>2017-11-29T09:05:47.000Z</published>
@@ -442,29 +463,6 @@
     
     
       <category term="编译原理" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lab3_Document</title>
-    <link href="http://yoursite.com/2017/11/27/OS/Lab3_Document/"/>
-    <id>http://yoursite.com/2017/11/27/OS/Lab3_Document/</id>
-    <published>2017-11-27T11:00:00.000Z</published>
-    <updated>2018-07-20T18:07:05.899Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Lab3-Document&quot;&gt;&lt;a href=&quot;#Lab3-Document&quot; class=&quot;headerlink&quot; title=&quot;Lab3 Document&quot;&gt;&lt;/a&gt;Lab3 Document&lt;/h1&gt;
-    
-    </summary>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/categories/OS/"/>
-    
-      <category term="MIT Lab" scheme="http://yoursite.com/categories/OS/MIT-Lab/"/>
-    
-    
-      <category term="OS" scheme="http://yoursite.com/tags/OS/"/>
     
   </entry>
   

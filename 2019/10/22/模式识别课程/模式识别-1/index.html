@@ -26,7 +26,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Muse',
     version: '7.4.2',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="日和">
 <meta property="og:description" content="本章指南重点 什么是模式识别？什么是模式？模式识别可以解决什么问题？ 模式的描述方法？ 模式识别系统的组成？ 模式识别利用训练样本设计分类器的原理是什么？两种最基本分类方法？它们的原理？ 为什么要用分界面来实现机器自动识别与分类？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-26T11:55:07.512Z">
+<meta property="og:updated_time" content="2019-10-29T02:51:11.915Z">
 <meta name="twitter:card" content="summary">
   <link rel="canonical" href="http://yoursite.com/2019/10/22/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-1/">
 
@@ -181,6 +181,8 @@
     
   </ul>
 
+    
+
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -217,8 +219,6 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-            
-
           <div class="content">
             
 
@@ -269,7 +269,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-26 19:55:07" itemprop="dateModified" datetime="2019-10-26T19:55:07+08:00">2019-10-26</time>
+                <time title="修改时间：2019-10-29 10:51:11" itemprop="dateModified" datetime="2019-10-29T10:51:11+08:00">2019-10-29</time>
               </span>
             
           
@@ -322,8 +322,94 @@
 <pre class="mermaid">graph LR
 A[特征]-->|表示|B[模式]
 B-->C[定性: 特征的有无]
-B-->D[定量: 特征的取值]</pre>
-
+B-->D[定量: 特征的取值]
+D-->E[特征向量表示法, 结构表示法]</pre>
+<h3 id="模式识别系统"><a href="#模式识别系统" class="headerlink" title="模式识别系统"></a>模式识别系统</h3><pre class="mermaid">graph LR
+A[数据获取]-->B[预处理]
+B-->C[特征提取]
+C-->|1: 训练, 确定参数|D[设计分类器]
+D-->E(分类决策)
+C-->|2: 确定的分类器|E</pre>
+<p>在上图中，1是训练得到一个分类器模型的过程，2是使用该分类器模型得到对模式的分类的过程。</p>
+<p><strong>数据获取</strong>：该环节主要使用传感器等获取需要的原始数据。比如癌细胞病理切片、语音信号、待识别文本等；<br><strong>预处理</strong>：将获取的数据中的噪声减弱、将有用的信息信号增强等。预处理之后，<em>数据应该能够直接被分类器处理</em>；<br><strong>特征选择与提取</strong>：选择什么特征，如何表示特征。这一模块的功能是对所获取的信息实现从测量空间到特征空间的转换。<a href="#">第四章将进一步讨论</a>。<br><strong>分类决策</strong>：计算待识别事物的属性，分析它是否满足是某类事物的条件。一般来说，同一类事物之间属性应比较近似，而不同类事物之间的属性之间应差异较大。这种现象表现在特征空间的分布中往往表现出同类事物的特征向量聚集在一起，聚集在一个相对集中的区域，而不同事物则分别占据不同的区域。在特征空间中哪个区域是某类事物典型所在区域需要用数学式子划定，这样一来，满足这种数学式子与否就成为分类决策的依据。如何确定这些数学式子就是分类器设计的任务，而一旦这种数学式子确定后，分类决策的方法也就确定了。</p>
+<p><strong>注意</strong>：由于模式识别的具体任务是千差万别的，而信息获取与预处理乃至特征选择和提取的具体内容与处理对象密切有关，是各种不同的学科研究与分析的重点，这里无法进行深入讨论，如涉及这方面内容也只是作为举例说明用。</p>
+<h4 id="例：车牌识别"><a href="#例：车牌识别" class="headerlink" title="例：车牌识别"></a>例：车牌识别</h4><p>车牌识别可以使用上述流程完成：车牌定位模块从整幅图中定位出车牌的精确位置，该部分结束后，会有一些候选车牌区域。随后对这些区域都进行字符识别，选择效果最好的那个识别结果。</p>
+<pre class="mermaid">graph LR
+    subgraph 车牌定位模块
+    A[原始图像]-->B[提取边缘分布特征]
+    B-->|训练|C[依据分布特征分类]
+    C-->|识别|D[提取车牌区域]
+    B-->D
+    end
+    subgraph 字符识别模块
+    D==>|所有候选结果|E[预处理: 字符切分]
+    E-->F[模板匹配方法等]
+    F-->|训练|G[依据为模板制定的特征描述]
+    G-->|识别|H[字符获取]
+    F-->H
+    end</pre>
+<p>其中：</p>
+<ol>
+<li>提取边缘特征利用<strong>车牌部分的纹理分布</strong>，主要利用的是水平和竖直两个方向上的边缘。在车牌部分，边缘分布比较密集，可以利用这一点提取出候选的车牌区域。粗略定位的结果往往不是很准，我们还可以利用<strong>颜色的连续性信息</strong>对定位的结果进行修正；</li>
+<li>字符分割把车牌中的一个个字符逐一切分开，在下一步的识别中对每一个字符分别处理。分割的方法就是利用<strong>灰度图像往水平方向的投影</strong>。在有数字或字符的部分，这个投影值应该比较大，而在字符之间的间隙处，投影的累计值几乎为零。同时，如果划分结果比较合理，划分出的每个字符的宽度都差不多，那么说明这个区域比较像车牌；</li>
+<li>字符识别的方法很多，神经元网络，PCA，特征提取及匹配等，模板匹配和特征提取是比较常用的方法；<ul>
+<li>模板匹配是把样本字符与输入的待识别字符作匹配，如果两个字符很像(在某种距离度量下距离很小)，说明匹配成功，把这个模板的对应字符作为输出结果。</li>
+<li>特征提取的方法是对样本和待测图像都先提取一些明显的特征，例如对“5”和“9”考虑其右上角是否封口，可以用维数较低的向量来描述图像，而且这些特征都是有代表性，可以用来区分不同样本。但是不足之处是特征需要手工设计，工作量较大。</li>
+<li>PCA方法可以从大量样本中训练得到每一类的特点。它的不足之处是样本的对齐(align)问题，如果训练时没有对齐，会影响训练结果，如果识别时没有对齐，会产生错误的识别结果。</li>
+</ul>
+</li>
+</ol>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><h5 id="训练与学习"><a href="#训练与学习" class="headerlink" title="训练与学习"></a>训练与学习</h5><p>传统的模式识别方法，不能自行寻找特征，而只能根据提供的特征数据，在已经选择好的分类器模型上以特征数据为自变量运行。实际上是找寻提供的数学表达式中最优参数的过程。<br>一个模式识别方法基本无法做到100%分类准确，最终使用的最优值一般是在某个度量标准下得到最优极值所取得的参数。<br>只要条件允许就要使用较简单的方法是一条基本原则。<br>而分类器也有一种学习过程，如果发现当前采用的分类函数会造成分类错误，那么利用错误提供应如何纠正的信息，就可以使分类函数朝正确的方向前进，这就形成了一种迭代的过程，如果分类函数及其参数使出错的情况越来越少，就可以说是逐渐收敛，学习过程就收到了效果，设计也就可以结束。</p>
+<h5 id="模式的紧致性"><a href="#模式的紧致性" class="headerlink" title="模式的紧致性"></a>模式的紧致性</h5><p>模式的紧致性，简单来说是不同模式之间界限简单清晰好区分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">oooo|xxxx   ||  ooo|xxxxx    ||xooxxxox</span><br><span class="line">oooo|xxxx   || oo|xxxxxx    ||ooxxooxo</span><br><span class="line">oooo|xxxx   || ooooo|xxx    ||xooxooox</span><br><span class="line">oooo|xxxx   || ooo|xxxxx    ||xxoooxxx</span><br><span class="line">  PIC.1         ||   PIC.2          ||  PIC.3</span><br></pre></td></tr></table></figure>
+<p>如上图，PIC.1有明确的界限，PIC.2界限弯曲，PIC.3更是基本无法区分二者。</p>
+<p><strong>临界点</strong>：处于两个类别边界上的点，临界点的某些特征数据往往改变一点点就会导致它变成另一种类别。<em>这种数据的出现意味着两个类别存在着难以区分的数据点，它们形成的区域很难说清究竟属于哪个类别</em>。</p>
+<p><strong>紧致集</strong>具有下列三个性质：</p>
+<ol>
+<li>临界点的数量在总点数中占比很小</li>
+<li>几何中任意两个内点之间可以使用光滑的曲线连接，在该连线上的点也属于这个集合</li>
+<li>每个内点都有一个足够大的邻域，在该领域中只包含同一集合中的点</li>
+</ol>
+<h5 id="相似度度量"><a href="#相似度度量" class="headerlink" title="相似度度量"></a>相似度度量</h5><p>同类物体之所以属于同一类，在于它们的某些属性相似，因此可选择适当的度量方法检测出它们之间的相似性，但问题在于，有些相似性很难定量描述，但是计算机擅长的确是定量计算。</p>
+<p>在特征空间中用特征向量描述样本的属性，就是把相似性度量用距度离量表示，统计模式识别各种方法实际上都是直接或间接以距离度量为基础的。在找到合适的特征空间情况下，同类样本应具有聚类性，或紧致性好，而不同类别样本应在特征空间中显示出具有较大的距离。常用的距离度量是D维特征空间中的欧氏距离：$\delta(X_k,X_j)=\sqrt{\sum_{i=1}^{D}{(x_{ki}-x_{ji}})^2}$，也就是两点之间的欧式距离。除此之外，还有其他距离，比如：$\delta(X_k,X_j)=\sum_{i=1}^{D}{|x_{ki}-x_{ji}|}$或者$\delta(X_k,X_j)=cos^{-1}\frac{X_k^TX_j}{\parallel X_k\parallel\cdot\parallel X_j\parallel}$。它们各自适用于不同的场景。</p>
+<p>在模式识别中特征向量的各个分量的含义往往是不同的，就像苹果的例子中，一个表示重量，一个表示直径，两者的单位都不一样，因此使用欧氏距离并不合理。一般来说样本的各个分量的分布范围在数量级上比较相近为好。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>通过本章学习，我们应该理解了以下几个方面的问题</p>
+<ol>
+<li>模式识别也就是机器自动进行判断，如对语音自动识别其词，断语乃至句子。模式识别是从外文Pattern Recognition翻译过来的。</li>
+<li>为了机器能自动识别事物(书中用样本这个词)。要对样本进行度量或成分描述，以利用度量确定其类别，比如苹果、樱桃等水果，用重量、大小、颜色等作为标准进行度量，表示成特征向量形式，便于样本间直接进行相似性比较来确定其类别，或通过特征空间划分来判别测试样本的类别。有些事物适合用其成分分析及成分间关系来确定其类别，这种成分及关系适用树、串、图等结构描述方法，属结构模式识别，基本方法用自然语言理解与离散数据等课程中的典型方法，不作本课讲课内容。</li>
+<li>根据上述原理，模式识别系统包括以下几个环节<ul>
+<li>信息获取是利用传感器将物理世界的信号转换为计算机能分析的数字信号，如用拾音器将声音转换为时序信号；摄像机、扫描仪将景物、刊物等转换成图像信号等。</li>
+<li>预处理是对获取信号进行规范化等各种处理</li>
+<li>特征提取与选择是将识别样本构造成便于比较、分析的描述量(书中指特征向量)</li>
+<li>分类器设计是由训练过程将训练样本提供的信息变为判别事物的判别函数</li>
+<li>分类决策是对样本特征分量按判别函数的计算结果进行分类</li>
+</ul>
+</li>
+<li>机器自动识别与分类的设计是依据范例(称为训练样本)提供的信息，分类的方法可以归纳为两大类，一类是与不同类范例的相似性(常称模板匹配)，另一种则是通过训练样本集确定不同类样本在特征空间中的分布。可以拟作划分势力范围，从而按测试样本落入哪个势力范围来确定其类别。这种过程常叫做训练学习过程，最常用的是通过错误的自学习过程。</li>
+<li>样本间相似性度量是模式识别中常用的计算内容，不同的相似性度量要考虑其合理性和计算简单性等。</li>
+</ol>
+<h2 id="作业说明"><a href="#作业说明" class="headerlink" title="作业说明"></a>作业说明</h2><p>第一次作业，KNN在iris数据集上K的选择以及最高的正确率。</p>
+<p>感觉我过度注意对数据的分析，缺少了理论上的分析。</p>
+<ol>
+<li>数据集划分问题：什么时候划分成三类、什么时候划分为两类？</li>
+<li>KNN中K的选择问题：<ol>
+<li>测试选择K的时候，K的范围最好是根据每一个类别中的样本数来选择</li>
+<li>为什么K较大的时候，正确率会急剧下降？【为什么会产生？</li>
+</ol>
+</li>
+<li>距离的定义，选择什么距离比较好？是不是需要定义相似度？比如cos角的相似？</li>
+<li>是不是需要做特征的归一化处理？使用什么归一化处理？</li>
+<li>实验过程：按照模式识别的过程</li>
+<li>如何赋予统计意义？<ol>
+<li>K折，K折的K也是变量，注意选举。</li>
+<li>最后怎么把测试集放进去。可以放很多次，得到均值结果。</li>
+</ol>
+</li>
+<li>如果KNN中K的选取，最后的出来的正确率相同，如何从其中选取均值？或者选取更小的K、或者选取性能方差比较小的</li>
+<li>源代码注释</li>
+<li>实验结果的分析。准确的语言、准确的数据。不要“大约”、“好像”、“大概”、“几乎”等等</li>
+<li>尽量少用<strong>显著性</strong>。</li>
+</ol>
 
     </div>
 
@@ -358,6 +444,10 @@ B-->D[定量: 特征的取值]</pre>
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/28/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E8%AF%BE%E7%A8%8B/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB-2/" rel="prev" title="贝叶斯决策理论与统计判别方法">
+                  贝叶斯决策理论与统计判别方法 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -403,7 +493,7 @@ B-->D[定量: 特征的取值]</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本章指南"><span class="nav-number">1.</span> <span class="nav-text">本章指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重点"><span class="nav-number">1.1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#难点"><span class="nav-number">1.2.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式识别流程框图"><span class="nav-number">1.3.</span> <span class="nav-text">模式识别流程框图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式识别与模式"><span class="nav-number">2.</span> <span class="nav-text">模式识别与模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模式的概念"><span class="nav-number">2.1.</span> <span class="nav-text">模式的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式的描述方法"><span class="nav-number">2.2.</span> <span class="nav-text">模式的描述方法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本章指南"><span class="nav-number">1.</span> <span class="nav-text">本章指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重点"><span class="nav-number">1.1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#难点"><span class="nav-number">1.2.</span> <span class="nav-text">难点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式识别流程框图"><span class="nav-number">1.3.</span> <span class="nav-text">模式识别流程框图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式识别与模式"><span class="nav-number">2.</span> <span class="nav-text">模式识别与模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模式的概念"><span class="nav-number">2.1.</span> <span class="nav-text">模式的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式的描述方法"><span class="nav-number">2.2.</span> <span class="nav-text">模式的描述方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式识别系统"><span class="nav-number">2.3.</span> <span class="nav-text">模式识别系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例：车牌识别"><span class="nav-number">2.3.1.</span> <span class="nav-text">例：车牌识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-number">2.3.2.</span> <span class="nav-text">说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#训练与学习"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">训练与学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模式的紧致性"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">模式的紧致性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相似度度量"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">相似度度量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业说明"><span class="nav-number">3.</span> <span class="nav-text">作业说明</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -422,7 +512,7 @@ B-->D[定量: 特征的取值]</pre>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -435,7 +525,7 @@ B-->D[定量: 特征的取值]</pre>
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -448,7 +538,7 @@ B-->D[定量: 特征的取值]</pre>
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -503,7 +593,7 @@ B-->D[定量: 特征的取值]</pre>
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -512,7 +602,9 @@ B-->D[定量: 特征的取值]</pre>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
   </div>
 
         
@@ -538,8 +630,7 @@ B-->D[定量: 特征的取值]</pre>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
-<script src="/js/schemes/pisces.js?v=7.4.2"></script>
-
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
 <script src="/js/next-boot.js?v=7.4.2"></script>
 
 
